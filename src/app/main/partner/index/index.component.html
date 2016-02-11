@@ -15,19 +15,23 @@
                           <p class="text-justify">{{ media.text }}</p>
                       </div>
                   </div>
+
                   <div class="col-12">
                       <hr>
                   </div>
+
                    <div class="col-12 p-5 text-center w-100">
                      <h3><strong style="font-weight: 800;">Partager votre conternu et laisser vous guider<br> par TAMERI BIG</strong></h3>
                    </div>
-                   <div *ngFor="let step of steps" class="col-md-3 col-sm-2 col-xs-1">
+
+                   <div *ngFor="let step of steps; let isOdd = odd; let idx = index;" class="col-md-3 col-sm-2 col-xs-1">
                      <div class="d-flex flex-column align-items-center p-3">
-                       <div>
+                       <div [ngClass]="{'z-depth-1': idx === 0, 'z-depth-2': idx === 1, 'z-depth-3': idx === 2, 'z-depth-4': idx === 3}">
                          <img [src]="step.image" height="220px" alt="">
                        </div>
                      </div>
                    </div>
+
                    <div class="col-12 p-5 text-center grey-text w-100">
                      <p><small>
                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nesciunt aliquid <br> 
