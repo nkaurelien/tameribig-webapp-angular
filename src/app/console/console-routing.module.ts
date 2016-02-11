@@ -3,11 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { ConsoleLayoutComponent } from './console-layout/console-layout.component';
 
 
+
 const routes: Routes = [
   {
     path: '',
     component: ConsoleLayoutComponent,
     children: [
+      {
+        path: 'assets',
+        loadChildren: () => import('@modules/console/assets/assets.module').then(m => m.AssetsModule)
+      },
       {
         path: 'user',
         loadChildren: () => import('@modules/console/profile/profile.module').then(m => m.ProfileModule)
