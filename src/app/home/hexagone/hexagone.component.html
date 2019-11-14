@@ -1,0 +1,21 @@
+<div class="hexagones">
+  <h6 class="text-center">Parcourir les différentes categories</h6>
+  <div class="hexa-content">
+    <div class="hexa" routerLink="/cat/{{hexa.name}}" *ngFor = "let hexa of hexas">
+      <div class="{{hexa.subclass}}"></div>
+      <p>{{hexa.name}}</p>
+    </div>
+  </div>
+  <div class="hexa-content mrg">
+    <div class="hexa">
+      <div class="hexagon-desactiv"></div>
+    </div>
+    <div class="hexa" routerLink="/cat/{{hexa.name}}" *ngFor = "let hexa of hexas2">
+      <div class="{{hexa.subclass}}"></div>
+      <p>{{hexa.name}}</p>
+    </div>
+    <div class="hexa">
+      <div class="hexagon-desactiv"></div>
+    </div>
+  </div>
+</div>

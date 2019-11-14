@@ -1,0 +1,235 @@
+/* .row{
+    display: flex;
+    margin: 0px;
+    width:100%;
+}
+
+
+.col-12{
+    width: 100%;
+}
+
+.col-1{
+    width: 15%;
+}
+
+.col-2{
+    width: 25%;
+}
+
+.icone{
+    width: 100%;
+}
+
+.col-11{
+    width: 95%;
+} */
+
+
+.circle {
+    margin: 11% 16%;
+    border-radius: 71px;
+    font-size: 28px;
+    padding: 15px;
+    color: white;
+}
+
+.elem{
+    position: relative;
+    width: 9%;
+    margin:0.5%; 
+}
+
+.hexa-content{
+    display: flex;
+    width:100%
+}
+
+.elem img{
+    width: 100%;
+    height: 100%;
+    
+}
+.elem:hover{
+    opacity: 0.5 ;
+}
+
+p.text-hexa {
+    position: absolute;
+    margin: 57px 0%;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.hexa-group{
+    margin-top: 50px;
+}
+
+.hexa-content2 {
+    margin-left: -5%;
+    margin-top: -35px;
+    display: flex;
+    width:120%
+}
+
+.hexa-content3 {
+    margin-top: -35px;
+    display: flex;
+    width:100%
+}
+
+.go {
+    background: #d44c2e;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 0px;
+    height: 37px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s
+}
+
+.go:hover{
+    background: #d42904;
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    padding-left: 16px;
+    opacity: 0.5; /* Firefox */
+}
+
+#myInputautocomplete-list {
+    background: white;
+    box-shadow: 0px 2px 3px -2px black;
+    padding: 18px;
+}
+
+
+
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: DodgerBlue;
+}
+
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+
+
+
+.description{
+    margin-top: 6px;
+}
+
+/*.hide{
+    display: none;
+}*/
+
+
+h5{
+    text-align: center;
+}
+
+
+.box-search .option{
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+}
+
+.box-search{
+    margin-top: 17px !important;
+}
+
+.box-search .option:hover .font{
+    position: absolute;
+    bottom: 2px;
+    /* width: 100%; */
+    text-align: center;
+    font-weight: bolder;
+    transition: 0.5s;
+    background-color: white;
+}
+
+.box-search .option:nth-child(1) .font{
+    color: #d44c2e;
+}
+
+.box-search .option:nth-child(2) .font{
+    color: #910091;
+}
+
+.box-search .option:nth-child(3) .font{
+    color: #0770d8;
+}
+
+.box-search .option:nth-child(4) .font{
+    color: #24880e;
+}
+
+
+h5{
+    text-align: center;
+}
+
+
+
+input{
+    border-radius: 0px;
+    background: #fff8f8;
+}
+
+.margin-grio{
+    margin: 3em 42.5% 1px 42.5%;
+}
+
+
+.form-control{
+    width: 94.5%;
+    border: solid 1px gray;
+    height: 33px;
+    padding-left: 18px;
+    border-radius: 21px;
+    font-size: 17px;
+}
+
+@media (min-width: 1025px) {
+
+    :host ::ng-deep {
+
+        .m-header--fixed .m-body {
+            padding-top: 0 !important;
+        }
+    }
+}
+
+
+
