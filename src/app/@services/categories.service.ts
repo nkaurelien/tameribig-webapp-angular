@@ -9,9 +9,7 @@ import {Observable, of, merge, concat, combineLatest} from 'rxjs';
 import {Router, RouterStateSnapshot} from '@angular/router';
 import {catchError, take} from 'rxjs/internal/operators';
 import {BehaviorSubject} from 'rxjs';
-import {dummyCategoriesMocks, generateDummyCategorieMocks} from '../_datas/dummy-categories';
-import {uniqBy, flattenDeep} from 'lodash';
-import {environment} from '../../environments/environment';
+import {dummyCategoriesMocks, generateDummyCategorieMocks} from '@data/dummy-categories';
 
 
 

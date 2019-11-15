@@ -2,15 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
-import { DefaultComponent } from '../default.component';
-import {LayoutModule} from '../../layouts/layout.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ButtonsModule, InputsModule, InputUtilitiesModule, ToastModule, WavesModule} from 'ng-uikit-pro-standard';
+import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 
 const routes: Routes = [
     {
         'path': '',
-        'component': DefaultComponent,
+        'component': ProfileLayoutComponent,
         'children': [
             {
                 'path': '',
@@ -20,7 +19,7 @@ const routes: Routes = [
     }
 ];
 @NgModule({imports: [
-        CommonModule, RouterModule.forChild(routes), LayoutModule,
+        CommonModule, RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
     ButtonsModule,
@@ -34,7 +33,8 @@ const routes: Routes = [
   ], exports: [
         RouterModule
     ], declarations: [
-        ProfileComponent
+        ProfileComponent,
+        ProfileLayoutComponent
     ]})
 export class ProfileModule  {
 

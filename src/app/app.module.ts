@@ -16,7 +16,7 @@ import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-ui
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,

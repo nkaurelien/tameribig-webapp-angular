@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Helpers } from '../../helpers';
-import {AuthenticationService} from '../../core/auth2/_services';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../core/auth2/_models';
 import {Subscription} from 'rxjs';
 import {ToastService} from 'ng-uikit-pro-standard';
+import {User} from '@app/auth2/_models';
+import {AuthenticationService} from '@app/auth2/_services';
 
 
 @Component({
@@ -45,7 +44,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  createForm () {
+  createForm() {
     this.profilForm = new FormGroup({
       fullName: new FormControl(this.authUser.fullName, [Validators.required, Validators.minLength(3)]),
       firstName: new FormControl(this.authUser.firstName, [Validators.required, Validators.minLength(3)]),

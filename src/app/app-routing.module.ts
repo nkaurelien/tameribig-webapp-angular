@@ -1,11 +1,43 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {MainLayoutComponent} from "@app/main/main-layout/main-layout.component";
 
-
-const routes: Routes = [];
+const routes: Routes = [
+        {
+            path: '',
+            component: MainLayoutComponent,
+            children: [
+                {
+                    path: 'home',
+                    loadChildren: () => import('@modules/home/home.module').then(m => m.HomeModule)
+                },
+                {
+                    path: 'home',
+                    loadChildren: () => import('@modules/profile/profile.module').then(m => m.ProfileModule)
+                },
+                {
+                    path: '',
+                    redirectTo: 'home',
+                    pathMatch: 'full'
+                },
+                {
+                    path: '**',
+                    redirectTo: '404',
+                    pathMatch: 'full'
+                },
+            ]
+        },
+        {
+            path: '**',
+            redirectTo: 'home',
+            pathMatch: 'full'
+        }
+    ]
+;
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

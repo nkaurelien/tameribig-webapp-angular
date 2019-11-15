@@ -9,9 +9,7 @@ import {Observable, of, merge, concat, combineLatest} from 'rxjs';
 import {Router, RouterStateSnapshot} from '@angular/router';
 import {catchError, take} from 'rxjs/internal/operators';
 import {BehaviorSubject} from 'rxjs';
-import {dummyPicturesMocks, generateDummyPicturesMocks} from '../_datas/dummy-pictures';
-import { join } from 'path';
-import { allowPreviousPlayerStylesMerge } from '@angular/animations/browser/src/util';
+import {dummyPicturesMocks, generateDummyPicturesMocks} from '../@datas/dummy-pictures';
 import {uniqBy, flattenDeep} from 'lodash';
 import {environment} from '../../environments/environment';
 
