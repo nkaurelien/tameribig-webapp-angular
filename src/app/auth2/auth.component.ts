@@ -1,11 +1,11 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ScriptLoaderService } from '../../_services/script-loader.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
 import { UserService } from './_services/user.service';
 import { AlertComponent } from './_directives/alert.component';
-import { Helpers } from '../../helpers';
+import {Helpers} from '@core/helpers';
+import {ScriptLoaderService} from "@core/services/script-loader.service";
 
 declare let $: any;
 declare let mUtil: any;
@@ -33,11 +33,11 @@ export class AuthComponent implements OnInit {
   returnUrl: string;
 
   @ViewChild('alertSignin',
-      {read: ViewContainerRef}) alertSignin: ViewContainerRef;
+      {read: ViewContainerRef, static: true}) alertSignin: ViewContainerRef;
   @ViewChild('alertSignup',
-      {read: ViewContainerRef}) alertSignup: ViewContainerRef;
+      {read: ViewContainerRef, static: true}) alertSignup: ViewContainerRef;
   @ViewChild('alertForgotPass',
-      {read: ViewContainerRef}) alertForgotPass: ViewContainerRef;
+      {read: ViewContainerRef, static: true}) alertForgotPass: ViewContainerRef;
 
   constructor(
       private _router: Router,

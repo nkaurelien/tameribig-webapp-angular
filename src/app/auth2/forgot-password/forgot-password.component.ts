@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 // Translate
 import { TranslateService } from '@ngx-translate/core';
 // Auth
-import { AuthNoticeService, AuthService } from '../../auth/index';
+import {AuthNoticeService, AuthService} from '@core/auth/index';
 
 @Component({
 	selector: 'kt-forgot-password',

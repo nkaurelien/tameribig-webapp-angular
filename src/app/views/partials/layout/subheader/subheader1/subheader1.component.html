@@ -1,0 +1,58 @@
+<!-- begin:: Content Head -->
+<div [hidden]="subheaderService.disabled$ | async" class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+        <h3 *ngIf="title" class="kt-subheader__title">{{title}}</h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        <!--<h4 *ngIf="desc" class="kt-subheader__desc">{{desc}}</h4>-->
+        <h4 class="kt-subheader__desc">#XRS-45670</h4>
+        <a class="btn btn-label-warning btn-bold btn-sm btn-icon-h kt-margin-l-10" href="javascript:;">
+            Add New
+        </a>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <a class="btn kt-subheader__btn-secondary" href="javascript:;">Today</a>
+
+            <a class="btn kt-subheader__btn-secondary" href="javascript:;">Month</a>
+
+            <a class="btn kt-subheader__btn-secondary" href="javascript:;">Year</a>
+
+            <div [placement]="'bottom-right'" class="dropdown dropdown-inline" data-placement="left" ngbDropdown>
+                <a class="btn kt-subheader__btn-daterange" data-placement="left" href="javascript:;"
+                   id="kt_dashboard_daterangepicker" ngbDropdownToggle ngbTooltip="Select dashboard daterange">
+                    <span class="kt-subheader__btn-daterange-title" id="kt_dashboard_daterangepicker_title">Today</span>&nbsp;
+                    <span class="kt-subheader__btn-daterange-date"
+                          id="kt_dashboard_daterangepicker_date">{{today | date:'MMM dd'}}</span>
+                    <i class="flaticon2-calendar-1"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                    <a class="dropdown-item" href="javascript:;">Today</a>
+                    <a class="dropdown-item" href="javascript:;">Yesterday</a>
+                    <a class="dropdown-item" href="javascript:;">Last 7 Days</a>
+                    <a class="dropdown-item" href="javascript:;">Last 30 Days</a>
+                    <a class="dropdown-item" href="javascript:;">This Month</a>
+                    <a class="dropdown-item" href="javascript:;">Last Month</a>
+                    <a class="dropdown-item" href="javascript:;">Yesterday</a>
+                    <a class="dropdown-item" href="javascript:;">Custom Range</a>
+                </div>
+            </div>
+
+            <div [placement]="'bottom-right'" class="dropdown dropdown-inline" data-placement="left" ngbDropdown
+                 ngbTooltip="Quick actions">
+                <a class="btn btn-icon" href="javascript:;" ngbDropdownToggle>
+                    <span [inlineSVG]="'./assets/media/icons/svg/Files/File-plus.svg'"
+                          class="kt-svg-icon kt-svg-icon--success kt-svg-icon--md"></span>
+                    <!--<i class="flaticon2-plus"></i>-->
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                    <a class="dropdown-item" href="javascript:;"><i class="la la-plus"></i> New Report</a>
+                    <a class="dropdown-item" href="javascript:;"><i class="la la-user"></i> Add Customer</a>
+                    <a class="dropdown-item" href="javascript:;"><i class="la la-cloud-download"></i> New Download</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript:;"><i class="la la-cog"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:: Content Head -->

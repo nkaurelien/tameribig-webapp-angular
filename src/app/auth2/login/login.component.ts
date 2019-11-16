@@ -9,9 +9,10 @@ import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 // Store
 import {Store} from '@ngrx/store';
-import {AppState} from '../../reducers/index';
+
 // Auth
 import {AuthNoticeService, AuthService, Login} from '@core/auth/index';
+import {AppState} from "@core/reducers";
 
 /**
  * ! Just example => Should be removed in development

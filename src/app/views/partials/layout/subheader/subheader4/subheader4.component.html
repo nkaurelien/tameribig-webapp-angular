@@ -1,0 +1,39 @@
+<!-- begin:: Content Head -->
+<div [hidden]="subheaderService.disabled$ | async" class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+        <h3 *ngIf="title" class="kt-subheader__title">{{title}}</h3>
+        <h4 *ngIf="desc" class="kt-subheader__desc">{{desc}}</h4>
+        <div *ngIf="breadcrumbs.length > 0" class="kt-subheader__breadcrumbs">
+            <span [hidden]="true" class="kt-subheader__separator"></span>
+            <a class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+            <ng-container *ngFor="let item of breadcrumbs">
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a [queryParams]="item.queryParams" [routerLink]="item.page" class="kt-subheader__breadcrumbs-link">
+                    {{item.title}}
+                </a>
+            </ng-container>
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <a class="btn kt-subheader__btn-secondary" href="javascript:">
+                Reports
+            </a>
+
+            <div [placement]="'bottom-right'" class="dropdown dropdown-inline" ngbDropdown>
+                <a class="btn btn-danger kt-subheader__btn-options" href="javascript:" ngbDropdownToggle>
+                    Products
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                    <a class="dropdown-item" href="javascript:"><i class="la la-plus"></i> New Product</a>
+                    <a class="dropdown-item" href="javascript:"><i class="la la-user"></i> New Order</a>
+                    <a class="dropdown-item" href="javascript:"><i class="la la-cloud-download"></i> New Download</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript:"><i class="la la-cog"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:: Content Head -->

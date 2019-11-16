@@ -1,0 +1,46 @@
+<!-- begin:: Content Head -->
+<div [hidden]="subheaderService.disabled$ | async" class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+        <h3 *ngIf="title" class="kt-subheader__title">{{title}}</h3>
+        <h4 *ngIf="desc" class="kt-subheader__desc">{{desc}}</h4>
+        <div *ngIf="breadcrumbs.length > 0" class="kt-subheader__breadcrumbs">
+            <span [hidden]="true" class="kt-subheader__separator"></span>
+            <a class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+            <ng-container *ngFor="let item of breadcrumbs">
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a [queryParams]="item.queryParams" [routerLink]="item.page" class="kt-subheader__breadcrumbs-link">
+                    {{item.title}}
+                </a>
+            </ng-container>
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <a class="btn kt-subheader__btn-daterange" data-placement="left" id="kt_dashboard_daterangepicker"
+               ngbTooltip="Select dashboard daterange">
+                <span class="kt-subheader__btn-daterange-title" id="kt_dashboard_daterangepicker_title">Today</span>&nbsp;
+                <span class="kt-subheader__btn-daterange-date"
+                      id="kt_dashboard_daterangepicker_date">{{today | date:'MMM dd'}}</span>
+                <span [inlineSVG]="'./assets/media/icons/svg/Communication/Chat-check.svg'"
+                      class="kt-svg-icon kt-svg-icon--sm"></span>
+            </a>
+
+            <div [placement]="'bottom-right'" class="dropdown dropdown-inline" data-placement="left" ngbDropdown
+                 ngbTooltip="Quick actions">
+                <a class="btn btn-icon" href="javascript:;" ngbDropdownToggle>
+                    <span [inlineSVG]="'./assets/media/icons/svg/Files/File-plus.svg'"
+                          class="kt-svg-icon kt-svg-icon--success kt-svg-icon--md"></span>
+                </a>
+                <div class="dropdown-menu" ngbDropdownMenu>
+                    <a class="dropdown-item"><i class="la la-plus"></i> New Report</a>
+                    <a class="dropdown-item"><i class="la la-user"></i> Add Customer</a>
+                    <a class="dropdown-item"><i class="la la-cloud-download"></i> New Download</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"><i class="la la-cog"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:: Content Head -->

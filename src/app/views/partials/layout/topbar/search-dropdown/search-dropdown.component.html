@@ -1,0 +1,35 @@
+<!--begin: Search -->
+<div (openChange)="openChange()" autoClose="outside"
+     class="kt-header__topbar-item kt-header__topbar-item--search dropdown" ngbDropdown placement="bottom-right">
+    <div class="kt-header__topbar-wrapper" ngbDropdownToggle>
+		<span class="kt-header__topbar-icon">
+			<i *ngIf="!useSVG" [ngClass]="icon"></i>
+			<span *ngIf="useSVG" [inlineSVG]="icon" class="kt-svg-icon"></span>
+		</span>
+    </div>
+    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-lg"
+         ngbDropdownMenu>
+        <div [ngClass]="{'kt-quick-search--has-result': data?.length}" class="kt-quick-search kt-quick-search--inline"
+             id="kt_quick_search_inline">
+            <form class="kt-quick-search__form" method="get">
+                <div [ngClass]="{'kt-spinner kt-spinner--input kt-spinner--sm kt-spinner--brand kt-spinner--right': loading}"
+                     class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i
+                            class="flaticon2-search-1"></i></span></div>
+                    <input #searchInput (keyup)="search($event)" class="form-control kt-quick-search__input"
+                           placeholder="Search..." type="text">
+                    <div class="input-group-append"><span class="input-group-text"><i (click)="clear($event)"
+                                                                                      [hidden]="!data || !data?.length"
+                                                                                      [ngStyle]="{'display': 'flex'}"
+                                                                                      class="la la-close kt-quick-search__close"></i></span>
+                    </div>
+                </div>
+            </form>
+            <div [ngStyle]="{'max-height': '40vh', 'position': 'relative'}"
+                 [perfectScrollbar]="{wheelPropagation: false}" class="kt-quick-search__wrapper">
+                <kt-search-result [data]="data"></kt-search-result>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end: Search -->

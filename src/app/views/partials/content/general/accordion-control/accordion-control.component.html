@@ -1,0 +1,49 @@
+<ng-template [ngForOf]="panels" let-panel ngFor>
+    <div [class]="'card card--' + (panel.type)">
+        <!-- title -->
+        <div (click)="!!toggle(panel.id)" [attr.aria-controls]="(panel.isOpen ? panel.id : null)"
+             [attr.aria-disabled]="panel.disabled"
+             [attr.aria-expanded]="panel.isOpen"
+             [attr.tabindex]="(panel.disabled ? '-1' : null)"
+             [class.collapsed]="!panel.isOpen"
+             [class.text-muted]="panel.disabled"
+             [class]="'card-header ' + (panel.type ? 'bg-'+panel.type: type ? 'bg-'+type : '')"
+             data-toggle="collapse"
+             id="{{panel.id}}-header"
+             role="tab">
+            <div class="card-title {{ panel.isOpen ? null : 'collapsed'}} ">
+                <i *ngIf="panel.iconClass" [class]="panel.iconClass"></i>
+                <span>
+					{{panel.title}}
+                    <ng-template [ngTemplateOutlet]="panel.titleTpl?.templateRef"></ng-template>
+				</span>
+            </div>
+        </div>
+        <!-- end: title -->
+
+        <!-- body without animation -->
+        <div class="{{ panel.hasBodyWrapper ? 'card-body-wrapper' : null }}">
+            <div *ngIf="!hasAnimation && (!destroyOnHide || panel.isOpen)"
+                 [attr.aria-labelledby]="panel.id + '-header'"
+                 class="card-body {{panel.isOpen ? 'show' : null }}"
+                 id="{{panel.id}}"
+                 role="tabpanel">
+                <ng-template [ngTemplateOutlet]="panel.contentTpl?.templateRef"></ng-template>
+            </div>
+        </div>
+        <!-- end: body without animation -->
+
+        <!-- body with animation -->
+        <div *ngIf="hasAnimation"
+             [attr.aria-labelledby]="panel.id + '-header'"
+             [style.height]="panel.height + 'px'"
+             class="card-body accordion--animation"
+             id="{{panel.id}}"
+             role="tabpanel">
+            <div class="kt-accordion__item-content">
+                <ng-template [ngTemplateOutlet]="panel.contentTpl?.templateRef"></ng-template>
+            </div>
+        </div>
+        <!-- end: body with animation -->
+    </div>
+</ng-template>

@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit, Output } from '@angula
 // RxJS
 import { Subscription } from 'rxjs';
 // Auth
-import { AuthNotice, AuthNoticeService } from '../../auth/index';
+import {AuthNotice, AuthNoticeService} from '@core/auth/index';
 
 @Component({
 	selector: 'kt-auth-notice',

@@ -7,7 +7,7 @@ import { map, catchError, mergeMap, tap } from 'rxjs/operators';
 // Lodash
 import { filter, some, find, each } from 'lodash';
 // Environment
-import { environment } from '../../../../environments/environment';
+import {environment} from '@environments/environment';
 // CRUD
 import { QueryParamsModel, QueryResultsModel, HttpUtilsService } from '../../_base/crud';
 // Models

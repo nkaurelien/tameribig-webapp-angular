@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 // CRUD
 import { BaseDataSource, QueryResultsModel } from '../../_base/crud';
 // State
-import { AppState } from '../../../core/reducers';
+import {AppState} from '@core/reducers';
 import { selectUsersInStore, selectUsersPageLoading, selectUsersShowInitWaitingMessage } from '../_selectors/user.selectors';
 
 

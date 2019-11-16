@@ -9,9 +9,9 @@ import { Store, select, Action } from '@ngrx/store';
 // CRUD
 import { QueryResultsModel, QueryParamsModel } from '../../_base/crud';
 // Services
-import { AuthService } from '../../../core/auth/_services';
+import {AuthService} from '@core/auth/_services';
 // State
-import { AppState } from '../../../core/reducers';
+import {AppState} from '@core/reducers';
 import {
     UserActionTypes,
     UsersPageRequested,

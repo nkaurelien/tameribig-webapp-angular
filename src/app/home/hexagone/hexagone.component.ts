@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Categorie, CategoriesService} from '../../@services/categories.service';
+import {Categorie, CategoriesService} from '../services/categories.service';
 
 @Component({
   selector: 'app-hexagone',
@@ -32,9 +32,9 @@ export class HexagoneComponent implements OnInit {
       });
       this.hexas = this.categories.slice(0, 8);
       this.hexas2 = this.categories.slice(8, 15);
-      console.log('categories', categories);
-      console.log('categories hexa ', this.hexas, this.hexas.length);
-      console.log('categories hexa 2 ', this.hexas2, this.hexas2.length);
+        // console.log('categories', categories);
+        // console.log('categories hexa ', this.hexas, this.hexas.length);
+        // console.log('categories hexa 2 ', this.hexas2, this.hexas2.length);
 
     });
   }

@@ -11,7 +11,7 @@ import { QueryResultsModel, QueryParamsModel } from '../../_base/crud';
 // Services
 import { AuthService } from '../_services';
 // State
-import { AppState } from '../../../core/reducers';
+import {AppState} from '@core/reducers';
 // Selectors
 import { allRolesLoaded } from '../_selectors/role.selectors';
 // Actions

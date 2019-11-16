@@ -10,9 +10,9 @@ import { Action, select, Store } from '@ngrx/store';
 // Auth actions
 import { AuthActionTypes, Login, Logout, Register, UserLoaded, UserRequested } from '../_actions/auth.actions';
 import { AuthService } from '../_services/index';
-import { AppState } from '../../reducers';
-import { environment } from '../../../../environments/environment';
+import {environment} from '@environments/environment';
 import { isUserLoaded } from '../_selectors/auth.selectors';
+import {AppState} from "@core/reducers";
 
 @Injectable()
 export class AuthEffects {

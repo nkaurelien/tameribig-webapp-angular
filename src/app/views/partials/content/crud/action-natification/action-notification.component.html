@@ -1,0 +1,16 @@
+<div class="kt-mat-snackbar">
+    <div class="kt-mat-snackbar__message">{{data.message}}</div>
+    <div class="kt-mat-snackbar__btn">
+        <button (click)="onDismissWithAction()" *ngIf="data.showUndoButton" color="primary" mat-button type="button">
+            Undo
+        </button>
+    </div>
+    <div class="kt-mat-snackbar__close">
+        <button (click)="onDismiss()"
+                *ngIf="data.showCloseButton"
+                color="warn"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>

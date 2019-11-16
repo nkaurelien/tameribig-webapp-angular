@@ -5,12 +5,19 @@ import {HomeLayoutComponent} from './home-layout/home-layout.component';
 import {HomeRoutingModule} from './home-routing.module';
 import {SearcherComponent} from './searcher/searcher.component';
 import {HexagoneComponent} from './hexagone/hexagone.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
     imports: [
         HomeRoutingModule,
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        NgbTypeaheadModule,
     ],
     exports: [
         HomeRoutingModule,

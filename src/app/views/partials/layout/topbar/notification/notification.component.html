@@ -1,0 +1,423 @@
+<div autoClose="outside" class="kt-header__topbar-item" ngbDropdown placement="bottom-right">
+    <div class="kt-header__topbar-wrapper" ngbDropdownToggle>
+		<span [ngClass]="{'kt-pulse kt-pulse--brand': pulse, 'kt-pulse--light' : pulseLight, 'kt-header__topbar-icon--success' : iconType === 'success'	}"
+              class="kt-header__topbar-icon">
+			<i *ngIf="!useSVG" [ngClass]="icon"></i>
+			<span *ngIf="useSVG" [inlineSVG]="icon" [ngClass]="{'kt-svg-icon--success' : iconType === 'success'}"
+                  class="kt-svg-icon"></span>
+			<span [hidden]="!pulse" class="kt-pulse__ring"></span>
+		</span>
+        <span [hidden]="!dot" class="kt-badge kt-badge--dot kt-badge--notify kt-badge--sm kt-badge--brand"></span>
+    </div>
+
+    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-lg"
+         ngbDropdownMenu>
+        <form>
+            <!--begin: Head -->
+            <div [ngStyle]="{'background-image': backGroundStyle() }"
+                 class="kt-head kt-head--skin-{{skin}} kt-head--fit-x kt-head--fit-b">
+                <h3 class="kt-head__title">
+                    User Notifications&nbsp;
+                    <span class="btn btn-{{ type }} btn-sm btn-bold btn-font-md">23 new</span>
+                </h3>
+                <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-{{ type }} kt-notification-item-padding-x"
+                    ktTabClickEvent role="tablist">
+                    <li class="nav-item">
+                        <a (click)="tab.select('tab-id-1')" aria-selected="true" class="nav-link active show"
+                           data-toggle="tab" href="javascript:;" role="tab">Alerts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="tab.select('tab-id-2')" aria-selected="false" class="nav-link" data-toggle="tab"
+                           href="javascript:;" role="tab">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="tab.select('tab-id-3')" aria-selected="false" class="nav-link" data-toggle="tab"
+                           href="javascript:;" role="tab">Logs</a>
+                    </li>
+                </ul>
+            </div>
+            <!--end: Head -->
+
+            <ngb-tabset #tab="ngbTabset">
+                <ngb-tab id="tab-id-1">
+                    <ng-template ngbTabContent>
+                        <div [ngStyle]="{'max-height': '40vh', 'position': 'relative'}"
+                             [perfectScrollbar]="{wheelPropagation: false}"
+                             class="kt-notification kt-margin-t-10 kt-margin-b-10">
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-line-chart kt-font-success"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New order has been received
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        2 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-box-1 kt-font-brand"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New customer is registered
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        3 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-chart2 kt-font-danger"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        Application has been approved
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        3 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-image-file kt-font-warning"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New file has been uploaded
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        5 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-bar-chart kt-font-info"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New user feedback received
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        8 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-pie-chart-2 kt-font-success"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        System reboot has been successfully completed
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        12 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-favourite kt-font-focus"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New order has been placed
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        15 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item kt-notification__item--read" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-safe kt-font-primary"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        Company meeting canceled
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        19 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-psd kt-font-success"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New report has been received
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        23 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon-download-1 kt-font-danger"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        Finance report has been generated
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        25 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon-security kt-font-warning"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New customer comment recieved
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        2 days ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-pie-chart kt-font-focus"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New customer is registered
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        3 days ago
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                <div class="ps__thumb-x" style="left: 0px; width: 0px;" tabindex="0"></div>
+                            </div>
+                            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                                <div class="ps__thumb-y" style="top: 0px; height: 0px;" tabindex="0"></div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab id="tab-id-2">
+                    <ng-template ngbTabContent>
+                        <div [ngStyle]="{'max-height': '40vh', 'position': 'relative'}"
+                             [perfectScrollbar]="{wheelPropagation: false}"
+                             class="kt-notification kt-margin-t-10 kt-margin-b-10">
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-psd kt-font-success"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New report has been received
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        23 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon-download-1 kt-font-danger"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        Finance report has been generated
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        25 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-line-chart kt-font-success"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New order has been received
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        2 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-box-1 kt-font-brand"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New customer is registered
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        3 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-chart2 kt-font-danger"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        Application has been approved
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        3 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-image-file kt-font-warning"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New file has been uploaded
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        5 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-bar-chart kt-font-info"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New user feedback received
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        8 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-pie-chart-2 kt-font-success"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        System reboot has been successfully completed
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        12 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-favourite kt-font-focus"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New order has been placed
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        15 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item kt-notification__item--read" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-safe kt-font-primary"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        Company meeting canceled
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        19 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-psd kt-font-success"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New report has been received
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        23 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon-download-1 kt-font-danger"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        Finance report has been generated
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        25 hrs ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon-security kt-font-warning"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New customer comment recieved
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        2 days ago
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="kt-notification__item" href="javascript:;">
+                                <div class="kt-notification__item-icon">
+                                    <i class="flaticon2-pie-chart kt-font-focus"></i>
+                                </div>
+                                <div class="kt-notification__item-details">
+                                    <div class="kt-notification__item-title">
+                                        New customer is registered
+                                    </div>
+                                    <div class="kt-notification__item-time">
+                                        3 days ago
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                <div class="ps__thumb-x" style="left: 0px; width: 0px;" tabindex="0"></div>
+                            </div>
+                            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                                <div class="ps__thumb-y" style="top: 0px; height: 0px;" tabindex="0"></div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab id="tab-id-3">
+                    <ng-template ngbTabContent>
+                        <div class="kt-grid kt-grid--ver" style="min-height: 200px;">
+                            <div class="kt-grid kt-grid--hor kt-grid__item kt-grid__item--fluid kt-grid__item--middle">
+                                <div class="kt-grid__item kt-grid__item--middle kt-align-center">
+                                    All caught up!
+                                    <br>No new notifications.
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </form>
+    </div>
+</div>
