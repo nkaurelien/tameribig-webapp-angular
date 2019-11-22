@@ -8,7 +8,7 @@ const statesWithFlags: {name: string, flag: string}[] = statesWithFlagsMocks;
 @Component({
   selector: 'app-searcher',
   templateUrl: './searcher.component.html',
-  styleUrls: ['./searcher.component.css'],
+  styleUrls: ['./searcher.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 

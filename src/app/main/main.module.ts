@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { FooterComponent } from './main-layout/footer/footer.component';
+import { NavigationModule } from './main-layout/navigation/navigation.module';
 
 
 @NgModule({
@@ -13,7 +14,11 @@ import { FooterComponent } from './main-layout/footer/footer.component';
   ],
   imports: [
     CommonModule,
-    MainRoutingModule
-  ]
+    MainRoutingModule,
+    NavigationModule,
+  ],
+  exports: [
+    FooterComponent,
+  ],
 })
 export class MainModule { }
