@@ -26,10 +26,6 @@ const routes: Routes = [
     InputsModule,
     InputUtilitiesModule,
     WavesModule,
-    ToastModule.forRoot({
-      positionClass: 'md-toast-bottom-center',
-      maxOpened: 2,
-    }),
   ], exports: [
         RouterModule
     ], declarations: [

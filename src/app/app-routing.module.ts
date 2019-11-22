@@ -7,6 +7,10 @@ const routes: Routes = [
         loadChildren: () => import('@modules/auth2/auth.module').then(m => m.AuthModule)
     },
     {
+        path: 'console',
+        loadChildren: () => import('@modules/console/console.module').then(m => m.ConsoleModule)
+    },
+    {
         path: '',
         loadChildren: () => import('@modules/main/main.module').then(m => m.MainModule)
     },

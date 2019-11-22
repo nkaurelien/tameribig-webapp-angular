@@ -25,7 +25,10 @@ import { environment } from '@environments/environment';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    ToastModule.forRoot(),
+    ToastModule.forRoot({
+      positionClass: 'md-toast-bottom-center',
+      maxOpened: 2,
+    }),
     MDBBootstrapModulesPro.forRoot(),
     NgtUniversalModule,
 

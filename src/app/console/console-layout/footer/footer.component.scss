@@ -1,0 +1,19 @@
+@media (min-width: 1025px) {
+
+  .m-footer--push.m-aside-left--enabled:not(.m-footer--fixed) .m-footer .m-footer__wrapper {
+
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+
+footer.page-footer .footer-copyright {
+  overflow: hidden;
+  background-color: rgb(238, 238, 238);
+  color: #424242;
+}
+
+footer.page-footer a {
+  color: #9fa0ae;
+}
