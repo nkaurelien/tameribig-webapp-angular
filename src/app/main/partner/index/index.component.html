@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col">
+        <div class="container">
+            <div class="col-12 p-5 text-center w-100">
+                <h1><strong>TAMERI BIG VOUS SOLLICTE</strong></h1>
+            </div>
+            <div class="p-5 w-100">
+              <div class="row">
+                  <div *ngFor="let media of medias" class="col-md-3 col-sm-2 col-xs-1">
+                      <div class="d-flex flex-column align-items-center p-3">
+                          <div>
+                              <img [src]="media.logo" height="72px" alt="">
+                          </div>
+                          <div class="h4-responsive pt-2 pb-3">{{ media.title }}</div>
+                          <p class="text-justify">{{ media.text }}</p>
+                      </div>
+                  </div>
+                  <div class="col-12">
+                      <hr>
+                  </div>
+                   <div class="col-12 p-5 text-center w-100">
+                     <h3><strong style="font-weight: 800;">Partager votre conternu et laisser vous guider<br> par TAMERI BIG</strong></h3>
+                   </div>
+                   <div *ngFor="let step of steps" class="col-md-3 col-sm-2 col-xs-1">
+                     <div class="d-flex flex-column align-items-center p-3">
+                       <div>
+                         <img [src]="step.image" height="220px" alt="">
+                       </div>
+                     </div>
+                   </div>
+                   <div class="col-12 p-5 text-center grey-text w-100">
+                     <p><small>
+                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nesciunt aliquid <br> 
+                         voluptate aspernatur dolorum praesentium placeat, odit quisquam optio vitae. 
+                         <br>Numquam quis ipsa unde? Tempore iusto facere id libero deleniti?</small></p>
+                   </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

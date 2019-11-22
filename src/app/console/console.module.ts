@@ -6,6 +6,7 @@ import { ConsoleLayoutComponent } from './console-layout/console-layout.componen
 import { FooterComponent } from './console-layout/footer/footer.component';
 import { NavigationModule } from './console-layout/navigation/navigation.module';
 import { ParametersComponent } from './parameters/parameters.component';
+import { SidenavModule } from 'ng-uikit-pro-standard';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ParametersComponent } from './parameters/parameters.component';
     CommonModule,
     ConsoleRoutingModule,
     NavigationModule,
+    SidenavModule,
   ]
 })
 export class ConsoleModule { }

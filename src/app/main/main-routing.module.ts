@@ -14,6 +14,10 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/home/home.module').then(m => m.HomeModule)
                 },
                 {
+                    path: 'partner',
+                    loadChildren: () => import('@modules/main/partner/partner.module').then(m => m.PartnerModule)
+                },
+                {
                     path: '',
                     redirectTo: 'home',
                     pathMatch: 'full'

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 
 @Component({
-    selector: 'app-footer',
+    selector: 'app-console-footer',
     templateUrl: './footer.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./footer.component.scss',],
