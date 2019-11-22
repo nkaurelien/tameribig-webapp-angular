@@ -80,3 +80,12 @@
     border: #a1a0a0;
     margin-top: 1.0rem
 }
+
+.white-skin input[type=email]:focus:not([readonly]),
+.white-skin input[type=text]:focus:not([readonl y]),
+.white-skin input[type=password]:focus:not([readonly]),
+.white-skin input[type=number]:focus:not([readonly]),
+.white-skin textarea.md-textarea:focus:not([readonly]) {
+  border-color: #fff;
+  box-shadow: 0 1px 0 0 #fff;
+}
