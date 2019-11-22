@@ -1,6 +1,18 @@
 #carousel {
     width: 100%;
     position: relative;
-    // height: 250px;
-    border-bottom: 6px solid orange;
+    height: 400px;
+    border-bottom: 14px solid #9c4828;
+}
+#carousel-text {
+    height: 400px;
+
+}
+
+.carousel-img {
+    height: 400px - 10px;
+}
+
+.text-shadow {
+  text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }

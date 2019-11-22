@@ -1,14 +1,32 @@
 <div id="carousel">
 
-  <!-- <img src="../../../../../assets/img/pharmacielogo.jpg" alt="pharmacie logo" style="width: 100%;position: relative;"/> -->
-<mdb-carousel [isControls]="false" [animation]="'slide'">
-  <mdb-carousel-item>
-    <img class="d-block w-100" style="height: 250px;" src="./assets/images/background/banner.jpg">
-  </mdb-carousel-item>
-  <mdb-carousel-item>
-    <img class="d-block w-100" style="height: 250px;" src="./assets/images/background/t+¬te-image-01.jpg">
-  </mdb-carousel-item>
-</mdb-carousel>
+
+<div class="position-absolute h-100 w-100">
+    <!-- <img src="../../../../../assets/img/pharmacielogo.jpg" alt="pharmacie logo" style="width: 100%;position: relative;"/> -->
+    <mdb-carousel [isControls]="false" [animation]="'slide'" >
+      <mdb-carousel-item>
+        <img class="d-block w-100 carousel-img" src="./assets/images/background/banner.jpg">
+      </mdb-carousel-item>
+      <mdb-carousel-item>
+        <img class="d-block w-100 carousel-img" src="./assets/images/background/t+¬te-image-01.jpg">
+      </mdb-carousel-item>
+    </mdb-carousel>
+</div>
+  <div class="position-absolute h-100 w-100" id="carousel-text">
+      <div class="container white-text py-5 px-5">
+          <div class="px-5">
+              <h1 class="mt-2- mb-4" ><strong class="text-shadow" style="font-weight: 800;">ALLEZ-Y LANCEZ-VOUS</strong></h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <br>Sapiente rerum facilis accusantium libero, animi tempore aut temporibus saepe sunt magnam fugiat,
+                <br>culpa quo nobis iusto soluta quae asperiores, dicta eligendi.</p>
+              <p>culpa quo nobis iusto soluta quae asperiores, dicta eligendi.</p>
+              <p class="mt-5">
+                <button class="btn btn-lg orange white-text mr-3">Inscrivez vous dès maintenant</button>
+                <button class="btn btn-lg btn-outline white-text border-white">S'identifier</button>
+              </p>
+          </div>
+      </div>
+</div>
 
 </div>
 
