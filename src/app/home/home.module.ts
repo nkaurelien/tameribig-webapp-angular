@@ -8,6 +8,8 @@ import {HexagoneComponent} from './hexagone/hexagone.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
+import { CategoriesService } from './services/categories.service';
+import { ImagesService } from './services/images.service';
 
 
 @NgModule({
@@ -28,6 +30,10 @@ import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
         HomeLayoutComponent,
         SearcherComponent,
         HexagoneComponent,
+    ],
+    providers: [
+        CategoriesService,
+        ImagesService
     ],
 })
 export class HomeModule {
