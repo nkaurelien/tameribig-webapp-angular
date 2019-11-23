@@ -1,7 +1,9 @@
 <div class="hexagones">
   <div class="w-100 flex-center">
    <div class="d-flex flex-column align-items-center"> 
-      <h5 class="text-center grey-text text-monospace my-5"><strong>Parcourir les différentes categories</strong>
+      <h5 class="text-center grey-text text-monospace my-5"><strong>Parcourir les différentes 
+        <a routerLink="/group" class="text-muted"><strong>categories</strong></a>
+      </strong>
       </h5>
       <div class="hexa-content">
         <div class="hexa" routerLink="/cat/{{hexa.name}}" *ngFor="let hexa of hexas">

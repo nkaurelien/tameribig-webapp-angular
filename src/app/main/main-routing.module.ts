@@ -18,7 +18,7 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/partner/partner.module').then(m => m.PartnerModule)
                 },
                 {
-                    path: 'cat',
+                    path: 'group',
                     loadChildren: () => import('@modules/main/category/category.module').then(m => m.CategoryModule)
                 },
                 {
