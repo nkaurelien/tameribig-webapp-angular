@@ -18,6 +18,10 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/partner/partner.module').then(m => m.PartnerModule)
                 },
                 {
+                    path: 'explorer',
+                    loadChildren: () => import('@modules/main/explorer/explorer.module').then(m => m.ExplorerModule)
+                },
+                {
                     path: 'group',
                     loadChildren: () => import('@modules/main/category/category.module').then(m => m.CategoryModule)
                 },
