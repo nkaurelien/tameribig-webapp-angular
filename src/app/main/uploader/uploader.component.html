@@ -1,0 +1,151 @@
+
+<div class="col-12">
+    <!--<h1 class="mb-5">Images presenter</h1>-->
+
+    <div class="row mx-auto">
+        <div class=" col-md-1"></div>
+        <div class=" col-md-10">
+
+            <div class="row my-5">
+                <div class="col-md-12">
+                    <!-- Material form row -->
+                    <h3>Ajouter une image en ligne</h3>
+                    <p>&nbsp;</p>
+                    <form [formGroup]="validatingForm" (submit)="submit()" novalidate>
+                        <!-- Grid row -->
+                        <div class="form-row mb-5">
+                            <div class="col-md-12 ">
+                                <div *ngIf="errors.length" class="animated fadeIn alert alert-warning" role="alert">
+                                    <b>{{ errors[0]}}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Grid row -->
+                        <div class="form-row">
+                            <!-- Grid column -->
+                            <div class="col">
+                                <!-- Material input -->
+                                <div class="md-form form-group mt-0">
+                                    <input type="text" id="titre" name="titre" formControlName="titre" class="form-control" placeholder="Titre " maxlength="100" mdbInput>
+                                    <label for="titre">Titre</label>
+                                    <mdb-error *ngIf="titreInput.invalid && (titreInput.dirty || titreInput.touched)">invalid</mdb-error>
+                                    <mdb-success *ngIf="titreInput.valid && (titreInput.dirty || titreInput.touched)">valid</mdb-success>
+                                </div>
+                            </div>
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col">
+                                <!-- Material input -->
+                                <div class="md-form form-group  mt-0">
+                                    <input type="number" id="prix" name="prix" formControlName="prix" class="form-control" placeholder="Prix" min="50" mdbInput>
+                                    <label for="prix">Prix en FCFA (min 50 FCFA)</label>
+                                    <mdb-error *ngIf="prixInput.invalid && (prixInput.dirty || prixInput.touched)">invalid</mdb-error>
+                                    <mdb-success *ngIf="prixInput.valid && (prixInput.dirty || prixInput.touched)">valid</mdb-success>
+                                </div>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                        <!-- Grid row -->
+                        <div class="form-row">
+                            <!-- Grid column -->
+                            <div class="col">
+                                <!-- Material input -->
+                                <div class="md-form mt-0">
+                                    <textarea name="description" id="description" formControlName="description" rows="5" maxlength="100" length="100" type="text" class="form-control" placeholder="Description " mdbCharCounter mdbInput></textarea>
+
+                                    <mdb-error *ngIf="descInput.invalid && (descInput.dirty || descInput.touched)">invalid</mdb-error>
+                                    <mdb-success *ngIf="descInput.valid && (descInput.dirty || descInput.touched)">valid</mdb-success></div>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                        <!-- Grid row -->
+                        <div class="form-row">
+                            <!-- Grid column -->
+                            <div class="col">
+                                <!-- Material input -->
+                                <div class="md-form mt-0">
+                                    <tag-input  formControlName="tags" [modelAsStrings]="true" inputClass="border  border-0"  [maxItems]='5'></tag-input>
+                                </div>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                        <!-- Grid row -->
+                        <div class="form-row">
+                            <!-- Grid column -->
+                            <div class="col">
+                                <!-- Material input -->
+                                <div class="md-form mt-0">
+                                    <dropzone *ngIf="type === 'component'" class="dropzone-container"[disabled]="disabled" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto"
+                                              [config]="config" [message]="'Click or drag images here to upload'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
+
+                                    <div *ngIf="type === 'directive'" class="dropzone dropzone-container"
+                                         [dropzone]="config" [disabled]="disabled" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                                </div>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                        <div class="form-row">
+
+
+                            <div class="col-md-3"><button type="submit" class="btn btn-block btn-primary">Envoyer</button></div>
+                            <div class="col-md-1">&nbsp;</div>
+                        </div>
+                    </form>
+                    <!-- Material form row -->
+                </div>
+                <div class="col-md-12"></div>
+            </div>
+
+            <!--<div class="box-container" fxLayout="column" [ngStyle.lt-sm]="'min-height: 800px;'">-->
+
+
+
+                <!--<div class="horizontal-container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="stretch" fxFlex="auto">-->
+                    <!--<div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">-->
+                        <!--<div class="box-title">Controls</div>-->
+
+                        <!--<div class="action-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">-->
+                            <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleType()'>{{(type == "component") ? "Switch to directive" : "Switch to component"}}</div>-->
+
+                            <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleDisabled()'>Toggle disabled state</div>-->
+
+                            <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleMultiUpload()'>{{(config.maxFiles !== 1) ? "Upload single file" : "Upload multiple files"}}</div>-->
+
+                            <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleAutoReset()'>{{config.autoReset ? "Turn off auto reset" : "Turn on auto reset"}}</div>-->
+
+                            <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleClickAction()'>{{config.clickable ? "Turn off click action" : "Turn on click action"}}</div>-->
+
+                            <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='resetDropzoneUploads()'>Reset upload area</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">-->
+                        <!--<div class="box-title">Dropzone</div>-->
+
+                        <!--<div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">-->
+                            <!--<dropzone *ngIf="type === 'component'" class="dropzone-container"[disabled]="disabled" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto"-->
+                                      <!--[config]="config" [message]="'Click or drag images here to upload'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>-->
+
+                            <!--<div *ngIf="type === 'directive'" class="dropzone dropzone-container" [dropzone]="config" [disabled]="disabled" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class=" col-md-1"></div>
+    </div>
+    <div *ngIf="imagesUploadedWithSuccess.length" class="row mx-auto">
+        <div  class="col">
+            <figure *ngFor="let img of imagesUploadedWithSuccess; let i = index" class="figure mx-2">
+                <img [src]="getImageUrl(img.uid)" class="figure-img img-fluid z-depth-1"
+                     [alt]="img.title" style="width: 400px">
+                <figcaption class="figure-caption">{{img.description}}</figcaption>
+            </figure>
+        </div>
+    </div>
+    </div>

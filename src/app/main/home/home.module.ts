@@ -8,8 +8,8 @@ import {HexagoneComponent} from './hexagone/hexagone.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
-import { CategoriesService } from './services/categories.service';
-import { ImagesService } from './services/images.service';
+import { CategoriesService } from '../@core/services/categories.service';
+import { ImagesService } from '../@core/services/images.service';
 
 
 @NgModule({

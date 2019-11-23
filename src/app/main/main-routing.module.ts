@@ -22,6 +22,10 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/help/help.module').then(m => m.HelpModule)
                 },
                 {
+                    path: 'uploader',
+                    loadChildren: () => import('@modules/main/uploader/uploader.module').then(m => m.UploaderModule)
+                },
+                {
                     path: '',
                     redirectTo: 'home',
                     pathMatch: 'full'

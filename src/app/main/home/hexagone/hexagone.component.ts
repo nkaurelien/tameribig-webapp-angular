@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Categorie, CategoriesService} from '../services/categories.service';
+import {Categorie, CategoriesService} from '../../@core/services/categories.service';
 
 @Component({
   selector: 'app-hexagone',
