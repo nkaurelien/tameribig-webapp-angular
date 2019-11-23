@@ -74,7 +74,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-    console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
+    // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
     if (this.validatingForm.valid) {
       this.dropzone.processQueue();
     } else {
@@ -109,18 +109,18 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   public onUploadInit(dropzone: any): void {
-    console.log('onUploadInit:', dropzone);
+    // console.log('onUploadInit:', dropzone);
   }
 
   public onUploadError(args: any): void {
-    console.log('onUploadError:', args);
+    // console.log('onUploadError:', args);
     this.resetDropzoneUploads();
     this.errors[0] = 'Un problème est survenu pendant l\'opération';
 
   }
 
   public onUploadSuccess([file, xhrResponse, progressEvent]: any): void {
-    console.log('onUploadSuccess:', [file, xhrResponse, progressEvent]);
+    // console.log('onUploadSuccess:', [file, xhrResponse, progressEvent]);
 
     this.imagesUploadedWithSuccess = [...this.imagesUploadedWithSuccess, xhrResponse];
     this.validatingForm.reset();
