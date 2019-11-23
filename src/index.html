@@ -6,6 +6,17 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    WebFont.load({
+      google: {
+        "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700", "Asap+Condensed:500"]
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      }
+    });
+  </script>
+  <!--end::Web font -->
 </head>
 <body class="white-skin">
   <app-root></app-root>
