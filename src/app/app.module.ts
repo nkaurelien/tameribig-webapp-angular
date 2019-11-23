@@ -14,6 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '@environments/environment';
+import { ErrorModule } from './errors/error.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,10 @@ import { environment } from '@environments/environment';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+
+
+    ErrorModule,
+    
     FormsModule,
     HttpClientModule,
     ToastModule.forRoot({
