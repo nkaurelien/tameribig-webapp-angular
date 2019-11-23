@@ -5,7 +5,7 @@ import { DropzoneComponent , DropzoneDirective,
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastService} from 'ng-uikit-pro-standard';
 import {environment} from '../../../environments/environment';
-import { AuthenticationService } from 'src/app/auth2/_services';
+import { AuthenticationService } from '@app/auth2/_services';
 
 @Component({
     selector: 'app-uploader',
