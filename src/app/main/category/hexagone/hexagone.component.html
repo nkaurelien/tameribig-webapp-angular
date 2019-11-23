@@ -1,16 +1,20 @@
 <div class="hexagones">
   <div class="w-100 flex-center">
-   <div class="d-flex flex-column align-items-center"> 
+   <div class="d-flex flex-column align-items-center" style="overflow-x: scroll;"> 
       <h5 class="text-center grey-text text-monospace my-5"><strong>Parcourir les différentes 
         <a routerLink="/group" class="text-muted"><strong>categories</strong></a>
       </strong>
       </h5>
+      
+      <!-- pair -->
       <div class="hexa-content">
         <div class="hexa" routerLink="/group/{{hexa.name}}" *ngFor="let hexa of hexas">
           <div class="{{hexa.subclass}}"></div>
           <p>{{hexa.name}}</p>
         </div>
       </div>
+
+      <!-- impair -->
       <div class="hexa-content mrg">
         <div class="hexa">
           <div class="hexagon-desactiv"></div>
@@ -23,6 +27,30 @@
           <div class="hexagon-desactiv"></div>
         </div>
       </div>
+
+      <!-- pair -->
+      <div class="hexa-content">
+        <div class="hexa" routerLink="/group/{{hexa.name}}" *ngFor="let hexa of hexas3">
+          <div class="{{hexa.subclass}}"></div>
+          <p>{{hexa.name}}</p>
+        </div>
+      </div>
+
+      <!-- impair -->
+      <div class="hexa-content mrg">
+        <div class="hexa">
+          <div class="hexagon-desactiv"></div>
+        </div>
+        <div class="hexa" routerLink="/group/{{hexa.name}}" *ngFor="let hexa of hexas4">
+          <div class="{{hexa.subclass}}"></div>
+          <p>{{hexa.name}}</p>
+        </div>
+        <div class="hexa">
+          <div class="hexagon-desactiv"></div>
+        </div>
+      </div>
+
+
    </div>
   </div>
 </div>

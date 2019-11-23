@@ -1,3 +1,36 @@
+$with: 170px;
+$height: 99.21px;
+
+.hexagones {
+  position: relative;
+  width: 100%;
+  // width: 91%;
+  // margin: 0 4.5%;
+}
+
+
+.mrg {
+  top: -47px;
+}
+
+.hexa {
+  position: relative;
+  width: $with;
+  margin: 10px;
+
+
+  p {
+    position: absolute;
+    top: 65px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    color: white;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+}
+
 .hexa-content{
   position: relative;
   display: flex;
@@ -10,15 +43,23 @@
   cursor: pointer;
   animation: 1.5s;
   position: relative;
-  width: 128px;
-  height: 68.21px;
-  margin: 41.6px 0;
+  width: $with;
+  height: $height;
+  margin: 61.6px 0;
   opacity: 1;
   // transition: opacity 3s linear 1s;
-}
-
-.hexagon:hover {
-  opacity: 0.7;
+  
+  &:hover {
+    opacity: 0.7;
+  }
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: $with / 2 solid transparent;
+    border-right: $with / 2 solid transparent;
+  }
 }
 
 
@@ -302,45 +343,3 @@
 }
 
 
-
-.hexagon:before,
-.hexagon:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  border-left: 64px solid transparent;
-  border-right: 64px solid transparent;
-}
-
-
-
-.hexa{
-  position:relative;
-  width: 128px;
-  margin: 10px;
-
-
-  p {
-    position: absolute;
-    top: 65px;
-    text-align: center;
-    width: 100%;
-    font-size: 14px;
-    color: white;
-    font-weight: bolder;
-    cursor: pointer;
-  }
-}
-
-
-.hexagones{
-  position: relative;
-  width: 100%;
-  width: 91%;
-  margin: 0 4.5%;
-}
-
-
-.mrg{
-  top: -47px;
-}

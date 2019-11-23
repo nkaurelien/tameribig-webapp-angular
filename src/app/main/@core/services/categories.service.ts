@@ -50,7 +50,7 @@ export class CategoriesService {
       take(1),
       tap( data => {
         this._categoriesBackup$.next(data);
-        console.log('categories$ collections',  data.length, data);
+        // console.log('categories$ collections',  data.length, data);
         // this.generateDummyCategoriesMocks(10).forEach(el => this.add(el));
         //   this.dummy.forEach(el => this.add(el));
 

@@ -6,6 +6,7 @@ import {CategoryDetailComponent} from './detail/category-detail.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LayoutComponent } from './layout/layout.component';
+import { HexagoneComponent } from './hexagone/hexagone.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
   ], exports: [
     RouterModule,
   ], declarations: [
+    HexagoneComponent,
     CategoryComponent,
     CategoryDetailComponent,
     LayoutComponent,
