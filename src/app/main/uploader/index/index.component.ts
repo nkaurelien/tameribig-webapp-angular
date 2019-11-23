@@ -8,6 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { environment } from '@environments/environment';
 import { AuthenticationService } from '@app/auth2/_services';
+import { ScriptService } from 'ngx-script-loader';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-index',
@@ -50,8 +52,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _auth: AuthenticationService,
-    private toast: ToastService
-  ) { }
+    private toast: ToastService,
+    private scriptService: ScriptService,
+  ) { 
+  } 
 
   ngOnInit() {
     this.validatingForm = new FormGroup({
@@ -128,6 +132,14 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
+    
+    // concat(
+    //   this.scriptService.loadScript('/lazy-loaded-jarallax.min.js'),
+    //   this.scriptService.loadScript('/lazy-loaded-jarallax-element.min.js'),
+    //   this.scriptService.loadScript('/lazy-loaded-jarallax-video.min.js'),
+    // ).subscribe(() => {
+    // });
+
     if (this.type === 'directive' && this.directiveRef) {
       this.dropzone = this.directiveRef.dropzone();
     } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
