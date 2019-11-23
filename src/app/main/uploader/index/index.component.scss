@@ -5,10 +5,29 @@
       border: none !important;
     }
   }
+
+  .ng2-tag-input__text-input {
+      position: relative;
+      top: 4px;
+  }
+
+  textarea.form-control {
+        padding: 10px !important;
+
+        & + .success-message {
+          position: relative;
+          top: 0px;
+        }
+
+        & + .error-message {
+          position: relative;
+          top: 0px;
+        }
+  }
+
 }
 
 //@import '~dropzone/dist/min/dropzone.min.css';
-
 
 .box-container {
   box-sizing: border-box;
@@ -23,8 +42,8 @@
   color: #555;
   background-color: #eee;
   box-shadow:
-          0 6px 20px rgba(0, 0, 0, 0.18),
-          0 6px 6px rgba(0, 0, 0, 0.25);
+    0 6px 20px rgba(0, 0, 0, 0.18),
+    0 6px 6px rgba(0, 0, 0, 0.25);
 }
 
 .info-container {
@@ -76,3 +95,4 @@
 .dropzone-container {
   height: 100%;
 }
+

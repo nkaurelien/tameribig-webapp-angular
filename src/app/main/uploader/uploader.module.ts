@@ -6,24 +6,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DropzoneModule, DropzoneConfigInterface,
     DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
-import {UploaderComponent} from './uploader.component';
 import {environment} from '@environments/environment';
-import {ButtonsModule, CharCounterModule, InputsModule, InputUtilitiesModule, ToastModule, WavesModule} from 'ng-uikit-pro-standard';
+import {ButtonsModule, CharCounterModule, InputsModule, InputUtilitiesModule, WavesModule, CardsModule} from 'ng-uikit-pro-standard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { TagInputModule } from 'ngx-chips';
-import { MainLayoutComponent } from '../main-layout/main-layout.component';
 import { ImagesService } from '../@core/services/images.service';
+import { LayoutComponent } from './layout/layout.component';
+import { IndexComponent } from './index/index.component';
 
 
 const routes: Routes = [
     {
         'path': '',
-        'component': MainLayoutComponent,
+        'component': LayoutComponent,
         'children': [
             {
                 'path': '',
-                'component': UploaderComponent
+                'component':  IndexComponent
             }
         ]
     }
@@ -40,10 +40,11 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 
 @NgModule({
 
-    // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
+        CardsModule,
         DropzoneModule,
         ButtonsModule,
         InputsModule,
@@ -64,7 +65,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     ], exports: [
         RouterModule
     ], declarations: [
-        UploaderComponent
+        LayoutComponent,
+        IndexComponent
     ],
     providers: [
         ImagesService,
