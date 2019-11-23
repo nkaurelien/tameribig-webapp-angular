@@ -18,6 +18,10 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/partner/partner.module').then(m => m.PartnerModule)
                 },
                 {
+                    path: 'cat',
+                    loadChildren: () => import('@modules/main/category/category.module').then(m => m.CategoryModule)
+                },
+                {
                     path: 'help',
                     loadChildren: () => import('@modules/main/help/help.module').then(m => m.HelpModule)
                 },

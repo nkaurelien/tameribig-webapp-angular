@@ -1,0 +1,40 @@
+<div class="row mx-0" style="min-height: 40vh; padding-top: 0em;">
+  <div class="col-12 p-0" id="banner" style="background: url(assets/images/banner.jpg) no-repeat;">
+    <div style="position:absolute; top: 50%; left: 50%; transform: scale(1.5);color: white">
+      <h1 class="text-uppercase">{{ categorySlug }}</h1>
+      <p>Des images parfaites adaptées à vos besoins</p>
+    </div>
+  </div>
+  <!-- END: Subheader -->
+</div>
+<div class="container">
+  <div class="row box-search mb-5 justify-content-center">
+
+    <a  (click)="filterMedia('image')"  class="col-2 option-cat">
+      <img class="icone img-fluid" src="assets/images/camera.png">
+      <h5 class="font font-image description">Images</h5>
+    </a>
+    <a  (click)="filterMedia('video')" class="col-2 option-cat">
+      <img class="icone img-fluid" src="assets/images/video.png">
+      <h5 class="font font-video description">Videos</h5>
+    </a>
+    <a  (click)="filterMedia('audio')"  class="col-2 option-cat">
+      <img class="icone img-fluid" src="assets/images/audio.png">
+      <h5 class="font font-audio description">Audios</h5>
+    </a>
+    <a  (click)="filterMedia('crea')"  class="col-2 option-cat">
+      <img class="icone img-fluid" src="assets/images/illustration.png">
+      <h5 class="font font-crea description">Creas</h5>
+    </a>
+
+  </div>
+    <div class="masonry-grid-with-flex- masonry-grid-with-columns- masonry-grid-with-columns-2" infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         (scrolled)="onScroll()">
+      <div *ngFor="let image of images">
+        <img [lazyLoad]="getImageUrl(image)" [offset]="20" [alt]="image.title" class="img-fluid" >
+        <!--<img [src]="getImageUrl(image)" [alt]="image.title" class="img-fluid" >-->
+      </div>
+    </div>
+</div>
