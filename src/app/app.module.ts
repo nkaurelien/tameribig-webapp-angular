@@ -15,6 +15,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '@environments/environment';
 import { ErrorModule } from './errors/error.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers, metaReducers } from '@core/reducers';
+import { AuthService } from '@core/auth';
+import { HttpUtilsService } from '@core/_base/crud';
+import { AuthenticationService } from './auth2/_services';
+import { ScriptLoaderService } from 'src/@core/services/script-loader.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +34,11 @@ import { ErrorModule } from './errors/error.module';
     AppRoutingModule,
     BrowserAnimationsModule,
 
+
+    StoreModule.forRoot(reducers, { metaReducers: metaReducers  }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    StoreDevtoolsModule.instrument(),
 
     ErrorModule,
     
@@ -47,7 +61,13 @@ import { ErrorModule } from './errors/error.module';
       apiKey: 'Your_api_key'
     })
   ],
-  providers: [MDBSpinningPreloader],
+  providers: [MDBSpinningPreloader,
+
+    AuthenticationService,
+    AuthService,
+    HttpUtilsService,
+    ScriptLoaderService,
+  ],
   bootstrap: [AppComponent],
   schemas:      [ NO_ERRORS_SCHEMA ]
 })

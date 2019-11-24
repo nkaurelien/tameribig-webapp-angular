@@ -52,6 +52,7 @@
     "ng-lazyload-image": "^7.0.1",
     "ng-simple-slideshow": "^1.2.9",
     "ng-uikit-pro-standard": "file:ng-uikit-pro-standard-8.6.0.tgz",
+    "ngrx-store-freeze": "^0.2.4",
     "ngx-chips": "^2.1.0",
     "ngx-clipboard": "^12.2.1",
     "ngx-dropzone-wrapper": "^8.0.0",
