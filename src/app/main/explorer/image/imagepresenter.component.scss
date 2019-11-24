@@ -1,0 +1,13 @@
+:host ::ng-deep mdb-accordion {
+    .accordion .card .card-header {
+        color: #0275d8;
+        padding: 1rem 0.5rem;
+        background: transparent;
+        border-bottom: 0;
+        cursor: pointer;
+    }
+}
+
+.price {
+    font-size: 1.7em;
+}

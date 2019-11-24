@@ -19,7 +19,8 @@ import {
     ExplorerPath,
     ImagesExplorerPath,
     SearchresultPath,
-    VideosExplorerPath
+    VideosExplorerPath,
+    ImagePresenterUrl
 } from './routes';
 import { ImagesService } from '../@core/services/images.service';
 
@@ -49,6 +50,11 @@ const routes: Routes = [
             {
                 path: SearchresultPath,
                 component: SearchresultComponent
+            },
+
+            {
+                path: ImagePresenterUrl,
+                loadChildren: () => import('@modules/main/explorer/image/image.module').then(m => m.ImageModule)
             },
         ]
     }
