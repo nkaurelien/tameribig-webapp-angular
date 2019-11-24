@@ -8,6 +8,11 @@
     background-color: #ffc107;
     color: #424242;
   }
+
+  .side-nav .collapsible .card.active {
+        background: rgba(255, 193, 7, 0.1607843137254902) !important;
+    border-bottom: 0 !important;
+  }
 }
 
 :host ::ng-deep .navbar-toggler-icon {

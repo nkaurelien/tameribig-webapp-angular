@@ -14,7 +14,7 @@ import {AuthenticationService} from '@app/auth2/_services';
 export class ProfileComponent implements OnInit {
   profilForm: FormGroup;
   authUser: User;
-  errors: string[];
+  errors: string[] = [];
   private isLoggedInSubscription: Subscription;
 
   constructor(
@@ -24,12 +24,12 @@ export class ProfileComponent implements OnInit {
   )  {
 
     this.authUser = new User();
-    this.createForm();
+
     this.subscribeLoginState();
 
   }
   ngOnInit()  {
-
+    this.createForm();
   }
 
   subscribeLoginState() {
@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
       firstName: new FormControl(this.authUser.firstName, [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl(this.authUser.lastName, [Validators.required, Validators.minLength(3)]),
       phoneNumber: new FormControl(this.authUser.phoneNumber, [Validators.required, Validators.minLength(9)]),
+      about: new FormControl(this.authUser.about, [Validators.nullValidator]),
       occupation: new FormControl(this.authUser.occupation, [ Validators.nullValidator]),
       companyName: new FormControl(this.authUser.companyName,  Validators.nullValidator),
       address: this.fb.group({
@@ -70,16 +71,17 @@ export class ProfileComponent implements OnInit {
 
 
   get addressInputGroup(): FormGroup {
-    return this.profilForm && this.profilForm.get('address') as FormGroup;
+    return this.profilForm && (this.profilForm.get('address') as FormGroup);
   }
 
   get socialLinksInputGroup(): FormGroup {
-    return this.profilForm && this.profilForm.get('socialLinks') as FormGroup;
+    return this.profilForm && (this.profilForm.get('socialLinks') as FormGroup);
   }
 
   get fullNameInput(): FormControl {
-    return this.profilForm && this.profilForm.get('fullNameInput') as FormControl;
+    return this.profilForm && (this.profilForm.get('fullNameInput') as FormControl);
   }
+
   submit() {
     console.log('this.profilForm.valid', this.profilForm.valid, this.profilForm.value);
     if (this.profilForm.valid) {
@@ -87,7 +89,8 @@ export class ProfileComponent implements OnInit {
       this.auth.updateUserData(this.profilForm.value);
     } else {
       this.errors = ['Formulaire invalide'];
-      this.toast.success('Verifier votre formulaire');
+      const options = { positionClass: 'md-toast-bottom-full-width' };
+      this.toast.info('Verifier votre formulaire', '', options);
     }
   }
 }

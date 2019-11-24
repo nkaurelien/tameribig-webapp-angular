@@ -5,6 +5,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { FooterComponent } from './main-layout/footer/footer.component';
 import { NavigationModule } from './main-layout/navigation/navigation.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -16,6 +17,10 @@ import { NavigationModule } from './main-layout/navigation/navigation.module';
     CommonModule,
     MainRoutingModule,
     NavigationModule,
+    AgmCoreModule.forRoot({
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
+      apiKey: 'AIzaSyCb44fZMVNTqsA7phK5chbOolMgsJl9mFw'
+    }),
   ],
   exports: [
     FooterComponent,
