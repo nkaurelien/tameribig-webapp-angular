@@ -20,8 +20,8 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.seo.generateTags({
-      title: 'Accueil  - Livraison Express',
-      description: 'Livraison Rapide',
+      title: 'Accueil Tameri Big, Bienvenue sur la toile de partage des images, photos, creations, videos.',
+      description: "Toile de partage des images, photos, creations, videos. Mettez votre imagination a profit. L'afrique a des talents",
       image: `${document.location.origin}/${environment.logo}`,
       slug: ''
     });
