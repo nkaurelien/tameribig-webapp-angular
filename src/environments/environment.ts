@@ -9,6 +9,8 @@ const firebaseConfig = {
 };
 
 export const environment = {
+    logo: 'assets/images/logo.png',
+
     // ApiBaseUrl: 'http://localhost:5001/tameri-big/us-central1/api',
     ApiBaseUrl: 'http://localhost:3000',
     authTokenKey: 'auth',
@@ -16,6 +18,9 @@ export const environment = {
     isMockEnabled: false,
     production: false
 };
+
+
+export const GMAP_API_KEY = 'AIzaSyBn_LS3TTqaSsByi5U7poZjoFLB8Egi2Kk';
 
 /*
  * In development mode, for easier debugging, you can ignore zone related error

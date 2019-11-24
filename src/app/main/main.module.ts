@@ -6,6 +6,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { FooterComponent } from './main-layout/footer/footer.component';
 import { NavigationModule } from './main-layout/navigation/navigation.module';
 import { AgmCoreModule } from '@agm/core';
+import { GMAP_API_KEY } from '@environments/environment';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { AgmCoreModule } from '@agm/core';
     NavigationModule,
     AgmCoreModule.forRoot({
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
-      apiKey: 'AIzaSyCb44fZMVNTqsA7phK5chbOolMgsJl9mFw'
+      apiKey: GMAP_API_KEY
     }),
   ],
   exports: [

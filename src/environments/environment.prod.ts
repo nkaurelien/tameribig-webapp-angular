@@ -9,9 +9,14 @@ const firebaseConfig = {
 };
 
 export const environment = {
+    logo: 'assets/images/logo.png',
+
     ApiBaseUrl: 'https://us-central1-tameri-big.cloudfunctions.net/api',
     authTokenKey: 'auth',
     firebaseConfig,
     isMockEnabled: false,
     production: true
 };
+
+
+export const GMAP_API_KEY = 'AIzaSyBn_LS3TTqaSsByi5U7poZjoFLB8Egi2Kk';

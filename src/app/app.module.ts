@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 
-import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-uikit-pro-standard';
+import { MDBSpinningPreloader, ToastModule } from 'ng-uikit-pro-standard';
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -22,9 +22,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from '@core/reducers';
 import { AuthService } from '@core/auth';
 import { HttpUtilsService } from '@core/_base/crud';
-import { AuthenticationService } from './auth2/_services';
-import { ScriptLoaderService } from 'src/@core/services/script-loader.service';
 import { AuthModule } from './auth2/auth.module';
+import { CoreModule } from '@core/core.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,7 @@ import { AuthModule } from './auth2/auth.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     AuthModule.forRoot(),
-
+    CoreModule.forRoot(),
 
     StoreModule.forRoot(reducers, { metaReducers: metaReducers  }),
     EffectsModule.forRoot([]),
@@ -50,25 +49,18 @@ import { AuthModule } from './auth2/auth.module';
       positionClass: 'md-toast-bottom-center',
       maxOpened: 2,
     }),
-    // MDBBootstrapModulesPro.forRoot(),
     NgtUniversalModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     // AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
-    
-    // AgmCoreModule.forRoot({
-    //   // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
-    //   apiKey: 'Your_api_key'
-    // })
   ],
   providers: [MDBSpinningPreloader,
 
     // AuthenticationService,
     AuthService,
     HttpUtilsService,
-    ScriptLoaderService,
   ],
   bootstrap: [AppComponent],
   schemas:      [ NO_ERRORS_SCHEMA ]
