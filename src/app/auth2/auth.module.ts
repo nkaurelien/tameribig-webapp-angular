@@ -1,4 +1,4 @@
-import {NgModule, ModuleWithProviders} from '@angular/core';
+import {NgModule, ModuleWithProviders, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BaseRequestOptions, HttpModule} from '@angular/http';
@@ -10,7 +10,6 @@ import {AlertService} from './_services/alert.service';
 import {AuthenticationService} from './_services/authentication.service';
 import {UserService} from './_services/user.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import { MatInputModule, MatFormFieldModule, MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -26,6 +25,7 @@ import { LogoutComponent } from './logout/logout.component';
 // Auth
 import {AuthEffects, authReducer, AuthService} from '@core/auth/index';
 import {InterceptService} from '@core/_base/crud/index';
+import { ButtonsModule, CardsModule, WavesModule, IconsModule } from 'ng-uikit-pro-standard';
 
 
 @NgModule({
@@ -44,10 +44,14 @@ import {InterceptService} from '@core/_base/crud/index';
     HttpModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
+    ButtonsModule,
+    CardsModule,
+    WavesModule,
+    IconsModule,
+    // MatButtonModule,
+    // MatInputModule,
+    // MatFormFieldModule,
+    // MatCheckboxModule,
     TranslateModule.forChild(),
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects])
@@ -66,6 +70,7 @@ import {InterceptService} from '@core/_base/crud/index';
   ],
   exports: [AuthComponent],
   entryComponents: [AlertComponent],
+  schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })
 
 export class AuthModule {

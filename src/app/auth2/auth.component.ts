@@ -4,7 +4,6 @@ import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
 import { UserService } from './_services/user.service';
 import { AlertComponent } from './_directives/alert.component';
-import {Helpers} from '@core/helpers';
 import {ScriptLoaderService} from "@core/services/script-loader.service";
 
 declare let $: any;
@@ -12,18 +11,8 @@ declare let mUtil: any;
 
 @Component({
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
-  templateUrl: './templates/login-1.component.html',
-  styles: [`
-    .m-login.m-login--1 .m-login__wrapper {
-        overflow: hidden;
-        padding: 15% 2rem 2rem 2rem;
-    }
-
-    .m-login.m-login--1 .m-login__wrapper .m-login__logo {
-        text-align: center;
-        margin: 0 auto 1.5rem auto;
-    }
-  `],
+  templateUrl: './templates/login-2.component.html',
+  styleUrls: ['./auth.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 
@@ -57,15 +46,15 @@ export class AuthComponent implements OnInit {
       this._router.navigate([this.returnUrl]);
     }
 
-    this._script.loadScripts('body', [
-      'assets/vendors/base/vendors.bundle.js',
-      'assets/demo/demo8/base/scripts.bundle.js'], true).then(() => {
-      Helpers.setLoading(false);
-      this.handleFormSwitch();
-      this.handleSignInFormSubmit();
-      this.handleSignUpFormSubmit();
-      this.handleForgetPasswordFormSubmit();
-    });
+    // this._script.loadScripts('body', [
+    //   'assets/vendors/base/vendors.bundle.js',
+    //   'assets/demo/demo8/base/scripts.bundle.js'], true).then(() => {
+    //   Helpers.setLoading(false);
+      // this.handleFormSwitch();
+      // this.handleSignInFormSubmit();
+      // this.handleSignUpFormSubmit();
+      // this.handleForgetPasswordFormSubmit();
+    // });
   }
 
   signin() {
@@ -127,132 +116,132 @@ export class AuthComponent implements OnInit {
   }
 
   handleSignInFormSubmit() {
-    $('#m_login_signin_submit').click((e) => {
-      const form = $(e.target).closest('form');
-      form.validate({
-        rules: {
-          email: {
-            required: true,
-            email: true,
-          },
-          password: {
-            required: true,
-          },
-        },
-      });
-      if (!form.valid()) {
-        e.preventDefault();
-        return;
-      }
-    });
+    // $('#m_login_signin_submit').click((e) => {
+    //   const form = $(e.target).closest('form');
+    //   form.validate({
+    //     rules: {
+    //       email: {
+    //         required: true,
+    //         email: true,
+    //       },
+    //       password: {
+    //         required: true,
+    //       },
+    //     },
+    //   });
+    //   if (!form.valid()) {
+    //     e.preventDefault();
+    //     return;
+    //   }
+    // });
   }
 
   displaySignUpForm() {
-    const login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--forget-password');
-    mUtil.removeClass(login, 'm-login--signin');
+    // const login = document.getElementById('m_login');
+    // mUtil.removeClass(login, 'm-login--forget-password');
+    // mUtil.removeClass(login, 'm-login--signin');
 
-    mUtil.addClass(login, 'm-login--signup');
-    mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
+    // mUtil.addClass(login, 'm-login--signup');
+    // mUtil.animateClass(login.getElementsByClassName('m-login__signup')[0], 'flipInX animated');
   }
 
   displaySignInForm() {
-    const login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--forget-password');
-    mUtil.removeClass(login, 'm-login--signup');
-    try {
-      $('form').data('validator').resetForm();
-    } catch (e) {
-    }
+    // const login = document.getElementById('m_login');
+    // mUtil.removeClass(login, 'm-login--forget-password');
+    // mUtil.removeClass(login, 'm-login--signup');
+    // try {
+    //   $('form').data('validator').resetForm();
+    // } catch (e) {
+    // }
 
-    mUtil.addClass(login, 'm-login--signin');
-    mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
+    // mUtil.addClass(login, 'm-login--signin');
+    // mUtil.animateClass(login.getElementsByClassName('m-login__signin')[0], 'flipInX animated');
   }
 
   displayForgetPasswordForm() {
-    const login = document.getElementById('m_login');
-    mUtil.removeClass(login, 'm-login--signin');
-    mUtil.removeClass(login, 'm-login--signup');
+    // const login = document.getElementById('m_login');
+    // mUtil.removeClass(login, 'm-login--signin');
+    // mUtil.removeClass(login, 'm-login--signup');
 
-    mUtil.addClass(login, 'm-login--forget-password');
-    mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
+    // mUtil.addClass(login, 'm-login--forget-password');
+    // mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
   }
 
   handleFormSwitch() {
-    document.getElementById('m_login_forget_password').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displayForgetPasswordForm();
-    });
+    // document.getElementById('m_login_forget_password').addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   this.displayForgetPasswordForm();
+    // });
 
-    document.getElementById('m_login_forget_password_cancel').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignInForm();
-    });
+    // document.getElementById('m_login_forget_password_cancel').addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   this.displaySignInForm();
+    // });
 
-    document.getElementById('m_login_signup').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignUpForm();
-    });
+    // document.getElementById('m_login_signup').addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   this.displaySignUpForm();
+    // });
 
-    document.getElementById('m_login_signup1').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignUpForm();
-    });
+    // document.getElementById('m_login_signup1').addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   this.displaySignUpForm();
+    // });
 
-    document.getElementById('m_login_signup_cancel').addEventListener('click', (e) => {
-      e.preventDefault();
-      this.displaySignInForm();
-    });
+    // document.getElementById('m_login_signup_cancel').addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   this.displaySignInForm();
+    // });
   }
 
   handleSignUpFormSubmit() {
-    document.getElementById('m_login_signup_submit').addEventListener('click', (e) => {
-      const btn = $(e.target);
-      const form = $(e.target).closest('form');
-      form.validate({
-        rules: {
-          fullname: {
-            required: true,
-          },
-          email: {
-            required: true,
-            email: true,
-          },
-          password: {
-            required: true,
-          },
-          rpassword: {
-            required: true,
-          },
-          agree: {
-            required: true,
-          },
-        },
-      });
-      if (!form.valid()) {
-        e.preventDefault();
-        return;
-      }
-    });
+    // document.getElementById('m_login_signup_submit').addEventListener('click', (e) => {
+    //   const btn = $(e.target);
+    //   const form = $(e.target).closest('form');
+    //   form.validate({
+    //     rules: {
+    //       fullname: {
+    //         required: true,
+    //       },
+    //       email: {
+    //         required: true,
+    //         email: true,
+    //       },
+    //       password: {
+    //         required: true,
+    //       },
+    //       rpassword: {
+    //         required: true,
+    //       },
+    //       agree: {
+    //         required: true,
+    //       },
+    //     },
+    //   });
+    //   if (!form.valid()) {
+    //     e.preventDefault();
+    //     return;
+    //   }
+    // });
   }
 
   handleForgetPasswordFormSubmit() {
-    document.getElementById('m_login_forget_password_submit').addEventListener('click', (e) => {
-      const btn = $(e.target);
-      const form = $(e.target).closest('form');
-      form.validate({
-        rules: {
-          email: {
-            required: true,
-            email: true,
-          },
-        },
-      });
-      if (!form.valid()) {
-        e.preventDefault();
-        return;
-      }
-    });
+    // document.getElementById('m_login_forget_password_submit').addEventListener('click', (e) => {
+    //   const btn = $(e.target);
+    //   const form = $(e.target).closest('form');
+    //   form.validate({
+    //     rules: {
+    //       email: {
+    //         required: true,
+    //         email: true,
+    //       },
+    //     },
+    //   });
+    //   if (!form.valid()) {
+    //     e.preventDefault();
+    //     return;
+    //   }
+    // });
   }
 
 }

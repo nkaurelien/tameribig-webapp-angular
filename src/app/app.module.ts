@@ -24,6 +24,7 @@ import { AuthService } from '@core/auth';
 import { HttpUtilsService } from '@core/_base/crud';
 import { AuthenticationService } from './auth2/_services';
 import { ScriptLoaderService } from 'src/@core/services/script-loader.service';
+import { AuthModule } from './auth2/auth.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ScriptLoaderService } from 'src/@core/services/script-loader.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AuthModule.forRoot(),
 
 
     StoreModule.forRoot(reducers, { metaReducers: metaReducers  }),
@@ -48,7 +50,7 @@ import { ScriptLoaderService } from 'src/@core/services/script-loader.service';
       positionClass: 'md-toast-bottom-center',
       maxOpened: 2,
     }),
-    MDBBootstrapModulesPro.forRoot(),
+    // MDBBootstrapModulesPro.forRoot(),
     NgtUniversalModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -56,14 +58,14 @@ import { ScriptLoaderService } from 'src/@core/services/script-loader.service';
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     
-    AgmCoreModule.forRoot({
-      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
-      apiKey: 'Your_api_key'
-    })
+    // AgmCoreModule.forRoot({
+    //   // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
+    //   apiKey: 'Your_api_key'
+    // })
   ],
   providers: [MDBSpinningPreloader,
 
-    AuthenticationService,
+    // AuthenticationService,
     AuthService,
     HttpUtilsService,
     ScriptLoaderService,
