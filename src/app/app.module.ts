@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 
-import { MDBSpinningPreloader, ToastModule, MDBModalService } from 'ng-uikit-pro-standard';
+import { MDBSpinningPreloader, ToastModule, MDBModalService, ModalModule } from 'ng-uikit-pro-standard';
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -52,6 +52,7 @@ import { FaqModule } from './coorporate/faq/faq.module';
     
     FormsModule,
     HttpClientModule,
+    ModalModule.forRoot(),
     ToastModule.forRoot({
       positionClass: 'md-toast-bottom-center',
       maxOpened: 2,

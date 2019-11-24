@@ -5,7 +5,8 @@ import {CommonModule} from '@angular/common';
 import {NewsLetterModule} from '../news-letter/news-letter.module';
 import {
   ButtonsModule, CharCounterModule, IconsModule, InputsModule, InputUtilitiesModule, ModalModule,
-  WavesModule
+  WavesModule,
+  MDBModalService
 } from 'ng-uikit-pro-standard';
 import {ContactUsModalComponent} from './_modals/contact-us-modal.component';
 import {ContactService} from '../_services/contact.service';
@@ -54,6 +55,7 @@ const routes: Routes = [
     ContactUsModalComponent,
   ],
   providers: [
+    MDBModalService,
     ContactService,
   ],
   entryComponents: [
