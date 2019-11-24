@@ -3,6 +3,13 @@
     cursor: pointer;
 }
 
+:host ::ng-deep {
+  .navbar {
+    background-color: #ffc107;
+    color: #424242;
+  }
+}
+
 :host ::ng-deep .navbar-toggler-icon {
     display: inline-block;
     width: 1.5em;
