@@ -1,0 +1,47 @@
+[debug] [2019-11-24T21:33:25.742Z] ----------------------------------------------------------------------
+[debug] [2019-11-24T21:33:25.746Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Nkumbe Aurelien\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2019-11-24T21:33:25.747Z] CLI Version:   7.4.0
+[debug] [2019-11-24T21:33:25.747Z] Platform:      win32
+[debug] [2019-11-24T21:33:25.747Z] Node Version:  v10.15.3
+[debug] [2019-11-24T21:33:25.748Z] Time:          Sun Nov 24 2019 22:33:25 GMT+0100 (GMT+01:00)
+[debug] [2019-11-24T21:33:25.749Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-11-24T21:33:25.762Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-24T21:33:25.763Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\laragon\www\tameri
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2019-11-24T21:34:08.981Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-11-24T21:34:08.981Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-11-24T21:34:10.681Z] <<< HTTP RESPONSE 200
+[debug] [2019-11-24T21:34:10.713Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects?pageSize=100  
+ 
+[debug] [2019-11-24T21:34:11.832Z] <<< HTTP RESPONSE 200
+[info] i  Using project tameri-big (Tameri Big)
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
