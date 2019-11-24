@@ -1,0 +1,115 @@
+<!--Content-->
+
+
+<div class="modal-content">
+
+    <!--Header-->
+    <div class="modal-header blue-grey darken-3 white-text">
+        <h4 class="title">
+            <!-- <i class="fa fa-pencil float-left"></i>  -->
+            Contactez nous</h4>
+        <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <!--Body-->
+    <div class="modal-body mb-0">
+        <div class="w-100">
+            <img [src]="logo" style="max-height: 80px" class="img-fluid mx-auto d-bock flex-center" alt="logo application coursier">
+
+        </div>
+        <div *ngIf="errors && errors.length" class="alert alert-warning">
+            {{ errors[0] }}
+        </div>
+        <form #formRef="ngForm" [formGroup]="contactform " (ngSubmit)="sendMessage()" novalidate autocomplete="off">
+
+            <re-captcha #captchaElem="reCaptcha"
+                        (resolved)="handleSuccess($event)" [siteKey]="siteKey"
+                        [size]="size"></re-captcha>
+
+
+            <div class="md-form form-sm">
+                <i class="icon-user prefix"></i>
+                <input mdbInput type="text" id="modalFormNameEx"
+                       formControlName="username"
+                       name="username" class="form-control">
+                <label for="modalFormNameEx">votre nom</label>
+                <small
+                        *ngIf="contactform.controls['username'].invalid && (contactform.controls['username'].dirty || contactform.controls['username'].touched)"
+                        class="form-text mt-0 text-danger">
+      <span *ngIf="contactform.controls['username'].hasError('required')">
+        veuillez entrer votre nom
+      </span><br>
+                </small>
+
+            </div>
+
+            <div class="md-form form-sm">
+                <i class="icon-paper-plane prefix"></i>
+                <input mdbInput type="email"
+                       formControlName="email"
+                       name="email" id="modalFormEmailEx"  class="form-control">
+                <label for="modalFormEmailEx">votre email</label>
+                <small
+                        *ngIf="contactform.controls['email'].invalid && (contactform.controls['email'].dirty || contactform.controls['email'].touched)"
+                        class="form-text mt-0 text-danger">
+      <span class="d-block" *ngIf="contactform.controls['email'].hasError('required')">
+        veuillez entrer votre email valide
+      </span>
+                    <span class="d-block" *ngIf="contactform.controls['email'].hasError('email')">
+        veuillez entrer votre email valide
+      </span>
+                </small>
+
+            </div>
+
+            <div class="md-form form-sm">
+                <i class="icon-envelope-open prefix"></i>
+                <input mdbInput type="text"
+                       id="modalFormSubjectEx"
+                       formControlName="objet"
+                       name="objet"  class="form-control">
+                <label for="modalFormSubjectEx">objet</label>
+                <small
+                        *ngIf="contactform.controls['objet'].invalid && (contactform.controls['objet'].dirty || contactform.controls['objet'].touched)"
+                        class="form-text mt-0 text-danger">
+      <span *ngIf="contactform.controls['objet'].hasError('required')">
+        veuillez entrer l'objet de votre méssage
+      </span><br>
+                </small>
+            </div>
+
+            <div class="md-form mb-5 form-sm">
+                <i class="icon-envelope-letter prefix"></i>
+                <textarea mdbInput type="text"
+                          formControlName="motif"
+                          name="motif" id="modalFormTextEx"  class="md-textarea mb-0"
+                          [length]="motifLength" mdbCharCounter ></textarea>
+                <label for="modalFormTextEx">Votre message</label>
+                <small
+                        *ngIf="contactform.controls['motif'].invalid && (contactform.controls['motif'].dirty || contactform.controls['motif'].touched)"
+                        class="form-text mt-0 text-danger">
+      <span *ngIf="contactform.controls['motif'].hasError('required')">
+        veuillez ajouter quelques mots à votre méssage
+      </span><br>
+                </small>
+            </div>
+
+            <div class="text-center mt-1-half">
+                <button style="min-width: 245px"  (click)="execute()" class="btn btn-primary mb-2 waves-light" type="submit" mdbWavesEffect>
+                    <i class="far mr-2 fa-paper-plane"></i>
+                    <span>Envoyer par courrier</span>
+                </button>
+            </div>
+
+            <div class="text-center mt-1-half">
+                <button style="min-width: 245px" (click)="sendWhatsappMessage()" type="button" class="btn btn-green mb-2 waves-light" mdbWavesEffect>
+                    <i class="fab mr-2  fa-whatsapp"></i>
+                    <span>Envoyer par whatsapp</span>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<!--/.Content-->

@@ -12,7 +12,7 @@ export class MainLayoutComponent implements OnInit {
   specialPage = false;
 
   private specialPages: any[] = [
-    '/home',
+    // '/home',
     '/login',
     '/register',
     '/registered',
@@ -36,9 +36,11 @@ export class MainLayoutComponent implements OnInit {
       } else {
         this.currentUrl = route.url;
       }
-      console.log('this.currentUrl', this.currentUrl);
-
-      this.specialPage = this.specialPages.indexOf(this.currentUrl) !== -1;
+      
+      if (this.currentUrl !== undefined) {
+        // console.log('this.currentUrl', this.currentUrl, this.specialPage);
+        this.specialPage = this.specialPages.indexOf(this.currentUrl) !== -1;
+      }
     });
    
   }

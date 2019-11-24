@@ -1,0 +1,72 @@
+header {
+  height: 40vh !important;
+}
+
+.intro-2 {
+  height: 100%;
+  position: relative;
+  // background: url(/assets/img/bg/home-banner-blue-swirl.svg) no-repeat;
+  // background-size: 60.5% 730px;
+  // background-position: 100.1% top;
+
+  background-position: top left;
+  // background-size: 100% 730px;
+  background: url(/assets/img/bg/contact-us.jpg) no-repeat !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+
+  &:visited {
+    animation: breath 40s linear infinite;
+  }
+
+  .mask {
+    * {
+      z-index: 2;
+    }
+
+    & > .container {
+
+      &:before {
+        opacity: .75;
+        content: " ";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        //background: url("/assets/img/bg/home-concept-small.png") no-repeat;
+        background-position: 15% 65%;
+        background-size: 80%;
+        transform: rotate(22deg);
+        //z-index: 100;
+      }
+
+
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 23%;
+    width: 26.5%;
+    right: 0;
+    // transform:scaleX(-1);
+    // filter: FlipH;
+
+    z-index: 1;
+
+    //background: url(/assets/img/bg/home-banner-blue-swirl.svg) no-repeat;
+    background-size: 100% 300px;
+    background-position: 100.1% top;
+
+    //
+    //animation: zoomin 10s ease-in infinite;
+    //transition: all .5s ease-in-out;
+    //overflow: hidden;
+  }
+  &::after {
+    display: none !important;
+  }
+
+}

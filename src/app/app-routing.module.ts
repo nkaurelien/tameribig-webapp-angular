@@ -11,6 +11,10 @@ const routes: Routes = [
         path: 'console',
         loadChildren: () => import('@modules/console/console.module').then(m => m.ConsoleModule),
     },
+    {
+        path: 'coorporate',
+        loadChildren: () => import('@modules/coorporate/coorporate.module').then(m => m.CoorporateModule),
+    },
     { 
         path: '404',
         component: NotFoundComponent,

@@ -37,10 +37,31 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/easy-pie-chart/dist/easypiechart.js",
-              "node_modules/screenfull/dist/screenfull.js",
-              "node_modules/hammerjs/hammer.min.js"
+              {
+                "input": "node_modules/chart.js/dist/Chart.js",
+                "lazy": true
+              }, {
+                "input": "node_modules/easy-pie-chart/dist/easypiechart.js",
+                "lazy": true
+              }, {
+                "input": "node_modules/screenfull/dist/screenfull.js",
+                "lazy": true
+              }, {
+                "input": "node_modules/hammerjs/hammer.min.js",
+                "lazy": false
+              }, {
+                "input": "node_modules/jarallax/dist/jarallax.min.js",
+                "bundleName": "lazy-loaded-jarallax.min",
+                "lazy": true
+              }, {
+                "input": "node_modules/jarallax/dist/jarallax-element.min.js",
+                "bundleName": "lazy-loaded-jarallax-element.min",
+                "lazy": true
+              }, {
+                "input": "node_modules/jarallax/dist/jarallax-video.min.js",
+                "bundleName": "lazy-loaded-jarallax-video.min",
+                "lazy": true
+              }
             ]
           },
           "configurations": {

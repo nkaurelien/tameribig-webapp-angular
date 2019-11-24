@@ -1,0 +1,74 @@
+header {
+  height: 40vh !important;
+}
+
+.intro-2 {
+  height: 100%;
+  position: relative;
+  // background: url(/assets/img/bg/home-banner-blue-swirl.svg) no-repeat;
+  // background-size: 60.5% 730px;
+  // background-position: 100.1% top;
+
+  background-position: top left;
+  // background-size: 100% 730px;
+  //background: url(/assets/img/bg/recrutement.png) no-repeat !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+
+  &:visited {
+    animation: breath 40s linear infinite;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100.1%;
+    width: 100.1%;
+    right: 0;
+    // transform:scaleX(-1);
+    // filter: FlipH;
+
+    //z-index: 1;
+
+    background: url(/assets/img/bg/recrutement.jpg) no-repeat;
+    background-size: 100% 100%;
+    background-position: 100.1% top;
+    background-attachment: fixed;
+
+    //
+    //animation: zoomin 10s ease-in infinite;
+    //transition: all .5s ease-in-out;
+    //overflow: hidden;
+  }
+  &::after {
+    display: none !important;
+  }
+
+  .mask {
+    * {
+      z-index: 2;
+    }
+
+    & > .container {
+
+      &:before {
+        opacity: .75;
+        content: " ";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        //background: url("/assets/img/bg/recrutement.png") no-repeat;
+        background-position: 1% 1%;
+        background-size: 80%;
+        //transform: rotate(22deg);
+        //z-index: 100;
+      }
+
+
+    }
+  }
+
+
+}

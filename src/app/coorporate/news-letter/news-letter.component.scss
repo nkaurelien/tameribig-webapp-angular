@@ -1,0 +1,53 @@
+
+:host ::ng-deep {
+
+    // [Removing ReCaptcha V3 Badge]
+    .grecaptcha-badge { visibility: collapse !important; }
+
+
+  #loginBtn{
+    display: none !important;
+  }
+
+  $size: 20px;
+  $left: -34px;
+  $top: 12px;
+
+  mdb-error:not(.inherit) {
+    font-size: $size;
+    color: rgba(255, 0, 0, 0.63);//red;
+    position: absolute;
+    top: $top;
+    left: $left;
+    z-index: 0;
+  }
+  mdb-success:not(.inherit) {
+    font-size: $size;
+    color: #0f9d58;
+    position: absolute;
+    top: $top;
+    left: $left;
+    z-index: 0;
+  }
+
+
+}
+
+
+:host {
+  $color: #f9f9f9;
+  border-radius: 50rem!important;
+  background-color:  $color;
+  padding-left: 1.2rem;
+
+  .md-form input[type=text], .md-form input[type=password], .md-form input[type=email], .md-form input[type=url], .md-form input[type=time], .md-form input[type=date], .md-form input[type=datetime-local], .md-form input[type=tel], .md-form input[type=number], .md-form input[type=search-md], .md-form input[type=search], .md-form textarea.md-textarea {
+    top: 0.7rem;
+    position: relative;
+    border-bottom: none;
+  }
+
+  .md-form input[type=text]:focus:not([readonly]), .md-form input[type=password]:focus:not([readonly]), .md-form input[type=email]:focus:not([readonly]), .md-form input[type=url]:focus:not([readonly]), .md-form input[type=time]:focus:not([readonly]), .md-form input[type=date]:focus:not([readonly]), .md-form input[type=datetime-local]:focus:not([readonly]), .md-form input[type=tel]:focus:not([readonly]), .md-form input[type=number]:focus:not([readonly]), .md-form input[type=search-md]:focus:not([readonly]), .md-form input[type=search]:focus:not([readonly]), .md-form textarea.md-textarea:focus:not([readonly]) {
+    box-shadow: 0 1px 0 0 $color;
+    border-bottom: 1px solid $color;
+}
+}

@@ -1,0 +1,82 @@
+.card.card-cascade .view.gradient-card-header {
+  padding: 1rem 1rem;
+  text-align: center;
+}
+
+.card.card-cascade h3,
+.card.card-cascade h4
+{
+  margin-bottom: 0;
+}
+
+.blue-gradient {
+  background: -webkit-linear-gradient(50deg, #45cafc, #303f9f);
+  background: linear-gradient(40deg, #45cafc, #4285f4);
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.card.card-cascade {
+  .view {
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 3px 12px 0 rgba(0, 0, 0, 0.15);
+  }
+}
+.spacer{
+  margin: 10px;
+}
+
+.fa{
+  margin: 10px;
+  margin-left: 10px;
+  display:inline-block;
+}
+.form-control {
+
+  padding: 0.575rem 0.75rem;
+
+  line-height: 2.5;
+}
+
+#profile-form {
+  min-height:415px
+}
+
+
+:host ::ng-deep {
+
+  $accordion-title-color: #92a7bc;
+
+  .form-group {
+    height: 7.25rem;
+  }
+
+  .accordion .card .card-header a {
+    color: $accordion-title-color !important;
+  }
+
+  ngx-avatar {
+
+    img {
+      background-color: $accordion-title-color !important;
+      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 3px 12px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    // .avatar-container {
+    //   width: 35px !important;
+    //   height: 35px !important;
+    // }
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
+p, li ,ul {
+  font-family: rgb(000,000,000);
+  font-size: 17px;
+  size: 17px;
+}

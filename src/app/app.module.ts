@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 
-import { MDBSpinningPreloader, ToastModule } from 'ng-uikit-pro-standard';
+import { MDBSpinningPreloader, ToastModule, MDBModalService } from 'ng-uikit-pro-standard';
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -24,6 +24,11 @@ import { AuthService } from '@core/auth';
 import { HttpUtilsService } from '@core/_base/crud';
 import { AuthModule } from './auth2/auth.module';
 import { CoreModule } from '@core/core.module';
+import { ContactUsModalComponent } from './coorporate/contact-us/_modals/contact-us-modal.component';
+import { FaqModalComponent } from './coorporate/faq/modals/faq/faq-modal.component';
+import { ContactUsModule } from './coorporate/contact-us/contact-us.module';
+import { FaqModule } from './coorporate/faq/faq.module';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +38,8 @@ import { CoreModule } from '@core/core.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ContactUsModule,
+    FaqModule,
     AuthModule.forRoot(),
     CoreModule.forRoot(),
 
@@ -61,6 +68,11 @@ import { CoreModule } from '@core/core.module';
     // AuthenticationService,
     AuthService,
     HttpUtilsService,
+    MDBModalService,
+  ],
+  entryComponents: [
+    ContactUsModalComponent,
+    FaqModalComponent,
   ],
   bootstrap: [AppComponent],
   schemas:      [ NO_ERRORS_SCHEMA ]

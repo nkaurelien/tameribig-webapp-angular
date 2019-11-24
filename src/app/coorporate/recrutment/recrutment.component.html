@@ -1,0 +1,257 @@
+<div class="software-lp">
+
+  <!--Main Navigation-->
+  <header class="">
+    <section class="view intro-2 blue-gradient">
+      <div class="mask rgba-black-strong">
+        <!-- <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+          <mdb-carousel-item>
+            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" alt="First slide">
+          </mdb-carousel-item>
+          <mdb-carousel-item>
+            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg" alt="Second slide">
+          </mdb-carousel-item>
+          <mdb-carousel-item>
+            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg" alt="Third slide">
+          </mdb-carousel-item>
+        </mdb-carousel> -->
+        <div  class="container h-100 d-flex justify-content-center align-items-center">
+
+          <div class="row flex-center pt-5 mt-3 w-100">
+
+            <div class="col-md-12 col-lg-8 wow fadeInRight " data-wow-delay="0.3s">
+              <h1 class=" grey-text " style="font-size: 50pt">Nous recrutons</h1>
+
+              <!--<h1 style="visibility: hidden;" class="mb-3 pt-3 dark-grey-text wow fadeIn text-center" data-wow-delay="0.2s"><strong-->
+              <!--class="font-weight-bold">Livraison</strong> Express</h1>-->
+
+              <p  style="visibility: hidden;" class="text-center grey-text w-responsive mx-auto mb-5 wow fadeIn" data-wow-delay="0.2s">
+                <strong>Recrutement de coursiers </strong></p>
+
+            </div>
+            <div class="col-md-12 col-lg-4 wow fadeInRight " data-wow-delay="0.3s">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main content-->
+  <main>
+
+    <!--First container-->
+    <div class="container-fluid">
+
+
+      <!--Section: Features v.1-->
+      <section id="features" class="section feature-box py-5 my-5">
+        <div class="container">
+          <!--Section heading-->
+          <h1 class="mb-3 pt-3 dark-grey-text wow fadeIn text-center" data-wow-delay="0.2s"><strong
+                  class="font-weight-bold">Votre</strong> Candidature</h1>
+
+          <!--Section description-->
+          <p class="text-center grey-text w-responsive mx-auto mb-5 wow fadeIn" data-wow-delay="0.2s">
+            votre meilleure <strong>opportunité</strong></p>
+
+
+          <!--<hr>-->
+
+          <!-- Card -->
+          <!--<div class="card card-image mb-3" style="background-image: url(assets/img/bg/442518-PEKY88-56.jpg);">-->
+
+          <!--&lt;!&ndash; Content &ndash;&gt;-->
+          <!--<div class="row text-white-x text-center d-flex align-items-center rgba-white-slight py-5 px-4">-->
+
+          <!--</div>-->
+          <!--&lt;!&ndash; Content &ndash;&gt;-->
+          <!--</div>-->
+          <mdb-card>
+
+            <mdb-card-header class="info-color white-text text-center py-4">
+              <h5>
+                <strong>Creer votre candidature</strong>
+              </h5>
+            </mdb-card-header>
+
+            <mdb-card-body class="px-lg-5 pt-0">
+
+              <form class="text-center" style="color: #757575;" [formGroup]="recrutmentForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
+                <div class="md-form mt-3">
+                  <input type="text" formControlName="fullname" id="materialContactFormName" class="form-control"
+                         mdbInput>
+                  <label for="materialContactFormName">Nom et prenom</label>
+                </div>
+
+                <div class="md-form">
+                  <input type="email" formControlName="email" id="materialContactFormEmail" class="form-control"
+                         mdbInput>
+                  <label for="materialContactFormEmail">E-mail</label>
+                </div>
+
+                <div class="md-form">
+                  <input type="tel" formControlName="phone" id="materialContactFormPhone" class="form-control"
+                         mdbInput>
+                  <label for="materialContactFormPhone">Téléphone</label>
+                </div>
+
+                <span>Sujet</span>
+                <div class="row">
+                  <div class="col-md-12 mx-auto">
+                    <mdb-select formControlName="subjects" [options]="optionsSelect" placeholder="Choisir une option"></mdb-select>
+                  </div>
+                </div>
+
+                <div class="md-form">
+                  <textarea type="text" formControlName="message" id="materialContactFormMessage" class="form-control md-textarea"
+                            mdbInput></textarea>
+                  <label for="materialContactFormMessage">Message</label>
+                </div>
+
+                <span>Votre CV</span>
+                <div class="file-field md-form">
+                  <div mdbBtn rounded="true" outline="true" color="cyan" size="md" mdbWavesEffect>
+                    <span class="pt-1">Choisir un fichier pdf</span>
+                    <input type="file" mdbFileSelect
+                           accept="application/pdf"
+                           [options]="options"
+                           (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                  </div>
+                  <div class="file-path-wrapper mt-2">
+                    <input class="file-path" type="text" placeholder="Téléverser votre curriculum vitae  " [value]="showFiles()">
+                  </div>
+                </div>
+                <!--<div class="md-form">-->
+                <!--<input id="image-file" type="file" />-->
+                <!--&lt;!&ndash;<mdb-file-upload [disabled]="true" (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>&ndash;&gt;-->
+                <!--</div>-->
+
+                <!--<div class="row">-->
+                  <!--<div class="col-md-6 mx-auto d-flex justify-content-center">-->
+                    <!--<mdb-checkbox formControlName="copy">Send me a copy of this message</mdb-checkbox>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+                <div *ngIf="uploadDone" class="animated fadeIn alert alert-success text-center" role="alert">
+                  Candidature enregistrée
+                </div>
+
+                <button mdbBtn color="info" outline="true" rounded="true" block="true" class="z-depth-0 my-4 waves-effect"
+                        mdbWavesEffect type="submit" [ngClass]="{disabled: disabledSubmitButton}" [disabled]="disabledSubmitButton">Postuler</button>
+
+              </form>
+
+            </mdb-card-body>
+
+          </mdb-card>
+          <!-- Card -->
+
+
+
+
+        </div>
+      </section>
+      <!--/Section: Features v.1-->
+
+
+
+
+    </div>
+    <!--First container-->
+
+    <!--Second container-->
+
+    <!--Second container-->
+
+    <!--Third container-->
+
+    <!--/Third container-->
+
+    <div class="container mt-5 text-center text-md-left">
+      <div class="row mt-3 py-5-x">
+
+        <!--First column-->
+        <!--/.First column-->
+
+        <!--Second column-->
+
+        <!--/.Second column-->
+
+        <!--Third column-->
+        <!--/.Third column-->
+
+        <!--Fourth column-->
+
+        <!--/.Fourth column-->
+      </div>
+    </div>
+
+
+    <!--/Fourth container-->
+    <div class="container">
+
+
+
+
+    </div>
+    <!--/Fourth container-->
+
+    <!-- <div class="streak streak-md streak-photo"
+      style="background-image:url('../../assets/img/app-landing/parallax/mur.jpg')">
+      <div class="flex-center white-text blue-gradient-mask-light">
+        <div class="container py-3"> -->
+
+    <!--Section: Clients-->
+    <!-- <section class="section feature-box wow fadeIn" data-wow-delay="0.2s"> -->
+
+    <!--Section heading-->
+    <!-- <h1 class="py-5 mt-5 mb-0  white-text text-center wow fadeIn" data-wow-delay="0.2s"><strong
+        class="font-weight-bold">NOS</strong> CLIENTS DIVERS</h1> -->
+
+    <!--Section description-->
+    <!-- <p class="text-center w-responsive mx-auto mt-0 mb-5 pb-5 white-text">Ils nous ont fait confiance avec le
+      temps</p> -->
+    <!--Grid column-->
+    <!-- <div class="col-md-10 offset-md-1"> -->
+
+    <!--Grid row-->
+    <!-- <div class="row mb-5">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-9">
+            <h5 class="mt-4 font-weight-bold white-text text-right">MTN CAMEROUN</h5>
+          </div>
+          <div class="col-3">
+            <img class="btn-floating white btn-lg my-0" src="../../assets/img/Mobile-Money.jpg" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-3">
+            <img class="btn-floating white btn-lg my-0" src="../../assets/img/Orange.jpg" />
+          </div>
+          <div class="col-9">
+            <h5 class="mt-4 font-weight-bold white-text">ORANGE CAMEROUN</h5>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <!-- </div> -->
+
+    <!-- </section> -->
+    <!--/Section: Features v.4-->
+    <!-- </div>
+  </div>
+</div> -->
+  </main>
+  <!--Main content-->
+
+</div>
+

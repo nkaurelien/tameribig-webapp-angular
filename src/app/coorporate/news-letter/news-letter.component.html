@@ -1,0 +1,89 @@
+
+<form
+    id="newsletterSubForm"
+  #newsletterSubFormRef="ngForm"
+  method="POST"
+  [formGroup]="newsletterSubForm"
+  (ngSubmit)="register()"
+  novalidate>
+
+  <!-- <ngx-invisible-recaptcha #captchaElem [siteKey]="siteKey"
+  (reset)="handleReset()" (ready)="handleReady()"
+    (load)="handleLoad()" (success)="handleSuccess($event)"
+    (expire)="handleExpire()"
+    [useGlobalDomain]="false"
+    [badge]="badge"
+    [size]="size"
+    [hl]="lang"
+    [theme]="theme"
+    [type]="type"
+    formControlName="recaptcha">
+  </ngx-invisible-recaptcha> -->
+
+  <re-captcha #captchaElem="reCaptcha"
+   (resolved)="handleSuccess($event)" [siteKey]="siteKey"
+    [size]="size"></re-captcha>
+
+  <!--Grid row-->
+  <div class="row">
+
+    <!--Grid column-->
+    <!-- <div class="col-md-6">
+                              <div class="md-form">
+                                      <input type="text" id="contact-us-name" class="form-control">
+                                      <label for="contact-us-name" class="">Your name</label>
+                              </div>
+                          </div> -->
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-md-12">
+        <!-- <label for="contact-us-email" class="">Your email</label> -->
+
+      <div class="md-form m-0 p-0">
+        <input
+        (focus)="handleEmailHaveFocus()"
+        (blur)="handleEmailLostFocus()"
+            placeholder="Votre email"
+            formControlName="email"
+            mdbValidate
+            type="text" id="contact-email" class="m-0 form-control">
+            <mdb-error class="inherit" *ngIf="error && !success">
+              <span aria-hidden="true">×</span>&nbsp; {{error}}
+            </mdb-error>
+            <mdb-success class="inherit" *ngIf="success && !error">
+              <span class="text-success" aria-hidden="true">✓</span>&nbsp;
+              <span class="text-success" >{{success}}</span>&nbsp;
+            </mdb-success>
+
+            <mdb-error *ngIf="
+                                                newsletterSubForm.get('email').invalid &&
+                                                (newsletterSubForm.get('email').dirty ||
+                                                  newsletterSubForm.get('email').touched) &&
+                                                newsletterSubForm.get('email').hasError('email')
+                                              ">
+              <span aria-hidden="true">×</span>
+            </mdb-error>
+            <!-- <mdb-success *ngIf="
+                                    newsletterSubForm.get('email').valid &&
+                                    (newsletterSubForm.get('email').dirty ||
+                                      newsletterSubForm.get('email').touched)
+                                  ">
+              <span aria-hidden="true">✓</span>
+            </mdb-success> -->
+      </div>
+    </div>
+    <!--Grid column-->
+
+  </div>
+  <!--Grid row-->
+
+</form>
+
+<div class="text-center text-md-left m-0 p-0">
+  <button (click)="execute()"
+          id="newsletterSubSubmitBtn"
+  [disabled]="emailInput.invalid" [ngClass]="{disabled: emailInput.invalid }"
+  type="submit" class="btn btn-light-blue-x btn-primary btn-rounded">
+    <i class="icon-paper-plane"></i> <span class="sr-only">S'abonner</span></button>
+</div>

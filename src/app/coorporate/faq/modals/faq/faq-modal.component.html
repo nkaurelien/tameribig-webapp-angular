@@ -1,0 +1,174 @@
+<!--Content-->
+<div class="modal-content">
+
+    <!--Body-->
+    <div class="modal-body mb-0">
+        <i class="icon-close grey-text" (click)="modalRef.hide()"></i>
+
+        <section id="faq" class="section background-color-light m-0">
+            <div class="container">
+                <div class="row text-center mb-3">
+                    <div class="col-lg-8 m-auto">
+                        <h2 class="custom-bar _center text-color-dark"><strong>Avez-vous</strong> des questions ?</h2>
+                        <p>Déjà client? Nous sommes là pour vous aider. Allez sur notre page de support</p>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-lg-10 m-auto">
+
+                        <mdb-accordion [multiple]="true">
+
+                          <mdb-accordion-item [collapsed]="true">
+                              <mdb-accordion-item-head>
+                                  Comment bénéficier de nos services ?
+                              </mdb-accordion-item-head>
+                              <mdb-accordion-item-body>
+                                  <p>	Vous devez disposer d’un smartphone ou d’un poste de travail, d’un compte préalablement créé et d’une adresse mail pour avoir accès au service.</p>
+                              </mdb-accordion-item-body>
+                          </mdb-accordion-item>
+
+                          <mdb-accordion-item>
+                              <mdb-accordion-item-head>
+                                  Quels navigateurs utilisés ?
+                              </mdb-accordion-item-head>
+                              <mdb-accordion-item-body>
+                                  Nous vous conseillons d’utiliser les navigateurs web modernes et récents tels que google chrome
+                              </mdb-accordion-item-body>
+                          </mdb-accordion-item>
+
+                          <mdb-accordion-item>
+                              <mdb-accordion-item-head>
+                                  Comment le service est-il facturé ?
+                              </mdb-accordion-item-head>
+                              <mdb-accordion-item-body>
+                                  Le tarif dépend de la distance entre le lieu de retrait et celui de la livraison, également  du poids du colis.
+                              </mdb-accordion-item-body>
+                          </mdb-accordion-item>
+
+                          <mdb-accordion-item>
+                              <mdb-accordion-item-head>
+                                  Comment nous contacter ?
+                              </mdb-accordion-item-head>
+                              <mdb-accordion-item-body>
+                                  Nos services sont ouverts  7jrs/7. Vous pouvez nous contacter  par appel, whatsapp et message au 695 461 461 ou nous écrire par mail à l’adresse contact@mail.livraison-express.net
+                              </mdb-accordion-item-body>
+                          </mdb-accordion-item>
+
+
+                          <!-- <mdb-accordion-item>
+                              <mdb-accordion-item-head>
+
+                              </mdb-accordion-item-head>
+                              <mdb-accordion-item-body>
+
+                              </mdb-accordion-item-body>
+                          </mdb-accordion-item> -->
+<!--
+                            <mdb-accordion-item [collapsed]="true">
+                                <mdb-accordion-item-head>De quoi ai-je besoin?</mdb-accordion-item-head>
+                                <mdb-accordion-item-body>
+                                    <p>Etre âgé de plus de 17 ans , avoir une carte national d'identité et disposer d’un téléphone
+                                        portable pour être notifier.</p>
+                                </mdb-accordion-item-body>
+                            </mdb-accordion-item>
+
+                            <mdb-accordion-item>
+                                <mdb-accordion-item-head>
+                                    Quels navigateurs Web est pris en charge?
+                                </mdb-accordion-item-head>
+                                <mdb-accordion-item-body>
+                                    Tous les navigateurs web modernes et récents. Utilisez entre Google chrome, Opera, Firefox Mozilla
+                                    ou encore Edge dans la version la plus recente.
+                                </mdb-accordion-item-body>
+                            </mdb-accordion-item>
+
+                            <mdb-accordion-item>
+                                <mdb-accordion-item-head>Comment le coût d'utilisation est-il calculé?</mdb-accordion-item-head>
+                                <mdb-accordion-item-body>
+                                    <p>Actuellement le coût du services de livraison est déduit par rapport à la distance entre le
+                                        point de recupération et l’autre point livraison.</p>
+
+                                </mdb-accordion-item-body>
+                            </mdb-accordion-item>
+
+                            <mdb-accordion-item>
+                                <mdb-accordion-item-head>Dans quels pays le service de livraison est-il disponible?
+                                </mdb-accordion-item-head>
+                                <mdb-accordion-item-body>
+                                    <p>L’application cible les populations du Cameroun et les pays limitrophes, Bientôt disponible
+                                        dans d’autres grandes métropoles en afrique et dans le monde.</p>
+
+                                </mdb-accordion-item-body>
+                            </mdb-accordion-item>
+
+                            <mdb-accordion-item>
+                                <mdb-accordion-item-head>Comment contacter le support technique?</mdb-accordion-item-head>
+                                <mdb-accordion-item-body>
+                                    <p>Vous pouvez nous écrire par mail, appeler, ou encore utiliser le ChatBox de discussion
+                                        instantanée fixée au coin inférieur droit de la page pour parler à un agent en ligne.</p>
+
+                                </mdb-accordion-item-body>
+                            </mdb-accordion-item>
+                            <mdb-accordion-item>
+                                <mdb-accordion-item-head>Quand le support technique est-il disponible?</mdb-accordion-item-head>
+                                <mdb-accordion-item-body>
+                                    <p>Le support de la client est disponible 24h/24 et 7jours/7. Sachez que les problèmes et la
+                                        satisfaction de notre clientèle sont l’essence de nos préoccupations.</p>
+
+                                </mdb-accordion-item-body>
+                            </mdb-accordion-item> -->
+
+
+                        </mdb-accordion>
+
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col">
+                        <p class="text-color-dark custom-font-secondary text-4 mb-0"><strong>Avez-vous encore des questions ?</strong>
+                        </p>
+                        <p>
+                            <button style="min-width: 245px" (click)="askViaWhatsapp()" type="button" class="btn btn-green mb-2 waves-light" mdbWavesEffect>
+                                <i class="fab mr-2  fa-whatsapp"></i>
+                                <span>Posez votre question ici</span>
+                            </button>
+                          </p>
+                        <p class="text-color-dark custom-font-secondary text-2 mb-5">Suivez  nous sur </p>
+
+                        <div style="background-color: #5991fb;">
+                            <div class="container">
+                                <!--Grid row-->
+                                <div class="row py-4 d-flex align-items-center">
+
+                                  <!--Grid column-->
+                                    <div class="col-12 col-md-12 text-center text-md-right">
+                                        <!--Facebook-->
+                                        <a class="p-2 m-2 fa-lg fb-ic ml-0"><i class="fab fa-facebook  fa-2x white-text mr-lg-4"> </i></a>
+                                        <!--Twitter-->
+                                        <a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter fa-2x white-text mr-lg-4"> </i></a>
+                                        <!--Google +-->
+                                        <a class="p-2 m-2 fa-lg gplus-ic"><i class="fab fa-google-plus fa-2x white-text mr-lg-4"> </i></a>
+                                        <!--Linkedin-->
+                                        <a class="p-2 m-2 fa-lg li-ic"><i class="fab fa-linkedin fa-2x white-text mr-lg-4"> </i></a>
+                                        <!--Instagram-->
+                                        <a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram fa-2x white-text mr-lg-4"> </i></a>
+                                    </div>
+                                    <!--Grid column-->
+
+                                </div>
+                                <!--Grid row-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--<button type="button"-->
+                <!--class="annuler  float-right btn btn-sm btn-rounded btn-default mt-2 waves-effect waves-light"-->
+                <!--data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">-->
+            <!--<span aria-hidden="true">×</span> Fermer-->
+        <!--</button>-->
+    </div>
+</div>
+<!--/.Content-->
