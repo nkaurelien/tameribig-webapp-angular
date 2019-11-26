@@ -1,0 +1,62 @@
+<!--Double navigation-->
+<header>
+
+    <!-- Navbar -->
+    <mdb-navbar SideClass="navbar navbar-expand-md scrolling-navbar double-nav" [containerInside]="false">
+
+        <logo>
+            <a href="/">
+                <img alt="" src="./assets/images/logo.png" />
+            </a>
+            <!-- Breadcrumb-->
+            <!-- <div class="breadcrumbs breadcrumb-dn mr-auto">
+                <p>Material Design for Bootstrap</p>
+            </div> -->
+            <!--/. Breadcrumb-->
+        </logo>
+        <navlinks>
+
+            <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
+                <li class="nav-item">
+                    <a class="nav-link waves-light" routerLink="/uploader" mdbWavesEffect>
+                        <mdb-icon fas icon="cloud-upload-alt" class="mr-1"></mdb-icon>
+                        <span class="clearfix d-none d-sm-inline-block">Télèversement</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" routerLink="/coorporate/contact-us" mdbWavesEffect>
+                        <mdb-icon far icon="envelope" class="mr-1"></mdb-icon>
+                        <span class="clearfix d-none d-sm-inline-block">Contact</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" routerLink="/coorporate/faq" mdbWavesEffect>
+                        <mdb-icon far icon="comments" class="mr-1"></mdb-icon>
+                        <span class="clearfix d-none d-sm-inline-block">Support</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" routerLink="/console/user" mdbWavesEffect>
+                        <mdb-icon fas icon="user" class="mr-1"></mdb-icon>
+                        <span class="clearfix d-none d-sm-inline-block">Account</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown btn-group" dropdown>
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+
+        </navlinks>
+
+    </mdb-navbar>
+    <!--/. Navbar -->
+
+</header>
+<!--/.Double navigation-->

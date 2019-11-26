@@ -9,16 +9,22 @@ import {ContactService} from './_services/contact.service';
 import {ButtonsModule, CarouselModule, IconsModule, PreloadersModule, WavesModule, AccordionModule} from 'ng-uikit-pro-standard';
 import {ScriptLoaderModule} from 'ngx-script-loader';
 import { CooporateRoutingModule } from './coorporate-routing.module';
+import { NavigationModule } from './coorporate-layout/navigation/navigation.module';
+import { FooterComponent } from './coorporate-layout/footer/footer.component';
+import { CoorporateLayoutComponent } from './coorporate-layout/coorporate-layout.component';
 
 
 @NgModule({
     declarations: [
         CoorporateComponent,
         PrivacyPolicieComponent,
+        CoorporateLayoutComponent,
+        FooterComponent
     ],
     imports: [
         CommonModule,
-      CooporateRoutingModule,
+        CooporateRoutingModule,
+        NavigationModule,
         ScriptLoaderModule,
         // NewsLetterModule,
         CarouselModule,
