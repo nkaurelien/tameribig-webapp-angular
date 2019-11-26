@@ -6,7 +6,7 @@ import {PrivacyPolicieComponent} from './privacyPolicie/privacypolicie.component
 // import {CarouselModule, WavesModule, ModalModule, InputsModule, ButtonsModule, AccordionModule} from 'ng-uikit-pro-standard';
 import {CoorporateComponent} from './coorporate.component';
 import {ContactService} from './_services/contact.service';
-import {ButtonsModule, CarouselModule, IconsModule, PreloadersModule, WavesModule} from 'ng-uikit-pro-standard';
+import {ButtonsModule, CarouselModule, IconsModule, PreloadersModule, WavesModule, AccordionModule} from 'ng-uikit-pro-standard';
 import {ScriptLoaderModule} from 'ngx-script-loader';
 import { CooporateRoutingModule } from './coorporate-routing.module';
 
@@ -22,7 +22,7 @@ import { CooporateRoutingModule } from './coorporate-routing.module';
         ScriptLoaderModule,
         // NewsLetterModule,
         CarouselModule,
-        // AccordionModule,
+        AccordionModule,
         // ModalModule,
         IconsModule,
         WavesModule,
