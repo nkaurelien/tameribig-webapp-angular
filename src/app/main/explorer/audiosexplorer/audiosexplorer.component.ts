@@ -4,8 +4,8 @@ import {NgxMasonryOptions} from 'ngx-masonry';
 
 @Component({
   selector: 'app-audios-explorer',
-  templateUrl: './Audiosexplorer.component.html',
-  styleUrls: ['./Audiosexplorer.component.css']
+  templateUrl: './audiosexplorer.component.html',
+  styleUrls: ['./audiosexplorer.component.css']
 })
 export class AudiosExplorerComponent implements OnInit {
   constructor() {}
