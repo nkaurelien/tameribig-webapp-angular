@@ -1,0 +1,85 @@
+image: node:10
+
+before_script:
+  - npm install --quiet
+  - npm --prefix ./functions install --quiet
+
+build-prod:
+  stage: build
+  cache:
+    paths:
+      - node_modules/
+  script:
+    #    - npm install --quiet
+    - npm run build-prod
+  only:
+    - master
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - dist/tameribig
+
+build-stage:
+  stage: build
+  cache:
+    paths:
+      - node_modules/
+  script:
+    #    - npm install --quiet
+    - npm run build
+  only:
+    - develop
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - dist/
+
+#test:
+#  stage: test
+#  cache:
+#    policy: pull
+#    paths:
+#      - node_modules/
+#  script:
+#    # install dependencies to use chrome w/ puppeteer
+#    - apt update && apt install -yq gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+#    - npm run test-ci
+#    - npm run e2e-ci
+
+deploy_prod:
+  stage: deploy
+  environment:
+    name: production
+    url: $FIREBASE_URL_PRODUCTION
+  when: manual
+  only:
+    - master
+  dependencies:
+    - build-prod
+  cache:
+    policy: pull
+    paths:
+      - node_modules/
+  script:
+    - npx firebase use prod
+    - firebase target:apply hosting tameri-big tameri-big
+    - npm run deploy:ci:hosting:prod
+
+deploy_stage:
+  stage: deploy
+  environment:
+    name: staging
+    url: $FIREBASE_URL
+  when: manual
+  only:
+    - develop
+  dependencies:
+    - build-stage
+  cache:
+    policy: pull
+    paths:
+      - node_modules/
+  script:
+    - npx firebase use dev
+    - firebase target:apply hosting tameri-big tameri-big-dev
+    - npm run deploy:ci:hosting:stage
