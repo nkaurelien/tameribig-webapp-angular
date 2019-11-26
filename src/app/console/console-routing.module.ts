@@ -13,12 +13,16 @@ const routes: Routes = [
         loadChildren: () => import('@modules/console/profile/profile.module').then(m => m.ProfileModule)
       },
       {
+        path: 'dashboard',
+        loadChildren: () => import('@modules/console/user-dashboad/user-dashboad.module').then(m => m.UserDashboadModule)
+      },
+      {
         path: 'settings',
         loadChildren: () => import('@modules/console/parameters/parameters.module').then(m => m.ParametersModule)
       },
       {
         path: '',
-        redirectTo: 'user',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       },
       {
