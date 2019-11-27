@@ -164,38 +164,20 @@
                                     <mdb-checkbox></mdb-checkbox>
                                 </th>
                                 <th class="th-lg">
-                                    <a (click)="sortBy('first')"
-                                    >First Name
+                                    <a (click)="sortBy('title')"
+                                    >Title
                                         <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
-                                    <a (click)="sortBy('last')"
-                                    >Last Name
+                                    <a (click)="sortBy('price')"
+                                    >Price
                                         <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
-                                    <a (click)="sortBy('username')"
-                                    >Username
-                                        <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
-                                    </a>
-                                </th>
-                                <th class="th-lg">
-                                    <a (click)="sortBy('email')"
-                                    >Email
-                                        <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
-                                    </a>
-                                </th>
-                                <th class="th-lg">
-                                    <a (click)="sortBy('country')"
-                                    >Country
-                                        <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
-                                    </a>
-                                </th>
-                                <th class="th-lg">
-                                    <a (click)="sortBy('city')"
-                                    >City
+                                    <a (click)="sortBy('createdAt')"
+                                    >createdAt
                                         <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
                                     </a>
                                 </th>
@@ -209,12 +191,9 @@
                                 <th scope="row">
                                     <mdb-checkbox></mdb-checkbox>
                                 </th>
-                                <td>{{ row.first }}</td>
-                                <td>{{ row.last }}</td>
-                                <td>{{ row.username }}</td>
-                                <td>{{ row.email }}</td>
-                                <td>{{ row.country }}</td>
-                                <td>{{ row.city }}</td>
+                                <td>{{ row.title }}</td>
+                                <td>{{ row.price }}</td>
+                                <td>{{ row.createdAt }}</td>
                             </tr>
                             </tbody>
                             <!--Table body-->

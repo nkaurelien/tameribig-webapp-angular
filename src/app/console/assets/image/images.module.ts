@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ImageComponent } from './image.component';
 import {
     ButtonsModule,
-    CardsModule, CharCounterModule,
+    CardsModule, CharCounterModule, CheckboxModule,
     IconsModule,
     InputsModule,
     InputUtilitiesModule,
@@ -17,6 +17,7 @@ import {DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule} from 'ngx-drop
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TagInputModule} from 'ngx-chips';
 import {ImagesService} from '@app/main/@core/services/images.service';
+import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -41,6 +42,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         InputUtilitiesModule,
         WavesModule,
         FormsModule,
+        CheckboxModule,
         CharCounterModule,
         ReactiveFormsModule,
         TagInputModule,
@@ -48,6 +50,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     providers: [
         ImagesService,
+        ImagesApiService,
         {
             provide: DROPZONE_CONFIG,
             useValue: DEFAULT_DROPZONE_CONFIG

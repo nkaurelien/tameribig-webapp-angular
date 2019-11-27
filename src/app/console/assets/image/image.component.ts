@@ -1,20 +1,22 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'app-image',
-  templateUrl: './image.component.html',
-  styleUrls: ['./image.component.scss']
+    selector: 'app-image',
+    templateUrl: './image.component.html',
+    styleUrls: ['./image.component.scss']
 })
 export class ImageComponent implements OnInit {
 
     @Input() shadows = true;
 
     tableData: object[] = [
-        { first: 'Mark', last: 'Otto', username: '@mdo', email: 'markotto@gmail.com', country: 'USA', city: 'San Francisco' },
-        { first: 'Jacob', last: 'Thornton', username: '@fat', email: 'jacobt@gmail.com', country: 'France', city: 'Paris' },
-        { first: 'Larry', last: 'the Bird', username: '@twitter', email: 'larrybird@gmail.com', country: 'Germany', city: 'Berlin' },
-        { first: 'Paul', last: 'Topolski', username: '@P_Topolski', email: 'ptopolski@gmail.com', country: 'Poland', city: 'Warsaw' },
-        { first: 'Anna', last: 'Doe', username: '@andy', email: 'annadoe@gmail.com', country: 'Spain', city: 'Madrid' }
+        // { first: 'Mark', last: 'Otto', username: '@mdo', email: 'markotto@gmail.com', country: 'USA', city: 'San Francisco' },
+        // { first: 'Jacob', last: 'Thornton', username: '@fat', email: 'jacobt@gmail.com', country: 'France', city: 'Paris' },
+        // { first: 'Larry', last: 'the Bird', username: '@twitter', email: 'larrybird@gmail.com', country: 'Germany', city: 'Berlin' },
+        // { first: 'Paul', last: 'Topolski', username: '@P_Topolski', email: 'ptopolski@gmail.com', country: 'Poland', city: 'Warsaw' },
+        // { first: 'Anna', last: 'Doe', username: '@andy', email: 'annadoe@gmail.com', country: 'Spain', city: 'Madrid' }
     ];
 
     bulkOptionsSelect: object[] = [
@@ -31,10 +33,19 @@ export class ImageComponent implements OnInit {
     ];
 
     private sorted = false;
+    private imagesApiSub: Subscription;
 
-    constructor() { }
+    constructor(
+        private imagesApi: ImagesApiService,
+    ) { }
 
     ngOnInit() {
+
+        this.imagesApiSub = this.imagesApi.getImages().subscribe(resp => {
+            console.log({resp});
+            this.tableData = resp;
+
+        });
     }
 
     sortBy(by: string | any): void {
