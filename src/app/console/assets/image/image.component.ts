@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ export class ImageComponent implements OnInit {
 
     @Input() shadows = true;
 
-    tableData: object[] = [
+    tableData: Image[] = [
         // { first: 'Mark', last: 'Otto', username: '@mdo', email: 'markotto@gmail.com', country: 'USA', city: 'San Francisco' },
         // { first: 'Jacob', last: 'Thornton', username: '@fat', email: 'jacobt@gmail.com', country: 'France', city: 'Paris' },
         // { first: 'Larry', last: 'the Bird', username: '@twitter', email: 'larrybird@gmail.com', country: 'Germany', city: 'Berlin' },

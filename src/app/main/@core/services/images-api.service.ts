@@ -38,6 +38,7 @@ export interface Image {
 
     keywords?: string[];
     tags?: string[];
+    topics?: string[];
     comments?: any[];
     size?: {
         xs?: ImageSize,
