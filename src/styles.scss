@@ -53,6 +53,29 @@ body {
 
 
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+.modal-body {
+
+  & > .icon-close {
+    font-size: 1.6em;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    z-index: 1;
+  }
+}
+
 // NAVBAR
 
 .white-skin .navbar {
@@ -63,4 +86,125 @@ body {
 // FOOTER
 .white-skin .page-footer {
   background-color: #6f717800;
+}
+
+
+
+
+//
+//  INPUT CUSTOM
+//
+
+
+.error-mark {
+  font-size: 1.4em;
+}
+
+%input-invalid {
+  border: 1px solid red !important;
+}
+
+:host ::ng-deep {
+
+  .form-control {
+
+    &:invalid:not(.ng-pristine) {
+      @extend %input-invalid;
+    }
+
+    &.ng-invalid:not(.ng-pristine) {
+      @extend %input-invalid;
+    }
+
+  }
+
+  input[type="date"]:invalid:not(.ng-pristine) {
+    @extend %input-invalid;
+
+  }
+
+}
+
+
+$focus-color: #4285f4;
+$error-color: #ff3547 ;
+$error-color-soft: #ff354730 ;
+
+.md-form input[type=text],
+.md-form input[type=password],
+.md-form input[type=email],
+.md-form input[type=url],
+.md-form input[type=time],
+.md-form input[type=date],
+.md-form input[type=datetime-local],
+.md-form input[type=tel],
+.md-form input[type=number],
+.md-form input[type=search-md],
+.md-form input[type=search],
+.md-form textarea.md-textarea {
+
+  &.ng-invalid.ng-touched:not(.ng-pristine) {
+    box-shadow: 0 1px 0 0 $error-color-soft;
+    border-bottom: 1px solid $error-color-soft;
+  }
+
+  &:focus:not([readonly]) {
+
+    box-shadow: 0 1px 0 0 $focus-color;
+    border-bottom: 1px solid $focus-color;
+
+    &.ng-invalid {
+      box-shadow: 0 1px 0 0 $error-color;
+      border-bottom: 1px solid $error-color;
+    }
+
+  }
+}
+
+//
+// NAVBAR
+//
+
+// @media (min-width: 769px) {
+.navbar:not(.top-nav-collapse) {
+  box-shadow: none;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: 0 0;
+}
+//.navbar, .page-footer {
+//  // background-color: #23242a;
+//  background-color: rgba(0, 0, 0, 0.12);
+//}
+// }
+
+
+// A fix for default background color of input in the browser
+
+@-webkit-keyframes autofill {
+  to {
+    color: #666;
+    background: transparent; } }
+
+@keyframes autofill {
+  to {
+    color: #666;
+    background: transparent; } }
+
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+
+// Hide Sentry Powered By
+.sentry-error-embed {
+  .close {
+    color: red;
+  }
+  .powered-by {
+    display: none !important;
+  }
 }

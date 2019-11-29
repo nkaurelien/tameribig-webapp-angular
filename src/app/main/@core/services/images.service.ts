@@ -75,10 +75,10 @@ export class ImagesService {
 
     private _imagesRef:  AngularFirestoreCollection<any> = this.afs.collection<Image[]>(`images`);
     private _imagesByTermRef = (term): AngularFirestoreCollection<any> => this.afs.collection<Image[]>(`images`,
-                                                                                    ref => ref.where('description', '==', term))
+        ref => ref.where('description', '==', term))
 
     private _imagesByTagsRef = (term): AngularFirestoreCollection<any> => this.afs.collection<Image[]>(`images`,
-                                                                                    ref => ref.where('keywords', 'array-contains', term))
+        ref => ref.where('keywords', 'array-contains', term))
 
     constructor(private http: HttpClient,
                 @Inject(PLATFORM_ID) private platformId: any,
@@ -104,11 +104,11 @@ export class ImagesService {
     }
 
     getImagesSnapshort(): Observable<Image[] | any> {
-      return this.afs.collection<Image[]>('images').snapshotChanges();
+        return this.afs.collection<Image[]>('images').snapshotChanges();
     }
 
     getImages(): Observable<Image[] | any> {
-      return this.afs.collection<Image[]>('images').valueChanges().pipe(take(1));
+        return this.afs.collection<Image[]>('images').valueChanges().pipe(take(1));
     }
 
     get imagesMock () {
@@ -230,7 +230,7 @@ export class ImagesService {
         );
     }
 
-  getImageUrl(image: Image) {
-    return `${environment.ApiBaseUrl}/images/open/${image.uid}`;
-  }
+    getImageUrl(image: Image) {
+        return `${environment.ApiBaseUrl}/images/open/${image.uid}`;
+    }
 }

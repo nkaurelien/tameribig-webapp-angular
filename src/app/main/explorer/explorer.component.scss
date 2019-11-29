@@ -12,6 +12,7 @@
   background-color: #00000050;
 }
 
+
 //@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 //body {
 //  font-family: 'Open Sans', sans-serif;
@@ -45,9 +46,9 @@
 
 :host ::ng-deep {
 
-  app-images-explorer, 
-  app-videos-explorer, 
-  app-creas-explorer, 
+  app-images-explorer,
+  app-videos-explorer,
+  app-creas-explorer,
   app-audios-explorer
    {
     display:flex;
@@ -59,23 +60,23 @@
     // margin-right: -15px;
     // margin-left: -15px;
   }
-  
+
   main {
       flex: 1 0 auto;
   }
   ngx-masonry {
     margin: 0 auto;
-    // width: 1280px; 
+    // width: 1280px;
     // min-height: 780px;
   }
-  
+
   .masonry {
     text-align: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
   // ngxmasonryitem{
-  //   margin-right: 1rem; 
+  //   margin-right: 1rem;
   // }
 
   .masonry-item {

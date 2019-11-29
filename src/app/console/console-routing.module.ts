@@ -3,14 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { ConsoleLayoutComponent } from './console-layout/console-layout.component';
 
 
+
 const routes: Routes = [
   {
     path: '',
     component: ConsoleLayoutComponent,
     children: [
       {
+        path: 'assets',
+        loadChildren: () => import('@modules/console/assets/assets.module').then(m => m.AssetsModule)
+      },
+      {
         path: 'user',
         loadChildren: () => import('@modules/console/profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('@modules/console/user-dashboad/user-dashboad.module').then(m => m.UserDashboadModule)
       },
       {
         path: 'settings',
@@ -18,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'user',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       },
       {

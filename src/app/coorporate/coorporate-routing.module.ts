@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import { CoorporateComponent } from './coorporate.component';
 import { PrivacyPolicieComponent } from './privacyPolicie/privacypolicie.component';
+import { CoorporateLayoutComponent } from './coorporate-layout/coorporate-layout.component';
 
 
 export const HOME_PAGE = ``;
@@ -17,7 +17,7 @@ const routes: Routes = [
     // { path: '',   redirectTo: HOME_PAGE, pathMatch: 'full'},
     {
         path: HOME_PAGE,
-        component: CoorporateComponent,
+        component: CoorporateLayoutComponent,
         children: [
             {
                 path: PRIVACY_PAGE,
