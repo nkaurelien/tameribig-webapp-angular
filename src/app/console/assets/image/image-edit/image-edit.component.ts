@@ -82,7 +82,6 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
     loadItem() {
         this.imagesApiService.findOneById(this.ID).subscribe(resp => {
-            console.log('image', resp);
             this.image = resp;
             this.loading = false;
             this.selectedTopics = uniq([...resp.topics || [], ...this.selectedTopics]);
@@ -97,7 +96,6 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
     loadTopics() {
         this.categoriesApiService.getAll().subscribe(resp => {
-            // console.log('topics', resp);
             this.topics = resp;
         });
     }
@@ -115,6 +113,9 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.modal.show();
     }
 
+    isCheckedCategorie(item) {
+        return CategoriesApiService.hasSomeById(this.topics, item);
+    }
 
     submit() {
         // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
@@ -122,7 +123,9 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
             this.submitting = true;
             const body = {
                 ...this.validatingForm.value,
-                topics: this.selectedTopics.map(T => T.name),
+                topics: this.selectedTopics.map(T => {
+                    return {_id: T._id, name: T.name};
+                }),
             };
             this.updateImagebyIdSub = this.imagesApiService.updateOneById(this.ID, body).subscribe(resp => {
                 this.submitting = false;

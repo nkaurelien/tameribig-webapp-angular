@@ -144,21 +144,17 @@
                                             <!--<h1 class="mb-5">Images presenter</h1>-->
 
                                             <div class="row mx-auto">
-
-                                                <ul class="list-group list-group-flush text-left">
-                                                    <li *ngFor="let item of topics; trackBy: trackByID"
-                                                        class="list-group-item col-md-6">
-                                                        <!--                                                        <mdb-icon class="mr-2" fas icon="angle-right"></mdb-icon>-->
-                                                        <mdb-checkbox (change)="selectTopic($event, item)"
-                                                                      [checkboxPosition]="'left'"
-                                                                      [checked]="image.topics?.includes(item.name)"
-                                                                      [inline]="true" [mdbTooltip]="item.name"
-                                                                      [value]="item._id" class="w-75"
-                                                                      filledIn="true" name="complements"
-                                                                      placement="bottom">{{item.name}}</mdb-checkbox>
-                                                    </li>
-                                                </ul>
-
+                                                <div *ngFor="let item of topics; trackBy: trackByID"
+                                                     class="border-grey m-1 col-md-6">
+                                                    <!--                                                        <mdb-icon class="mr-2" fas icon="angle-right"></mdb-icon>-->
+                                                    <mdb-checkbox (change)="selectTopic($event, item)"
+                                                                  [checkboxPosition]="'left'"
+                                                                  [checked]="isCheckedCategorie(item)"
+                                                                  [inline]="true" [mdbTooltip]="item.name"
+                                                                  [value]="item._id" class="w-75"
+                                                                  filledIn="true" name="complements"
+                                                                  placement="bottom">{{item.name}}</mdb-checkbox>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

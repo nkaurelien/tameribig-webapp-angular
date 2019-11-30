@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {CategoriesApiService} from "@app/main/@core/services/categories-api.service";
 
 @Component({
     selector: 'app-image',
@@ -31,10 +32,14 @@ export class ImageComponent implements OnInit {
     ngOnInit() {
 
         this.imagesApiSub = this.imagesApi.getAllByAuth().subscribe(resp => {
-            console.log({resp});
+            // console.log({resp});
             this.tableData = resp;
 
         });
+    }
+
+    extractTopicsNames(items: any) {
+        return CategoriesApiService.extractTopicsNames(items);
     }
 
     sortBy(by: string | any): void {

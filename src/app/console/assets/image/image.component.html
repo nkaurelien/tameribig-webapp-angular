@@ -197,13 +197,13 @@
                                 </th>
                                 <td>
                                     <img *ngIf="row.miniature.length" [src]="row.miniature" class="img-fluid">
-                                    <span *ngIf="row.miniature.length" class="text-muted">Indéfinie</span>
+                                    <span *ngIf="!row.miniature.length" class="text-muted">Indéfinie</span>
                                 </td>
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.price }}</td>
                                 <td>{{ row.createdAt }}</td>
                                 <td>{{ row.keywords }}</td>
-                                <td>{{ row.topics }}</td>
+                                <td>{{ extractTopicsNames(row.topics) }}</td>
                                 <td>
                                     <div class="nav-item dropdown btn-group" dropdown>
                                         <a class="px-2 dropdown-toggle waves-light" color="blue"

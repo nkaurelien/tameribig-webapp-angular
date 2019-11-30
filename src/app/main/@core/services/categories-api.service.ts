@@ -34,6 +34,16 @@ export class CategoriesApiService {
 
     }
 
+    public static extractTopicsNames(items: Categorie[]) {
+        return (items || []).map(I => (I.name)).filter(I => !!I);
+    }
+
+    public static hasSomeById(topics: any[], search: any, by = '_id') {
+        return (topics || []).some(el => {
+            return (el[by] || el) === search[by];
+        });
+    }
+
 
     getAll(): Observable<Categorie[] | any> {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/topics/').pipe(
@@ -41,7 +51,6 @@ export class CategoriesApiService {
             map(resp => (resp.data || resp) as Categorie)
         );
     }
-
 
     findOneById(ID: string): Observable<Categorie | any> {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/topics/' + ID).pipe(
