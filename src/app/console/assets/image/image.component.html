@@ -61,6 +61,8 @@
                                             class="form-control my-0 py-0"
                                             type="text"
                                             placeholder="Search"
+                                            [(ngModel)]="searchText1"
+                                            [ngModelOptions]="{standalone: true}"
                                     />
                                     <div class="input-group-btn">
                                         <button
@@ -78,8 +80,8 @@
                         </div>
                         <!--Grid column-->
                     </div>
-                    <!--Grid row--></mdb-card-body
-                >
+                    <!--Grid row-->
+                </mdb-card-body>
             </mdb-card>
             <!--Top Table UI-->
 
@@ -151,7 +153,8 @@
                             <thead>
                             <tr>
                                 <th>
-                                    <mdb-checkbox></mdb-checkbox>
+                                    <mdb-checkbox (change)="toggleRows($event)" [checked]="isAllChecked"
+                                                  [indeterminate]="isSelectionIndeterminate"></mdb-checkbox>
                                 </th>
                                 <th class="th-lg">
                                     Image
@@ -191,19 +194,22 @@
 
                             <!--Table body-->
                             <tbody>
-                            <tr *ngFor="let row of tableData">
+                            <tr *ngFor="let row of tableData | searchSelectable: 'title,price':searchText1; trackBy: trackByID">
                                 <th scope="row">
-                                    <mdb-checkbox></mdb-checkbox>
+                                    <mdb-checkbox (change)="selectRow($event, row)"
+                                                  [checkboxPosition]="'left'"
+                                                  [checked]="row.selected"
+                                    ></mdb-checkbox>
                                 </th>
                                 <td>
-                                    <img *ngIf="row.miniature.length" [src]="row.miniature" class="img-fluid">
-                                    <span *ngIf="!row.miniature.length" class="text-muted">Indéfinie</span>
+                                    <img *ngIf="row.data.miniature.length" [src]="row.data.miniature" class="img-fluid">
+                                    <span *ngIf="!row.data.miniature.length" class="text-muted">Indéfinie</span>
                                 </td>
-                                <td>{{ row.title }}</td>
-                                <td>{{ row.price }}</td>
-                                <td>{{ row.createdAt }}</td>
-                                <td>{{ row.keywords }}</td>
-                                <td>{{ extractTopicsNames(row.topics) }}</td>
+                                <td>{{ row.data.title }}</td>
+                                <td>{{ row.data.price }}</td>
+                                <td>{{ row.data.createdAt }}</td>
+                                <td>{{ row.data.keywords }}</td>
+                                <td>{{ extractTopicsNames(row.data.topics) }}</td>
                                 <td>
                                     <div class="nav-item dropdown btn-group" dropdown>
                                         <a class="px-2 dropdown-toggle waves-light" color="blue"

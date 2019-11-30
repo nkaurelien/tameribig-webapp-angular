@@ -21,6 +21,7 @@ import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {ImageUploadSourceComponent} from './image-upload-source/image-upload-source.component';
 import {ImageUploadPictureComponent} from './image-upload-picture/image-upload-picture.component';
 import {ImageEditComponent} from './image-edit/image-edit.component';
+import {SearchSelectablePipe} from './search-selectable.pipe';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -31,7 +32,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 };
 
 @NgModule({
-    declarations: [ImageComponent, ImageAddComponent, ImageUploadSourceComponent, ImageUploadPictureComponent, ImageEditComponent],
+    declarations: [ImageComponent, ImageAddComponent, ImageUploadSourceComponent, ImageUploadPictureComponent, ImageEditComponent, SearchSelectablePipe],
     imports: [
         CommonModule,
         ImagesRoutingModule,
