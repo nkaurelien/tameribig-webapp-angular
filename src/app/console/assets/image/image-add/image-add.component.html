@@ -57,9 +57,10 @@
                                                         <div class="col">
                                                             <!-- Material input -->
                                                             <div class="md-form form-group  mt-0">
-                                                                <input type="number" id="prix" name="prix" formControlName="prix" class="form-control"
+                                                                <input class="form-control" formControlName="price"
+                                                                       id="prix" name="prix" type="number"
                                                                        placeholder="Prix" min="50" mdbInput>
-                                                                <label for="prix">Prix en FCFA (min 50 FCFA)</label>
+                                                                <label for="prix">Prix(FCFA)</label>
                                                                 <mdb-error *ngIf="prixInput.invalid && (prixInput.dirty || prixInput.touched)">invalid
                                                                 </mdb-error>
                                                                 <mdb-success *ngIf="prixInput.valid && (prixInput.dirty || prixInput.touched)">valid
@@ -94,7 +95,9 @@
                                                         <div class="col">
                                                             <!-- Material input -->
                                                             <div class="md-form mt-0">
-                                                                <tag-input formControlName="tags" [modelAsStrings]="true" inputClass="border  border-0"
+                                                                <tag-input [modelAsStrings]="true"
+                                                                           formControlName="keywords"
+                                                                           inputClass="border  border-0"
                                                                            [maxItems]='5'></tag-input>
                                                             </div>
                                                         </div>

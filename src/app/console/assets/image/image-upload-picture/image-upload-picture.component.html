@@ -1,0 +1,103 @@
+<div #modal="mdbModal" (onHide)="onHideModal()" [config]="{backdrop: true, ignoreBackdropClick: true}"
+     aria-hidden="true"
+     aria-labelledby="myBasicModalLabel" class="modal fade top"
+     mdbModal role="dialog" style="overflow-y: auto" tabindex="-1">
+    <div class="modal-dialog modal-xs" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Changer l'image de garde a partagée</p>
+                <button (click)="modal.hide()" aria-label="Close" class="close pull-right" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12">
+                        <!--<h1 class="mb-5">Images presenter</h1>-->
+
+                        <div class="row mx-auto">
+                            <div class=" col-md-1"></div>
+                            <div class=" col-md-10">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- Material form row -->
+                                        <form (submit)="submit()" novalidate>
+                                            <!-- Grid row -->
+                                            <div class="form-row mb-5">
+                                                <div class="col-md-12 ">
+                                                    <div *ngIf="errors.length"
+                                                         class="animated fadeIn alert alert-warning" role="alert">
+                                                        <b>{{ errors[0]}}</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Grid row -->
+                                            <div class="form-row">
+                                                <!-- Grid column -->
+                                                <div class="col">
+                                                    <!-- Material input -->
+                                                    <div class="md-form mt-0">
+                                                        <dropzone (error)="onUploadError($event)"
+                                                                  (init)="onUploadInit($event)"
+                                                                  (success)="onUploadSuccess($event)"
+                                                                  *ngIf="type === 'component'" [config]="config"
+                                                                  [disabled]="disabled"
+                                                                  [message]="'Click or drag images here to upload'"
+                                                                  class="dropzone-container"
+                                                                  fxFlex="auto"
+                                                                  fxLayout="row"
+                                                                  fxLayoutAlign="start strech"></dropzone>
+
+                                                        <div (error)="onUploadError($event)"
+                                                             (init)="onUploadInit($event)"
+                                                             (success)="onUploadSuccess($event)"
+                                                             *ngIf="type === 'directive'" [disabled]="disabled"
+                                                             [dropzone]="config"
+                                                             class="dropzone dropzone-container"></div>
+                                                    </div>
+                                                </div>
+                                                <!-- Grid column -->
+                                            </div>
+                                            <!-- Grid row -->
+                                            <div class="form-row">
+
+
+                                                <div class="col-md-12 text-center">
+                                                    <button [disabled]="uploading"
+                                                            class="btn btn-block btn-primary" type="submit">
+                                                        <mdb-spinner *ngIf="uploading" color="white" size="sm"
+                                                                     spinnerColor="yellow"></mdb-spinner>
+                                                        <span *ngIf="!uploading">Envoyer</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-1">&nbsp;</div>
+                                            </div>
+                                        </form>
+                                        <!-- Material form row -->
+                                    </div>
+                                    <div class="col-md-12"></div>
+                                </div>
+
+                            </div>
+                            <div class=" col-md-1"></div>
+                        </div>
+                        <div *ngIf="imagesUploadedWithSuccess.length" class="row mx-auto">
+                            <div class="col">
+                                <figure *ngFor="let img of imagesUploadedWithSuccess; let i = index"
+                                        class="figure mx-2">
+                                    <img [alt]="img.title" [src]="getImageUrl(img.uid)"
+                                         class="figure-img img-fluid z-depth-1"
+                                         style="width: 400px">
+                                    <figcaption class="figure-caption">{{img.description}}</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

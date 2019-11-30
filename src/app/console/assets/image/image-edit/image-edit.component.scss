@@ -1,0 +1,33 @@
+:host ::ng-deep {
+
+  tag-input {
+    .border.border-0 {
+      border: none !important;
+    }
+  }
+
+  .ng2-tag-input__text-input {
+    position: relative;
+    top: 4px;
+  }
+
+  textarea.form-control {
+    padding: 10px !important;
+
+    & + .success-message {
+      position: relative;
+      top: 0px;
+    }
+
+    & + .error-message {
+      position: relative;
+      top: 0px;
+    }
+  }
+
+
+  .modal-body {
+    background-color: rgba(255, 193, 7, 0.62);
+    color: #424242;
+  }
+}

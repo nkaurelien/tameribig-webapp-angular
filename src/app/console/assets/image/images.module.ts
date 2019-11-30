@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ImageComponent } from './image.component';
 import {
     ButtonsModule,
-    CardsModule, CharCounterModule, CheckboxModule,
+    CardsModule, CharCounterModule, CheckboxModule, DropdownModule,
     IconsModule,
     InputsModule,
     InputUtilitiesModule,
-    ModalModule,
-    SelectModule, WavesModule
+    ModalModule, PreloadersModule,
+    SelectModule, TooltipModule, WavesModule
 } from 'ng-uikit-pro-standard';
 import { ImageAddComponent } from './image-add/image-add.component';
 import {ImagesRoutingModule} from './images-routing.module';
@@ -18,17 +18,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TagInputModule} from 'ngx-chips';
 import {ImagesService} from '@app/main/@core/services/images.service';
 import {ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {ImageUploadSourceComponent} from './image-upload-source/image-upload-source.component';
+import {ImageUploadPictureComponent} from './image-upload-picture/image-upload-picture.component';
+import {ImageEditComponent} from './image-edit/image-edit.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
-    url: `${environment.ApiBaseUrl}/images/uploadHandler`,
+    url: `${environment.ApiBaseUrl}/images/upload-picture`,
     acceptedFiles: 'image/*',
     createImageThumbnails: true,
     addRemoveLinks: true,
 };
 
 @NgModule({
-    declarations: [ImageComponent, ImageAddComponent],
+    declarations: [ImageComponent, ImageAddComponent, ImageUploadSourceComponent, ImageUploadPictureComponent, ImageEditComponent],
     imports: [
         CommonModule,
         ImagesRoutingModule,
@@ -37,8 +40,12 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         ButtonsModule,
         SelectModule,
         ModalModule,
+        PreloadersModule,
         DropzoneModule,
+        DropdownModule,
         InputsModule,
+        CheckboxModule,
+        TooltipModule,
         InputUtilitiesModule,
         WavesModule,
         FormsModule,

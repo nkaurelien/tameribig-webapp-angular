@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-image',
@@ -11,13 +12,7 @@ export class ImageComponent implements OnInit {
 
     @Input() shadows = true;
 
-    tableData: Image[] = [
-        // { first: 'Mark', last: 'Otto', username: '@mdo', email: 'markotto@gmail.com', country: 'USA', city: 'San Francisco' },
-        // { first: 'Jacob', last: 'Thornton', username: '@fat', email: 'jacobt@gmail.com', country: 'France', city: 'Paris' },
-        // { first: 'Larry', last: 'the Bird', username: '@twitter', email: 'larrybird@gmail.com', country: 'Germany', city: 'Berlin' },
-        // { first: 'Paul', last: 'Topolski', username: '@P_Topolski', email: 'ptopolski@gmail.com', country: 'Poland', city: 'Warsaw' },
-        // { first: 'Anna', last: 'Doe', username: '@andy', email: 'annadoe@gmail.com', country: 'Spain', city: 'Madrid' }
-    ];
+    tableData: Image[] = [];
 
     bulkOptionsSelect: object[] = [
         { value: '1', label: 'Delete' },
@@ -25,23 +20,17 @@ export class ImageComponent implements OnInit {
         { value: '3', label: 'Change segment' }
     ];
 
-    filterOptionsSelect: object[] = [
-        { value: '1', label: 'Contacts in no segments (100)' },
-        { value: '2', label: 'Segment 1  (2000)' },
-        { value: '3', label: 'Segment 2  (1000)' },
-        { value: '4', label: 'Segment 3  (4000)' }
-    ];
-
     private sorted = false;
     private imagesApiSub: Subscription;
 
     constructor(
         private imagesApi: ImagesApiService,
+        private router: Router,
     ) { }
 
     ngOnInit() {
 
-        this.imagesApiSub = this.imagesApi.getImages().subscribe(resp => {
+        this.imagesApiSub = this.imagesApi.getAllByAuth().subscribe(resp => {
             console.log({resp});
             this.tableData = resp;
 
@@ -51,6 +40,9 @@ export class ImageComponent implements OnInit {
     sortBy(by: string | any): void {
 
         this.tableData.sort((a: any, b: any) => {
+            if (a[by] === undefined || a[by] === null || b[by] === undefined || b[by] === null) {
+                return 0;
+            }
             if (a[by] < b[by]) {
                 return this.sorted ? 1 : -1;
             }
@@ -64,4 +56,15 @@ export class ImageComponent implements OnInit {
         this.sorted = !this.sorted;
     }
 
+    uploadPicture(image: Image) {
+        this.router.navigate([`/console/assets/images/${image._id}/upload-picture`]);
+    }
+
+    uploadFiles(image: Image) {
+        this.router.navigateByUrl(`/console/assets/images/${image._id}/upload-source`);
+    }
+
+    edit(image: Image) {
+        this.router.navigateByUrl(`/console/assets/images/${image._id}/edit`);
+    }
 }

@@ -22,6 +22,7 @@ export interface ImageSize {
 }
 
 export interface Image {
+    _id: string;
     uid: string;
     picture: string;
     miniature: string;
@@ -31,13 +32,13 @@ export interface Image {
     price: number;
     author: Author;
     userId: number;
-    created_at?: string;
-    updated_at?: string;
-    deleted_at?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
     upvote?: number;
 
     keywords?: string[];
-    tags?: string[];
+    // tags?: string[];
     topics?: string[];
     comments?: any[];
     size?: {
@@ -64,7 +65,7 @@ export class ImagesApiService {
     }
 
 
-    getImages(): Observable<Image[] | any> {
+    getAll(): Observable<Image[] | any> {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/').pipe(
             take(1),
             map(resp => (resp.data || resp) as Image)
@@ -72,9 +73,24 @@ export class ImagesApiService {
     }
 
 
-    getImagesByAuth(): Observable<Image[] | any> {
-        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/me').pipe(take(1));
+    findOneById(ID: string): Observable<Image | any> {
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID).pipe(
+            take(1),
+            map(resp => (resp.data || resp) as Image)
+        );
+    }
+
+    updateOneById(ID: string, body: Partial<Image>): Observable<Image | any> {
+        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID, body).pipe(
+            take(1),
+            map(resp => (resp.data || resp) as Image)
+        );
     }
 
 
+    getAllByAuth(): Observable<Image[] | any> {
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/me').pipe(
+            take(1),
+            map(resp => (resp.data || resp) as Image));
+    }
 }

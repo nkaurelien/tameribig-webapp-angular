@@ -1,26 +1,28 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalDirective, ToastService} from 'ng-uikit-pro-standard';
 import {DropzoneComponent, DropzoneConfigInterface, DropzoneDirective} from 'ngx-dropzone-wrapper';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@app/auth2/_services';
 import {environment} from '@environments/environment';
+import {Subscription} from 'rxjs';
 
 @Component({
-    selector: 'app-image-add',
-    templateUrl: './image-add.component.html',
-    styleUrls: ['./image-add.component.scss']
+    selector: 'app-image-upload-picture-component',
+    templateUrl: './image-upload-picture.component.html',
+    styleUrls: ['./image-upload-picture.component.scss']
 })
-export class ImageAddComponent implements OnInit, AfterViewInit {
+export class ImageUploadPictureComponent implements OnInit, AfterViewInit, OnDestroy {
+
 
     @ViewChild('modal', {static: true}) modal: ModalDirective;
 
-    @ViewChild(DropzoneComponent, { static: false }) componentRef?: DropzoneComponent;
+    @ViewChild(DropzoneComponent, {static: false}) componentRef?: DropzoneComponent;
 
-    @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
+    @ViewChild(DropzoneDirective, {static: false}) directiveRef?: DropzoneDirective;
 
     public type = 'directive';
     public disabled = false;
+    public uploading = false;
     public config: DropzoneConfigInterface = {
         clickable: true,
         maxFiles: 1,
@@ -37,34 +39,33 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
     public errors = [];
     public imagesUploadedWithSuccess = [];
 
-    private validatingForm: FormGroup;
     private user: any;
-
-
-    get prixInput() {
-        return this.validatingForm.get('price');
-    }
-    get titreInput() { return this.validatingForm.get('titre'); }
-    get descInput() { return this.validatingForm.get('description'); }
-    get tagsInput() { return this.validatingForm.get('tags'); }
+    private paramMapSub: Subscription;
+    private ID: string;
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private auth: AuthenticationService,
         private toast: ToastService,
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
-        this.validatingForm = new FormGroup({
-            titre: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-            price: new FormControl(null, [Validators.required, Validators.min(50)]),
-            description: new FormControl(null, [Validators.minLength(3), Validators.maxLength(100)]),
-            tags: new FormControl(null, null),
-        });
-
         this.auth.loggedIn$.subscribe(({loggedIn, routerState, user}) => {
             this.user = user;
         });
+
+        this.paramMapSub = this.route.paramMap.subscribe(params => {
+            this.ID = params.get('id');
+        });
+
+    }
+
+    ngOnDestroy(): void {
+        if (this.paramMapSub) {
+            this.paramMapSub.unsubscribe();
+        }
     }
 
     ngAfterViewInit() {
@@ -80,38 +81,27 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
         }
 
         this.dropzone.on('sending', (file, xhr, formData) => {
+            this.uploading = true;
             // Will send the filesize along with the file as POST data.
             // console.log('sending:', file, xhr, formData);
+            formData.append('id', this.ID);
             formData.append('user', JSON.stringify(this.user));
 
-            const generatedKeyswords = (this.validatingForm.value['description'] || '').split(' ');
-
-            for (const key in this.validatingForm.value) {
-                formData.append(key, JSON.stringify(this.validatingForm.value[key]));
-            }
-
-            const keywordsModelList = this.validatingForm.value['keywords'];
-            const keywords = keywordsModelList.map(x => x).concat(generatedKeyswords).filter(x => x.length > 2);
-            formData.append('keywords', JSON.stringify(keywords));
 
         });
     }
 
-
-
-    onHideModal() {
+    redirectToImagesIndex() {
         this.router.navigateByUrl('/console/assets/images');
     }
 
-
+    onHideModal() {
+        this.redirectToImagesIndex();
+    }
 
     submit() {
         // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
-        if (this.validatingForm.valid) {
-            this.dropzone.processQueue();
-        } else {
-            this.errors = ['Formulaire invalide'];
-        }
+        this.dropzone.processQueue();
     }
 
     public resetDropzoneUploads(): void {
@@ -130,17 +120,18 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
         // console.log('onUploadError:', args);
         this.resetDropzoneUploads();
         this.errors[0] = 'Un problème est survenu pendant l\'opération';
+        this.uploading = false;
 
     }
 
     public onUploadSuccess([file, xhrResponse, progressEvent]: any): void {
         // console.log('onUploadSuccess:', [file, xhrResponse, progressEvent]);
-
+        this.uploading = false;
         this.imagesUploadedWithSuccess = [...this.imagesUploadedWithSuccess, xhrResponse];
-        this.validatingForm.reset();
         this.resetDropzoneUploads();
         this.errors = [];
         this.toast.success('Votre image a été soumise et la qualité sera etudier avant d\'etre publier');
+        setTimeout(() => this.modal.hide(), 2000);
     }
 
 

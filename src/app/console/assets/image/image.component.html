@@ -89,17 +89,7 @@
                         class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center"
                 >
                     <div>
-                        <button
-                                type="button"
-                                mdbBtn
-                                outline="true"
-                                color="white"
-                                rounded="true"
-                                size="sm"
-                                class="px-2"
-                        >
-                            <mdb-icon fas icon="th-large" class="mt-0"></mdb-icon>
-                        </button>
+
                         <button
                                 type="button"
                                 mdbBtn
@@ -164,33 +154,37 @@
                                     <mdb-checkbox></mdb-checkbox>
                                 </th>
                                 <th class="th-lg">
+                                    Image
+                                </th>
+                                <th class="th-lg">
                                     <a (click)="sortBy('title')"
-                                    >Title
+                                    >Titre
                                         <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
                                     <a (click)="sortBy('price')"
-                                    >Price
+                                    >Prix
                                         <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
                                     <a (click)="sortBy('createdAt')"
-                                    >createdAt
+                                    >Date
                                         <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
                                     <a
-                                    >Tags
+                                    >Mots clés
                                     </a>
                                 </th>
                                 <th class="th-lg">
                                     <a
-                                    >Topics
+                                    >Categories
                                     </a>
                                 </th>
+                                <th></th>
                             </tr>
                             </thead>
                             <!--Table head-->
@@ -201,11 +195,42 @@
                                 <th scope="row">
                                     <mdb-checkbox></mdb-checkbox>
                                 </th>
+                                <td>
+                                    <img *ngIf="row.miniature.length" [src]="row.miniature" class="img-fluid">
+                                    <span *ngIf="row.miniature.length" class="text-muted">Indéfinie</span>
+                                </td>
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.price }}</td>
                                 <td>{{ row.createdAt }}</td>
                                 <td>{{ row.keywords }}</td>
                                 <td>{{ row.topics }}</td>
+                                <td>
+                                    <div class="nav-item dropdown btn-group" dropdown>
+                                        <a class="px-2 dropdown-toggle waves-light" color="blue"
+                                           dropdownToggle
+                                           mdbBtn
+                                           mdbWavesEffect
+                                           outline="true"
+                                           rounded="true" size="sm" type="button">
+                                            <mdb-icon class="mt-0" fas icon="th-large"></mdb-icon>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                                            <a (click)="uploadPicture(row)" class="dropdown-item text-primary">
+                                                <mdb-icon class="mr-1" fas icon="cloud-upload-alt"></mdb-icon>
+                                                <span class="clearfix d-none d-sm-inline-block">Picture</span>
+                                            </a>
+                                            <a (click)="uploadFiles(row)" class="dropdown-item text-primary">
+                                                <mdb-icon class="mr-1" fas icon="cloud-upload-alt"></mdb-icon>
+                                                <span class="clearfix d-none d-sm-inline-block">Source .Zip</span>
+                                            </a>
+                                            <a (click)="edit(row)" class="dropdown-item text-primary">
+                                                <mdb-icon class="mr-1" fas icon="edit"></mdb-icon>
+                                                <span class="clearfix d-none d-sm-inline-block">Edit</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </td>
                             </tr>
                             </tbody>
                             <!--Table body-->
