@@ -6,7 +6,7 @@
       </strong>
       </h5>
       <div class="hexa-content">
-        <div class="hexa" routerLink="/group/{{hexa.name}}" *ngFor="let hexa of hexas">
+          <div *ngFor="let hexa of hexas" class="hexa" routerLink="/topics/{{hexa.name}}">
           <div class="{{hexa.subclass}}"></div>
           <p>{{hexa.name}}</p>
         </div>
@@ -15,7 +15,7 @@
         <div class="hexa">
           <div class="hexagon-desactiv"></div>
         </div>
-        <div class="hexa" routerLink="/group/{{hexa.name}}" *ngFor="let hexa of hexas2">
+          <div *ngFor="let hexa of hexas2" class="hexa" routerLink="/topics/{{hexa.name}}">
           <div class="{{hexa.subclass}}"></div>
           <p>{{hexa.name}}</p>
         </div>

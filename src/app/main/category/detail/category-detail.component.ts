@@ -14,15 +14,16 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
   categorySlug: string;
   public  imagesSubscription: Subscription;
   public images: Image[];
+  private paramMapSub: Subscription;
 
   constructor(
-    private _route: ActivatedRoute,
-    private imageService: ImagesService,
+      private route: ActivatedRoute,
+      private imageService: ImagesService,
   ) {
 
-    const params = this._route.snapshot.params;
-    // console.log({ params });
-    this.categorySlug = params['slug'];
+    this.paramMapSub = this.route.paramMap.subscribe(params => {
+      this.categorySlug = params.get('slug');
+    });
 
   }
 
@@ -37,6 +38,9 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.imagesSubscription) {
       this.imagesSubscription.unsubscribe();
+    }
+    if (this.paramMapSub) {
+      this.paramMapSub.unsubscribe();
     }
   }
 

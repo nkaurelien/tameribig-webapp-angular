@@ -10,16 +10,16 @@ import { HexagoneComponent } from './hexagone/hexagone.component';
 
 const routes: Routes = [
   {
-    'path': '',
-    'component': LayoutComponent,
-    'children': [
+      path: '',
+      component: LayoutComponent,
+      children: [
       {
-        'path': '',
-        'component': CategoryComponent,
+          path: '',
+          component: CategoryComponent,
       },
       {
-        'path': ':slug',
-        'component': CategoryDetailComponent,
+          path: ':slug',
+          component: CategoryDetailComponent,
       },
     ],
   },

@@ -22,7 +22,7 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/explorer/explorer.module').then(m => m.ExplorerModule)
                 },
                 {
-                    path: 'group',
+                    path: 'topics',
                     loadChildren: () => import('@modules/main/category/category.module').then(m => m.CategoryModule)
                 },
                 {
