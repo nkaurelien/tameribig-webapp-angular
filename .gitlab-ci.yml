@@ -64,7 +64,6 @@ deploy_prod:
       - node_modules/
   script:
     - npx firebase use prod
-    - firebase target:apply hosting tameri-big tameri-big
     - npm run deploy:ci:hosting:prod
 
 deploy_stage:
@@ -83,5 +82,4 @@ deploy_stage:
       - node_modules/
   script:
     - firebase use default
-    - firebase target:apply hosting dev tameri-big-dev
     - npm run deploy:ci:hosting:stage
