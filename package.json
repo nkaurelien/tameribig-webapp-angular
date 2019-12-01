@@ -10,6 +10,8 @@
     "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
     "heroku-postbuild": "echo This runs afterwards.",
     "build": "ng build",
+    "build-prod": "ng build --prod --extract-css",
+    "build-watch": "ng build --extract-css --watch",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
