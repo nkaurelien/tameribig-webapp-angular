@@ -1,6 +1,8 @@
 image: node:10
 
 before_script:
+  - npm install -g node-pre-gyp
+  - npm install -g firebase-tools
   - npm install --quiet
   # - npm --prefix ./functions install --quiet
 
