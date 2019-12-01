@@ -80,6 +80,5 @@ deploy_stage:
     paths:
       - node_modules/
   script:
-    - npx firebase use dev
-    - firebase target:apply hosting tameri-big tameri-big-dev
+    - npx firebase use default
     - npm run deploy:ci:hosting:stage

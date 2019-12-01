@@ -6,8 +6,11 @@
   "targets": {
     "tameri-big": {
       "hosting": {
-        "tameri-big": [
+        "dev": [
           "tameri-big-dev"
+        ],
+        "prod": [
+          "tameri-big"
         ]
       }
     }
