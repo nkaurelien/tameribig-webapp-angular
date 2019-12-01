@@ -18,8 +18,8 @@
     "deploy:local:hosting:stage": "firebase deploy --only hosting",
     "deploy:local:hosting:prod": "firebase deploy --only hosting",
     "deploy:ci": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
-    "deploy:ci:hosting:stage": "firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive",
-    "deploy:ci:hosting:prod": "firebase deploy --only hosting --token $FIREBASE_TOKEN_PRODUCTION --non-interactive"
+    "deploy:ci:hosting:stage": "firebase deploy --only hosting:dev --token $FIREBASE_TOKEN --non-interactive",
+    "deploy:ci:hosting:prod": "firebase deploy --only hosting:prod --token $FIREBASE_TOKEN_PRODUCTION --non-interactive"
   },
   "private": true,
   "dependencies": {

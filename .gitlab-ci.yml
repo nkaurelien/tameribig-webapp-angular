@@ -1,8 +1,10 @@
 image: node:10
 
 before_script:
+  - npm install -g node-pre-gyp
+  - npm install -g firebase-tools
   - npm install --quiet
-  - npm --prefix ./functions install --quiet
+  # - npm --prefix ./functions install --quiet
 
 build-prod:
   stage: build
@@ -17,7 +19,7 @@ build-prod:
   artifacts:
     expire_in: 1 month
     paths:
-      - dist/tameribig
+      - dist/
 
 build-stage:
   stage: build
@@ -62,7 +64,6 @@ deploy_prod:
       - node_modules/
   script:
     - npx firebase use prod
-    - firebase target:apply hosting tameri-big tameri-big
     - npm run deploy:ci:hosting:prod
 
 deploy_stage:
@@ -70,7 +71,7 @@ deploy_stage:
   environment:
     name: staging
     url: $FIREBASE_URL
-  when: manual
+  #when: manual
   only:
     - develop
   dependencies:
@@ -80,6 +81,5 @@ deploy_stage:
     paths:
       - node_modules/
   script:
-    - npx firebase use dev
-    - firebase target:apply hosting tameri-big tameri-big-dev
+    - firebase use default
     - npm run deploy:ci:hosting:stage
