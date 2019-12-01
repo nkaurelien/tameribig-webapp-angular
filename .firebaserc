@@ -1,5 +1,15 @@
 {
   "projects": {
-    "default": "tameri-big"
+    "default": "tameri-big",
+    "prod": "tameri-big"
+  },
+  "targets": {
+    "tameri-big": {
+      "hosting": {
+        "tameri-big": [
+          "tameri-big-dev"
+        ]
+      }
+    }
   }
 }
