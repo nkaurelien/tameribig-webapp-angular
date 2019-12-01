@@ -17,7 +17,7 @@ build-prod:
   artifacts:
     expire_in: 1 month
     paths:
-      - dist/tameribig
+      - dist/
 
 build-stage:
   stage: build
@@ -80,5 +80,5 @@ deploy_stage:
     paths:
       - node_modules/
   script:
-    - npx firebase use default
+    - firebase use default
     - npm run deploy:ci:hosting:stage
