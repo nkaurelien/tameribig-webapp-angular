@@ -2,7 +2,7 @@ image: node:10
 
 before_script:
   - npm install --quiet
-  - npm --prefix ./functions install --quiet
+   #- npm --prefix ./functions install --quiet
 
 build-prod:
   stage: build
