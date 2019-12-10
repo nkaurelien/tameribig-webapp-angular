@@ -29,6 +29,8 @@ import { ContactUsModalComponent } from './coorporate/contact-us/_modals/contact
 import { FaqModalComponent } from './coorporate/faq/modals/faq/faq-modal.component';
 import { ContactUsModule } from './coorporate/contact-us/contact-us.module';
 import { FaqModule } from './coorporate/faq/faq.module';
+import { SplashScreenService, DataTableService, KtDialogService, PageConfigService, MenuConfigService, LayoutRefService, LayoutConfigService } from 'src/@core/_base/layout';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -59,6 +61,7 @@ import { FaqModule } from './coorporate/faq/faq.module';
       maxOpened: 2,
     }),
     NgtUniversalModule,
+    TranslateModule.forRoot(),
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     // AngularFireDatabaseModule,
@@ -67,6 +70,13 @@ import { FaqModule } from './coorporate/faq/faq.module';
   ],
   providers: [MDBSpinningPreloader,
 
+    LayoutConfigService,
+    LayoutRefService,
+    MenuConfigService,
+    PageConfigService,
+    KtDialogService,
+    DataTableService,
+    SplashScreenService,
     // AuthenticationService,
     AuthService,
     HttpUtilsService,

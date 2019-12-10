@@ -1,5 +1,5 @@
 // import login css
-@import "../../../assets/metronic/css/demo1/pages/general/login/login-1.css";
+// @import "../../../assets/metronic/css/demo1/pages/general/login/login-1.css";
 
 kt-auth, .kt-login {
 	height: 100%;
@@ -12,4 +12,9 @@ kt-auth, .kt-login {
 	.kt-spinner {
 		padding-right: 3rem !important;
 	}
+}
+
+.kt-login__logo {
+	position: relative;
+	top: 1rem;
 }

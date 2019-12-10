@@ -1,5 +1,5 @@
 // MODULE
-export { AuthModule } from './components/auth.module';
+export { AuthModule } from './auth.module';
 
 // SERVICES
 export { AuthService } from './_services';

@@ -18,14 +18,10 @@ import { Login } from '../../_actions/auth.actions';
 /**
  * ! Just example => Should be removed in development
  */
-const DEMO_PARAMS = {
-	EMAIL: 'admin@demo.com',
-	PASSWORD: 'demo'
-};
 
 @Component({
 	selector: 'kt-login',
-	templateUrl: './login.component.html',
+	templateUrl: './login2.component.html',
 	encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -97,23 +93,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 	 * Default params, validators
 	 */
 	initLoginForm() {
-		// demo message to show
-		if (!this.authNoticeService.onNoticeChanged$.getValue()) {
-			const initialNotice = `Use account
-			<strong>${DEMO_PARAMS.EMAIL}</strong> and password
-			<strong>${DEMO_PARAMS.PASSWORD}</strong> to continue.`;
-			this.authNoticeService.setNotice(initialNotice, 'info');
-		}
+	
 
 		this.loginForm = this.fb.group({
-			email: [DEMO_PARAMS.EMAIL, Validators.compose([
+			email: ['', Validators.compose([
 				Validators.required,
 				Validators.email,
 				Validators.minLength(3),
 				Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
 			])
 			],
-			password: [DEMO_PARAMS.PASSWORD, Validators.compose([
+			password: ['', Validators.compose([
 				Validators.required,
 				Validators.minLength(3),
 				Validators.maxLength(100)

@@ -49,7 +49,7 @@ export class AuthComponent implements OnInit {
 		this.splashScreenService.hide();
 
 		// load default styles
-		this.loadCSS('./metronic/css/demo1/style.bundle.css');
+		// this.loadCSS('./metronic/css/demo1/style.bundle.css');
 	}
 
 	/**

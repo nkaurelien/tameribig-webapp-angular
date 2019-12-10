@@ -1,5 +1,5 @@
 // Angular
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,30 +14,37 @@ import { EffectsModule } from '@ngrx/effects';
 // CRUD
 import { InterceptService } from '@core/_base/crud';
 // Module components
-import { AuthComponent } from './auth.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { AuthNoticeComponent } from './auth-notice/auth-notice.component';
+import { AuthComponent } from './components/auth.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { AuthNoticeComponent } from './components/auth-notice/auth-notice.component';
 import { AuthRoutingModule } from './auth-routing.module'; 
 // Auth
-import { authReducer } from '../_reducers/auth.reducers';
-import { AuthEffects } from '../_effects/auth.effects';
-import { AuthService } from '../_services';
-import { AuthFirebaseService } from '../_services';
-import { AuthGuard } from '../_guards/auth.guard';
+import { authReducer } from './_reducers/auth.reducers';
+import { AuthEffects } from './_effects/auth.effects';
+import { AuthService } from './_services';
+import { AuthFirebaseService } from './_services';
+import { AuthGuard } from './_guards/auth.guard';
+import { ButtonsModule, CardsModule, WavesModule, IconsModule, CheckboxModule } from 'ng-uikit-pro-standard';
 
 
 @NgModule({
+	schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 	imports: [
 		CommonModule,
 		AuthRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
-		MatButtonModule,
-		MatInputModule,
-		MatFormFieldModule,
-		MatCheckboxModule,
+		// MatButtonModule,
+		// MatInputModule,
+		// MatFormFieldModule,
+		// MatCheckboxModule,
+		ButtonsModule,
+		CardsModule,
+		CheckboxModule,
+		WavesModule,
+		IconsModule,
 		TranslateModule.forChild(),
 		StoreModule.forFeature('auth', authReducer),
 		EffectsModule.forFeature([AuthEffects])
