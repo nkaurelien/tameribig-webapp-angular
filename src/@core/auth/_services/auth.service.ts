@@ -6,16 +6,15 @@ import {Permission} from '../_models/permission.model';
 import {Role} from '../_models/role.model';
 import {catchError, map} from 'rxjs/operators';
 import {QueryParamsModel, QueryResultsModel} from '../../_base/crud';
-import {environment} from "../../../environments/environment";
+import {environment} from '@environments/environment';
+import { AuthFirebaseService } from './auth-firebase.service';
+import { API_USERS_URL, API_PERMISSION_URL, API_ROLES_URL } from './auth.routes';
 
 
-const API_USERS_URL = 'api/users';
-const API_PERMISSION_URL = 'api/permissions';
-const API_ROLES_URL = 'api/roles';
 
 @Injectable()
 export class AuthService {
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private fireAuth: AuthFirebaseService) {
     }
 
     // Authentication/Authorization

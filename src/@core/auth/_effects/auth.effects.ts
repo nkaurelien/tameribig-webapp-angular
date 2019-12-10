@@ -12,7 +12,7 @@ import { AuthActionTypes, Login, Logout, Register, UserLoaded, UserRequested } f
 import { AuthService } from '../_services/index';
 import {environment} from '@environments/environment';
 import { isUserLoaded } from '../_selectors/auth.selectors';
-import {AppState} from "@core/reducers";
+import {AppState} from '@core/reducers';
 
 @Injectable()
 export class AuthEffects {
