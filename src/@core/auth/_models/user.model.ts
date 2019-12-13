@@ -3,20 +3,55 @@ import { Address } from './address.model';
 import { SocialNetworks } from './social-networks.model';
 
 export class User extends BaseModel {
-    id: number;
+    id: string;
+    uid: string;
+    avatar: string;
     username: string;
     password: string;
     email: string;
     accessToken: string;
     refreshToken: string;
-    roles: number[];
+    roles: string[];
     pic: string;
     fullname: string;
     occupation: string;
-	companyName: string;
-	phone: string;
+    about: string;
+    companyName: string;
+    phone: string;
     address: Address;
-    socialNetworks: SocialNetworks;
+
+
+    socialLinks: SocialNetworks;
+
+
+    public constructor(init?: Partial<User>) {
+        super();
+
+        this.address = {},
+        this.socialLinks = {},
+        this.init(init);
+
+    }
+
+
+    init(user?: Partial<User>) {
+
+            // const { uid, photoUrl, providerId, providerName, userName, adress, fullName, email, roles, phone, created_at, updated_at, deleted_at } = user;
+            // this.uid = uid;
+            // this.photoUrl = photoUrl;
+            // this.providerId = providerId;
+            // this.providerName = providerName;
+            // this.fullName = fullName;
+            // this.userName = userName;
+            // this.email = email;
+            // this.phone = phone;
+            // this.updated_at = updated_at;
+            // this.created_at = created_at;
+            // this.roles = roles;
+            // this.adress = adress;
+            Object.assign(this, user);
+
+    }
 
     clear(): void {
         this.id = undefined;
@@ -32,8 +67,8 @@ export class User extends BaseModel {
         this.companyName = '';
         this.phone = '';
         this.address = new Address();
-        this.address.clear();
-        this.socialNetworks = new SocialNetworks();
-        this.socialNetworks.clear();
+        // this.address.clear();
+        this.socialLinks = new SocialNetworks();
+        // this.socialLinks.clear();
     }
 }

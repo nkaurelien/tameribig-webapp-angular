@@ -3,58 +3,53 @@ import {Injectable} from '@angular/core';
 import {User} from '../_models/index';
 import {map} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '@environments/environment';
 
 
 
 @Injectable()
 export class UserService {
+    private ApiBaseUrl: string;
     constructor(private http: HttpClient) {
+        this.ApiBaseUrl = environment.ApiBaseUrl;
     }
 
-    verify() {
-        return this.http.get('/api/verify', this.jwt())/*.map((response: Response) => response.json())*/;
-    }
 
     forgotPassword(email: string) {
-        return this.http.post('/api/forgot-password', JSON.stringify({email}), this.jwt())/*.pipe(
+        return this.http.post('/forgot-password', JSON.stringify({email}), this.jwt())/*.pipe(
             map((response: Response) => response.json())
         )*/;
     }
 
-    getAll() {
-        return this.http.get('/api/users', this.jwt())/*.map((response: Response) => response.json())*/;
+    getById(id: string) {
+        return this.http.get<any>('/users/' + id, this.jwt()).pipe(
+            map((response) => response.data || response)
+        );
     }
 
-    getById(id: number) {
-        return this.http.get('/api/users/' + id, this.jwt())/*.map((response: Response) => response.json())*/;
+    getByUsername(uname: string) {
+        return this.http.get<any>(this.ApiBaseUrl + '/users/' + uname, this.jwt()).pipe(
+            map((response) => response.data || response)
+        );
     }
 
     create(user: User) {
-        return this.http.post('/api/users', user, this.jwt())/*.map((response: Response) => response.json())*/;
+        return this.http.post('/users', user, this.jwt())/*.map((response: Response) => response.json())*/;
     }
 
     update(user: User) {
-        return this.http.put('/api/users/' + user.uid, user, this.jwt())/*.map((response: Response) => response.json())*/;
-    }
-
-    delete(id: number) {
-        return this.http.delete('/api/users/' + id, this.jwt())/*.map((response: Response) => response.json())*/;
+        return this.http.put('/users/' + user.uid, user, this.jwt())/*.map((response: Response) => response.json())*/;
     }
 
     // private helper methods
 
     private jwt() {
-        // create authorization header with jwt token
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            const headers = new HttpHeaders({
+        const headers = new HttpHeaders({
 
-                'Content-Type':  'application/json',
-                'Accept':  'application/json',
-                // 'X-CSRF-TOKEN' : '',
-                'Authorization': 'Bearer ' + currentUser.token});
-            return {headers: headers};
-        }
-        return null;
+            'Content-Type':  'application/json',
+            Accept:  'application/json',
+            // 'X-CSRF-TOKEN' : '',
+            Authorization: 'Bearer '});
+        return {headers};
     }
 }

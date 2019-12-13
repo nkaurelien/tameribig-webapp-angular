@@ -47,7 +47,7 @@ export class HexagoneComponent implements OnInit {
 
   navigateToDetail(name: string) {
 
-    this.router.navigate([`/group/${name}`]);
+    this.router.navigate([`/topic/${name}`]);
   }
 
 }

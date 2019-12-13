@@ -9,6 +9,10 @@ const routes: Routes = [
         loadChildren: () => import('@core/auth').then(m => m.AuthModule),
     },
     {
+        path: 'network',
+        loadChildren: () => import('@modules/network/network.module').then(m => m.NetworkModule),
+    },
+    {
         path: 'console',
         loadChildren: () => import('@modules/console/console.module').then(m => m.ConsoleModule),
     },

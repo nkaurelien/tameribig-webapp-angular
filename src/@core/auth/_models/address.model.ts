@@ -1,13 +1,19 @@
 export class Address {
-    addressLine: string;
-    city: string;
-    state: string;
-    postCode: string;
+    street?: string;
+    addressLine?: string;
+    locality?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    postalCode?: string;
 
     clear() {
+        this.street = '';
+        this.locality = '';
+        this.country = '';
         this.addressLine = '';
         this.city = '';
         this.state = '';
-        this.postCode = '';
+        this.postalCode = '';
     }
 }
