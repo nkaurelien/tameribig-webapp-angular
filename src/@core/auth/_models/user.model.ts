@@ -14,7 +14,6 @@ export class User extends BaseModel {
     roles: string[];
     pic: string;
     fullname: string;
-    username: string;
     occupation: string;
     about: string;
     companyName: string;
@@ -24,12 +23,6 @@ export class User extends BaseModel {
 
     socialLinks: SocialNetworks;
 
-    address?: {
-        street: string,
-        city: string,
-        country: string
-        postCode: string
-    };
 
     public constructor(init?: Partial<User>) {
         super();
@@ -74,8 +67,8 @@ export class User extends BaseModel {
         this.companyName = '';
         this.phone = '';
         this.address = new Address();
-        this.address.clear();
-        this.socialNetworks = new SocialNetworks();
-        this.socialNetworks.clear();
+        // this.address.clear();
+        this.socialLinks = new SocialNetworks();
+        // this.socialLinks.clear();
     }
 }
