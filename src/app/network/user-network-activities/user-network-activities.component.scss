@@ -1,0 +1,28 @@
+.testimonial-card {
+  .card-up {
+
+    height: 296px;
+    background: url(/assets/images/background/user-dashboad-banner.jpg) no-repeat !important;
+    background-position: right;
+    background-size: 103.5% 296px !important;
+    //background-size: cover;
+    // background-size: 100% 730px;
+    // background-attachment: fixed !important;
+    //
+  }
+  .avatar {
+    border-radius: 50%;
+    width: 245px;
+    margin-top: -162px;
+    margin-right: 90px;
+    overflow: hidden;
+    border: 1px solid #e40f32;
+  }
+
+  mdb-card-body {
+    position: relative;
+    top: -2em;
+  }
+}
+
+
