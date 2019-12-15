@@ -52,7 +52,7 @@ export class AuthService {
     }
 
     register(user: User): Observable<any> {
-        user.roles = [2]; // Manager
+        user.roles = ['customer']; // Manager
         user.accessToken = 'access-token-' + Math.random();
         user.refreshToken = 'access-token-' + Math.random();
         user.pic = './assets/media/users/default.jpg';

@@ -13,7 +13,7 @@ export interface UsersState extends EntityState<User> {
     listLoading: boolean;
     actionsloading: boolean;
     totalCount: number;
-    lastCreatedUserId: number;
+    lastCreatedUserId: string;
     lastQuery: QueryParamsModel;
     showInitWaitingMessage: boolean;
 }

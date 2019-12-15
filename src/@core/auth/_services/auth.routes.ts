@@ -1,4 +1,6 @@
+import {environment} from "@environments/environment";
 
-export const API_USERS_URL = 'api/users';
-export const API_PERMISSION_URL = 'api/permissions';
-export const API_ROLES_URL = 'api/roles';
+const ApiBaseUrl = environment.ApiBaseUrl;
+export const API_USERS_URL = ApiBaseUrl + '/users';
+export const API_PERMISSION_URL = ApiBaseUrl + '/permissions';
+export const API_ROLES_URL = ApiBaseUrl + '/roles';

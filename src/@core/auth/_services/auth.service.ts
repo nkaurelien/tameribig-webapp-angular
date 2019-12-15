@@ -64,6 +64,11 @@ export class AuthService {
         return this.http.get<User>(API_USERS_URL + `/${userId}`);
     }
 
+    getUserByUsername(uname: string): Observable<User> {
+        return this.http.get<any>(API_USERS_URL + `/${uname}`).pipe(
+            map((response) => response.data || response)
+        );
+    }
 
     // DELETE => delete the user from the server
     deleteUser(userId: number) {

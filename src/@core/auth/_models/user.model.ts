@@ -27,8 +27,8 @@ export class User extends BaseModel {
     public constructor(init?: Partial<User>) {
         super();
 
-        this.address = {},
-        this.socialLinks = {},
+        this.address = new Address();
+        this.socialLinks = new SocialNetworks();
         this.init(init);
 
     }
@@ -36,20 +36,20 @@ export class User extends BaseModel {
 
     init(user?: Partial<User>) {
 
-            // const { uid, photoUrl, providerId, providerName, userName, adress, fullName, email, roles, phone, created_at, updated_at, deleted_at } = user;
-            // this.uid = uid;
-            // this.photoUrl = photoUrl;
-            // this.providerId = providerId;
-            // this.providerName = providerName;
-            // this.fullName = fullName;
-            // this.userName = userName;
-            // this.email = email;
-            // this.phone = phone;
-            // this.updated_at = updated_at;
-            // this.created_at = created_at;
-            // this.roles = roles;
-            // this.adress = adress;
-            Object.assign(this, user);
+        // const { uid, photoUrl, providerId, providerName, userName, adress, fullName, email, roles, phone, created_at, updated_at, deleted_at } = user;
+        // this.uid = uid;
+        // this.photoUrl = photoUrl;
+        // this.providerId = providerId;
+        // this.providerName = providerName;
+        // this.fullName = fullName;
+        // this.userName = userName;
+        // this.email = email;
+        // this.phone = phone;
+        // this.updated_at = updated_at;
+        // this.created_at = created_at;
+        // this.roles = roles;
+        // this.adress = adress;
+        Object.assign(this, user);
 
     }
 
