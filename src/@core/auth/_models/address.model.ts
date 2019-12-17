@@ -1,3 +1,5 @@
+
+
 export class Address {
     street?: string;
     addressLine?: string;
@@ -6,6 +8,20 @@ export class Address {
     state?: string;
     country?: string;
     postalCode?: string;
+
+
+    public constructor(init?: Partial<Address>) {
+
+        this.init(init);
+
+    }
+
+
+    init(data?: Partial<Address>) {
+
+        Object.assign(this, data);
+
+    }
 
     clear() {
         this.street = '';

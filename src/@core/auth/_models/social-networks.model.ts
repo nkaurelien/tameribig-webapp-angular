@@ -1,3 +1,4 @@
+
 export class SocialNetworks {
     linkedIn: string;
 	facebook: string;
@@ -5,6 +6,18 @@ export class SocialNetworks {
     instagram: string;
     youtube: string
 
+    public constructor(init?: Partial<SocialNetworks>) {
+
+        this.init(init);
+
+    }
+
+
+    init(data?: Partial<SocialNetworks>) {
+
+        Object.assign(this, data);
+
+    }
 
     clear() {
         this.linkedIn = '';
