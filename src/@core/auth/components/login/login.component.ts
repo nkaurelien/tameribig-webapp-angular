@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../reducers';
 // Auth
 import { AuthNoticeService } from '../../auth-notice/auth-notice.service';
-import { AuthService } from '../../_services';
+import {AuthFirebaseService, AuthService} from '../../_services';
 import { Login } from '../../_actions/auth.actions';
 
 /**
@@ -50,14 +50,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 	 * @param route
 	 */
 	constructor(
-		private router: Router,
-		private auth: AuthService,
-		private authNoticeService: AuthNoticeService,
-		private translate: TranslateService,
-		private store: Store<AppState>,
-		private fb: FormBuilder,
-		private cdr: ChangeDetectorRef,
-		private route: ActivatedRoute
+        private router: Router,
+        private auth: AuthService,
+        private fireAuth: AuthFirebaseService,
+        private authNoticeService: AuthNoticeService,
+        private translate: TranslateService,
+        private store: Store<AppState>,
+        private fb: FormBuilder,
+        private cdr: ChangeDetectorRef,
+        private route: ActivatedRoute
 	) {
 		this.unsubscribe = new Subject();
 	}
@@ -131,16 +132,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 			email: controls['email'].value,
 			password: controls['password'].value
 		};
-		this.auth
-			.login(authData.email, authData.password)
+        this.fireAuth
+            .firePasswordLogin(authData.email, authData.password)
 			.pipe(
 				tap(user => {
-					if (user) {
-						this.store.dispatch(new Login({authToken: user.accessToken}));
-						this.router.navigateByUrl(this.returnUrl); // Main page
-					} else {
-						this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
-					}
+                    console.log({user})
+                    // if (user) {
+                    // 	this.store.dispatch(new Login({authToken: user.accessToken}));
+                    // 	this.router.navigateByUrl(this.returnUrl); // Main page
+                    // } else {
+                    // 	this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+                    // }
 				}),
 				takeUntil(this.unsubscribe),
 				finalize(() => {
@@ -149,6 +151,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 				})
 			)
 			.subscribe();
+        // this.auth
+        // 	.login(authData.email, authData.password)
+        // 	.pipe(
+        // 		tap(user => {
+        // 			if (user) {
+        // 				this.store.dispatch(new Login({authToken: user.accessToken}));
+        // 				this.router.navigateByUrl(this.returnUrl); // Main page
+        // 			} else {
+        // 				this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+        // 			}
+        // 		}),
+        // 		takeUntil(this.unsubscribe),
+        // 		finalize(() => {
+        // 			this.loading = false;
+        // 			this.cdr.markForCheck();
+        // 		})
+        // 	)
+        // 	.subscribe();
 	}
 
 	/**

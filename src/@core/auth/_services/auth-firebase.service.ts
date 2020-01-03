@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { tap, first } from 'rxjs/operators';
+import {fromPromise} from "rxjs/internal-compatibility";
 
 
 const API_USERS_URL = 'api/users';
@@ -24,7 +25,7 @@ export class AuthFirebaseService {
 
 
     firePasswordLogin(email: string, password: string) {
-        return new Promise<any>((resolve, reject) => {
+        return fromPromise(new Promise<any>((resolve, reject) => {
             // const provider = new firebase.auth.EmailAuthProvider();
             this.afAuth.auth
                 .signInWithEmailAndPassword(email, password)
@@ -33,7 +34,7 @@ export class AuthFirebaseService {
                 }, err => {
                     reject(err);
                 });
-        });
+        }));
     }
 
     fireRegister(value) {

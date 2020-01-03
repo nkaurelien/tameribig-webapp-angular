@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
 import { environment } from '@environments/environment';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,14 @@ export class AppComponent implements OnInit{
   title = 'tameri';
 
   constructor(
-
-    private seo: SeoService,
-    // private store: Store<fromStore.AppState>,
-    // @Inject(WINDOW) private window: Window,
-    // @Inject(LOCAL_STORAGE) private localStorage: any,
-  ) {}
+      private seo: SeoService,
+      private translate: TranslateService,
+      // private store: Store<fromStore.AppState>,
+      // @Inject(WINDOW) private window: Window,
+      // @Inject(LOCAL_STORAGE) private localStorage: any,
+  ) {
+      this.translate.setDefaultLang('fr');
+  }
 
   ngOnInit() {
     this.seo.generateTags({

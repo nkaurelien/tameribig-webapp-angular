@@ -8,7 +8,14 @@ import {catchError, map} from 'rxjs/operators';
 import {QueryParamsModel, QueryResultsModel} from '../../_base/crud';
 import {environment} from '@environments/environment';
 import { AuthFirebaseService } from './auth-firebase.service';
-import { API_USERS_URL, API_PERMISSION_URL, API_ROLES_URL } from './auth.routes';
+import {
+    API_USERS_URL,
+    API_PERMISSION_URL,
+    API_ROLES_URL,
+    API_REGISTER_URL,
+    API_LOGIN_URL,
+    API_REGISTER_FIREBASE_URL, API_LOGIN_FIREBASE_URL
+} from './auth.routes';
 
 
 
@@ -19,7 +26,7 @@ export class AuthService {
 
     // Authentication/Authorization
     login(email: string, password: string): Observable<User> {
-        return this.http.post<User>(API_USERS_URL, {email, password});
+        return this.http.post<User>(API_LOGIN_FIREBASE_URL, {email, password});
     }
 
     getUserByToken(): Observable<User> {
@@ -32,7 +39,7 @@ export class AuthService {
     register(user: User): Observable<any> {
         const httpHeaders = new HttpHeaders();
         httpHeaders.set('Content-Type', 'application/json');
-        return this.http.post<User>(API_USERS_URL, user, {headers: httpHeaders})
+        return this.http.post<User>(API_REGISTER_FIREBASE_URL, user, {headers: httpHeaders})
             .pipe(
                 map((res: User) => {
                     return res;

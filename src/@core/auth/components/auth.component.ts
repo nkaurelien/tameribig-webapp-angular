@@ -45,7 +45,31 @@ export class AuthComponent implements OnInit {
 	ngOnInit(): void {
 		this.translationService.setLanguage(this.translationService.getSelectedLanguage());
 		this.headerLogo = this.layoutConfigService.getLogo();
+		this.translationService.loadTranslations({
+			lang: 'fr',
+			data: {
+				'HELLO': 'Salut {{value}}',
+				'AUTH.REGISTER.TITLE': 'Inscription',
+				'AUTH.GENERAL.FORGOT_BUTTON': 'Mot de passe oublié',
+				'AUTH.GENERAL.BACK_BUTTON': 'revenir',
+				'AUTH.GENERAL.SUBMIT_BUTTON': 'Soumettre',
 
+				'AUTH.LABEL.EMAIL': 'Tape ton email',
+				'AUTH.LABEL.FULLNAME': 'Tape ton nom et prénom',
+				'AUTH.LABEL.PASSWORD': 'Tape ton mot de passe',
+				'AUTH.LABEL.CONFIRM_PASSWORD': 'Confirme ton mot de passe',
+
+				'AUTH.INPUT.EMAIL': 'Email',
+				'AUTH.INPUT.PASSWORD': 'Mot de passe',
+				'AUTH.INPUT.CONFIRM_PASSWORD': 'Confirmer le mot de passe',
+
+				'AUTH.VALIDATION.CONFIRM_PASSWORD_NOT_MATCH': 'Le mot de passe ne correspond pas',
+				'AUTH.VALIDATION.REQUIRED_FIELD': 'Ce champ est obligatoire',
+				'AUTH.VALIDATION.MIN_LENGTH_FIELD': 'Trop long',
+				'AUTH.VALIDATION.MAX_LENGTH_FIELD': 'Trop court',
+
+			}
+		});
 		this.splashScreenService.hide();
 
 		// load default styles

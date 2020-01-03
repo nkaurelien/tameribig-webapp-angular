@@ -26,7 +26,15 @@ import { AuthEffects } from './_effects/auth.effects';
 import { AuthService } from './_services';
 import { AuthFirebaseService } from './_services';
 import { AuthGuard } from './_guards/auth.guard';
-import { ButtonsModule, CardsModule, WavesModule, IconsModule, CheckboxModule } from 'ng-uikit-pro-standard';
+import {
+	ButtonsModule,
+	CardsModule,
+	WavesModule,
+	IconsModule,
+	CheckboxModule,
+	InputsModule, PreloadersModule
+} from 'ng-uikit-pro-standard';
+import {RegisterCompleteComponent} from "./components/register-complete/register-complete.component";
 
 
 @NgModule({
@@ -40,12 +48,14 @@ import { ButtonsModule, CardsModule, WavesModule, IconsModule, CheckboxModule } 
 		// MatInputModule,
 		// MatFormFieldModule,
 		// MatCheckboxModule,
+		InputsModule,
 		ButtonsModule,
 		CardsModule,
 		CheckboxModule,
 		WavesModule,
 		IconsModule,
 		TranslateModule.forChild(),
+		PreloadersModule,
 		StoreModule.forFeature('auth', authReducer),
 		EffectsModule.forFeature([AuthEffects])
 	],
@@ -62,6 +72,7 @@ import { ButtonsModule, CardsModule, WavesModule, IconsModule, CheckboxModule } 
 		AuthComponent,
 		LoginComponent,
 		RegisterComponent,
+		RegisterCompleteComponent,
 		ForgotPasswordComponent,
 		AuthNoticeComponent
 	]

@@ -13,19 +13,19 @@ import { AppState } from '../../../reducers';
 import { AuthNoticeService } from '../../auth-notice/auth-notice.service';
 import { AuthService } from '../../_services';
 import { Subject } from 'rxjs';
-import { ConfirmPasswordValidator } from './confirm-password.validator';
 import { Register } from '../../_actions/auth.actions';
 import { User } from '../../_models/user.model';
 
 @Component({
 	selector: 'kt-register',
-	templateUrl: './register.component.html',
+	templateUrl: './register-complete.component.html',
 	encapsulation: ViewEncapsulation.None
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterCompleteComponent implements OnInit, OnDestroy {
 	registerForm: FormGroup;
 	loading = false;
 	errors: any = [];
+	username = '';
 
 	private unsubscribe: Subject<any>; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
@@ -78,30 +78,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	 */
 	initRegisterForm() {
 		this.registerForm = this.fb.group({
-
-			email: ['', Validators.compose([
+			fullname: ['', Validators.compose([
 				Validators.required,
-				Validators.email,
 				Validators.minLength(3),
-				// https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
-				Validators.maxLength(320)
+				Validators.maxLength(100)
+			])
+			],
+			username: ['', Validators.compose([
+				Validators.required,
+				Validators.minLength(3),
+				Validators.maxLength(100)
 			]),
-			],
-			password: ['', Validators.compose([
-				Validators.required,
-				Validators.minLength(3),
-				Validators.maxLength(100)
-			])
-			],
-			confirmPassword: ['', Validators.compose([
-				Validators.required,
-				Validators.minLength(3),
-				Validators.maxLength(100)
-			])
-			],
-			agree: [false, Validators.compose([Validators.required])]
-		}, {
-			validator: ConfirmPasswordValidator.MatchPassword
+			]
 		});
 	}
 
@@ -131,8 +119,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		const _user: User = new User();
 		_user.clear();
 		_user.email = controls['email'].value;
-		// _user.username = controls['username'].value;
-		// _user.fullname = controls['fullname'].value;
+		_user.username = controls['username'].value;
+		_user.fullname = controls['fullname'].value;
 		_user.password = controls['password'].value;
 		_user.roles = [];
 		this.auth.register(_user).pipe(
@@ -141,7 +129,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 					this.store.dispatch(new Register({authToken: user.accessToken}));
 					// pass notice message to the login page
 					this.authNoticeService.setNotice(this.translate.instant('AUTH.REGISTER.SUCCESS'), 'success');
-					this.router.navigateByUrl('/auth/register-complete', {queryParams: {authToken: user.accessToken}});
+					this.router.navigateByUrl('/auth/login');
 				} else {
 					this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
 				}
