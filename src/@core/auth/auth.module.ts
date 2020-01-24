@@ -23,7 +23,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 // Auth
 import { authReducer } from './_reducers/auth.reducers';
 import { AuthEffects } from './_effects/auth.effects';
-import { AuthService } from './_services';
+import { AuthService, AuthBackendService } from './_services';
 import { AuthFirebaseService } from './_services';
 import { AuthGuard } from './_guards/auth.guard';
 import {
@@ -84,6 +84,7 @@ export class AuthModule {
 			ngModule: AuthModule,
 			providers: [
 				AuthFirebaseService,
+				AuthBackendService,
 				AuthService,
 				AuthGuard
 			]

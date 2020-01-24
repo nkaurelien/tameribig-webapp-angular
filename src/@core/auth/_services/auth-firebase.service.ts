@@ -6,6 +6,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { tap, first } from 'rxjs/operators';
 import {fromPromise} from "rxjs/internal-compatibility";
+import { Observable } from 'rxjs';
+import { AuthBackendService } from './auth-backend.service';
 
 
 const API_USERS_URL = 'api/users';
@@ -18,24 +20,38 @@ export class AuthFirebaseService {
         private http: HttpClient,
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
+        public readonly authBackend: AuthBackendService,
         @Inject(LOCAL_STORAGE) private localStorage: any,
         @Inject(PLATFORM_ID) private platformId: any,
         ) {
     }
 
 
-    firePasswordLogin(email: string, password: string) {
+    firePasswordLogin(email: string, password: string): Observable<firebase.User> {
         return fromPromise(new Promise<any>((resolve, reject) => {
             // const provider = new firebase.auth.EmailAuthProvider();
             this.afAuth.auth
                 .signInWithEmailAndPassword(email, password)
-                .then(res => {
-                    resolve(res);
-                }, err => {
-                    reject(err);
+                .then( async (res) => {
+                    const user = <any>this.afAuth.auth.currentUser.toJSON();
+                    // const access_token = user.stsTokenManager.accessToken;
+                    const idToken = await this.afAuth.auth.currentUser.getIdToken(/* forceRefresh */  true);
+                    this.localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.localStorage.setItem('idToken', idToken);
+
+                    // console.log('this.afAuth.auth.currentUser', this.afAuth.auth.currentUser.toJSON());
+                    // console.log('this.afAuth.auth.currentUser.getIdTokenResult', await this.afAuth.auth.currentUser.getIdTokenResult());
+                    // console.log('this.afAuth.auth.currentUser.getIdTokenResult', await this.afAuth.auth.currentUser.getIdToken());
+                    // console.log('access_token', access_token);
+                    this.authBackend.backendLogin(user.email, idToken).subscribe(response => {
+
+                    });
+                    
+                    resolve(this.afAuth.auth.currentUser);
                 });
         }));
     }
+
 
     fireRegister(value) {
 

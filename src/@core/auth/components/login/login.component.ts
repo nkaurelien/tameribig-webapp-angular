@@ -136,7 +136,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             .firePasswordLogin(authData.email, authData.password)
 			.pipe(
 				tap(user => {
-                    console.log({user})
+
                     // if (user) {
                     // 	this.store.dispatch(new Login({authToken: user.accessToken}));
                     // 	this.router.navigateByUrl(this.returnUrl); // Main page
