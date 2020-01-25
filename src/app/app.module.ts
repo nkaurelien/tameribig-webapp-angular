@@ -22,12 +22,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from '@core/reducers';
 import { AuthService } from '@core/auth';
 import { HttpUtilsService } from '@core/_base/crud';
-import { AuthModule } from './auth2/auth.module';
+// import { AuthModule } from './auth2/auth.module';
+import { AuthModule } from '@core/auth';
 import { CoreModule } from '@core/core.module';
 import { ContactUsModalComponent } from './coorporate/contact-us/_modals/contact-us-modal.component';
 import { FaqModalComponent } from './coorporate/faq/modals/faq/faq-modal.component';
 import { ContactUsModule } from './coorporate/contact-us/contact-us.module';
 import { FaqModule } from './coorporate/faq/faq.module';
+import { SplashScreenService, DataTableService, KtDialogService, PageConfigService, MenuConfigService, LayoutRefService, LayoutConfigService } from 'src/@core/_base/layout';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -58,6 +61,7 @@ import { FaqModule } from './coorporate/faq/faq.module';
       maxOpened: 2,
     }),
     NgtUniversalModule,
+    TranslateModule.forRoot(),
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     // AngularFireDatabaseModule,
@@ -66,6 +70,13 @@ import { FaqModule } from './coorporate/faq/faq.module';
   ],
   providers: [MDBSpinningPreloader,
 
+    LayoutConfigService,
+    LayoutRefService,
+    MenuConfigService,
+    PageConfigService,
+    KtDialogService,
+    DataTableService,
+    SplashScreenService,
     // AuthenticationService,
     AuthService,
     HttpUtilsService,

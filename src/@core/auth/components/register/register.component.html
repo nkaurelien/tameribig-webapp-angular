@@ -1,0 +1,91 @@
+<!--begin::Body-->
+<div class="p-5">
+	<!--begin::Signin-->
+	<div>
+		<div class="display-4">
+			<h3>{{ 'AUTH.REGISTER.TITLE' | translate }}</h3>
+		</div>
+
+		<kt-auth-notice></kt-auth-notice>
+
+		<form [formGroup]="registerForm" autocomplete="off">
+
+			<div class="md-form">
+				<mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
+				<input autocomplete="off" formControlName="email" id="email" mdbInput mdbValidate
+					   name="email" type="text">
+				<label for="email">{{ 'AUTH.LABEL.EMAIL' | translate }}</label>
+				<mdb-error *ngIf="isControlHasError('email','required')">
+					<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+				</mdb-error>
+				<ndb-error *ngIf="isControlHasError('email','email')">
+					<strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
+				</ndb-error>
+				<mdb-error *ngIf="isControlHasError('email','minLength')">
+					<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+				</mdb-error>
+				<mdb-error *ngIf="isControlHasError('email','maxLength')">
+					<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
+				</mdb-error>
+			</div>
+
+			<div class="md-form">
+				<mdb-icon class="prefix" fas icon="key"></mdb-icon>
+				<label for="password">{{ 'AUTH.LABEL.PASSWORD' | translate }}</label>
+				<input autocomplete="off" formControlName="password" id="password" mdbInput mdbValidate
+					   type="password"/>
+				<mdb-error *ngIf="isControlHasError('password','required')">
+					<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+				</mdb-error>
+				<mdb-error *ngIf="isControlHasError('password','minLength')">
+					<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+				</mdb-error>
+				<mdb-error *ngIf="isControlHasError('password','maxLength')">
+					<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
+				</mdb-error>
+
+			</div>
+			<div class="md-form ">
+				<mdb-icon class="prefix" fas icon="key"></mdb-icon>
+				<label for="confirmPassword">{{ 'AUTH.LABEL.CONFIRM_PASSWORD' | translate }}</label>
+				<input autocomplete="off" formControlName="confirmPassword" id="confirmPassword" mdbInput mdbValidate
+					   type="password"/>
+				<mdb-error *ngIf="isControlHasError('confirmPassword','required')">
+					<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+				</mdb-error>
+				<mdb-error *ngIf="isControlHasError('confirmPassword','minLength')">
+					<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+				</mdb-error>
+				<mdb-error *ngIf="isControlHasError('confirmPassword','maxLength')">
+					<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
+				</mdb-error>
+				<mdb-error
+						*ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors.ConfirmPassword">
+					<strong>{{ 'AUTH.VALIDATION.CONFIRM_PASSWORD_NOT_MATCH' | translate }} </strong>
+				</mdb-error>
+
+			</div>
+			<div class="form-group">
+				<!-- Default unchecked -->
+				<mdb-checkbox [default]="false" formControlName="agree" name="agree">
+					I agree the <a href="javascript:;">terms & conditions</a>
+				</mdb-checkbox>
+			</div>
+
+			<!--begin::Action-->
+			<div class="kt-login__actions">
+				<a href="javascript:;" routerLink="/auth/forgot-password" class="kt-link kt-login__link-forgot">
+					{{ 'AUTH.GENERAL.FORGOT_BUTTON' | translate }}
+				</a><br><br>
+				<button routerLink="/auth/login" [disabled]="loading" id="kt_login_signup_cancel" class="btn btn-secondary btn-elevate kt-login__btn-secondary">{{ 'AUTH.GENERAL.BACK_BUTTON' | translate }}</button>
+				<button (click)="submit()"
+						[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}"
+						class="btn btn-primary btn-elevate kt-login__btn-primary" id="kt_login_signin_submit">
+					<mdb-spinner *ngIf="loading" class="mr-1" spinnerColor="blue" spinnerType="small"></mdb-spinner>
+					{{ 'AUTH.GENERAL.SUBMIT_BUTTON' | translate }}
+				</button>
+			</div>
+			<!--end::Action-->
+		</form>
+	</div>
+</div>

@@ -1,0 +1,110 @@
+<div class="flex-center- p-5 d-flex flex-column align-items-center">
+	<div class="m-stack__item m-stack__item--fluid">
+		<div class="m-login__wrapper">
+			<div class="m-login__logo">
+				<a [routerLink]="['/']">
+					<!-- <img src="./assets/app/media/img//logos/logo-2.png"> -->
+					<img alt="" class="img-fluid compteur" src="assets/images/compteur.png"
+						 style="transform: scale(0.75) translateX(20px); height: 196px;">
+				</a>
+			</div>
+			<div class="m-login__signin">
+				<div class="m-login__head">
+					<h3 class="m-login__title">
+						Sign In
+					</h3>
+					<kt-auth-notice></kt-auth-notice>
+
+					<form #f="ngForm" (ngSubmit)="f.form.valid && submit()" [formGroup]="loginForm" action=""
+						  autocomplete="off" class="m-login__form m-form mt-5">
+						<div class="md-form mt=3">
+							<mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
+							<input autocomplete="off" formControlName="email" id="email" mdbInput mdbValidate
+								   name="email"
+								   placeholder="Email" type="text">
+							<label for="email">Type your e-mail</label>
+							<mdb-error *ngIf="isControlHasError('email','required')">
+								<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+							</mdb-error>
+							<ndb-error *ngIf="isControlHasError('email','email')">
+								<strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
+							</ndb-error>
+							<mdb-error *ngIf="isControlHasError('email','minLength')">
+								<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+							</mdb-error>
+							<mdb-error *ngIf="isControlHasError('email','maxLength')">
+								<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
+							</mdb-error>
+						</div>
+						<div class="md-form mt-3">
+							<mdb-icon class="prefix" fas icon="key"></mdb-icon>
+							<input autocomplete="off" formControlName="password" id="password" mdbInput
+								   mdbValidate name="password" placeholder="Password" type="password">
+							<label for="password">Type your password</label>
+							<mdb-error *ngIf="isControlHasError('password','required')">
+								<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+							</mdb-error>
+						</div>
+						<div class="row m-login__form-sub">
+							<!-- <div class="col m--align-left">
+                                <label class="m-checkbox m-checkbox--focus">
+                                    <input type="checkbox" name="remember" #remember="ngModel">
+                                    Remember me
+                                    <span></span>
+                                </label>
+                            </div> -->
+							<div class="col text-right">
+								<a class="m-link" href="javascript:;" id="m_login_forget_password"
+								   routerLink="/auth/forgot-password">
+									<small>Forget Password ?</small>
+								</a>
+							</div>
+						</div>
+						<div class="m-login__form-action">
+							<button [disabled]="loading"
+									[ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
+									class="btn btn-primary" id="m_login_signin_submit">
+								<mdb-spinner *ngIf="loading" class="mr-1" spinnerColor="blue"
+											 spinnerType="small"></mdb-spinner>
+								<span>
+								Sign In
+							</span>
+							</button>
+						</div>
+					</form>
+
+					<!--begin::Options-->
+					<div class="my-3 mt-5 kt-login__options">
+						<a class="btn btn-primary kt-btn" href="https://www.facebook.com/keenthemes/" target="_blank">
+							<i class="fab fa-facebook-f"></i>
+							Facebook
+						</a>
+
+						<a class="btn btn-info kt-btn" href="https://twitter.com/keenthemes/" target="_blank">
+							<i class="fab fa-twitter"></i>
+							Twitter
+						</a>
+
+						<a class="btn btn-danger kt-btn" href="javascript:;">
+							<i class="fab fa-google"></i>
+							Google
+						</a>
+					</div>
+					<!--end::Options-->
+				</div>
+			</div>
+		</div>
+		<div class="m--margin-top-40 m-alert m-alert--outline m-alert--outline-2x alert alert-success fade show"
+			 role="alert">
+			You don't have an
+			<span style="font-weight: 500;">
+											Account
+										</span>
+			yet? <br>
+			please continue to.
+			<a [routerLink]="['../register']" href="javascript:;" id="m_login_signup1">
+				Sign Up
+			</a>
+		</div>
+	</div>
+</div>

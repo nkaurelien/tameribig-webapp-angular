@@ -6,21 +6,27 @@ import {Permission} from '../_models/permission.model';
 import {Role} from '../_models/role.model';
 import {catchError, map} from 'rxjs/operators';
 import {QueryParamsModel, QueryResultsModel} from '../../_base/crud';
-import {environment} from "../../../environments/environment";
+import {environment} from '@environments/environment';
+import { AuthFirebaseService } from './auth-firebase.service';
+import {
+    API_USERS_URL,
+    API_PERMISSION_URL,
+    API_ROLES_URL,
+    API_REGISTER_URL,
+    API_LOGIN_URL,
+    API_REGISTER_FIREBASE_URL, API_LOGIN_FIREBASE_URL
+} from './auth.routes';
 
 
-const API_USERS_URL = 'api/users';
-const API_PERMISSION_URL = 'api/permissions';
-const API_ROLES_URL = 'api/roles';
 
 @Injectable()
 export class AuthService {
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private fireAuth: AuthFirebaseService) {
     }
 
     // Authentication/Authorization
     login(email: string, password: string): Observable<User> {
-        return this.http.post<User>(API_USERS_URL, {email, password});
+        return this.http.post<User>(API_LOGIN_FIREBASE_URL, {email, password});
     }
 
     getUserByToken(): Observable<User> {
@@ -33,7 +39,7 @@ export class AuthService {
     register(user: User): Observable<any> {
         const httpHeaders = new HttpHeaders();
         httpHeaders.set('Content-Type', 'application/json');
-        return this.http.post<User>(API_USERS_URL, user, {headers: httpHeaders})
+        return this.http.post<User>(API_REGISTER_FIREBASE_URL, user, {headers: httpHeaders})
             .pipe(
                 map((res: User) => {
                     return res;
@@ -65,6 +71,11 @@ export class AuthService {
         return this.http.get<User>(API_USERS_URL + `/${userId}`);
     }
 
+    getUserByUsername(uname: string): Observable<User> {
+        return this.http.get<any>(API_USERS_URL + `/${uname}`).pipe(
+            map((response) => response.data || response)
+        );
+    }
 
     // DELETE => delete the user from the server
     deleteUser(userId: number) {

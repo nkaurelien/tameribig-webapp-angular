@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subject, Subscription} from 'rxjs';
-import {UserService} from '@app/auth2/_services';
-import {User} from '@core/auth';
+import {AuthService, User} from '@core/auth';
 
 
 @Component({
@@ -19,7 +18,7 @@ export class UserNetworkActivitiesComponent implements OnInit, OnDestroy {
 
   constructor(
       private route: ActivatedRoute,
-      private userService: UserService,
+      private authService: AuthService,
 
   ) {
       this.user = new User({});
@@ -32,8 +31,7 @@ export class UserNetworkActivitiesComponent implements OnInit, OnDestroy {
       ).subscribe(params => {
           this.username = params.get('userid');
 
-          console.log('uname', this.username);
-          this.userService.getByUsername(this.username).subscribe(resp => {
+          this.authService.getUserByUsername(this.username).subscribe(resp => {
               console.log(resp);
               this.user = new User(resp);
 

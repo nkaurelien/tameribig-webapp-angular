@@ -5,7 +5,8 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 const routes: Routes = [
     {
         path: 'auth',
-        loadChildren: () => import('@modules/auth2/auth.module').then(m => m.AuthModule),
+        // loadChildren: () => import('@modules/auth2/auth.module').then(m => m.AuthModule),
+        loadChildren: () => import('@core/auth').then(m => m.AuthModule),
     },
     {
         path: 'network',
