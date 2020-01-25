@@ -1,4 +1,4 @@
-// NGRX
+    // NGRX
 import { createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 // Actions
@@ -13,7 +13,7 @@ export interface UsersState extends EntityState<User> {
     listLoading: boolean;
     actionsloading: boolean;
     totalCount: number;
-    lastCreatedUserId: number;
+    lastCreatedUserId: string;
     lastQuery: QueryParamsModel;
     showInitWaitingMessage: boolean;
 }
