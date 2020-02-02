@@ -1,8 +1,8 @@
-<div class="w-100 special-color-dark pt-3">
+<div #gridContainerRef class="w-100- container special-color-dark- pt-3">
 
     <div class="d-flex justify-content-between">
         <h1 class="text-center">Search</h1>
-        <div class="btn-group">
+        <div *ngIf="isMobile"  class="btn-group">
             <button (click)="displayMode = 'mansory-grid'" class="btn btn-sm btn-primary">Grille</button>
             <button (click)="displayMode = 'list'"  class="btn btn-sm btn-primary">Liste</button>
         </div>
@@ -38,21 +38,12 @@
 
         <!-- Affichage en grille de brique -->
         <ng-masonry-grid *ngIf="displayMode === 'mansory-grid'" 
-            [masonryOptions]="{
-                transitionDuration: '0.8s',
-                gutter: 10,
-                columnWidth: 600,
-                fitWidth: true
-            }"
+            [masonryOptions]="masonryOptions"
             [useAnimation]="true" 
             [useImagesLoaded]="true" 
-            [scrollAnimationOptions]="{
-                animationEffect: 'effect-2',
-                minDuration: 0.4,
-                maxDuration: 0.7
-            }">
+            [scrollAnimationOptions]="scrollAnimationOptions">
             <ng-masonry-grid-item id="{{ 'masonry-item-' + i }}" *ngFor="let picture of masonryImages; let i = index"
-                class="masonry-item" style="width: 580px;">
+                class="masonry-item" [style.width.px]="imageWidth">
                 <img [src]="picture.picture">
 
             </ng-masonry-grid-item>

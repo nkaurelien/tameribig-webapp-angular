@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject, ViewChild, ElementRef  } from '@angular/core';
 import { dummyPicturesMocks } from '@data/dummy-pictures';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import { NgForm } from '@angular/forms';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { WINDOW } from '@ng-toolkit/universal';
 
 @Component({
   selector: 'app-videos-explorer',
@@ -14,7 +16,12 @@ import { NgForm } from '@angular/forms';
   // encapsulation: ViewEncapsulation.None
 })
 export class VideosExplorerComponent implements OnInit {
-  constructor() {}
+  isMobile: boolean;
+  isTablet: boolean;
+  deviceInfo: any;
+  isDesktopDevice: boolean;
+  isSmallDesktopDevice: boolean;
+
   displayMode = 'mansory-grid';
   form: any = <any>{};
   dummyPictures = dummyPicturesMocks;
@@ -23,10 +30,46 @@ export class VideosExplorerComponent implements OnInit {
   masonryImages;
   limit = 15;
   masonryOptions:  NgxMasonryOptions = {
-    transitionDuration: '0.8s'
-  };
+    transitionDuration: '0.8s',
+    gutter: 10,
+    columnWidth: 350,
+    fitWidth: true
+};
+scrollAnimationOptions: {
+  animationEffect: 'effect-2',
+  minDuration: 0.4,
+  maxDuration: 0.7
+};
+imageWidth: 540;
+
+  SM_SCREEN_BREAKPOINT = 365;
+  MD_SCREEN_BREAKPOINT = 768;
+
+  @ViewChild('gridContainerRef', {static: true})
+  gridContainerRef: ElementRef;
+
+  constructor(
+    private deviceService: DeviceDetectorService,
+    
+    @Inject(WINDOW)
+    private window: Window
+  ) {
+    this.isSmallDesktopDevice = false;
+
+  }
+  
   ngOnInit() {
-    this.showImages();
+
+    if (this.window.innerWidth <= this.SM_SCREEN_BREAKPOINT) {
+      this.isSmallDesktopDevice = true;
+    }
+
+     this.isMobile = this.deviceService.isMobile();
+     this.isTablet = this.deviceService.isTablet();
+     this.isDesktopDevice = this.deviceService.isDesktop();
+
+     this.deviceInfo = this.deviceService.getDeviceInfo();
+     console.log(this.deviceInfo);
   }
 
   

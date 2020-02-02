@@ -31,6 +31,7 @@ import { ContactUsModule } from './coorporate/contact-us/contact-us.module';
 import { FaqModule } from './coorporate/faq/faq.module';
 import { SplashScreenService, DataTableService, KtDialogService, PageConfigService, MenuConfigService, LayoutRefService, LayoutConfigService } from 'src/@core/_base/layout';
 import { TranslateModule } from '@ngx-translate/core';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { TranslateModule } from '@ngx-translate/core';
     }),
     NgtUniversalModule,
     TranslateModule.forRoot(),
+    DeviceDetectorModule.forRoot(),
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     // AngularFireDatabaseModule,
