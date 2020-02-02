@@ -1,19 +1,33 @@
 
-<div class="col-12 special-color-dark mt-5">
-        <div class="masonry">
+<div
+  class="search-results"
+  infiniteScroll
+  [infiniteScrollDistance]="10"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="getImages()"
+>
+  <ng-masonry-grid
+    [masonryOptions]="{
+      transitionDuration: '0.8s',
+      gutter: 5,
+      columnWidth: 300,
+      fitWidth: true
+    }"
+    [useAnimation]="true"
+    [useImagesLoaded]="true"
+    [scrollAnimationOptions]="{
+      animationEffect: 'effect-4',
+      minDuration: 0.4,
+      maxDuration: 0.7
+    }"
+  >
+    <ng-masonry-grid-item
+      id="{{ 'masonry-item-' + i }}"
+      *ngFor="let picture of masonryImages"
+      class="masonry-item"
+    >
+      <img  (click)="showImage(picture)" [src]="getImageUrl(picture)">
 
-            <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
-                <ngxMasonryItem  *ngFor="let picture of masonryImages" class="masonry-item">
-                    <!--<img [defaultImage]="defaultImage" [lazyLoad]="picture.picture" [offset]="offset">-->
-<!--                    <img  (click)="showImage(picture)" src="{{picture.picture}}">-->
-                    <img  (click)="showImage(picture)" src="{{getImageUrl(picture)}}">
-
-                </ngxMasonryItem >
-            </ngx-masonry>
-
-            <button *ngIf="limit < 100" (click)="showMoreImages()">Show More Images</button>
-            <h2 *ngIf="limit >= 100">No More Images</h2>
-
-        </div>
-
-    </div>
+    </ng-masonry-grid-item>
+  </ng-masonry-grid>
+</div>
