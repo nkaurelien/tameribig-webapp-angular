@@ -39,6 +39,7 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ContactUsModule,
@@ -54,7 +55,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ErrorModule,
     
     FormsModule,
-    HttpClientModule,
     ModalModule.forRoot(),
     ToastModule.forRoot({
       positionClass: 'md-toast-bottom-center',
@@ -78,7 +78,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DataTableService,
     SplashScreenService,
     // AuthenticationService,
-    AuthService,
+    // AuthService,
     HttpUtilsService,
     MDBModalService,
   ],

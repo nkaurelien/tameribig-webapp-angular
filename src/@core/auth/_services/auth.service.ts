@@ -16,24 +16,16 @@ import {
     API_LOGIN_URL,
     API_REGISTER_FIREBASE_URL, API_LOGIN_FIREBASE_URL
 } from './auth.routes';
+import {AuthBackendService} from "@core/auth/_services/auth-backend.service";
 
 
 
 @Injectable()
 export class AuthService {
-    constructor(private http: HttpClient, private fireAuth: AuthFirebaseService) {
-    }
-
-    // Authentication/Authorization
-    login(email: string, password: string): Observable<User> {
-        return this.http.post<User>(API_LOGIN_FIREBASE_URL, {email, password});
-    }
-
-    getUserByToken(): Observable<User> {
-        const userToken = localStorage.getItem(environment.authTokenKey);
-        const httpHeaders = new HttpHeaders();
-        httpHeaders.append('Authorization', 'Bearer ' + userToken);
-        return this.http.get<User>(API_USERS_URL, {headers: httpHeaders});
+    constructor(private http: HttpClient,
+                public fireAuth: AuthFirebaseService,
+                public apiAuth: AuthBackendService,
+    ) {
     }
 
     register(user: User): Observable<any> {

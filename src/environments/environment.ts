@@ -13,7 +13,7 @@ export const environment = {
 
     // ApiBaseUrl: 'http://localhost:5001/tameri-big/us-central1/api',
     ApiBaseUrl: 'http://localhost:3000',
-    authTokenKey: 'auth',
+    authTokenKey: 'token',
     firebaseConfig,
     isMockEnabled: false,
     production: false,

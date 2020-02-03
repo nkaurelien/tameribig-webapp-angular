@@ -1,7 +1,7 @@
 // import login css
 // @import "../../../assets/metronic/css/demo1/pages/general/login/login-1.css";
 
-kt-auth, .kt-login {
+kt-auth, app-login {
 	height: 100%;
 
 	.mat-form-field {
@@ -17,4 +17,9 @@ kt-auth, .kt-login {
 .kt-login__logo {
 	position: relative;
 	top: 1rem;
+}
+
+.home-btn {
+  position: absolute;
+  padding: 1em 2em;
 }

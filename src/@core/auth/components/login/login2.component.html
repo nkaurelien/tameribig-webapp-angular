@@ -1,28 +1,23 @@
 <div class="flex-center- p-5 d-flex flex-column align-items-center">
-	<div class="m-stack__item m-stack__item--fluid">
-		<div class="m-login__wrapper">
-			<div class="m-login__logo">
-				<a [routerLink]="['/']">
-					<!-- <img src="./assets/app/media/img//logos/logo-2.png"> -->
-					<img alt="" class="img-fluid compteur" src="assets/images/compteur.png"
-						 style="transform: scale(0.75) translateX(20px); height: 196px;">
-				</a>
+	<div class="relative">
+
+		<div class="login__wrapper">
+			<div class="flex-center">
+				<img class="noselect img-fluid compteur" src="assets/images/compteur.png"
+					 style="transform: scale(0.75) translateX(-10px); height: 196px;">
 			</div>
 			<div class="m-login__signin">
 				<div class="m-login__head">
-					<h3 class="m-login__title">
-						Sign In
-					</h3>
 					<kt-auth-notice></kt-auth-notice>
 
 					<form #f="ngForm" (ngSubmit)="f.form.valid && submit()" [formGroup]="loginForm" action=""
 						  autocomplete="off" class="m-login__form m-form mt-5">
-						<div class="md-form mt=3">
+						<div class="md-form mt-3">
 							<mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
 							<input autocomplete="off" formControlName="email" id="email" mdbInput mdbValidate
 								   name="email"
 								   placeholder="Email" type="text">
-							<label for="email">Type your e-mail</label>
+							<label for="email">E-mail</label>
 							<mdb-error *ngIf="isControlHasError('email','required')">
 								<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
 							</mdb-error>
@@ -36,11 +31,11 @@
 								<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
 							</mdb-error>
 						</div>
-						<div class="md-form mt-3">
+						<div class="md-form mt-5">
 							<mdb-icon class="prefix" fas icon="key"></mdb-icon>
 							<input autocomplete="off" formControlName="password" id="password" mdbInput
 								   mdbValidate name="password" placeholder="Password" type="password">
-							<label for="password">Type your password</label>
+							<label for="password">Mot de passe</label>
 							<mdb-error *ngIf="isControlHasError('password','required')">
 								<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
 							</mdb-error>
@@ -53,57 +48,51 @@
                                     <span></span>
                                 </label>
                             </div> -->
-							<div class="col text-right">
+							<div class="col text-center">
 								<a class="m-link" href="javascript:;" id="m_login_forget_password"
 								   routerLink="/auth/forgot-password">
-									<small>Forget Password ?</small>
+									<small>Mot de passe oublié</small>
 								</a>
 							</div>
 						</div>
-						<div class="m-login__form-action">
-							<button [disabled]="loading"
-									[ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
-									class="btn btn-primary" id="m_login_signin_submit">
-								<mdb-spinner *ngIf="loading" class="mr-1" spinnerColor="blue"
-											 spinnerType="small"></mdb-spinner>
-								<span>
-								Sign In
-							</span>
+						<div class="flex-center mt-3">
+							<button [disabled]="loading" [ngClass]="{'disabled': loading}" color="primary"
+									mdbBtn
+									rounded="true">
+								<span *ngIf="loading" aria-hidden="true" class="spinner-grow spinner-grow-sm text-light"
+									  role="status"></span>
+								<!--								<mdb-spinner *ngIf="loading"  class="mr-1" spinnerColor="blue" spinnerType="small" ></mdb-spinner>-->
+								<span> Connexion </span>
 							</button>
 						</div>
 					</form>
 
 					<!--begin::Options-->
 					<div class="my-3 mt-5 kt-login__options">
-						<a class="btn btn-primary kt-btn" href="https://www.facebook.com/keenthemes/" target="_blank">
+						<a color="fb" href="https://www.facebook.com/keenthemes/" mdbBtn rounded="true" target="_blank">
 							<i class="fab fa-facebook-f"></i>
-							Facebook
+							<span class="sr-only">Facebook</span>
 						</a>
 
-						<a class="btn btn-info kt-btn" href="https://twitter.com/keenthemes/" target="_blank">
+						<a color="tw" href="https://twitter.com/keenthemes/" mdbBtn rounded="true" target="_blank">
 							<i class="fab fa-twitter"></i>
-							Twitter
+							<span class="sr-only">Twitter</span>
 						</a>
 
-						<a class="btn btn-danger kt-btn" href="javascript:;">
+						<a color="gplus" href="javascript:;" mdbBtn rounded="true">
 							<i class="fab fa-google"></i>
-							Google
+							<span class="sr-only">Google</span>
 						</a>
 					</div>
 					<!--end::Options-->
 				</div>
 			</div>
 		</div>
-		<div class="m--margin-top-40 m-alert m-alert--outline m-alert--outline-2x alert alert-success fade show"
+		<div class="fade show text-center h5 mt-5"
 			 role="alert">
-			You don't have an
-			<span style="font-weight: 500;">
-											Account
-										</span>
-			yet? <br>
-			please continue to.
-			<a [routerLink]="['../register']" href="javascript:;" id="m_login_signup1">
-				Sign Up
+			vous n'avez un compte? <br>
+			<a [routerLink]="['../register']" class="h4" href="javascript:;">
+				Créer un compte
 			</a>
 		</div>
 	</div>

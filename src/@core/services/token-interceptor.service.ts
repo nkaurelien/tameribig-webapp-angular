@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -8,20 +8,28 @@ import {
 import { Observable } from 'rxjs';
 import {tap} from 'rxjs/operators';
 import { AuthenticationService } from '@app/auth2/_services';
+import {LOCAL_STORAGE} from "@ng-toolkit/universal";
+import {AuthFirebaseService} from "@core/auth/_services";
+import {environment} from "@environments/environment";
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(public auth: AuthenticationService) {}
+  constructor(
+      private auth: AuthFirebaseService,
+      @Inject(LOCAL_STORAGE) private localStorage: any
+  ) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    const token = this.localStorage.getItem(environment.authTokenKey);
     request = request.clone({
       setHeaders: {
         // 'Content-Type': 'application/json', // Uncomment this will lock file upload by overwriting necessary Content-Type: multipart/form-data;
         Accept: 'application/json',
         // 'X-CSRF-TOKEN': ''
-        Authorization: `Bearer ${this.auth.token }`
+        Authorization: `Bearer ${token}`,
       }
     });
     // console.log(request);
@@ -36,7 +44,7 @@ export class TokenInterceptorService implements HttpInterceptor {
           // redirect to the login route
           // or show a modal
           // console.log(err.status);
-          this.auth.signOut();
+          this.auth.fireLogout();
         }
       }
     }));
