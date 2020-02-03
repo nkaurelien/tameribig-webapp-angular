@@ -23,7 +23,8 @@ import {
     ImagePresenterUrl
 } from './routes';
 import { ImagesService } from '../@core/services/images.service';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgMasonryGridModule } from 'ng-masonry-grid';
 
 const routes: Routes = [
     {
@@ -78,7 +79,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SlideshowModule,
         LazyLoadImageModule,
-        NgxMasonryModule,
+        // NgxMasonryModule,
+        NgMasonryGridModule,
+        InfiniteScrollModule,
         // NgbModule,
 
     ],

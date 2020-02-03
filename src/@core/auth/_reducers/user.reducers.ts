@@ -1,4 +1,4 @@
-// NGRX
+    // NGRX
 import { createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 // Actions
