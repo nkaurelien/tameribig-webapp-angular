@@ -1,34 +1,32 @@
-<div class="w-100 special-color-dark pt-3">
-
-    <div class="d-flex justify-content-between">
-        <h1 class="text-center">Search</h1>
-        <div class="btn-group">
+<div class="container ">
+    <div class="d-flex justify-content-between pt-3 box-search">
+        <!--<div class="btn-group">
             <button (click)="displayMode = 'mansory-grid'" class="btn btn-sm btn-primary">Grille</button>
             <button (click)="displayMode = 'list'"  class="btn btn-sm btn-primary">Liste</button>
-        </div>
+        </div>-->
 
-        <form (ngSubmit)="search(searchForm)" #searchForm="ngForm">
-            <div class="form-group">
-                <label>Keyword</label>
-                <input
-                type="text"
-                class="form-control"
-                placeholder="Keyword"
-                #keyword="ngModel"
-                name="keyword"
-                [(ngModel)]="form.keyword"
-                required-
-                />
-                <div *ngIf="keyword?.invalid && (keyword.dirty || keyword.touched)">
-                    <div *ngIf="keyword.errors.required">
+        <form (ngSubmit)="search(searchForm)" #searchForm="ngForm"
+        [formGroup]="filterForm" 
+         class="w-100 form-inline md-form form-sm">
+
+            <input
+            type="text"
+            aria-label="Search"
+            class="form-control form-control-sm input-search w-75"
+            placeholder="Keyword"
+            name="keyword"
+            formControlName="keyword"
+            required-
+            />
+            <mdb-icon fas icon="search" class="icon-search" aria-hidden="true"></mdb-icon>
+            <div *ngIf="keyword?.invalid && (keyword.dirty || keyword.touched)">
+                <div *ngIf="keyword.errors.required">
                         Keyword is required.
                     </div>
                     <div *ngIf="keyword.invalid">
                         Keyword is invalid.
                     </div>
                 </div>
-            </div>
-            <button class="btn btn-primary">Search</button>
         </form>
     </div>
 
@@ -41,7 +39,7 @@
             [masonryOptions]="{
                 transitionDuration: '0.8s',
                 gutter: 10,
-                columnWidth: 600,
+                columnWidth: 360,
                 fitWidth: true
             }"
             [useAnimation]="true" 
@@ -52,7 +50,7 @@
                 maxDuration: 0.7
             }">
             <ng-masonry-grid-item id="{{ 'masonry-item-' + i }}" *ngFor="let picture of masonryImages; let i = index"
-                class="masonry-item" style="width: 580px;">
+                class="masonry-item" style="width: 350px;">
                 <img [src]="picture.picture">
 
             </ng-masonry-grid-item>

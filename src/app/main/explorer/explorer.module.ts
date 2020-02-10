@@ -1,6 +1,8 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
+import { IconsModule } from 'ng-uikit-pro-standard'
+import { WavesModule, InputsModule, ButtonsModule } from 'ng-uikit-pro-standard'
 import {ExplorerComponent} from './explorer.component';
 import {VideosExplorerComponent} from './videosexplorer/videosexplorer.component';
 
@@ -82,6 +84,10 @@ const routes: Routes = [
         // NgxMasonryModule,
         NgMasonryGridModule,
         InfiniteScrollModule,
+            IconsModule,
+        WavesModule, 
+        InputsModule, 
+        ButtonsModule,
         // NgbModule,
 
     ],
