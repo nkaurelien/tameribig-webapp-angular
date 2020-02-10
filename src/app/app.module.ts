@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 
-import { MDBSpinningPreloader, ToastModule, MDBModalService, ModalModule } from 'ng-uikit-pro-standard';
+import { MDBSpinningPreloader, ToastModule, MDBModalService, ModalModule, IconsModule } from 'ng-uikit-pro-standard';
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -35,7 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,9 +51,10 @@ import { TranslateModule } from '@ngx-translate/core';
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
 
-    ErrorModule,
+      ErrorModule,
     
     FormsModule,
+    IconsModule,
     HttpClientModule,
     ModalModule.forRoot(),
     ToastModule.forRoot({

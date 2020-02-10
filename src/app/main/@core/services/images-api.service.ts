@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {environment} from '@environments/environment';
 import {AuthenticationService} from '@app/auth2/_services';
 import {IApiResource} from '@core/_base/crud/models/IApiResource';
+import { Router } from '@angular/router';
 
 
 export interface Author {
@@ -60,6 +61,7 @@ export class ImagesApiService {
     constructor(
         private http: HttpClient,
         private auth: AuthenticationService,
+        private router: Router,
     ) {
 
     }
@@ -80,6 +82,20 @@ export class ImagesApiService {
         );
     }
 
+    voteUpById(ID: string): Observable<Image | any> {
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-up').pipe(
+            map(resp => (resp.data || resp) as Image)
+        );
+    }
+
+    
+    voteDownById(ID: string): Observable<Image | any> {
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-down').pipe(
+            map(resp => (resp.data || resp) as Image)
+        );
+    }
+
+
     updateOneById(ID: string, body: Partial<Image>): Observable<Image | any> {
         return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID, body).pipe(
             take(1),
@@ -92,5 +108,11 @@ export class ImagesApiService {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/me').pipe(
             take(1),
             map(resp => (resp.data || resp) as Image));
+    }
+
+    navigateToImage(param: string) {
+
+        this.router.navigate(['/explorer/images/', param]);
+
     }
 }

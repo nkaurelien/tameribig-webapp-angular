@@ -11,7 +11,9 @@ import {
     CarouselModule,
     IconsModule,
     PreloadersModule,
-    WavesModule
+    BadgeModule,
+    WavesModule,
+    TabsModule
 } from 'ng-uikit-pro-standard';
 import {FooterComponent} from './network-layout/footer/footer.component';
 import {NavigationModule} from './network-layout/navigation/navigation.module';
@@ -31,10 +33,11 @@ import {LazyLoadImageModule} from 'ng-lazyload-image';
         IconsModule,
         WavesModule,
         PreloadersModule,
-
+        TabsModule, 
         // InputsModule,
         ButtonsModule,
         LazyLoadImageModule,
+        BadgeModule,
     ]
 })
 export class NetworkModule { }

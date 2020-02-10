@@ -46,6 +46,13 @@
 
 :host ::ng-deep {
 
+  .avatar {
+    height: 3.5em !important;
+    width: 3.5em !important;
+    min-width: inherit !important;
+    min-height: inherit !important;
+  }
+
   app-images-explorer,
   app-videos-explorer,
   app-creas-explorer,

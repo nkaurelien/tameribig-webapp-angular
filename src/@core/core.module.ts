@@ -22,7 +22,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ScriptLoaderService } from './services/script-loader.service';
 import { SeoService } from './services/seo.service';
 
-
 @NgModule({
     imports: [CommonModule],
     declarations: [

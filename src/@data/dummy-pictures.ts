@@ -15,8 +15,8 @@ export const generateDummyPicturesMocks = function ( size: number) {
 
             {
                 uid: faker.random.uuid(),
-                picture: faker.image.imageUrl(1200),
-                miniature: faker.image.imageUrl(420),
+                picture: faker.image.imageUrl(500),
+                miniature: faker.image.imageUrl(320),
                 description:  faker.lorem.paragraph(3),
                 price,
                 priceHuman,

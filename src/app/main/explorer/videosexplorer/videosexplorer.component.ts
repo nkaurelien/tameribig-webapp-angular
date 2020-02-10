@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { dummyPicturesMocks } from '@data/dummy-pictures';
+import { ImagesApiService } from '../../@core/services/images-api.service';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
-import { tap, distinctUntilChanged, debounceTime } from 'rxjs/operators'
+import { tap, distinctUntilChanged, debounceTime, takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs';
+import { generateDummyPicturesMocks } from 'src/@data/dummy-pictures';
 
 @Component({
   selector: 'app-videos-explorer',
@@ -14,10 +17,9 @@ import { tap, distinctUntilChanged, debounceTime } from 'rxjs/operators'
   
   // encapsulation: ViewEncapsulation.None
 })
-export class VideosExplorerComponent implements OnInit {
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {}
+export class VideosExplorerComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject();
 
   filterForm: FormGroup;
   displayMode = 'mansory-grid';
@@ -29,6 +31,14 @@ export class VideosExplorerComponent implements OnInit {
   masonryOptions:  NgxMasonryOptions = {
     transitionDuration: '0.8s'
   };
+
+  constructor(
+    private imagesService: ImagesApiService,
+    private formBuilder: FormBuilder,
+  ) {
+    this.dummyPictures = generateDummyPicturesMocks(60);
+  }
+
   ngOnInit() {
 
     this.filterForm = this.formBuilder.group({
@@ -37,7 +47,8 @@ export class VideosExplorerComponent implements OnInit {
     this.filterForm.get('keyword').valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      tap( val => this.search(this.filterForm))
+      tap( val => this.search(this.filterForm)),
+      takeUntil(this.unsubscribe)
     ).subscribe(val => { 
       // console.log( `searching keyword is ${val}.`);
     });
@@ -45,7 +56,14 @@ export class VideosExplorerComponent implements OnInit {
     this.showImages();
   }
 
-  
+  ngOnDestroy() {
+    
+    this.unsubscribe.next(true);
+    // this.unsubscribe.unsubscribe();
+    this.unsubscribe.complete();
+  }
+
+
   showImages() {
     this.masonryImages = this.dummyPictures.slice(0, this.limit);
   }
@@ -88,4 +106,20 @@ export class VideosExplorerComponent implements OnInit {
     //     this.images = this.images.concat(res.hits);
     //   })
   }
+
+  liked(id, event?: boolean) {
+
+    if (event === true) {
+      this.imagesService.voteUpById(id || '5e2abcb28ddd5425987c02d3')
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe();   
+    }
+    
+  }
+  
+  navigateToImage(id) {
+      this.imagesService.navigateToImage(id || '5e2abcb28ddd5425987c02d3')
+    
+  }
+  
 }

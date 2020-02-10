@@ -13,3 +13,12 @@
     width: 90% !important;
 }
 
+app-animated-like {
+
+    position: absolute;
+
+    top: 5px;
+
+    right: 5px;
+
+}

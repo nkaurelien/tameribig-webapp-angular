@@ -27,6 +27,7 @@ import {
 import { ImagesService } from '../@core/services/images.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgMasonryGridModule } from 'ng-masonry-grid';
+import { AnimatedLikeModule } from 'src/@core/components/animated-like/animated-like.module';
 
 const routes: Routes = [
     {
@@ -88,6 +89,7 @@ const routes: Routes = [
         WavesModule, 
         InputsModule, 
         ButtonsModule,
+        AnimatedLikeModule,
         // NgbModule,
 
     ],
