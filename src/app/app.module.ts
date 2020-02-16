@@ -39,6 +39,7 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ContactUsModule,
@@ -79,7 +80,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DataTableService,
     SplashScreenService,
     // AuthenticationService,
-    AuthService,
+    // AuthService,
     HttpUtilsService,
     MDBModalService,
   ],

@@ -52,11 +52,14 @@
 			</div>
 			<!--begin::Action-->
 			<div class="kt-login__actions">
+
+                <button (click)="submit()"
+                        [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}"
+                        class="btn btn-primary btn-elevate kt-login__btn-primary"
+                        id="kt_login_signin_submit">{{ 'AUTH.LOGIN.BUTTON' | translate }}</button>
 				<a href="javascript:;" routerLink="/auth/forgot-password" class="kt-link kt-login__link-forgot">
 					{{ 'AUTH.GENERAL.FORGOT_BUTTON' | translate }}
-				</a>
-				<button (click)="submit()" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" id="kt_login_signin_submit" class="btn btn-primary btn-elevate kt-login__btn-primary">{{ 'AUTH.LOGIN.BUTTON' | translate }}</button>
-			</div>
+                </a></div>
 			<!--end::Action-->
 		</form>
 		<!--end::Form-->

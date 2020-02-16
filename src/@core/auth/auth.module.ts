@@ -3,7 +3,7 @@ import { ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 // Material
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 // Translate
@@ -35,6 +35,7 @@ import {
 	InputsModule, PreloadersModule
 } from 'ng-uikit-pro-standard';
 import {RegisterCompleteComponent} from "./components/register-complete/register-complete.component";
+import {LoginFormComponent} from './components/login/login-form/login-form.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {RegisterCompleteComponent} from "./components/register-complete/register
 	imports: [
 		CommonModule,
 		AuthRoutingModule,
+        HttpClientModule,
 		FormsModule,
 		ReactiveFormsModule,
 		// MatButtonModule,
@@ -60,12 +62,12 @@ import {RegisterCompleteComponent} from "./components/register-complete/register
 		EffectsModule.forFeature([AuthEffects])
 	],
 	providers: [
-		InterceptService,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: InterceptService,
-			multi: true
-		},
+        // InterceptService,
+        // {
+        // 	provide: HTTP_INTERCEPTORS,
+        // 	useClass: InterceptService,
+        // 	multi: true
+        // },
 	],
 	exports: [AuthComponent],
 	declarations: [
@@ -74,7 +76,8 @@ import {RegisterCompleteComponent} from "./components/register-complete/register
 		RegisterComponent,
 		RegisterCompleteComponent,
 		ForgotPasswordComponent,
-		AuthNoticeComponent
+        AuthNoticeComponent,
+        LoginFormComponent
 	]
 })
 

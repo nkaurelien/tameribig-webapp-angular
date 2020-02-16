@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
             setHeaders: {
                 // 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Authorization: `Bearer ${this.auth.token }`
+                Authorization: `Bearer fake ${this.auth.token}`
             }
         });
         // console.log(request);

@@ -1,5 +1,11 @@
-
-import {MDBBootstrapModulesPro, SidenavModule} from 'ng-uikit-pro-standard';
+import {
+    MDBBootstrapModulesPro,
+    SidenavModule,
+    NavbarModule,
+    ButtonsModule,
+    WavesModule,
+    IconsModule
+} from 'ng-uikit-pro-standard';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -12,7 +18,11 @@ import { NavigationComponent } from './navigation.component';
         RouterModule,
         FormsModule,
         SidenavModule,
-        MDBBootstrapModulesPro.forRoot()
+        ButtonsModule,
+        NavbarModule,
+        WavesModule,
+        IconsModule,
+        //MDBBootstrapModulesPro.forRoot()
     ],
     declarations: [
         NavigationComponent,

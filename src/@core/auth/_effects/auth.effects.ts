@@ -48,7 +48,7 @@ export class AuthEffects {
         ofType<UserRequested>(AuthActionTypes.UserRequested),
         withLatestFrom(this.store.pipe(select(isUserLoaded))),
         filter(([action, _isUserLoaded]) => !_isUserLoaded),
-        mergeMap(([action, _isUserLoaded]) => this.auth.getUserByToken()),
+        mergeMap(([action, _isUserLoaded]) => this.auth.apiAuth.backendAuthProfile()),
         tap(_user => {
             if (_user) {
                 this.store.dispatch(new UserLoaded({ user: _user }));

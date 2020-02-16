@@ -4,9 +4,9 @@ import {environment} from '@environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
-import { tap, first } from 'rxjs/operators';
+import {tap, first, switchMap, exhaustMap, mergeMap, map, concat} from 'rxjs/operators';
 import {fromPromise} from "rxjs/internal-compatibility";
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { AuthBackendService } from './auth-backend.service';
 
 
@@ -23,33 +23,48 @@ export class AuthFirebaseService {
         public readonly authBackend: AuthBackendService,
         @Inject(LOCAL_STORAGE) private localStorage: any,
         @Inject(PLATFORM_ID) private platformId: any,
-        ) {
+    ) {
+
     }
 
 
-    firePasswordLogin(email: string, password: string): Observable<firebase.User> {
-        return fromPromise(new Promise<any>((resolve, reject) => {
-            // const provider = new firebase.auth.EmailAuthProvider();
+    firePasswordLogin(email: string, password: string): Observable<any> {
+        return fromPromise(
             this.afAuth.auth
                 .signInWithEmailAndPassword(email, password)
-                .then( async (res) => {
-                    const user = <any>this.afAuth.auth.currentUser.toJSON();
+                .then(async (res) => {
+                    const user = this.afAuth.auth.currentUser.toJSON();
                     // const access_token = user.stsTokenManager.accessToken;
-                    const idToken = await this.afAuth.auth.currentUser.getIdToken(/* forceRefresh */  true);
-                    this.localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.localStorage.setItem('idToken', idToken);
+                    // this.localStorage.setItem('currentUser', JSON.stringify(user));
 
                     // console.log('this.afAuth.auth.currentUser', this.afAuth.auth.currentUser.toJSON());
                     // console.log('this.afAuth.auth.currentUser.getIdTokenResult', await this.afAuth.auth.currentUser.getIdTokenResult());
                     // console.log('this.afAuth.auth.currentUser.getIdTokenResult', await this.afAuth.auth.currentUser.getIdToken());
                     // console.log('access_token', access_token);
-                    this.authBackend.backendLogin(user.email, idToken).subscribe(response => {
 
-                    });
-                    
-                    resolve(this.afAuth.auth.currentUser);
-                });
-        }));
+                    return this.afAuth.auth.currentUser;
+                })
+        ).pipe(
+            tap(userRecord => {
+                // console.log({userRecord});
+            }),
+            switchMap((userRecord, idx) => {
+                return fromPromise(userRecord.getIdToken(/* forceRefresh */  true)).pipe(
+                    switchMap(idToken => {
+                        this.localStorage.setItem(environment.authTokenKey, idToken);
+                        // console.log({idToken});
+                        return this.authBackend.backendLogin(userRecord.email, idToken)
+                            .pipe(
+                                map(response => response.data || response),
+                                map(data => {
+                                    data.accessToken = idToken;
+                                    return data;
+                                })
+                            );
+                    })
+                );
+            })
+        );
     }
 
 
@@ -79,7 +94,7 @@ export class AuthFirebaseService {
         const clearStorage = () => {
             return new Promise((resolve, reject) => {
                 try {
-                    this.localStorage.removeItem('user');
+                    this.localStorage.clear();
                     resolve();
                 } catch (e) {
                     reject();
