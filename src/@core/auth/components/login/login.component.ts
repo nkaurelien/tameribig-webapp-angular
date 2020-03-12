@@ -169,4 +169,27 @@ export class LoginComponent implements OnInit, OnDestroy {
         const result = control.hasError(validationType) && (control.dirty || control.touched);
         return result;
     }
+
+
+    loginWithFacebook() {
+        this.auth.fireAuth.doFacebookLogin()
+            .pipe(
+                tap(user => {
+                    console.log({ user });
+
+                    if (user) {
+                        this.store.dispatch(new Login({ authToken: user.accessToken }));
+                        this.router.navigateByUrl(this.returnUrl); // Main page
+                    } else {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+                    }
+                }),
+                takeUntil(this.unsubscribe),
+                finalize(() => {
+                    this.loading = false;
+                    this.cdr.markForCheck();
+                })
+            )
+            .subscribe();
+    }
 }

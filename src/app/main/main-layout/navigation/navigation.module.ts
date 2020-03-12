@@ -22,7 +22,7 @@ import { NavigationComponent } from './navigation.component';
         NavbarModule,
         WavesModule,
         IconsModule,
-        //MDBBootstrapModulesPro.forRoot()
+        MDBBootstrapModulesPro.forRoot()
     ],
     declarations: [
         NavigationComponent,

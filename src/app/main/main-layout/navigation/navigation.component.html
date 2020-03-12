@@ -48,9 +48,9 @@
                        class="nav-link text-lowercase text-truncate dropdown-toggle mt-1 ml-5 waves-effect waves-light"
                        data-toggle="dropdown" id="navbarDropdownMenuLink-1" mdbDropdownToggle
                        mdbWavesEffect>
-            <span class="d-none d-sm-inline-block text-truncate" id="user-name"
-                  style="max-width: 10em; transform: translateY(5px);">{{ authUser.firstName || authUser.username}}</span>
-                        <img [src]="authUser.avatar" alt="avatar mx-auto white" class="rounded-circle img-fluid">
+                        <span class="d-none d-sm-inline-block text-truncate" id="user-name"
+                            style="max-width: 10em; transform: translateY(5px);">{{ authUser.firstName || authUser.username}}</span>
+                        <img [src]="authUser.avatar"  class="rounded-circle img-fluid">
                         <!--<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="img-fluid rounded-circle z-depth-0">-->
                     </a>
                     <div aria-labelledby="navbarDropdownMenuLink-5"
@@ -78,9 +78,11 @@
                     </div>
                 </li>
                 <!--Avatar-->
+                <!-- 
                 <div *ngIf="authenticated" class="avatar mx-auto white">
                     <img [src]="authUser.avatar" alt="avatar mx-auto white" class="rounded-circle img-fluid">
                 </div>
+                 -->
                 <a *ngIf="!authenticated" [routerLink]="['/auth/login']"
                    class="btn btn-sm btn-rounded  btn-primary waves-effect  waves-light"
                    id="loginBtn" routerLinkActive="login"

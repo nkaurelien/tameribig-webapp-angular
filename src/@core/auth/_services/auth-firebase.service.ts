@@ -8,7 +8,7 @@ import {tap, first, switchMap, exhaustMap, mergeMap, map, concat} from 'rxjs/ope
 import {fromPromise} from "rxjs/internal-compatibility";
 import {Observable, of} from 'rxjs';
 import { AuthBackendService } from './auth-backend.service';
-
+import * as firebase from 'firebase/app';
 
 const API_USERS_URL = 'api/users';
 const API_PERMISSION_URL = 'api/permissions';
@@ -25,6 +25,25 @@ export class AuthFirebaseService {
         @Inject(PLATFORM_ID) private platformId: any,
     ) {
 
+    }
+
+
+
+    private switchMapToServer(userRecord: firebase.User) {
+        return fromPromise(userRecord.getIdToken(/* forceRefresh */  true)).pipe(
+            switchMap(idToken => {
+                this.localStorage.setItem(environment.authTokenKey, idToken);
+                // console.log({idToken});
+                return this.authBackend.backendLogin(userRecord.email, idToken)
+                    .pipe(
+                        map(response => response.data || response),
+                        map(data => {
+                            data.accessToken = idToken;
+                            return data;
+                        })
+                    );
+            })
+        );
     }
 
 
@@ -49,20 +68,7 @@ export class AuthFirebaseService {
                 // console.log({userRecord});
             }),
             switchMap((userRecord, idx) => {
-                return fromPromise(userRecord.getIdToken(/* forceRefresh */  true)).pipe(
-                    switchMap(idToken => {
-                        this.localStorage.setItem(environment.authTokenKey, idToken);
-                        // console.log({idToken});
-                        return this.authBackend.backendLogin(userRecord.email, idToken)
-                            .pipe(
-                                map(response => response.data || response),
-                                map(data => {
-                                    data.accessToken = idToken;
-                                    return data;
-                                })
-                            );
-                    })
-                );
+                return this.switchMapToServer(userRecord);
             })
         );
     }
@@ -108,4 +114,43 @@ export class AuthFirebaseService {
         ]);
     }
 
+
+    doFacebookLogin() {
+        const provider = new firebase.auth.FacebookAuthProvider();
+        return fromPromise(
+            this.afAuth.auth
+                .signInWithPopup(provider)
+                .then(res => {
+                    return this.afAuth.auth.currentUser;
+                })
+        ).pipe(
+            tap(userRecord => {
+                // console.log({userRecord});
+            }),
+            switchMap((userRecord, idx) => {
+                return this.switchMapToServer(userRecord);
+            })
+        );
+    }
+
+    doGoogleLogin() {
+
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('profile');
+        provider.addScope('email');
+        return fromPromise(
+            this.afAuth.auth
+                .signInWithPopup(provider)
+                .then(res => {
+                    return this.afAuth.auth.currentUser;
+                })
+        ).pipe(
+            tap(userRecord => {
+                // console.log({userRecord});
+            }),
+            switchMap((userRecord, idx) => {
+                return this.switchMapToServer(userRecord);
+            })
+        );
+    }
 }
