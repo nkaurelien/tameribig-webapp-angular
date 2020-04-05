@@ -1,8 +1,11 @@
 // import login css
 // @import "../../../assets/metronic/css/demo1/pages/general/login/login-1.css";
 
-kt-auth, app-login {
-	height: 100%;
+$white: #fff;
+$error-color: #af622c;
+
+app-login {
+	//height: 100%;
 
 	.mat-form-field {
 		width: 100%;
@@ -22,4 +25,68 @@ kt-auth, app-login {
 .home-btn {
   position: absolute;
   padding: 1em 2em;
+}
+
+.input-group-text {
+	display: flex;
+	align-items: center;
+	padding: 0.375rem 0.75rem;
+	margin-bottom: 0;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	text-align: center;
+	white-space: nowrap;
+	background-color: #e9ecef00;
+	border: 1px solid #ced4da;
+	border-right: none;
+	border-radius: 0.25rem;
+}
+
+.input-group > .form-control:not(:first-child), .input-group > .custom-select:not(:first-child) {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: none;
+}
+
+.form-control {
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 1.25rem;
+
+	& + .input-group-prepend {
+		border: 1px solid $error-color;
+	}
+
+	&.ng-touched.ng-invalid {
+		border: 1px dashed $error-color;
+		border-left: none;
+	}
+}
+
+.kt-login__options {
+	padding: .5em;
+	margin-top: 6em;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+.white-skin {
+	background-color: $white;
+}
+
+mdb-error {
+	color: $error-color;
+	font-size: .85em;
+	text-align: right;
+	float: right;
+	margin-right: 1.35em;
+	margin-bottom: 1em;
 }

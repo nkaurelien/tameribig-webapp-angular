@@ -1,91 +1,186 @@
-<!--begin::Body-->
-<div class="p-5">
-	<!--begin::Signin-->
-	<div>
-		<div class="display-4">
-			<h3>{{ 'AUTH.REGISTER.TITLE' | translate }}</h3>
-		</div>
+<div class="fade show text-right h6 mb-1 py-3 px-5 bg-white "
+     role="alert"> Déja inscrit?
+    <a [routerLink]="['../login']" class="h5 ml-2" href="javascript:;">
+        Connecte toi
+    </a>
+</div>
+<div class="flex-center- p-5 d-flex flex-column align-items-center bg-white">
+    <div class="relative">
 
-		<kt-auth-notice></kt-auth-notice>
+        <div class="login__wrapper">
+            <!--			<div class="flex-center">-->
+            <!--				<img class="noselect img-fluid compteur" src="assets/images/compteur.png"-->
+            <!--					 style="transform: scale(0.75) translateX(-40px); height: 196px;">-->
+            <!--			</div>-->
+            <div class="m-login__signin">
+                <div class="m-login__head">
+                    <div class="display-4 my-5">
+                        <h3>{{ 'AUTH.REGISTER.TITLE' | translate }}</h3>
+                    </div>
 
-		<form [formGroup]="registerForm" autocomplete="off">
 
-			<div class="md-form">
-				<mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
-				<input autocomplete="off" formControlName="email" id="email" mdbInput mdbValidate
-					   name="email" type="text">
-				<label for="email">{{ 'AUTH.LABEL.EMAIL' | translate }}</label>
-				<mdb-error *ngIf="isControlHasError('email','required')">
-					<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
-				</mdb-error>
-				<ndb-error *ngIf="isControlHasError('email','email')">
-					<strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
-				</ndb-error>
-				<mdb-error *ngIf="isControlHasError('email','minLength')">
-					<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
-				</mdb-error>
-				<mdb-error *ngIf="isControlHasError('email','maxLength')">
-					<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
-				</mdb-error>
-			</div>
+                    <kt-auth-notice></kt-auth-notice>
+                    <form [formGroup]="registerForm" autocomplete="off">
 
-			<div class="md-form">
-				<mdb-icon class="prefix" fas icon="key"></mdb-icon>
-				<label for="password">{{ 'AUTH.LABEL.PASSWORD' | translate }}</label>
-				<input autocomplete="off" formControlName="password" id="password" mdbInput mdbValidate
-					   type="password"/>
-				<mdb-error *ngIf="isControlHasError('password','required')">
-					<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
-				</mdb-error>
-				<mdb-error *ngIf="isControlHasError('password','minLength')">
-					<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
-				</mdb-error>
-				<mdb-error *ngIf="isControlHasError('password','maxLength')">
-					<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
-				</mdb-error>
+                        <div class="form-group">
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <mdb-icon class="prefix" fas icon="user"></mdb-icon>
+                                    </div>
+                                </div>
+                                <input autocomplete="off" class="form-control" formControlName="fullname" id="fullname"
+                                       mdbInput mdbValidate
+                                       name="email" placeholder="{{ 'AUTH.LABEL.FULLNAME' | translate }}" type="text">
+                                <!--							<label for="email">{{ 'AUTH.LABEL.EMAIL' | translate }}</label>-->
+                            </div>
+                            <mdb-error *ngIf="isControlHasError('fullname','required')">
+                                <strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('fullname','minLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('fullname','maxLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 191</strong>
+                            </mdb-error>
 
-			</div>
-			<div class="md-form ">
-				<mdb-icon class="prefix" fas icon="key"></mdb-icon>
-				<label for="confirmPassword">{{ 'AUTH.LABEL.CONFIRM_PASSWORD' | translate }}</label>
-				<input autocomplete="off" formControlName="confirmPassword" id="confirmPassword" mdbInput mdbValidate
-					   type="password"/>
-				<mdb-error *ngIf="isControlHasError('confirmPassword','required')">
-					<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
-				</mdb-error>
-				<mdb-error *ngIf="isControlHasError('confirmPassword','minLength')">
-					<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
-				</mdb-error>
-				<mdb-error *ngIf="isControlHasError('confirmPassword','maxLength')">
-					<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
-				</mdb-error>
-				<mdb-error
-						*ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors.ConfirmPassword">
-					<strong>{{ 'AUTH.VALIDATION.CONFIRM_PASSWORD_NOT_MATCH' | translate }} </strong>
-				</mdb-error>
+                        </div>
 
-			</div>
-			<div class="form-group">
-				<!-- Default unchecked -->
-				<mdb-checkbox [default]="false" formControlName="agree" name="agree">
-					I agree the <a href="javascript:;">terms & conditions</a>
-				</mdb-checkbox>
-			</div>
+                        <div class="form-group">
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
+                                    </div>
+                                </div>
+                                <input autocomplete="off" class="form-control" formControlName="email" id="email"
+                                       mdbInput mdbValidate
+                                       name="email" placeholder="{{ 'AUTH.LABEL.EMAIL' | translate }}" type="text">
+                                <!--							<label for="email">{{ 'AUTH.LABEL.EMAIL' | translate }}</label>-->
+                            </div>
+                            <mdb-error *ngIf="isControlHasError('email','required')">
+                                <strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+                            </mdb-error>
+                            <ndb-error *ngIf="isControlHasError('email','email')">
+                                <strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
+                            </ndb-error>
+                            <mdb-error *ngIf="isControlHasError('email','minLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('email','maxLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
+                            </mdb-error>
 
-			<!--begin::Action-->
-			<div class="kt-login__actions">
-				<a href="javascript:;" routerLink="/auth/forgot-password" class="kt-link kt-login__link-forgot">
-					{{ 'AUTH.GENERAL.FORGOT_BUTTON' | translate }}
-				</a><br><br>
-				<button routerLink="/auth/login" [disabled]="loading" id="kt_login_signup_cancel" class="btn btn-secondary btn-elevate kt-login__btn-secondary">{{ 'AUTH.GENERAL.BACK_BUTTON' | translate }}</button>
-				<button (click)="submit()"
-						[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}"
-						class="btn btn-primary btn-elevate kt-login__btn-primary" id="kt_login_signin_submit">
-					<mdb-spinner *ngIf="loading" class="mr-1" spinnerColor="blue" spinnerType="small"></mdb-spinner>
-					{{ 'AUTH.GENERAL.SUBMIT_BUTTON' | translate }}
-				</button>
-			</div>
-			<!--end::Action-->
-		</form>
-	</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <mdb-icon class="prefix" fas icon="key"></mdb-icon>
+                                    </div>
+                                </div>
+                                <!--							<label for="password">{{ 'AUTH.LABEL.PASSWORD' | translate }}</label>-->
+                                <input autocomplete="off" class="form-control" formControlName="password" id="password"
+                                       mdbInput mdbValidate
+                                       placeholder="{{ 'AUTH.LABEL.PASSWORD' | translate }}" type="password"/>
+                            </div>
+                            <mdb-error *ngIf="isControlHasError('password','required')">
+                                <strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('password','minLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('password','maxLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
+                            </mdb-error>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <mdb-icon class="prefix" fas icon="key"></mdb-icon>
+                                    </div>
+                                </div>
+                                <!--							<label for="confirmPassword">{{ 'AUTH.LABEL.CONFIRM_PASSWORD' | translate }}</label>-->
+                                <input autocomplete="off" class="form-control" formControlName="confirmPassword"
+                                       id="confirmPassword" mdbInput mdbValidate
+                                       placeholder="{{ 'AUTH.LABEL.CONFIRM_PASSWORD' | translate }}" type="password"/>
+                            </div>
+
+                            <mdb-error *ngIf="isControlHasError('confirmPassword','required')">
+                                <strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('confirmPassword','minLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('confirmPassword','maxLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
+                            </mdb-error>
+                            <mdb-error
+                                    *ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors.ConfirmPassword">
+                                <strong>{{ 'AUTH.VALIDATION.CONFIRM_PASSWORD_NOT_MATCH' | translate }} </strong>
+                            </mdb-error>
+
+                        </div>
+                        <div class="form-group my-4">
+
+                            <!-- Default unchecked -->
+                            <mdb-checkbox [default]="false" formControlName="agree" name="agree">
+                                J'accepte les <a href="javascript:;">termes & conditions</a> d'utilisation
+                            </mdb-checkbox>
+                        </div>
+
+                        <!--begin::Action-->
+
+                        <div class="row m-login__form-sub">
+                            <div class="flex-center mt-y">
+                                <div class="col text-left p-0 pr-5" style="width: 250px">
+
+                                </div>
+                                <button (click)="submit()"
+                                        [disabled]="loading" [ngClass]="{'disabled': loading}" class="m-0 z-depth-1"
+                                        color="primary"
+                                        mdbBtn
+                                        rounded="true">
+								<span *ngIf="loading" aria-hidden="true" class="spinner-grow spinner-grow-sm text-light"
+                                      role="status"></span>
+                                    <!--								<mdb-spinner *ngIf="loading"  class="mr-1" spinnerColor="blue" spinnerType="small" ></mdb-spinner>-->
+                                    <span>
+									{{ 'AUTH.GENERAL.SUBMIT_BUTTON' | translate }}
+								    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <!--end::Action-->
+                    </form>
+                    <!--begin::Options-->
+                    <div class="d-none kt-login__options">
+                        <h6> Inscrivez vous avec votre reseau </h6>
+                        <P class="w-100"></P>
+                        <a class="z-depth-1" color="fb" href="https://www.facebook.com/keenthemes/" mdbBtn
+                           rounded="true" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+
+                        <a class="z-depth-1" color="tw" href="https://twitter.com/keenthemes/" mdbBtn rounded="true"
+                           target="_blank">
+                            <i class="fab fa-twitter"></i>
+                            <span class="sr-only">Twitter</span>
+                        </a>
+
+                        <a class="z-depth-1" color="gplus" href="javascript:;" mdbBtn rounded="true">
+                            <i class="fab fa-google"></i>
+                            <span class="sr-only">Google</span>
+                        </a>
+                    </div>
+                    <!--end::Options-->
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

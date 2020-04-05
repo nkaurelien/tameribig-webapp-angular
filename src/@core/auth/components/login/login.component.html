@@ -1,98 +1,120 @@
-<!--begin::Head-->
-<div class="kt-login__head">
-	<span class="kt-login__signup-label">Don't have an account yet?</span>&nbsp;&nbsp;
-	<a href="javascript:;" routerLink="/auth/register" class="kt-link kt-login__signup-link">{{ 'AUTH.GENERAL.SIGNUP_BUTTON' | translate }}</a>
+<div class="fade show text-right h6 mb-1 py-3 px-5 bg-white "
+     role="alert"> Pas encore inscrit?
+    <a [routerLink]="['../register']" class="h5 ml-2" href="javascript:;">
+        Crée un compte
+    </a>
 </div>
-<!--end::Head-->
+<div class="flex-center- p-5 d-flex flex-column align-items-center bg-white">
+    <div class="relative">
 
-<!--begin::Body-->
-<div class="kt-login__body">
-	<!--begin::Signin-->
-	<div class="kt-login__form">
-		<div class="kt-login__title">
-			<h3>Sign In</h3>
-		</div>
+        <div class="login__wrapper">
+            <div class="flex-center">
+                <img class="noselect img-fluid compteur" src="assets/images/compteur.png"
+                     style="transform: scale(0.75) translateX(-40px); height: 196px;">
+            </div>
+            <div class="m-login__signin">
+                <div class="m-login__head">
+                    <kt-auth-notice></kt-auth-notice>
 
-		<kt-auth-notice></kt-auth-notice>
+                    <form #f="ngForm" (ngSubmit)="f.form.valid && submit()" [formGroup]="loginForm" action=""
+                          autocomplete="off" class="m-login__form m-form mt-5">
 
-		<!--begin::Form-->
-		<form class="kt-form" [formGroup]="loginForm" autocomplete="off">
-			<div class="form-group">
-				<mat-form-field>
-					<mat-label>{{ 'AUTH.INPUT.EMAIL' | translate }}</mat-label>
-					<input matInput type="email" placeholder="{{ 'AUTH.INPUT.EMAIL' | translate }}" formControlName="email" autocomplete="off"/>
-					<mat-error *ngIf="isControlHasError('email','required')">
-						<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
-					</mat-error>
-					<mat-error *ngIf="isControlHasError('email','email')">
-						<strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
-					</mat-error>
-					<mat-error *ngIf="isControlHasError('email','minLength')">
-						<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
-					</mat-error>
-					<mat-error *ngIf="isControlHasError('email','maxLength')">
-						<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
-					</mat-error>
-				</mat-form-field>
-			</div>
-			<div class="form-group">
-				<mat-form-field>
-					<mat-label>{{ 'AUTH.INPUT.PASSWORD' | translate }}</mat-label>
-					<input matInput type="password" placeholder="{{ 'AUTH.INPUT.PASSWORD' | translate }}" formControlName="password" autocomplete="off"/>
-					<mat-error *ngIf="isControlHasError('password','required')">
-						<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
-					</mat-error>
-					<mat-error *ngIf="isControlHasError('password','minLength')">
-						<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
-					</mat-error>
-					<mat-error *ngIf="isControlHasError('password','maxLength')">
-						<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
-					</mat-error>
-				</mat-form-field>
-			</div>
-			<!--begin::Action-->
-			<div class="kt-login__actions">
+                        <div class="form-group">
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
+                                    </div>
+                                </div>
+                                <input autocomplete="off" class="form-control" formControlName="email" id="email"
+                                       mdbInput mdbValidate
+                                       name="email"
+                                       placeholder="Email" type="text">
+                            </div>
+                            <mdb-error *ngIf="isControlHasError('email','required')">
+                                <strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('email','email')">
+                                <strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('email','minLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+                            </mdb-error>
+                            <mdb-error *ngIf="isControlHasError('email','maxLength')">
+                                <strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
+                            </mdb-error>
+                        </div>
+                        <div class="form-group">
 
-                <button (click)="submit()"
-                        [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}"
-                        class="btn btn-primary btn-elevate kt-login__btn-primary"
-                        id="kt_login_signin_submit">{{ 'AUTH.LOGIN.BUTTON' | translate }}</button>
-				<a href="javascript:;" routerLink="/auth/forgot-password" class="kt-link kt-login__link-forgot">
-					{{ 'AUTH.GENERAL.FORGOT_BUTTON' | translate }}
-                </a></div>
-			<!--end::Action-->
-		</form>
-		<!--end::Form-->
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <mdb-icon class="prefix" fas icon="key"></mdb-icon>
+                                    </div>
+                                </div>
+                                <input autocomplete="off" class="form-control" formControlName="password" id="password"
+                                       mdbInput
+                                       mdbValidate name="password" placeholder="Password" type="password">
+                            </div>
+                            <mdb-error *ngIf="isControlHasError('password','required')">
+                                <strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+                            </mdb-error>
+                        </div>
 
-		<!--begin::Divider-->
-		<div class="kt-login__divider">
-			<div class="kt-divider">
-				<span></span>
-				<span>OR</span>
-				<span></span>
-			</div>
-		</div>
-		<!--end::Divider-->
+                        <div class="row m-login__form-sub">
+                            <!-- <div class="col m--align-left">
+                                <label class="m-checkbox m-checkbox--focus">
+                                    <input type="checkbox" name="remember" #remember="ngModel">
+                                    Remember me
+                                    <span></span>
+                                </label>
+                            </div> -->
+                        </div>
+                        <div class="flex-center mt-4">
 
-		<!--begin::Options-->
-		<div class="kt-login__options d-flex justify-content-between">
-			<a (click)='loginWithFacebook()' href="https://www.facebook.com/keenthemes/" target="_blank" class="btn btn-primary kt-btn">
-				<i class="fab fa-facebook-f"></i>
-				Facebook
-			</a>
+                            <div class="col text-left p-0 pr-5" style="min-width: 250px">
+                                <a class="m-link h6" href="javascript:;" id="m_login_forget_password"
+                                   routerLink="/auth/forgot-password">
+                                    <span>Mot de passe oublié</span>
+                                </a>
+                            </div>
+                            <button [disabled]="loading" [ngClass]="{'disabled': loading}" class="m-0 z-depth-1"
+                                    color="primary"
+                                    mdbBtn
+                                    rounded="true">
+								<span *ngIf="loading" aria-hidden="true" class="spinner-grow spinner-grow-sm text-light"
+                                      role="status"></span>
+                                <!--								<mdb-spinner *ngIf="loading"  class="mr-1" spinnerColor="blue" spinnerType="small" ></mdb-spinner>-->
+                                <span> Connexion </span>
+                            </button>
+                        </div>
+                    </form>
 
-			<!-- <a href="https://twitter.com/keenthemes/" target="_blank" class="btn btn-info kt-btn">
-				<i class="fab fa-twitter"></i>
-				Twitter
-			</a>
+                    <!--begin::Options-->
+                    <div class="kt-login__options">
+                        <h6> Connectez vous avec votre reseau </h6>
+                        <P class="w-100"></P>
+                        <a class="z-depth-1" color="fb" href="https://www.facebook.com/keenthemes/" mdbBtn
+                           rounded="true" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                            <span class="sr-only">Facebook</span>
+                        </a>
 
-			<a href="javascript:;" class="btn btn-danger kt-btn">
-				<i class="fab fa-google"></i>
-				Google
-			</a> -->
-		</div>
-		<!--end::Options-->
-	</div>
-	<!--end::Signin-->
+                        <a class="z-depth-1" color="tw" href="https://twitter.com/keenthemes/" mdbBtn rounded="true"
+                           target="_blank">
+                            <i class="fab fa-twitter"></i>
+                            <span class="sr-only">Twitter</span>
+                        </a>
+
+                        <a class="z-depth-1" color="gplus" href="javascript:;" mdbBtn rounded="true">
+                            <i class="fab fa-google"></i>
+                            <span class="sr-only">Google</span>
+                        </a>
+                    </div>
+                    <!--end::Options-->
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
-<!--end::Body-->

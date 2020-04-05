@@ -6,7 +6,7 @@ import { LayoutConfigService, SplashScreenService, TranslationService } from '@c
 import { AuthNoticeService } from '../auth-notice/auth-notice.service';
 
 @Component({
-	selector: 'kt-auth',
+	selector: 'tameri-auth-page',
 	templateUrl: './auth.component.html',
 	styleUrls: ['./auth.component.scss'],
 	encapsulation: ViewEncapsulation.None
@@ -65,6 +65,7 @@ export class AuthComponent implements OnInit {
 
 				'AUTH.VALIDATION.CONFIRM_PASSWORD_NOT_MATCH': 'Le mot de passe ne correspond pas',
 				'AUTH.VALIDATION.REQUIRED_FIELD': 'Ce champ est obligatoire',
+				'AUTH.VALIDATION.INVALID_FIELD': 'Ce champ est incorrect',
 				'AUTH.VALIDATION.MIN_LENGTH_FIELD': 'Trop long',
 				'AUTH.VALIDATION.MAX_LENGTH_FIELD': 'Trop court',
 

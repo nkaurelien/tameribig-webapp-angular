@@ -21,7 +21,7 @@ import {Login} from '../../_actions/auth.actions';
 
 @Component({
     selector: 'app-login',
-    templateUrl: './login2.component.html',
+    templateUrl: './login.component.html',
     encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit, OnDestroy {
