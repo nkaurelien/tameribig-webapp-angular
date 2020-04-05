@@ -3,8 +3,8 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation} from
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 // RxJS
-import {Observable, Subject} from 'rxjs';
-import {finalize, takeUntil, tap} from 'rxjs/operators';
+import {Observable, of, Subject, throwError} from 'rxjs';
+import {catchError, finalize, takeUntil, tap} from 'rxjs/operators';
 // Translate
 import {TranslateService} from '@ngx-translate/core';
 // Store
@@ -14,6 +14,8 @@ import {AppState} from '../../../reducers';
 import {AuthNoticeService} from '../../auth-notice/auth-notice.service';
 import {AuthFirebaseService, AuthService} from '../../_services';
 import {Login} from '../../_actions/auth.actions';
+
+import {get} from 'lodash';
 
 /**
  * ! Just example => Should be removed in development
@@ -144,6 +146,15 @@ export class LoginComponent implements OnInit, OnDestroy {
                     } else {
                         this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
                     }
+                }),
+                catchError((error, __) => {
+
+                    if (get(error, 'error.error.code') === 'auth/user-not-found') {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.LOGIN.NOT_FOUND'), 'danger');
+                    } else {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+                    }
+                    return throwError(error);
                 }),
                 takeUntil(this.unsubscribe),
                 finalize(() => {

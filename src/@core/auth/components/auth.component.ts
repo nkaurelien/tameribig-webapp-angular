@@ -50,6 +50,9 @@ export class AuthComponent implements OnInit {
 			data: {
 				'HELLO': 'Salut {{value}}',
 				'AUTH.REGISTER.TITLE': 'Inscription',
+                'AUTH.REGISTER.FAIL': 'Erreur de creation de compte',
+				'AUTH.LOGIN.NOT_FOUND': 'Aucun enregistrement d\'utilisateur existant ',
+                'AUTH.REGISTER.ACCOUNT_EXISTS': 'Ce compte existe déja',
 				'AUTH.GENERAL.FORGOT_BUTTON': 'Mot de passe oublié',
 				'AUTH.GENERAL.BACK_BUTTON': 'revenir',
 				'AUTH.GENERAL.SUBMIT_BUTTON': 'Soumettre',

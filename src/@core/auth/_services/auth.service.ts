@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {User} from '../_models/user.model';
 import {Permission} from '../_models/permission.model';
 import {Role} from '../_models/role.model';
@@ -36,9 +36,12 @@ export class AuthService {
                 map((res: User) => {
                     return res;
                 }),
-                catchError(err => {
-                    return null;
-                })
+                catchError((error, __) => {
+                    if (error.status === 401 || error.status === 403) {
+                        // handle error
+                    }
+                    return throwError(error);
+                }),
             );
     }
 
