@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject, ViewChild, ElementRef  } from '@angular/core';
 import { dummyPicturesMocks } from '@data/dummy-pictures';
-import { ImagesApiService } from '../../@core/services/images-api.service';
 import {NgxMasonryOptions} from 'ngx-masonry';
-import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
-import { tap, distinctUntilChanged, debounceTime, takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs';
-import { generateDummyPicturesMocks } from 'src/@data/dummy-pictures';
+import { NgForm } from '@angular/forms';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { WINDOW } from '@ng-toolkit/universal';
 
 @Component({
   selector: 'app-videos-explorer',
@@ -17,60 +15,71 @@ import { generateDummyPicturesMocks } from 'src/@data/dummy-pictures';
   
   // encapsulation: ViewEncapsulation.None
 })
-export class VideosExplorerComponent implements OnInit, OnDestroy {
+export class VideosExplorerComponent implements OnInit {
+  isMobile: boolean;
+  isTablet: boolean;
+  deviceInfo: any;
+  isDesktopDevice: boolean;
+  isSmallDesktopDevice: boolean;
 
-  private unsubscribe = new Subject();
-
-  filterForm: FormGroup;
   displayMode = 'mansory-grid';
+  form: any = <any>{};
   dummyPictures = dummyPicturesMocks;
   defaultImage = 'assets/images$/default-image.png';
   offset = 100;
   masonryImages;
   limit = 15;
   masonryOptions:  NgxMasonryOptions = {
-    transitionDuration: '0.8s'
-  };
+    transitionDuration: '0.8s',
+    gutter: 10,
+    columnWidth: 350,
+    fitWidth: true
+};
+scrollAnimationOptions: {
+  animationEffect: 'effect-2',
+  minDuration: 0.4,
+  maxDuration: 0.7
+};
+imageWidth: 540;
+
+  SM_SCREEN_BREAKPOINT = 365;
+  MD_SCREEN_BREAKPOINT = 768;
+
+  @ViewChild('gridContainerRef', {static: true})
+  gridContainerRef: ElementRef;
 
   constructor(
-    private imagesService: ImagesApiService,
-    private formBuilder: FormBuilder,
+    private deviceService: DeviceDetectorService,
+    
+    @Inject(WINDOW)
+    private window: Window
   ) {
-    this.dummyPictures = generateDummyPicturesMocks(60);
-  }
+    this.isSmallDesktopDevice = false;
 
+  }
+  
   ngOnInit() {
 
-    this.filterForm = this.formBuilder.group({
-      keyword: ''
-    });
-    this.filterForm.get('keyword').valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      tap( val => this.search(this.filterForm)),
-      takeUntil(this.unsubscribe)
-    ).subscribe(val => { 
-      // console.log( `searching keyword is ${val}.`);
-    });
+    if (this.window.innerWidth <= this.SM_SCREEN_BREAKPOINT) {
+      this.isSmallDesktopDevice = true;
+    }
 
-    this.showImages();
+     this.isMobile = this.deviceService.isMobile();
+     this.isTablet = this.deviceService.isTablet();
+     this.isDesktopDevice = this.deviceService.isDesktop();
+
+     this.deviceInfo = this.deviceService.getDeviceInfo();
+     console.log(this.deviceInfo);
   }
 
-  ngOnDestroy() {
-    
-    this.unsubscribe.next(true);
-    // this.unsubscribe.unsubscribe();
-    this.unsubscribe.complete();
-  }
-
-
+  
   showImages() {
     this.masonryImages = this.dummyPictures.slice(0, this.limit);
   }
 
   get searching () {
     try {
-      return (this.filterForm.get('keyword').value || '').length > 0;      
+      return (this.form.keyword || '').length > 0;      
     } catch (error) {
       return false;
     }
@@ -80,7 +89,7 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
     this.limit += 15;
     
       if (this.searching) {
-        this.masonryImages = this.filterImagesByKeyword(this.filterForm.get('keyword').value).slice(0, this.limit);
+        this.masonryImages = this.filterImagesByKeyword(this.form.keyword).slice(0, this.limit);
       } else {
         this.masonryImages = this.dummyPictures.slice(0, this.limit);
 
@@ -93,12 +102,11 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
      });
   }
 
-  search(searchForm: FormGroup) {
+  search(searchForm: NgForm) {
     if (searchForm.invalid) {
       return;
     }
-    this.masonryImages = this.filterImagesByKeyword(searchForm.get('keyword').value);
-    // console.log( `Searching`, this.searching);
+    this.masonryImages = this.filterImagesByKeyword(this.form.keyword);
     
 
     // this.imageService.searchImages(this.form.keyword, this.page)
@@ -106,20 +114,4 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
     //     this.images = this.images.concat(res.hits);
     //   })
   }
-
-  liked(id, event?: boolean) {
-
-    if (event === true) {
-      this.imagesService.voteUpById(id || '5e2abcb28ddd5425987c02d3')
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe();   
-    }
-    
-  }
-  
-  navigateToImage(id) {
-      this.imagesService.navigateToImage(id || '5e2abcb28ddd5425987c02d3')
-    
-  }
-  
 }
