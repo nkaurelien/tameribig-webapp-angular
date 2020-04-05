@@ -28,6 +28,9 @@
       "@schemas": [
         "src/@schemas"
       ],
+      "@@/*": [
+        "src/*"
+      ],
       "~src/*": [
         "src/*"
       ]
