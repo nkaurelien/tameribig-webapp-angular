@@ -11,7 +11,7 @@ import {FooterComponent} from './console-layout/footer/footer.component';
 
 
 @NgModule({
-    declarations: [ParametersComponent, ConsoleLayoutComponent, FooterComponent],
+    declarations: [ConsoleLayoutComponent, FooterComponent],
     imports: [
         CommonModule,
         ConsoleRoutingModule,

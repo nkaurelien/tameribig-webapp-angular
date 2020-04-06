@@ -10,6 +10,7 @@ import { ParametersComponent } from './parameters.component';
   imports: [
     CommonModule,
     ParametersRoutingModule
-  ]
+  ],
+    exports: [ParametersComponent]
 })
 export class ParametersModule { }

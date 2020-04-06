@@ -16,11 +16,38 @@
 // @import '~ng-uikit-pro-standard/assets/scss/addons-pro/_steppers-pro.scss';
 // @import '~ng-uikit-pro-standard/assets/scss/addons-pro/_timeline-pro.scss';
 // @import '~ng-uikit-pro-standard/assets/scss/addons-pro/_timelines-pro.scss';
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext');
 
+/* #Primary
+================================================== */
 
 body {
-  background-color: #eee;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #212112;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 7%;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: all 200ms linear;
 }
+
+::selection {
+  color: #fff;
+  background-color: #8167a9;
+}
+
+::-moz-selection {
+  color: #fff;
+  background-color: #8167a9;
+}
+
+@import "~src/app/main/main-layout/navigation/navigation.component";
+
 
 .card.card-cascade .view.gradient-card-header {
   padding: 1rem 1rem;
@@ -78,13 +105,13 @@ body {
 
 // NAVBAR
 
-.white-skin .navbar {
+.navbar {
   background-color: #fff0;
   color: #424242;
 }
 
 // FOOTER
-.white-skin .page-footer {
+.page-footer {
   background-color: #6f717800;
 }
 
@@ -126,9 +153,29 @@ body {
 }
 
 
+$yourColor: green;
+
+//To change a focus-color use this code:
 $focus-color: #4285f4;
 $error-color: #ff3547 ;
 $error-color-soft: #ff354730 ;
+
+
+//input[type=text]:focus:not([readonly]),
+//input[type=password]:focus:not([readonly]),
+//input[type=email]:focus:not([readonly]),
+//input[type=url]:focus:not([readonly]),
+//input[type=time]:focus:not([readonly]),
+//input[type=date]:focus:not([readonly]),
+//input[type=datetime-local]:focus:not([readonly]),
+//input[type=tel]:focus:not([readonly]),
+//input[type=number]:focus:not([readonly]),
+//input[type=search-md]:focus:not([readonly]),
+//textarea.md-textarea:focus:not([readonly]) {
+//  border-bottom: 1px solid $yourColor;
+//  box-shadow: 0 1px 0 0 $yourColor;
+//}
+
 
 .md-form input[type=text],
 .md-form input[type=password],
@@ -220,3 +267,4 @@ input:-webkit-autofill {
   width: 100%;
   height: auto;
 }
+
