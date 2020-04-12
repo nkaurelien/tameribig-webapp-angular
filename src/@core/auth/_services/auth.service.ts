@@ -14,7 +14,7 @@ import {
     API_ROLES_URL,
     API_REGISTER_URL,
     API_LOGIN_URL,
-    API_REGISTER_FIREBASE_URL, API_LOGIN_FIREBASE_URL
+    API_REGISTER_FIREBASE_URL, API_LOGIN_FIREBASE_URL, API_AUTH_USER, API_AUTH_PASSWORD_RESET
 } from './auth.routes';
 import {AuthBackendService} from "@core/auth/_services/auth-backend.service";
 
@@ -52,7 +52,7 @@ export class AuthService {
      * @returns {Observable<any>}
      */
     public requestPassword(email: string): Observable<any> {
-        return this.http.get(API_USERS_URL + '/forgot?=' + email)
+        return this.http.post(API_AUTH_PASSWORD_RESET, {email})
             .pipe(catchError(this.handleError('forgot-password', []))
             );
     }
@@ -164,7 +164,7 @@ export class AuthService {
             console.error(error); // log to console instead
 
             // Let the app keep running by returning an empty result.
-            return of(result);
+            return throwError(result);
         };
     }
 }

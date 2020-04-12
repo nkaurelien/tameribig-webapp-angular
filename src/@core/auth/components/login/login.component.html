@@ -44,6 +44,7 @@
                                 <strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
                             </mdb-error>
                         </div>
+
                         <div class="form-group">
 
                             <div class="input-group mt-3">
@@ -74,7 +75,8 @@
 
                             <div class="col text-left p-0 pr-5" style="min-width: 250px">
                                 <a class="m-link h6" href="javascript:;" id="m_login_forget_password"
-                                   routerLink="/auth/forgot-password">
+                                   [queryParams]="{email: loginForm.get('email').value}"
+                                   queryParamsHandling="merge" routerLink="/auth/forgot-password">
                                     <span>Mot de passe oublié</span>
                                 </a>
                             </div>
