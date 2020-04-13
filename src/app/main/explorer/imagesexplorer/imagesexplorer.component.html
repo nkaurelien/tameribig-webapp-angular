@@ -1,10 +1,10 @@
 
 <div
-  class="search-results"
-  infiniteScroll
-  [infiniteScrollDistance]="10"
-  [infiniteScrollThrottle]="50"
-  (scrolled)="getImages()"
+        class="search-results"
+        infiniteScroll
+        [infiniteScrollDistance]="10"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="null"
 >
   <ng-masonry-grid
     [masonryOptions]="{
@@ -22,9 +22,9 @@
     }"
   >
     <ng-masonry-grid-item
-      id="{{ 'masonry-item-' + i }}"
-      *ngFor="let picture of masonryImages"
-      class="masonry-item"
+            *ngFor="let picture of masonryImages; let i = index"
+            id="{{ 'masonry-item-' +  i}}"
+            class="masonry-item"
     >
       <img  (click)="showImage(picture)" [src]="getImageUrl(picture)">
 

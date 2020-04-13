@@ -4,7 +4,7 @@ import {
     NavbarModule,
     ButtonsModule,
     WavesModule,
-    IconsModule, CollapseModule
+    IconsModule, CollapseModule, DropdownModule
 } from 'ng-uikit-pro-standard';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -23,6 +23,7 @@ import { NavigationComponent } from './navigation.component';
         WavesModule,
         IconsModule,
         CollapseModule,
+        DropdownModule.forRoot(),
         MDBBootstrapModulesPro.forRoot()
     ],
     declarations: [

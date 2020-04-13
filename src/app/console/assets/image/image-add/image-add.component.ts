@@ -37,8 +37,8 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
     public errors = [];
     public imagesUploadedWithSuccess = [];
 
-    private validatingForm: FormGroup;
-    private user: any;
+    public validatingForm: FormGroup;
+    public user: any;
 
 
     get prixInput() {

@@ -39,7 +39,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     public errors = [];
     public imagesUploadedWithSuccess = [];
 
-    private validatingForm: FormGroup;
+    public validatingForm: FormGroup;
     private user: any;
 
 

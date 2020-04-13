@@ -23,11 +23,11 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
     public image: Image;
     public submitting = false;
     public loading = false;
-    private validatingForm: FormGroup;
-    private user: any;
+    public validatingForm: FormGroup;
+    public user: any;
     private paramMapSub: Subscription;
-    private ID: string;
-    private updateImagebyIdSub: Subscription;
+    public ID: string;
+    public updateImagebyIdSub: Subscription;
 
     constructor(
         private router: Router,

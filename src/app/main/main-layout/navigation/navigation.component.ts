@@ -27,6 +27,15 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
         return this.authUser && this.authUser.email !== undefined;
     }
 
+    get username() {
+        let username = '';
+        if (this.authUser && this.authUser.email !== undefined) {
+            username = this.authUser.email.split('@')[0]
+        }
+        return this.authUser && this.authUser.displayName !== undefined && this.authUser.displayName !== null ?
+            this.authUser.displayName : username;
+    }
+
     ngOnInit() {
 
         /* CHECK AUTH STATE */

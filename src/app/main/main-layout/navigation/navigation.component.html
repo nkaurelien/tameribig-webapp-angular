@@ -1,6 +1,6 @@
 <header style="position: relative;">
 
-    <div class="navigation-wrap bg-light start-header start-style">
+    <div class="navigation-wrap bg-light bg-light-alpha-strong start-header start-style">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -18,38 +18,106 @@
                         <div #navbarSupportedContent="bs-collapse" [isCollapsed]="false" class="navbar-collapse"
                              id="navbarSupportedContent" mdbCollapse>
                             <ul class="navbar-nav ml-auto py-4 py-md-0">
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                                       data-toggle="dropdown" href="#" role="button">Home</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link" href="#">Portfolio</a>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link" href="#">Agency</a>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                                       data-toggle="dropdown" href="#" role="button">Services</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link" href="#">Journal</a>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link" href="#">Contact</a>
-                                </li>
+
+                                <ng-container *ngIf="!authenticated">
+
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link waves-light" mdbWavesEffect
+                                           routerLink="/coorporate/contact-us">
+                                            <mdb-icon class="mr-1" far icon="envelope"></mdb-icon>
+                                            <span class="clearfix d-none d-sm-inline-block">Contact</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link waves-light" mdbWavesEffect routerLink="/coorporate/faq">
+                                            <mdb-icon class="mr-1" far icon="comments"></mdb-icon>
+                                            <span class="clearfix d-none d-sm-inline-block">Support</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-button pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a [routerLink]="['/auth/login']"
+                                           class="btn btn-sm btn-rounded  btn-primary waves-effect  waves-light"
+                                           id="loginBtn" routerLinkActive="login"
+                                           type="button">
+                                            <i class="fa fa-sign-in "></i>&nbsp;
+                                            Se connecter
+                                        </a>
+                                    </li>
+                                </ng-container>
+
+                                <ng-container *ngIf="authenticated">
+
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a aria-expanded="false" aria-haspopup="true"
+                                           class="nav-link dropdown-toggle waves-light" data-toggle="dropdown"
+                                           mdbWavesEffect role="button">
+                                            <mdb-icon class=" mr-1 " fas icon="layer-group"></mdb-icon>
+                                            Mes collections
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" routerLink="/console/images">
+                                                <!--                                            <mdb-icon class=" mr-1 " fas icon="layer-group"></mdb-icon>-->
+                                                Mes Images
+                                            </a>
+                                            <!--                                            <a class="dropdown-item" href="#">Something else here</a>-->
+                                            <!--                                            <a class="dropdown-item" href="#">Another action</a>-->
+                                        </div>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a aria-expanded="false" aria-haspopup="true"
+                                           class="nav-link dropdown-toggle waves-light"
+                                           data-toggle="dropdown" href="#" role="button">
+                                            <mdb-icon class=" mr-1 " fas icon="crown"></mdb-icon>
+                                            Mon reseau
+                                        </a>
+                                        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                                            <!--                                            <a class="dropdown-item" routerLink="/network/nkaurelien/followers">Mes abonnées</a>-->
+                                            <!--                                            <a class="dropdown-item" routerLink="/network/nkaurelien/trending">Mes performances</a>-->
+                                        </div>
+                                    </li>
+                                    <li class="nav-item no-underlined pl-4 pl-md-0 ml-md-5">
+                                        <a aria-expanded="false" aria-haspopup="true"
+                                           class="nav-link dropdown-toggle waves-light"
+                                           data-toggle="dropdown" role="button">
+                                           <span>
+                                                <mdb-icon class="mr-" fas icon="th"></mdb-icon>&nbsp;
+                                                <span class="sr-only">Applications </span>
+                                           </span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                                        </div>
+
+                                    </li>
+                                    <li class="pull-right nav-item no-underlined pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a aria-expanded="false" aria-haspopup="true"
+                                           class="nav-link user-nav-link dropdown-toggle p-0"
+                                           data-toggle="dropdown" role="button">
+                                            <img [alt]="username.substring(0,1).toUpperCase()" [src]="authUser.avatar"
+                                                 class="avatar rounded-circle img-fluid">
+                                            <span class="pl-2 ml-1 d-none d-sm-inline-block text-truncate"
+                                                  id="user-name"
+                                                  style="max-width: 10em; transform: translateY(5px);">{{ username.substring(0, 16) }}</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                                            <a [routerLink]="['/network',username,'activities']" class="dropdown-item">Mes
+                                                activités</a>
+                                            <a class="dropdown-item waves-light" mdbWavesEffect
+                                               routerLink="/console/user">
+                                                <!--                                                <mdb-icon class="mr-1" fas icon="user"></mdb-icon>-->
+                                                <span class="clearfix d-none d-sm-inline-block">Mon compte</span>
+                                            </a>
+                                            <div class="divider dropdown-divider"></div>
+                                            <a class="dropdown-item waves-effect waves-light" routerLink="/auth/logout">
+                                           <span class="red-text ">
+                                                <mdb-icon class="mr-" fas icon="power-off"></mdb-icon>&nbsp;
+                                               Deconnexion
+                                           </span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ng-container>
+
+
                             </ul>
                         </div>
 
@@ -65,29 +133,29 @@
 </header>
 
 
-<!--<div class="section full-height " id="intro">-->
-<!--<div class="absolute-center">-->
-<!--    <div class="section">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <div class="col-12">-->
-<!--                    <h1><span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span> <span>4</span><br>-->
-<!--                        <span>m</span><span>e</span><span>n</span><span>u</span></h1>-->
-<!--                    <p>scroll for nav animation</p>-->
+<!--<div class="section row full-height rgba-orange-strong" id="intro">-->
+<!--    <div class="absolute-center">-->
+<!--        <div class="section">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-12">-->
+<!--                        <h1><span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span> <span>4</span><br>-->
+<!--                            <span>m</span><span>e</span><span>n</span><span>u</span></h1>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="section mt-5">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-12">-->
+<!--    &lt;!&ndash;                    <div id="switch">&ndash;&gt;-->
+<!--    &lt;!&ndash;                        <div id="circle"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
-<!--    <div class="section mt-5">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <div class="col-12">-->
-<!--&lt;!&ndash;                    <div id="switch">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div id="circle"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 <!--</div>-->
