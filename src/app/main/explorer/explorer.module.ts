@@ -1,19 +1,19 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
-import { IconsModule } from 'ng-uikit-pro-standard'
-import { WavesModule, InputsModule, ButtonsModule } from 'ng-uikit-pro-standard'
+import {IconsModule} from 'ng-uikit-pro-standard'
+import {WavesModule, InputsModule, ButtonsModule} from 'ng-uikit-pro-standard'
 import {ExplorerComponent} from './explorer.component';
 import {VideosExplorerComponent} from './videosexplorer/videosexplorer.component';
 
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {NgxMasonryModule} from 'ngx-masonry';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
-import { SearchresultComponent } from './searchresult/searchresult.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreasExplorerComponent } from './creasexplorer/creasexplorer.component';
-import { AudiosExplorerComponent } from './audiosexplorer/audiosexplorer.component';
-import { ImagesExplorerComponent } from './imagesexplorer/imagesexplorer.component';
+import {SearchresultComponent} from './searchresult/searchresult.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CreasExplorerComponent} from './creasexplorer/creasexplorer.component';
+import {AudiosExplorerComponent} from './audiosexplorer/audiosexplorer.component';
+import {ImagesExplorerComponent} from './imagesexplorer/imagesexplorer.component';
 
 import {
     AudiosExplorerPath,
@@ -24,10 +24,10 @@ import {
     VideosExplorerPath,
     ImagePresenterUrl
 } from './routes';
-import { ImagesService } from '../@core/services/images.service';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgMasonryGridModule } from 'ng-masonry-grid';
-import { AnimatedLikeModule } from 'src/@core/components/animated-like/animated-like.module';
+import {ImagesService} from '../@core/services/images.service';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {NgMasonryGridModule} from 'ng-masonry-grid';
+import {AnimatedLikeModule} from 'src/@core/components/animated-like/animated-like.module';
 
 const routes: Routes = [
     {
@@ -85,9 +85,9 @@ const routes: Routes = [
         // NgxMasonryModule,
         NgMasonryGridModule,
         InfiniteScrollModule,
-            IconsModule,
-        WavesModule, 
-        InputsModule, 
+        IconsModule,
+        WavesModule,
+        InputsModule,
         ButtonsModule,
         AnimatedLikeModule,
         // NgbModule,
@@ -97,7 +97,7 @@ const routes: Routes = [
     providers: [
         ImagesService,
     ]
-    
+
 })
 export class ExplorerModule {
 }

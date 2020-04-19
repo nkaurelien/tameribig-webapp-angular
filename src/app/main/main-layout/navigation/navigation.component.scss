@@ -658,3 +658,66 @@ app-navigation {
     }
 
 }
+
+.dropdown-menu > .modules {
+
+  width: 250px;
+  background: transparent;
+  margin: 0;
+
+  .module {
+
+    transition: all 200ms linear;
+
+    &:hover {
+      background-color: white;
+      border-radius: 11px;
+    }
+  }
+
+  .module-brand {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+
+    padding: 1em;
+    text-align: center;
+    font-size: 11px;
+    text-transform: capitalize;
+
+    color: #222;
+    font-weight: 400;
+
+    &:hover {
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+    }
+
+    img {
+      height: 72px;
+      width: 72px;
+      margin: 0;
+
+    }
+  }
+
+
+  //&:nth-child(1) a:hover {
+  //    color: orangered;
+  //}
+  //
+  //&:nth-child(2) a:hover {
+  //    color: magenta;
+  //}
+  //
+  //&:nth-child(3) a:hover {
+  //    color: cornflowerblue;
+  //}
+  //
+  //&:nth-child(4) a:hover {
+  //    color: green;
+  //}
+
+}
+

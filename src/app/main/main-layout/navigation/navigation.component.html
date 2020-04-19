@@ -48,14 +48,14 @@
                                 <ng-container *ngIf="authenticated">
 
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a aria-expanded="false" aria-haspopup="true"
+                                        <a aria-expanded="false" aria-haspopup="true" routerLink="/console/assets"
                                            class="nav-link dropdown-toggle waves-light" data-toggle="dropdown"
                                            mdbWavesEffect role="button">
                                             <mdb-icon class=" mr-1 " fas icon="layer-group"></mdb-icon>
                                             Mes collections
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" routerLink="/console/images">
+                                            <a class="dropdown-item" routerLink="/console/assets/images">
                                                 <!--                                            <mdb-icon class=" mr-1 " fas icon="layer-group"></mdb-icon>-->
                                                 Mes Images
                                             </a>
@@ -64,7 +64,8 @@
                                         </div>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a aria-expanded="false" aria-haspopup="true"
+                                        <a [routerLink]="['/network',username]" aria-expanded="false"
+                                           aria-haspopup="true"
                                            class="nav-link dropdown-toggle waves-light"
                                            data-toggle="dropdown" href="#" role="button">
                                             <mdb-icon class=" mr-1 " fas icon="crown"></mdb-icon>
@@ -85,6 +86,37 @@
                                            </span>
                                         </a>
                                         <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                                            <div class="modules row">
+                                                <div class="module col flex-center">
+                                                    <a [routerLink]="[ '/explorer/images' ]" class="module-brand"
+                                                       href="javascript:;">
+                                                        <img alt="" src="./assets/images/icons/ICONES COULEUR-01.png"/>
+                                                        <span>IMAGES</span>
+                                                    </a>
+                                                </div>
+                                                <div class="module col flex-center">
+                                                    <a [routerLink]="[ '/explorer/videos' ]" class="module-brand"
+                                                       href="javascript:;">
+                                                        <img alt="" src="./assets/images/icons/ICONES COULEUR-02.png"/>
+                                                        <span>VIDEOS</span>
+                                                    </a>
+                                                </div>
+                                                <div class="w-100"></div>
+                                                <div class="module col flex-center">
+                                                    <a [routerLink]="[ '/explorer/audios' ]" class="module-brand "
+                                                       href="javascript:;">
+                                                        <img alt="" src="./assets/images/icons/ICONES COULEUR-03.png"/>
+                                                        <span>AUDIOS</span>
+                                                    </a>
+                                                </div>
+                                                <div class="module col flex-center">
+                                                    <a [routerLink]="[ '/explorer/creas' ]" class="module-brand"
+                                                       href="javascript:;">
+                                                        <img alt="" src="./assets/images/icons/ICONES COULEUR-04.png"/>
+                                                        <span>DESIGNS</span>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </li>
@@ -99,13 +131,13 @@
                                                   style="max-width: 10em; transform: translateY(5px);">{{ username.substring(0, 16) }}</span>
                                         </a>
                                         <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
-                                            <a [routerLink]="['/network',username,'activities']" class="dropdown-item">Mes
-                                                activités</a>
                                             <a class="dropdown-item waves-light" mdbWavesEffect
                                                routerLink="/console/user">
                                                 <!--                                                <mdb-icon class="mr-1" fas icon="user"></mdb-icon>-->
                                                 <span class="clearfix d-none d-sm-inline-block">Mon compte</span>
                                             </a>
+                                            <a [routerLink]="['/console','settings']" class="dropdown-item">Mes
+                                                préférences</a>
                                             <div class="divider dropdown-divider"></div>
                                             <a class="dropdown-item waves-effect waves-light" routerLink="/auth/logout">
                                            <span class="red-text ">

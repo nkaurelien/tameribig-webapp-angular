@@ -34,6 +34,14 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/uploader/uploader.module').then(m => m.UploaderModule)
                 },
                 {
+                    path: 'network',
+                    loadChildren: () => import('@modules/main/network/network.module').then(m => m.NetworkModule),
+                },
+                {
+                    path: 'console',
+                    loadChildren: () => import('@modules/main/console/console.module').then(m => m.ConsoleModule),
+                },
+                {
                     path: '',
                     redirectTo: 'home',
                     pathMatch: 'full'
