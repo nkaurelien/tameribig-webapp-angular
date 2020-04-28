@@ -1,4 +1,4 @@
-import {environment} from "@environments/environment";
+import {environment} from '@environments/environment';
 
 const ApiBaseUrl = environment.ApiBaseUrl;
 export const API_USERS_URL = ApiBaseUrl + '/users';

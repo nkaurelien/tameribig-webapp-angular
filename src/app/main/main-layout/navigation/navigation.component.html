@@ -1,4 +1,4 @@
-<header style="position: relative;">
+<header id="top-nav" style="position: relative;">
 
     <div class="navigation-wrap bg-light bg-light-alpha-strong start-header start-style">
         <div class="container">
@@ -8,7 +8,9 @@
 
 
                         <a class="navbar-brand" href="javascript:;">
-                            <img alt="" src="./assets/images/logo.png"/>
+                            <img alt="" id="navbar-logo" src="./assets/images/logo.png"/>
+                            <img alt="" id="navbar-logo-inverse" src="./assets/images/logo_inverse.png"
+                                 style="display: none;"/>
                         </a>
 
                         <button (click)="navbarSupportedContent.toggle()" class="navbar-toggler" type="button">

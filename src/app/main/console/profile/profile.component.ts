@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import {of, Subject, Subscription} from 'rxjs';
 import {ToastService} from 'ng-uikit-pro-standard';
 import {User} from '@app/auth2/_models';
 import {AuthenticationService} from '@app/auth2/_services';
+import {AuthService} from "@core/auth";
+import {switchMap, takeUntil, tap} from "rxjs/operators";
 
 
 @Component({
@@ -12,45 +14,58 @@ import {AuthenticationService} from '@app/auth2/_services';
   styleUrls: ['./profile.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   profilForm: FormGroup;
   authUser: User;
   errors: string[] = [];
   private isLoggedInSubscription: Subscription;
   defaultImageAvatar = '/assets/images/icons/masque-afrique.jpg';
+    unsubscribe = new Subject<boolean>();
+
 
   constructor(
-    private auth: AuthenticationService,
-    private fb: FormBuilder,
-    private toast: ToastService
+      private auth: AuthService,
+      private fb: FormBuilder,
+      private toast: ToastService
   )  {
 
     this.authUser = new User();
 
-    this.subscribeLoginState();
 
   }
-  ngOnInit()  {
-    this.createForm();
-  }
+
+    ngOnInit() {
+        this.subscribeLoginState();
+        this.createForm();
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.next(true);
+        this.unsubscribe.complete();
+    }
 
   subscribeLoginState() {
-    this.isLoggedInSubscription = this.auth.isLoggedIn$.subscribe(({ loggedIn, user, routerState }) => {
-      // console.log('routerState', routerState, 'user' , user, '_loggedIn', loggedIn);
-      if (loggedIn && user) {
-        this.authUser.init(user);
-      } else {
-        this.authUser = new User();
-      }
 
-    });
+      /* CHECK AUTH STATE */
+      this.auth.fireAuth.fireUser().pipe(
+          tap((user: firebase.User) => {
+              if (!!user) {
+                  this.authUser.fullName = user.displayName;
+                  this.authUser.phoneNumber = user.phoneNumber;
+                  this.authUser.email = user.emailVerified ? user.email : undefined;
+                  this.authUser.uid = user.uid;
+                  console.log({user}, this.authUser);
+              }
+          }),
+          takeUntil(this.unsubscribe)
+      ).subscribe();
   }
 
   createForm() {
     this.profilForm = new FormGroup({
-      fullName: new FormControl(this.authUser.fullName, [Validators.required, Validators.minLength(3)]),
-      firstName: new FormControl(this.authUser.firstName, [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl(this.authUser.lastName, [Validators.required, Validators.minLength(3)]),
+        fullName: new FormControl(this.authUser.fullName, [Validators.required, Validators.maxLength(33)]),
+        firstName: new FormControl(this.authUser.firstName, [Validators.nullValidator, Validators.maxLength(33)]),
+        lastName: new FormControl(this.authUser.lastName, [Validators.nullValidator, Validators.maxLength(33)]),
       phoneNumber: new FormControl(this.authUser.phoneNumber, [Validators.required, Validators.minLength(9)]),
       about: new FormControl(this.authUser.about, [Validators.nullValidator]),
       occupation: new FormControl(this.authUser.occupation, [ Validators.nullValidator]),
@@ -88,8 +103,13 @@ export class ProfileComponent implements OnInit {
     console.log('this.profilForm.valid', this.profilForm.valid, this.profilForm.value);
     if (this.profilForm.valid) {
       // this.dropzone.processQueue();
-      this.auth.updateUserData(this.profilForm.value);
+        this.auth.fireAuth.updateUserData(this.profilForm.value).subscribe();
+        this.auth.apiAuth.updateUserData(this.profilForm.value).subscribe(response => {
+            this.authUser.init(response);
+        });
+        // this.auth.updateUserData(this.profilForm.value);
     } else {
+        console.log(this.profilForm.errors);
       this.errors = ['Formulaire invalide'];
       const options = { positionClass: 'md-toast-bottom-full-width' };
       this.toast.info('Verifier votre formulaire', '', options);

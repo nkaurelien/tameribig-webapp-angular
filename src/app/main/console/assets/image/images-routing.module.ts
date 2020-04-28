@@ -5,6 +5,7 @@ import {ImageAddComponent} from './image-add/image-add.component';
 import {ImageUploadSourceComponent} from './image-upload-source/image-upload-source.component';
 import {ImageUploadPictureComponent} from './image-upload-picture/image-upload-picture.component';
 import {ImageEditComponent} from './image-edit/image-edit.component';
+import {ImageUploadComponent} from './image-upload/image-upload.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,10 @@ const routes: Routes = [
             {
                 path: 'add',
                 component: ImageAddComponent,
+            },
+            {
+                path: 'upload',
+                component: ImageUploadComponent,
             },
             {
                 path: ':id/upload-picture',

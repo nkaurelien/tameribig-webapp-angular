@@ -2,3 +2,21 @@
   white-space: nowrap;
   margin-right: 3rem;
 }
+
+
+.md-tabs .nav-item.show .nav-link {
+  background-color: transparent !important;
+  color: #fff;
+  transition: 1s;
+  border-radius: .125rem;
+}
+
+
+.md-tabs {
+  box-shadow: none !important;
+  margin-bottom: 20px !important;
+}
+
+:host ::ng-deep {
+
+}

@@ -73,12 +73,12 @@
     <!-- rigth -->
     <div class="col-xl-9 col-lg-8 order-md-1 mt-md-0 mt-5 pt-md-0 pt-4">
         <!-- Nav Tabs -->
-        <mdb-tabset #staticTabs [buttonClass]="'md-tabs tabs-3 amber lighten-1- z-depth-1'" [contentClass]="'card'">
+        <mdb-tabset #staticTabs [buttonClass]="'md-tabs tabs-3 orange darken-3 no-underlined z-depth-1'"
+                    [contentClass]="'card'" disableWaves="true">
           <!--Panel 1-->
-          <mdb-tab heading="Update Profile">
+            <mdb-tab heading="Update Profile">
             <div class="row">
               <div class="col-12">
-                <br>
                 <!-- profil form-->
                 <form [formGroup]="profilForm" (submit)="submit()" class="m-form m-form--fit m-form--label-align-right"
                   novalidate>
@@ -250,18 +250,18 @@
 
                     </div>
                   </div>
-                  <div class="m-portlet__foot m-portlet__foot--fit">
+                    <div class="m-portlet__foot m-portlet__foot--fit ">
                     <div class="m-form__actions">
-                      <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-7 md-form m-0">
-                          <button type="submit" class="btn btn-primary m-btn m-btn--air m-btn--custom">
-                            Save changes
-                          </button>
+                        <div class="row mt-md-4">
+                            <div class="col"></div>
+                            <div class="col-6 text-right md-form m-0">
                           &nbsp;&nbsp;
-                          <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">
+                                <button class="btn grey lighten-3 " type="reset">
                             Cancel
-                          </button>
+                                </button>
+                                <button class="btn orange darken-3 text-white" type="submit">
+                                    Save changes
+                                </button>
                         </div>
                       </div>
                     </div>

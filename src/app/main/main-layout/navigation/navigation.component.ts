@@ -56,10 +56,10 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.intiNavbar();
+        this.initNavbar();
     }
 
-    intiNavbar() {
+    initNavbar() {
 
         $(function () {
             const header = $('.start-style');
@@ -98,9 +98,13 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
             if ($('body').hasClass('dark')) {
                 $('body').removeClass('dark');
                 $('#switch').removeClass('switched');
+                $('#navbar-logo').show();
+                $('#navbar-logo-inverse').hide();
             } else {
                 $('body').addClass('dark');
                 $('#switch').addClass('switched');
+                $('#navbar-logo').hide();
+                $('#navbar-logo-inverse').show();
             }
         });
     }

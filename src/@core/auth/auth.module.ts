@@ -34,10 +34,11 @@ import {
     CheckboxModule,
     InputsModule, PreloadersModule
 } from 'ng-uikit-pro-standard';
-import {RegisterCompleteComponent} from "./components/register-complete/register-complete.component";
+import {RegisterCompleteComponent} from './components/register-complete/register-complete.component';
 import {LoginFormComponent} from './components/login/login-form/login-form.component';
-import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from "ng-recaptcha";
-import {environment} from "@environments/environment";
+import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from 'ng-recaptcha';
+import {environment} from '@environments/environment';
+import {LogoutComponent} from '@core/auth/components/logout/logout.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import {environment} from "@environments/environment";
         RegisterCompleteComponent,
         ForgotPasswordComponent,
         AuthNoticeComponent,
-        LoginFormComponent
+        LoginFormComponent,
+        LogoutComponent,
     ]
 })
 

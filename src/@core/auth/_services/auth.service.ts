@@ -16,7 +16,7 @@ import {
     API_LOGIN_URL,
     API_REGISTER_FIREBASE_URL, API_LOGIN_FIREBASE_URL, API_AUTH_USER, API_AUTH_PASSWORD_RESET
 } from './auth.routes';
-import {AuthBackendService} from "@core/auth/_services/auth-backend.service";
+import {AuthBackendService} from '@core/auth/_services/auth-backend.service';
 
 
 

@@ -19,6 +19,7 @@ export class ImageComponent implements OnInit {
 
     tableData: Selectable<Image>[] = [];
 
+
     get isSelectionIndeterminate(): boolean {
         return this.selection.length !== 0 && this.selection.length !== this.tableData.length;
     }

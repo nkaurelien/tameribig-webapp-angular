@@ -1,10 +1,10 @@
 
 <div
-        class="search-results"
-        infiniteScroll
+        (scrolled)="getImages()"
         [infiniteScrollDistance]="10"
         [infiniteScrollThrottle]="50"
-        (scrolled)="null"
+        class="search-results"
+        infiniteScroll
 >
   <ng-masonry-grid
     [masonryOptions]="{
