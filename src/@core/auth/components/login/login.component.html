@@ -96,21 +96,29 @@
                     <div class="kt-login__options">
                         <h6> Connectez vous avec votre reseau </h6>
                         <P class="w-100"></P>
-                        <a class="z-depth-1" color="fb" href="https://www.facebook.com/keenthemes/" mdbBtn
+                        <a (click)="loginWithFacebook()" class="z-depth-1"
+                           color="fb" mdbBtn
                            rounded="true" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                            <span class="sr-only">Facebook</span>
+                            <span *ngIf="loadingSocialFB" aria-hidden="true"
+                                  class="spinner-grow spinner-grow-sm text-light"
+                                  role="status"></span>
+                            <i *ngIf="!loadingSocialFB" class="fab fa-facebook-f"></i>
+                            <span *ngIf="!loadingSocialFB" class="sr-only">Facebook</span>
                         </a>
 
-                        <a class="z-depth-1" color="tw" href="https://twitter.com/keenthemes/" mdbBtn rounded="true"
+                        <a class="d-none z-depth-1" color="tw" href="javascript:;" mdbBtn rounded="true"
                            target="_blank">
                             <i class="fab fa-twitter"></i>
                             <span class="sr-only">Twitter</span>
                         </a>
 
-                        <a class="z-depth-1" color="gplus" href="javascript:;" mdbBtn rounded="true">
-                            <i class="fab fa-google"></i>
-                            <span class="sr-only">Google</span>
+                        <a (click)="loginWithGoogle()" class="z-depth-1" color="gplus"
+                           href="javascript:;" mdbBtn rounded="true">
+                            <span *ngIf="loadingSocialGoogle" aria-hidden="true"
+                                  class="spinner-grow spinner-grow-sm text-light"
+                                  role="status"></span>
+                            <i *ngIf="!loadingSocialGoogle" class="fab fa-google"></i>
+                            <span *ngIf="!loadingSocialGoogle" class="sr-only">Google</span>
                         </a>
                     </div>
                     <!--end::Options-->

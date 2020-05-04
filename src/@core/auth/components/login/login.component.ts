@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Public params
     loginForm: FormGroup;
     loading = false;
+    loadingSocialFB = false;
+    loadingSocialGoogle = false;
     isLoggedIn$: Observable<boolean>;
     errors: any = [];
 
@@ -89,6 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.unsubscribe.next();
         this.unsubscribe.complete();
         this.loading = false;
+        this.loadingSocialFB = false;
     }
 
     /**
@@ -183,6 +186,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     loginWithFacebook() {
+        this.loadingSocialFB = true;
         this.auth.fireAuth.doFacebookLogin()
             .pipe(
                 tap(user => {
@@ -195,9 +199,50 @@ export class LoginComponent implements OnInit, OnDestroy {
                         this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
                     }
                 }),
+                catchError((error, __) => {
+
+                    if (get(error, 'error.error.code') === 'auth/user-not-found') {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.LOGIN.NOT_FOUND'), 'danger');
+                    } else {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+                    }
+                    return throwError(error);
+                }),
                 takeUntil(this.unsubscribe),
                 finalize(() => {
-                    this.loading = false;
+                    this.loadingSocialFB = false;
+                    this.cdr.markForCheck();
+                })
+            )
+            .subscribe();
+    }
+
+    loginWithGoogle() {
+        this.loadingSocialGoogle = true;
+        this.auth.fireAuth.doGoogleLogin()
+            .pipe(
+                tap(user => {
+                    console.log({user});
+
+                    if (user) {
+                        this.store.dispatch(new Login({authToken: user.accessToken}));
+                        this.router.navigateByUrl(this.returnUrl); // Main page
+                    } else {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+                    }
+                }),
+                catchError((error, __) => {
+
+                    if (get(error, 'error.error.code') === 'auth/user-not-found') {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.LOGIN.NOT_FOUND'), 'danger');
+                    } else {
+                        this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+                    }
+                    return throwError(error);
+                }),
+                takeUntil(this.unsubscribe),
+                finalize(() => {
+                    this.loadingSocialGoogle = false;
                     this.cdr.markForCheck();
                 })
             )

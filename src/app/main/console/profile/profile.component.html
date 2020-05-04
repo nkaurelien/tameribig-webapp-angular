@@ -3,6 +3,16 @@
 <!-- END: Subheader -->
 <div class="container p-md-5 p-sm-2">
   <div class="row ">
+
+    <!-- top-->
+    <div class="col-12 text-black-50 my-3">
+      <div class="h1-responsive">
+        <small>Salut,</small>
+        <span class="text-capitalize ml-2 blue-grey-text">{{ username }}</span> !
+      </div>
+    </div>
+    <div class="w-100 mt-5"></div>
+
     <!-- left -->
     <div class="col-xl-3 col-lg-4 order-md-2 mt-md-0 mt-5 pt-md-0 pt-4 d-none d-md-block">
 
@@ -76,7 +86,7 @@
         <mdb-tabset #staticTabs [buttonClass]="'md-tabs tabs-3 orange darken-3 no-underlined z-depth-1'"
                     [contentClass]="'card'" disableWaves="true">
           <!--Panel 1-->
-            <mdb-tab heading="Update Profile">
+          <mdb-tab heading="Mon Profile">
             <div class="row">
               <div class="col-12">
                 <!-- profil form-->
@@ -96,11 +106,11 @@
                     <div class="form-group m-form__group row">
                       <div class="col-10 ml-auto-">
                         <h3 class="m-form__section">
-                          1. Personal Details
+                          1. Details Personnel
                         </h3>
                       </div>
                     </div>
-                    <div class="form-group m-form__group row">
+                    <div class="d-none form-group m-form__group row">
                       <label for="example-text-input" class="col-2 col-form-label">
                         Full Name
                       </label>
@@ -124,18 +134,19 @@
                     </div>
                     <div class="form-group m-form__group row">
                       <label for="example-text-input" class="col-2 col-form-label">
-                        Company Name
+                        Organisation
                       </label>
                       <div class="col-7 md-form m-0">
                         <input class="form-control m-input" formControlName="companyName" type="text" mdbInput mdbValidate>
-                        <span class="m-form__help">
-                          If you want your invoices addressed to a company. Leave blank to use your full name.
-                        </span>
+                        <small class="d-none- m-form__help">
+                          Si vous souhaitez que vos factures soient adressées à une entreprise. Laissez vide pour
+                          utiliser votre nom complet.
+                        </small>
                       </div>
                     </div>
                     <div class="form-group m-form__group row">
                       <label for="example-text-input" class="col-2 col-form-label">
-                        Phone No.
+                        Téléphone
                       </label>
                       <div class="col-7 md-form m-0">
                         <input class="form-control m-input" formControlName="phoneNumber" type="text" mdbInput mdbValidate>
@@ -143,7 +154,7 @@
                     </div>
                     <div class="form-group m-form__group row">
                       <label for="example-text-input" class="col-2 col-form-label">
-                        About You.
+                        A propos.
                       </label>
                       <div class="col-7 md-form m-0">
                         <textarea class="form-control m-input" formControlName="about" type="text" mdbInput
@@ -281,33 +292,20 @@
             </div>
           </mdb-tab>
           <!--Panel 2-->
-          <mdb-tab heading="Follow">
+          <mdb-tab heading="Mon compte">
             <div class="row">
               <div class="col-12">
                 <br>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima,
-                  soluta doloribus
-                  reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora,
-                  placeat ratione
-                  porro voluptate odit minima.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima,
-                  soluta doloribus
-                  reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora,
-                  placeat ratione
-                  porro voluptate odit minima.</p>
+                <p>.</p>
               </div>
             </div>
           </mdb-tab>
           <!--Panel 3-->
-          <mdb-tab heading="Messages">
+          <mdb-tab heading="Ma carrière">
             <div class="row">
               <div class="col-12">
                 <br>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima,
-                  soluta doloribus
-                  reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora,
-                  placeat ratione
-                  porro voluptate odit minima.</p>
+                <p>.</p>
               </div>
             </div>
           </mdb-tab>
