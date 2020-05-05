@@ -99,28 +99,29 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     fillForm(user: User) {
+
         this.profilForm.patchValue({
-            "address": {
-                "street": user.address.street,
-                "city": user.address.city,
-                "country": user.address.country
+            'address': {
+                'street': user.address.street,
+                'city': user.address.city,
+                'country': user.address.country
             },
-            "socialLinks": {
-                "facebook": user.socialLinks.facebook,
-                "dribbble": user.socialLinks.dribbble,
-                "twitter": user.socialLinks.twitter,
-                "instagram": user.socialLinks.instagram,
-                "youtube": user.socialLinks.youtube,
-                "linkedin": user.socialLinks.linkedin,
+            'socialLinks': {
+                'facebook': user.socialLinks.facebook,
+                'dribbble': user.socialLinks.dribbble,
+                'twitter': user.socialLinks.twitter,
+                'instagram': user.socialLinks.instagram,
+                'youtube': user.socialLinks.youtube,
+                'linkedin': user.socialLinks.linkedin,
             },
-            "fullName": user.fullName,
-            "phoneNumber": user.phoneNumber,
-            "email": user.email,
-            "about": user.about,
-            "firstName": user.firstName,
-            "lastName": user.lastName,
-            "occupation": user.occupation,
-            "companyName": user.companyName
+            'fullName': user.fullName,
+            'phoneNumber': user.phoneNumber,
+            'email': user.email,
+            'about': user.about,
+            'firstName': user.firstName,
+            'lastName': user.lastName,
+            'occupation': user.occupation,
+            'companyName': user.companyName
         });
     }
     createForm() {
