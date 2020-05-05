@@ -125,7 +125,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     createForm() {
 
-        console.log('this.authUser', this.authUser);
+        const urlReg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+
         this.profilForm = new FormGroup({
             fullName: new FormControl(this.authUser.fullName, [Validators.nullValidator, Validators.maxLength(33)]),
             displayName: new FormControl(this.authUser.fullName, [Validators.nullValidator, Validators.maxLength(33)]),
@@ -141,12 +142,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 country: [this.authUser.address.country || 'Cameroun', Validators.nullValidator],
             }),
             socialLinks: this.fb.group({
-                facebook: [this.authUser.socialLinks.facebook, Validators.nullValidator],
-                dribbble: [this.authUser.socialLinks.twitter, Validators.nullValidator],
-                twitter: [this.authUser.socialLinks.twitter, Validators.nullValidator],
-                instagram: [this.authUser.socialLinks.instagram, Validators.nullValidator],
-                youtube: [this.authUser.socialLinks.youtube, Validators.nullValidator],
-                linkedin: [this.authUser.socialLinks.linkedin, Validators.nullValidator],
+                facebook: [this.authUser.socialLinks.facebook, Validators.nullValidator, Validators.pattern(urlReg)],
+                dribbble: [this.authUser.socialLinks.twitter, Validators.nullValidator, Validators.pattern(urlReg)],
+                twitter: [this.authUser.socialLinks.twitter, Validators.nullValidator, Validators.pattern(urlReg)],
+                instagram: [this.authUser.socialLinks.instagram, Validators.nullValidator, Validators.pattern(urlReg)],
+                youtube: [this.authUser.socialLinks.youtube, Validators.nullValidator, Validators.pattern(urlReg)],
+                linkedin: [this.authUser.socialLinks.linkedin, Validators.nullValidator, Validators.pattern(urlReg)],
             })
         });
 
