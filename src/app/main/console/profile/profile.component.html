@@ -2,314 +2,363 @@
 <div></div>
 <!-- END: Subheader -->
 <div class="container p-md-5 p-sm-2">
-  <div class="row ">
+    <div class="row ">
 
-    <!-- top-->
-    <div class="col-12 text-black-50 my-3">
-      <div class="h1-responsive">
-        <small>Salut,</small>
-        <span class="text-capitalize ml-2 blue-grey-text">{{ username }}</span> !
-      </div>
-    </div>
-    <div class="w-100 mt-5"></div>
+        <!-- top-->
+        <div class="col-12 text-black-50 my-3">
+            <div class="h1-responsive">
+                <small>Salut,</small>
+                <span class="text-capitalize ml-2 blue-grey-text">{{ username }}</span> !
+            </div>
+        </div>
+        <div class="w-100 mt-5"></div>
 
-    <!-- left -->
-    <div class="col-xl-3 col-lg-4 order-md-2 mt-md-0 mt-5 pt-md-0 pt-4 d-none d-md-block">
-
-
-      <!--Card image-->
-      <div class="view view-cascade overlay hm-white-slight waves-light" mdbWavesEffect>
-        <!--          <img src="./assets/images/icons/voir-x.jpg" class="img-fluid w-100">-->
-        <img [defaultImage]="defaultImageAvatar" [lazyLoad]="authUser.avatar" class="img-fluid w-100">
-
-        <a>
-          <div class="mask"></div>
-        </a>
-      </div>
-
-      <!--Card-->
-      <mdb-card cascade="true" narrower="true">
+        <!-- left -->
+        <div class="col-xl-3 col-lg-4 order-md-2 mt-md-0 mt-5 pt-md-0 pt-4 d-none d-md-block">
 
 
-        <!--/Card image-->
+            <!--Card image-->
+            <div class="view view-cascade overlay hm-white-slight waves-light" mdbWavesEffect>
+                <!--          <img src="./assets/images/icons/voir-x.jpg" class="img-fluid w-100">-->
+                <img [defaultImage]="defaultImageAvatar" [lazyLoad]="authUser.avatar" class="img-fluid w-100">
 
-        <!--Card content-->
-        <mdb-card-body cascade="true" class="text-center">
-          <!--Title-->
-          <h4 class="card-title font-bold mb-2"><strong>
-                  {{ authUser.fullName }} <br>
-                  <small>
-                    {{ authUser.email }}
-                  </small>
-          </strong></h4>
-          <h5 class="indigo-text"><strong>Photographer</strong></h5>
+                <a>
+                    <div class="mask"></div>
+                </a>
+            </div>
 
-
-          <h6 class='text-justify'><strong>About:</strong></h6>
-          <p class='text-justify'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione perferendis
-            quod animi dignissimos consectetur
-            quibusdam numquam laboriosam, minus, provident...</p>
-
-          <div class="text-right">
-            <button type="button" mdbBtn outline="true" color="primary" rounded="true" size="sm" mdbWavesEffect>
-              More...
-            </button>
-          </div>
+            <!--Card-->
+            <mdb-card cascade="true" narrower="true">
 
 
-          <hr>
-          <!--Linkedin-->
-          <a class="icons-sm li-ic px-3">
-            <mdb-icon fab icon="linkedin-in"></mdb-icon>
-          </a>
-          <!--Twitter-->
-          <a class="icons-sm tw-ic px-3">
-            <mdb-icon fab icon="twitter"></mdb-icon>
-          </a>
-          <!--Dribbble-->
-          <a class="icons-sm fb-ic px-3">
-            <mdb-icon fab icon="facebook-f"></mdb-icon>
-          </a>
+                <!--/Card image-->
 
-        </mdb-card-body>
-        <!--/.Card content-->
-
-      </mdb-card>
-      <!--/.Card-->
-
-    </div>
-
-
-    <!-- rigth -->
-    <div class="col-xl-9 col-lg-8 order-md-1 mt-md-0 mt-5 pt-md-0 pt-4">
-        <!-- Nav Tabs -->
-        <mdb-tabset #staticTabs [buttonClass]="'md-tabs tabs-3 orange darken-3 no-underlined z-depth-1'"
-                    [contentClass]="'card'" disableWaves="true">
-          <!--Panel 1-->
-          <mdb-tab heading="Mon Profile">
-            <div class="row">
-              <div class="col-12">
-                <!-- profil form-->
-                <form [formGroup]="profilForm" (submit)="submit()" class="m-form m-form--fit m-form--label-align-right"
-                  novalidate>
-                  <!-- Grid row -->
-                  <div class="form-row mb-5">
-                    <div class="col-md-12 ">
-                      <div *ngIf="errors.length" class="animated fadeIn alert alert-warning" role="alert">
-                        <b>{{ errors[0]}}</b>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Grid row -->
-                  <div class="col offset-md-2">
-                   
-                    <div class="form-group m-form__group row">
-                      <div class="col-10 ml-auto-">
-                        <h3 class="m-form__section">
-                          1. Details Personnel
-                        </h3>
-                      </div>
-                    </div>
-                    <div class="d-none form-group m-form__group row">
-                      <label for="example-text-input" class="col-2 col-form-label">
-                        Full Name
-                      </label>
-                      <div class="col-7 md-form m-0">
-                        <input class="form-control m-input" formControlName="fullName" type="text" mdbInput mdbValidate>
-                        <mdb-error
-                          *ngIf="fullNameInput?.invalid && (fullNameInput?.dirty || fullNameInput?.touched)">
-                          invalid</mdb-error>
-                        <mdb-success
-                          *ngIf="fullNameInput?.valid && (fullNameInput?.dirty || fullNameInput?.touched)">
-                          valid</mdb-success>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label for="example-text-input" class="col-2 col-form-label">
-                        Occupation
-                      </label>
-                      <div class="col-7 md-form m-0">
-                        <input class="form-control m-input" formControlName="occupation" type="text" mdbInput mdbValidate>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label for="example-text-input" class="col-2 col-form-label">
-                        Organisation
-                      </label>
-                      <div class="col-7 md-form m-0">
-                        <input class="form-control m-input" formControlName="companyName" type="text" mdbInput mdbValidate>
-                        <small class="d-none- m-form__help">
-                          Si vous souhaitez que vos factures soient adressées à une entreprise. Laissez vide pour
-                          utiliser votre nom complet.
+                <!--Card content-->
+                <mdb-card-body cascade="true" class="text-center">
+                    <!--Title-->
+                    <h4 class="card-title font-bold mb-2"><strong>
+                        {{ authUser.fullName }} <br>
+                        <small>
+                            {{ authUser.email }}
                         </small>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label for="example-text-input" class="col-2 col-form-label">
-                        Téléphone
-                      </label>
-                      <div class="col-7 md-form m-0">
-                        <input class="form-control m-input" formControlName="phoneNumber" type="text" mdbInput mdbValidate>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <label for="example-text-input" class="col-2 col-form-label">
-                        A propos.
-                      </label>
-                      <div class="col-7 md-form m-0">
+                    </strong></h4>
+                    <h5 class="indigo-text"><strong>{{ authUser.occupation }}</strong></h5>
+
+
+                    <ng-container *ngIf="authUser.about">
+                        <h6 class='text-justify'><strong>About:</strong></h6>
+                        <markdown class='text-justify' data="{{ authUser.about }}"></markdown>
+                    </ng-container>
+
+                    <!--          <div class="text-right">-->
+                    <!--            <button type="button" mdbBtn outline="true" color="primary" rounded="true" size="sm" mdbWavesEffect>-->
+                    <!--              More...-->
+                    <!--            </button>-->
+                    <!--          </div>-->
+
+
+                    <hr>
+
+                    <ng-container *ngIf="authUser && authUser.socialLinks">
+                        <!--Linkedin-->
+                        <!--          <a class="icons-sm li-ic px-3">-->
+                        <!--          </a>-->
+                        <ng-container *ngIf="authUser.socialLinks.linkedin">
+                            <a [href]="authUser.socialLinks.linkedin" class="icons-sm fb-ic px-3" target="_blank">
+                                <mdb-icon fab icon="linkedin-in"></mdb-icon>
+                            </a>
+                        </ng-container>
+                        <!--Twitter-->
+                        <ng-container *ngIf="authUser.socialLinks.twitter">
+                            <a [href]="authUser.socialLinks.twitter" class="icons-sm fb-ic px-3" target="_blank">
+                                <mdb-icon fab icon="twitter"></mdb-icon>
+                            </a>
+                        </ng-container>
+                        <!--Facebook-->
+                        <ng-container *ngIf="authUser.socialLinks.facebook">
+                            <a [href]="authUser.socialLinks.facebook" class="icons-sm fb-ic px-3" target="_blank">
+                                <mdb-icon fab icon="facebook-f"></mdb-icon>
+                            </a>
+                        </ng-container>
+                        <!--Dribbble-->
+                        <ng-container *ngIf="authUser.socialLinks.dribbble">
+                            <a [href]="authUser.socialLinks.dribbble" class="icons-sm fb-ic px-3">
+                                <mdb-icon fab icon="dribbble"></mdb-icon>
+                            </a>
+                        </ng-container>
+
+
+                    </ng-container>
+
+                </mdb-card-body>
+                <!--/.Card content-->
+
+            </mdb-card>
+            <!--/.Card-->
+
+        </div>
+
+
+        <!-- rigth -->
+        <div class="col-xl-9 col-lg-8 order-md-1 mt-md-0 mt-5 pt-md-0 pt-4">
+            <!-- Nav Tabs -->
+            <mdb-tabset #staticTabs [buttonClass]="'md-tabs tabs-3 orange darken-3 no-underlined z-depth-1'"
+                        [contentClass]="'card'" disableWaves="true">
+                <!--Panel 1-->
+                <mdb-tab heading="Mon Profile">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- profil form-->
+                            <form (submit)="submit()" [formGroup]="profilForm"
+                                  class="m-form m-form--fit m-form--label-align-right"
+                                  novalidate>
+                                <!-- Grid row -->
+                                <div class="form-row mb-5">
+                                    <div class="col-md-12 ">
+                                        <div *ngIf="errors.length" class="animated fadeIn alert alert-warning"
+                                             role="alert">
+                                            <b>{{ errors[0]}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Grid row -->
+                                <div class="col offset-md-2">
+
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-10 ml-auto-">
+                                            <h3 class="m-form__section">
+                                                1. Details Personnel
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="d-none form-group m-form__group row">
+                                        <label class="col-2 col-form-label" for="example-text-input">
+                                            Full Name
+                                        </label>
+                                        <div class="col-7 md-form m-0">
+                                            <input class="form-control m-input" formControlName="fullName" mdbInput
+                                                   mdbValidate type="text">
+                                            <mdb-error
+                                                    *ngIf="fullNameInput?.invalid && (fullNameInput?.dirty || fullNameInput?.touched)">
+                                                invalid
+                                            </mdb-error>
+                                            <mdb-success
+                                                    *ngIf="fullNameInput?.valid && (fullNameInput?.dirty || fullNameInput?.touched)">
+                                                valid
+                                            </mdb-success>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-2 col-form-label" for="example-text-input">
+                                            Téléphone
+                                        </label>
+                                        <div class="col-7 md-form m-0">
+                                            <input class="form-control m-input" formControlName="phoneNumber"
+                                                   mdbInput mdbValidate type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-2 col-form-label" for="example-text-input">
+                                            Occupation
+                                        </label>
+                                        <div class="col-7 md-form m-0">
+                                            <input class="form-control m-input" formControlName="occupation" mdbInput
+                                                   mdbValidate type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-2 col-form-label" for="example-text-input">
+                                            Organisation
+                                        </label>
+                                        <div class="col-7 md-form m-0">
+                                            <input class="form-control m-input" formControlName="companyName"
+                                                   mdbInput mdbValidate type="text">
+                                            <small class="d-none- m-form__help">
+                                                Si vous souhaitez que vos factures soient adressées à une entreprise.
+                                                Laissez vide pour utiliser votre nom complet.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-2 col-form-label" for="example-text-input">
+                                            A propos.
+                                        </label>
+                                        <div class="col-7 md-form m-0">
                         <textarea class="form-control m-input" formControlName="about" type="text" mdbInput
-                          mdbValidate></textarea>
-                      </div>
+                                  mdbValidate></textarea>
+                                            <small class="d-none- m-form__help">
+                                                vous pouvez utiliser du <a href="https://github.github.com/gfm/"
+                                                                           target="_blank">markdown
+                                                <mdb-icon fas icon="external-link-alt"
+                                                          style="font-size: 75%"></mdb-icon>
+                                                <!--                              <mdb-icon style="font-size: 75%" fas icon="external-link-square-alt"></mdb-icon>-->
+                                            </a>.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+
+                                    <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+
+
+                                    <div [formGroup]="profilForm.get('address')" class="mt-5">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-10 ml-auto-">
+                                                <h3 class="m-form__section">
+                                                    2. Address
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Address
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="street" mdbInput
+                                                       mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                City
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="city" mdbInput
+                                                       mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Country
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="country"
+                                                       mdbInput mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+
+                                    <div [formGroup]="profilForm.get('socialLinks')" class="mt-5">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-10 ml-auto-">
+                                                <h3 class="m-form__section">
+                                                    3. Social Links
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Linkedin
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="linkedin"
+                                                       mdbInput mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Facebook
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="facebook"
+                                                       mdbInput mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Dribbble
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="dribbble"
+                                                       mdbInput mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Twitter
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="twitter"
+                                                       mdbInput mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Instagram
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="instagram"
+                                                       mdbInput mdbValidate type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-2 col-form-label" for="example-text-input">
+                                                Youtube
+                                            </label>
+                                            <div class="col-7 md-form m-0">
+                                                <input class="form-control m-input" formControlName="youtube"
+                                                       mdbInput mdbValidate type="text">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="m-portlet__foot m-portlet__foot--fit ">
+                                    <div class="m-form__actions">
+                                        <div class="row mt-md-4">
+                                            <div class="col"></div>
+                                            <div class=" col-6 text-right md-form m-0">
+                                                <button class="d-none btn grey lighten-3 " type="reset">
+                                                    Annuler
+                                                </button>
+                                                <button class="btn orange darken-3 text-white mr-4" type="submit">
+                                  <span *ngIf="loading"
+                                        [disabled]="loading"
+                                        aria-hidden="true"
+                                        class="spinner-grow spinner-grow-sm text-light"
+                                        role="status"></span>
+                                                    Enregistrer
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Grid row -->
+                                <div class="form-row mt-5">
+                                    <div class="col-md-12 ">
+                                        <div *ngIf="errors.length" class="animated fadeIn alert alert-warning"
+                                             role="alert">
+                                            <b>{{ errors[0]}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Grid row -->
+                            </form>
+                            <!-- ./profil form-->
+                        </div>
                     </div>
-                    <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-
-                    <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-
-
-                    <div [formGroup]="profilForm.get('address')" class="mt-5">
-                      <div class="form-group m-form__group row">
-                        <div class="col-10 ml-auto-">
-                          <h3 class="m-form__section">
-                            2. Address
-                          </h3>
+                </mdb-tab>
+                <!--Panel 2-->
+                <mdb-tab heading="Mon compte">
+                    <div class="row">
+                        <div class="col-12">
+                            <br>
+                            <p>.</p>
                         </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          Address
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="street" mdbInput mdbValidate>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          City
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="city" mdbInput mdbValidate>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          Country
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="country" mdbInput mdbValidate>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          Postcode
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="postCode" mdbInput mdbValidate>
-                        </div>
-                      </div>
                     </div>
-
-                    <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-
-                    <div [formGroup]="profilForm.get('socialLinks')" class="mt-5">
-                      <div class="form-group m-form__group row">
-                        <div class="col-10 ml-auto-">
-                          <h3 class="m-form__section">
-                            3. Social Links
-                          </h3>
+                </mdb-tab>
+                <!--Panel 3-->
+                <mdb-tab heading="Ma carrière">
+                    <div class="row">
+                        <div class="col-12">
+                            <br>
+                            <p>.</p>
                         </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          Linkedin
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="linkedin" mdbInput mdbValidate>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          Facebook
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="facebook" mdbInput mdbValidate>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          Twitter
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="twitter" mdbInput mdbValidate>
-                        </div>
-                      </div>
-                      <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-2 col-form-label">
-                          Instagram
-                        </label>
-                        <div class="col-7 md-form m-0">
-                          <input class="form-control m-input" type="text" formControlName="instagram" mdbInput mdbValidate>
-                        </div>
-                      </div>
-                        <div class="form-group m-form__group row">
-                          <label for="example-text-input" class="col-2 col-form-label">
-                            Youtube
-                          </label>
-                          <div class="col-7 md-form m-0">
-                            <input class="form-control m-input" type="text" formControlName="youtube" mdbInput mdbValidate>
-                          </div>
-                        </div>
-
                     </div>
-                  </div>
-                    <div class="m-portlet__foot m-portlet__foot--fit ">
-                    <div class="m-form__actions">
-                        <div class="row mt-md-4">
-                            <div class="col"></div>
-                            <div class="col-6 text-right md-form m-0">
-                          &nbsp;&nbsp;
-                                <button class="btn grey lighten-3 " type="reset">
-                            Cancel
-                                </button>
-                                <button class="btn orange darken-3 text-white" type="submit">
-                                    Save changes
-                                </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Grid row -->
-                  <div class="form-row mt-5">
-                    <div class="col-md-12 ">
-                      <div *ngIf="errors.length" class="animated fadeIn alert alert-warning" role="alert">
-                        <b>{{ errors[0]}}</b>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Grid row -->
-                </form>
-                <!-- ./profil form-->
-              </div>
-            </div>
-          </mdb-tab>
-          <!--Panel 2-->
-          <mdb-tab heading="Mon compte">
-            <div class="row">
-              <div class="col-12">
-                <br>
-                <p>.</p>
-              </div>
-            </div>
-          </mdb-tab>
-          <!--Panel 3-->
-          <mdb-tab heading="Ma carrière">
-            <div class="row">
-              <div class="col-12">
-                <br>
-                <p>.</p>
-              </div>
-            </div>
-          </mdb-tab>
-        </mdb-tabset>
+                </mdb-tab>
+            </mdb-tabset>
+        </div>
     </div>
-  </div>
 </div>

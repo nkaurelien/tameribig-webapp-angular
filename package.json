@@ -70,6 +70,7 @@
     "imagesloaded": "^4.1.4",
     "jarallax": "^1.12.0",
     "jquery": "^3.4.1",
+    "marked": "^1.0.0",
     "masonry-layout": "^4.2.2",
     "mongoose": "^5.8.1",
     "ng-inline-svg": "^9.1.0",

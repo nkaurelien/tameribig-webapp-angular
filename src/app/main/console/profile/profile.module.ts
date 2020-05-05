@@ -15,6 +15,8 @@ import {
 } from 'ng-uikit-pro-standard';
 import {ProfileLayoutComponent} from './profile-layout/profile-layout.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
+import {MarkdownModule} from "@core/components/markdown/markdown.module";
+import {CoreDirectivesModule} from "@core/directives/core-directives.module";
 
 const routes: Routes = [
     {
@@ -44,6 +46,9 @@ const routes: Routes = [
         AccordionModule,
         TabsModule,
         LazyLoadImageModule,
+        MarkdownModule,
+        IconsModule,
+        CoreDirectivesModule,
     ], exports: [
         RouterModule
     ], declarations: [

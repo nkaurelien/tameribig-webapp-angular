@@ -1,13 +1,14 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {of, Subject, Subscription} from 'rxjs';
+import {of, Subject, Subscription, throwError} from 'rxjs';
 import {ToastService} from 'ng-uikit-pro-standard';
 import {User} from '@app/auth2/_models';
 import {AuthenticationService} from '@app/auth2/_services';
 import {AuthService} from '@core/auth';
-import {switchMap, takeUntil, tap} from 'rxjs/operators';
+import {catchError, finalize, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {AllValidationErrors, getFormValidationErrors} from '@core/_helpers/get-form-validation-errors';
 
+import {get} from 'lodash';
 
 @Component({
     selector: 'app-profile',
@@ -23,11 +24,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     defaultImageAvatar = '/assets/images/icons/masque-afrique.jpg';
     private isLoggedInSubscription: Subscription;
     unsubscribe = new Subject<boolean>();
+    private loading = false;
 
     constructor(
         private auth: AuthService,
         private fb: FormBuilder,
-        private toast: ToastService
+        private toast: ToastService,
+        private cdr: ChangeDetectorRef
     ) {
 
         this.authUser = new User();
@@ -54,7 +57,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     get fullNameInput(): FormControl {
-        return this.profilForm && (this.profilForm.get('fullNameInput') as FormControl);
+        return this.profilForm && (this.profilForm.get('fullName') as FormControl);
+    }
+
+    get phoneInput(): FormControl {
+        return this.profilForm && (this.profilForm.get('phoneNumber') as FormControl);
     }
 
     get username() {
@@ -78,15 +85,50 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     this.authUser.email = user.emailVerified ? user.email : undefined;
                     this.authUser.uid = user.uid;
                     console.log({user}, this.authUser);
+                    this.auth.apiAuth.backendAuthProfile();
                 }
             }),
-            takeUntil(this.unsubscribe)
-        ).subscribe();
+            switchMap((authUser) => {
+                return this.auth.apiAuth.backendAuthProfile();
+            }),
+            takeUntil(this.unsubscribe),
+        ).subscribe((response) => {
+            this.authUser.init(response.data || response);
+            this.fillForm(this.authUser);
+        });
     }
 
+    fillForm(user: User) {
+        this.profilForm.patchValue({
+            "address": {
+                "street": user.address.street,
+                "city": user.address.city,
+                "country": user.address.country
+            },
+            "socialLinks": {
+                "facebook": user.socialLinks.facebook,
+                "dribbble": user.socialLinks.dribbble,
+                "twitter": user.socialLinks.twitter,
+                "instagram": user.socialLinks.instagram,
+                "youtube": user.socialLinks.youtube,
+                "linkedin": user.socialLinks.linkedin,
+            },
+            "fullName": user.fullName,
+            "phoneNumber": user.phoneNumber,
+            "email": user.email,
+            "about": user.about,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "occupation": user.occupation,
+            "companyName": user.companyName
+        });
+    }
     createForm() {
+
+        console.log('this.authUser', this.authUser);
         this.profilForm = new FormGroup({
             fullName: new FormControl(this.authUser.fullName, [Validators.nullValidator, Validators.maxLength(33)]),
+            displayName: new FormControl(this.authUser.fullName, [Validators.nullValidator, Validators.maxLength(33)]),
             firstName: new FormControl(this.authUser.firstName, [Validators.nullValidator, Validators.maxLength(33)]),
             lastName: new FormControl(this.authUser.lastName, [Validators.nullValidator, Validators.maxLength(33)]),
             phoneNumber: new FormControl(this.authUser.phoneNumber, [Validators.required, Validators.minLength(9)]),
@@ -100,11 +142,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
             }),
             socialLinks: this.fb.group({
                 facebook: [this.authUser.socialLinks.facebook, Validators.nullValidator],
+                dribbble: [this.authUser.socialLinks.twitter, Validators.nullValidator],
                 twitter: [this.authUser.socialLinks.twitter, Validators.nullValidator],
                 instagram: [this.authUser.socialLinks.instagram, Validators.nullValidator],
                 youtube: [this.authUser.socialLinks.youtube, Validators.nullValidator],
                 linkedin: [this.authUser.socialLinks.linkedin, Validators.nullValidator],
             })
+        });
+
+        this.profilForm.get('about').valueChanges.subscribe((value) => {
+            this.authUser.about = value;
         });
     }
 
@@ -116,14 +163,35 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
 
         if (this.profilForm.valid) {
+            this.loading = true;
             // this.dropzone.processQueue();
-            this.auth.fireAuth.updateUserData(this.profilForm.value).subscribe();
-            this.auth.apiAuth.updateUserData(this.profilForm.value).subscribe(response => {
-                this.authUser.init(response);
-            });
+            const data = {...this.authUser, ...this.profilForm.value};
+            this.auth.fireAuth.updateUserData(data).subscribe();
+            this.auth.apiAuth.updateUserData(data)
+                .pipe(
+                    catchError((serverError, __) => {
+                        if (get(serverError, 'error.error.code') === 'auth/user-not-found') {
+                        } else {
+                            this.errors = ['Probleme d\'enregistrement'];
+                            const options = {positionClass: 'md-toast-bottom-full-width'};
+                            this.toast.info('Probleme d\'enregistrement', '', options);
+                        }
+                        return throwError(serverError);
+                    }),
+                    takeUntil(this.unsubscribe),
+                    finalize(() => {
+                        this.loading = false;
+                        this.cdr.markForCheck();
+                    })
+                )
+                .subscribe(response => {
+                    this.authUser.init(response.data || response);
+                    const options = {positionClass: 'md-toast-bottom-full-width'};
+                    this.toast.success('Vos informations ont été correctement enregistrées', '', options);
+                });
             // this.auth.updateUserData(this.profilForm.value);
         } else {
-            console.log(this.profilForm.errors);
+            // console.log(this.profilForm.errors);
             this.errors = ['Formulaire invalide'];
             const options = {positionClass: 'md-toast-bottom-full-width'};
             this.toast.info('Verifier votre formulaire', '', options);
