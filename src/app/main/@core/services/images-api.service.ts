@@ -96,6 +96,15 @@ export class ImagesApiService {
     }
 
 
+    create(body: Partial<Image>): Observable<Image | any> {
+        return this.http.post<IApiResource>(environment.ApiBaseUrl + '/images', body).pipe(
+            take(1),
+            map(resp => (resp.data || resp) as Image)
+        );
+    }
+
+
+
     updateOneById(ID: string, body: Partial<Image>): Observable<Image | any> {
         return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID, body).pipe(
             take(1),

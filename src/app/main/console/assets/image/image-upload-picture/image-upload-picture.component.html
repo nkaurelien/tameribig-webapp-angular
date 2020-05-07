@@ -63,7 +63,7 @@
                                             <div class="form-row">
 
 
-                                                <div class="col-md-12 text-center">
+                                                <div *ngIf="!config.autoProcessQueue" class="col-md-12 text-center">
                                                     <button [disabled]="uploading"
                                                             class="btn btn-block btn-primary" type="submit">
                                                         <mdb-spinner *ngIf="uploading" color="white" size="sm"

@@ -125,7 +125,6 @@
                                                                         name="description"
                                                                         placeholder="Description "
                                                                         rows="2" type="text"></textarea>
-                                                                <small>markdown</small>
                                                                 <mdb-error
                                                                         *ngIf="descInput.invalid && (descInput.dirty || descInput.touched)">
                                                                     invalid
@@ -155,40 +154,6 @@
                                             <div class="col-md-12"></div>
                                         </div>
 
-                                        <!--<div class="box-container" fxLayout="column" [ngStyle.lt-sm]="'min-height: 800px;'">-->
-
-
-                                        <!--<div class="horizontal-container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="stretch" fxFlex="auto">-->
-                                        <!--<div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">-->
-                                        <!--<div class="box-title">Controls</div>-->
-
-                                        <!--<div class="action-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">-->
-                                        <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleType()'>{{(type == "component") ? "Switch to directive" : "Switch to component"}}</div>-->
-
-                                        <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleDisabled()'>Toggle disabled state</div>-->
-
-                                        <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleMultiUpload()'>{{(config.maxFiles !== 1) ? "Upload single file" : "Upload multiple files"}}</div>-->
-
-                                        <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleAutoReset()'>{{config.autoReset ? "Turn off auto reset" : "Turn on auto reset"}}</div>-->
-
-                                        <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleClickAction()'>{{config.clickable ? "Turn off click action" : "Turn on click action"}}</div>-->
-
-                                        <!--<div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='resetUploads()'>Reset upload area</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-
-                                        <!--<div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">-->
-                                        <!--<div class="box-title">Dropzone</div>-->
-
-                                        <!--<div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">-->
-                                        <!--<dropzone *ngIf="type === 'component'" class="dropzone-container"[disabled]="disabled" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto"-->
-                                        <!--[config]="config" [message]="'Click or drag images here to upload'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>-->
-
-                                        <!--<div *ngIf="type === 'directive'" class="dropzone dropzone-container" [dropzone]="config" [disabled]="disabled" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
                                     </div>
                                     <div class=" col-md-1"></div>
                                 </div>

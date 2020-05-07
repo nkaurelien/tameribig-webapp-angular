@@ -84,6 +84,15 @@ export class ImageUploadPictureComponent implements OnInit, AfterViewInit, OnDes
             this.uploading = true;
             // Will send the filesize along with the file as POST data.
             // console.log('sending:', file, xhr, formData);
+            // for (const key in this.validatingForm.value) {
+            //     formData.append(key, JSON.stringify(this.validatingForm.value[key]));
+            // }
+            // const generatedKeyswords = (this.validatingForm.value['description'] || '').split(' ');
+            // const keywordsModelList = this.validatingForm.value['keywords'];
+            // const keywords = keywordsModelList.map(x => x).concat(generatedKeyswords).filter(x => x.length > 2);
+            // formData.append('keywords', JSON.stringify(keywords));
+
+
             formData.append('id', this.ID);
             formData.append('user', JSON.stringify(this.user));
 
