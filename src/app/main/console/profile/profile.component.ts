@@ -100,30 +100,33 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     fillForm(user: User) {
 
-        this.profilForm.patchValue({
-            'address': {
-                'street': user.address.street,
-                'city': user.address.city,
-                'country': user.address.country
-            },
-            'socialLinks': {
-                'facebook': user.socialLinks.facebook,
-                'dribbble': user.socialLinks.dribbble,
-                'twitter': user.socialLinks.twitter,
-                'instagram': user.socialLinks.instagram,
-                'youtube': user.socialLinks.youtube,
-                'linkedin': user.socialLinks.linkedin,
-            },
-            'fullName': user.fullName,
-            'phoneNumber': user.phoneNumber,
-            'email': user.email,
-            'about': user.about,
-            'firstName': user.firstName,
-            'lastName': user.lastName,
-            'occupation': user.occupation,
-            'companyName': user.companyName
-        });
+        if (this.profilForm) {
+            this.profilForm.patchValue({
+                'address': {
+                    'street': user.address.street,
+                    'city': user.address.city,
+                    'country': user.address.country
+                },
+                'socialLinks': {
+                    'facebook': user.socialLinks.facebook,
+                    'dribbble': user.socialLinks.dribbble,
+                    'twitter': user.socialLinks.twitter,
+                    'instagram': user.socialLinks.instagram,
+                    'youtube': user.socialLinks.youtube,
+                    'linkedin': user.socialLinks.linkedin,
+                },
+                'fullName': user.fullName,
+                'phoneNumber': user.phoneNumber,
+                'email': user.email,
+                'about': user.about,
+                'firstName': user.firstName,
+                'lastName': user.lastName,
+                'occupation': user.occupation,
+                'companyName': user.companyName
+            });
+        }
     }
+
     createForm() {
 
         const urlReg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
@@ -143,12 +146,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 country: [this.authUser.address.country || 'Cameroun', Validators.nullValidator],
             }),
             socialLinks: this.fb.group({
-                facebook: [this.authUser.socialLinks.facebook, Validators.nullValidator, Validators.pattern(urlReg)],
-                dribbble: [this.authUser.socialLinks.twitter, Validators.nullValidator, Validators.pattern(urlReg)],
-                twitter: [this.authUser.socialLinks.twitter, Validators.nullValidator, Validators.pattern(urlReg)],
-                instagram: [this.authUser.socialLinks.instagram, Validators.nullValidator, Validators.pattern(urlReg)],
-                youtube: [this.authUser.socialLinks.youtube, Validators.nullValidator, Validators.pattern(urlReg)],
-                linkedin: [this.authUser.socialLinks.linkedin, Validators.nullValidator, Validators.pattern(urlReg)],
+                facebook: [this.authUser.socialLinks.facebook, [Validators.nullValidator, Validators.pattern(urlReg)]],
+                dribbble: [this.authUser.socialLinks.twitter, [Validators.nullValidator, Validators.pattern(urlReg)]],
+                twitter: [this.authUser.socialLinks.twitter, [Validators.nullValidator, Validators.pattern(urlReg)]],
+                instagram: [this.authUser.socialLinks.instagram, [Validators.nullValidator, Validators.pattern(urlReg)]],
+                youtube: [this.authUser.socialLinks.youtube, [Validators.nullValidator, Validators.pattern(urlReg)]],
+                linkedin: [this.authUser.socialLinks.linkedin, [Validators.nullValidator, Validators.pattern(urlReg)]],
             })
         });
 
