@@ -10,33 +10,17 @@
 
 
             <!--Top Table UI-->
-            <mdb-card class="my-5">
-                <mdb-card-body>
-                    <mdb-card-title >
-                        <h4 class="text-muted">
-                            <span>Images</span>
-                        </h4>
-                        <!--<div class="float-right">-->
-                            <!--<a class="btn btn-primary waves-light" routerLink="./add" mdbWavesEffect>-->
-                                <!--<mdb-icon fas icon="plus" class="mr-1"></mdb-icon>-->
-                                <!--<span class="clearfix d-none d-sm-inline-block">Inserer</span>-->
-                            <!--</a>-->
-                        <!--</div>-->
-                    </mdb-card-title>
-                    <hr>
-                    <!--Grid row-->
+            <!--Grid row-->
+            <div class="row">
+                <div class="col p-4">
                     <div class="row">
 
                         <!--Grid column-->
                         <div class="col-xl-3 col-lg-6 col-md-6">
-                            <a class="btn btn-primary waves-light" routerLink="./add" mdbWavesEffect>
+                            <a class="ml-3 btn btn-primary waves-light" mdbWavesEffect routerLink="./add">
                                 <mdb-icon class="mr-1" fas icon="plus"></mdb-icon>
                                 <span class="clearfix d-none d-sm-inline-block">Ajouter</span>
                             </a>
-                            <a class="btn btn-primary waves-light" mdbWavesEffect routerLink="./upload">
-                                <mdb-icon class="mr-1" fas icon="upload"></mdb-icon>
-                                <span class="clearfix d-none d-sm-inline-block">Télécharger</span>
-                            </a>
                         </div>
                         <!--Grid column-->
 
@@ -46,7 +30,7 @@
                         <!--Grid column-->
 
                         <!--Grid column-->
-                        <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="pr-3 col-xl-3 col-lg-6 col-md-12">
                             <mdb-select
                                     [options]="bulkOptionsSelect"
                                     placeholder="Statuts"
@@ -83,9 +67,9 @@
                         </div>
                         <!--Grid column-->
                     </div>
-                    <!--Grid row-->
-                </mdb-card-body>
-            </mdb-card>
+                </div>
+            </div>
+            <!--Grid row-->
             <!--Top Table UI-->
 
             <mdb-card cascade="true" narrower="true" [ngClass]="{ 'z-depth-0': !shadows }">
@@ -197,8 +181,9 @@
                                     ></mdb-checkbox>
                                 </th>
                                 <td>
-                                    <img *ngIf="row.data.miniature.length" [src]="row.data.miniature" class="img-fluid">
-                                    <span *ngIf="!row.data.miniature.length" class="text-muted">Indéfinie</span>
+                                    <img *ngIf="row.data.miniature?.length" [src]="row.data.miniature"
+                                         class="img-fluid">
+                                    <span *ngIf="!row.data.miniature?.length" class="text-muted">Indéfinie</span>
                                 </td>
                                 <td>{{ row.data.title }}</td>
                                 <td>{{ row.data.price }}</td>

@@ -30,7 +30,7 @@
                                                 <div class="col-md-12 ">
                                                     <div *ngIf="errors.length"
                                                          class="animated fadeIn alert alert-warning" role="alert">
-                                                        <b>{{ errors[0]}}</b>
+                                                        <b [innerHTML]="errors[0]"></b>
                                                     </div>
                                                 </div>
                                             </div>
@@ -40,23 +40,15 @@
                                                 <div class="col">
                                                     <!-- Material input -->
                                                     <div class="md-form mt-0">
-                                                        <dropzone (error)="onUploadError($event)"
-                                                                  (init)="onUploadInit($event)"
-                                                                  (success)="onUploadSuccess($event)"
-                                                                  *ngIf="type === 'component'" [config]="config"
-                                                                  [disabled]="disabled"
-                                                                  [message]="'Click or drag images here to upload'"
-                                                                  class="dropzone-container"
-                                                                  fxFlex="auto"
-                                                                  fxLayout="row"
-                                                                  fxLayoutAlign="start strech"></dropzone>
 
-                                                        <div (error)="onUploadError($event)"
-                                                             (init)="onUploadInit($event)"
-                                                             (success)="onUploadSuccess($event)"
-                                                             *ngIf="type === 'directive'" [disabled]="disabled"
-                                                             [dropzone]="config"
-                                                             class="dropzone dropzone-container"></div>
+                                                        <file-pond #myPond
+                                                                   (onaddfile)="pondHandleAddFile($event)"
+                                                                   (onerror)="onUploadError($event)"
+                                                                   (oninit)="pondHandleInit()"
+                                                                   [files]="pondFiles"
+                                                                   [options]="pondOptions">
+                                                        </file-pond>
+
                                                     </div>
                                                 </div>
                                                 <!-- Grid column -->

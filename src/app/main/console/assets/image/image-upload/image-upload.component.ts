@@ -169,8 +169,6 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
         if (this.validatingForm.valid) {
 
             this.myPond.processFile().then(file => {
-
-
             });
 
         } else {

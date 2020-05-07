@@ -16,25 +16,10 @@ export class ImageUploadSourceComponent implements OnInit, AfterViewInit, OnDest
 
     @ViewChild('modal', {static: true}) modal: ModalDirective;
 
-    @ViewChild(DropzoneComponent, {static: false}) componentRef?: DropzoneComponent;
-
-    @ViewChild(DropzoneDirective, {static: false}) directiveRef?: DropzoneDirective;
-
-    public type = 'directive';
+    @ViewChild('myPond', {static: true}) myPond: any;
+    pondFiles = [];
     public disabled = false;
     public uploading = false;
-    public config: DropzoneConfigInterface = {
-        clickable: true,
-        maxFiles: 1,
-        autoReset: null,
-        errorReset: null,
-        cancelReset: null,
-        autoProcessQueue: false,
-        // acceptedFiles: 'application/zip,application/x-7z-compressed,application/tar+gzip,application/x-photoshop,application/octet-stream,image/vnd.adobe.photoshop'
-    };
-
-
-    public dropzone: any;
 
     public errors = [];
     public imagesUploadedWithSuccess = [];
@@ -42,6 +27,83 @@ export class ImageUploadSourceComponent implements OnInit, AfterViewInit, OnDest
     private user: any;
     private paramMapSub: Subscription;
     private ID: string;
+
+    /**
+     * @see https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+     * @see https://codepen.io/rikschennink/pen/NzRvbj
+     */
+    pondOptions = {
+        maxFiles: 1,
+        class: 'my-filepond',
+        multiple: false,
+        // name: 'filepond',
+        labelIdle: 'Glisser votre couverture d\'image ici ou <span class="filepond--label-action"> Choisir </span>',
+        // acceptedFileTypes: 'image/jpeg, image/png',
+        // acceptedFileTypes: 'application/tar+gzip,application/x-photoshop,application/octet-stream,image/vnd.adobe.photoshop',
+        acceptedFileTypes: 'application/zip,application/x-zip-compressed,application/x-7z-compressed,application/tar+gzip',
+
+        required: true,
+
+        allowDrop: true,
+        allowMultiple: false,
+        allowBrowse: true,
+        allowReplace: false,
+        allowRevert: false,
+        instantUpload: false,
+        allowFileEncode: true,
+        allowImagePreview: false,
+        server: {
+            url: `${environment.ApiBaseUrl}/images/upload-archive`,
+            timeout: 7000,
+            revert: null,
+            restore: null,
+            load: null,
+            fetch: null,
+            process: (fieldName, file, metadata, load, error, progress, abort) => {
+
+                const formData = new FormData();
+                this.uploading = true;
+
+                formData.append('id', this.ID);
+                formData.append('file', file);
+                formData.append('user', JSON.stringify(this.user));
+
+                const request = new XMLHttpRequest();
+                request.open('POST', this.pondOptions.server.url);
+
+                // Should call the progress method to update the progress to 100% before calling load
+                // Setting computable to false switches the loading indicator to infinite mode
+                request.upload.onprogress = (e) => {
+                    progress(e.lengthComputable, e.loaded, e.total);
+                };
+
+                // Should call the load method when done and pass the returned server file id
+                // this server file id is then used later on when reverting or restoring a file
+                // so your server knows which file to return without exposing that info to the client
+                request.onload = () => {
+                    if (request.status >= 200 && request.status < 300) {
+                        // the load method accepts either a string (id) or an object
+                        load(request.responseText);
+                    } else {
+                        // Can call the error method if something is wrong, should exit after
+                        error('oh no');
+                    }
+                    this.uploading = false;
+                };
+                request.send(formData);
+                // Should expose an abort method so the request can be cancelled
+                return {
+                    abort: () => {
+                        this.myPond.removeFiles();
+                        this.errors = ['Erreur de téléchargement'];
+                        // Let FilePond know the request has been cancelled
+                        abort();
+                        this.uploading = false;
+                    },
+                };
+            },
+        },
+    };
 
     constructor(
         private router: Router,
@@ -71,24 +133,15 @@ export class ImageUploadSourceComponent implements OnInit, AfterViewInit, OnDest
     ngAfterViewInit() {
         this.modal.show();
 
-        // Dropzone Init
+    }
 
 
-        if (this.type === 'directive' && this.directiveRef) {
-            this.dropzone = this.directiveRef.dropzone();
-        } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
-            this.dropzone = this.componentRef.directiveRef.dropzone();
-        }
+    pondHandleInit() {
+        console.log('FilePond has initialised', this.myPond);
+    }
 
-        this.dropzone.on('sending', (file, xhr, formData) => {
-            this.uploading = true;
-            // Will send the filesize along with the file as POST data.
-            // console.log('sending:', file, xhr, formData);
-            formData.append('id', this.ID);
-            formData.append('user', JSON.stringify(this.user));
-
-
-        });
+    pondHandleAddFile(event: any) {
+        console.log('A file was added', event);
     }
 
     redirectToImagesIndex() {
@@ -100,35 +153,38 @@ export class ImageUploadSourceComponent implements OnInit, AfterViewInit, OnDest
     }
 
     submit() {
+        console.log('begin', (new Date()).toISOString());
+        this.uploading = true;
         // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
-        this.dropzone.processQueue();
+        this.myPond.processFile().then(file => {
+        }).finally(() => {
+            this.uploading = false;
+            console.log('end', (new Date()).toISOString());
+
+        });
     }
 
-    public resetDropzoneUploads(): void {
-        if (this.type === 'directive' && this.directiveRef) {
-            this.directiveRef.reset();
-        } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
-            this.componentRef.directiveRef.reset();
-        }
-    }
 
-    public onUploadInit(dropzone: any): void {
-        // console.log('onUploadInit:', dropzone);
+    public resetUploads(): void {
+        this.myPond.removeFiles();
     }
 
     public onUploadError(args: any): void {
-        // console.log('onUploadError:', args);
-        this.resetDropzoneUploads();
-        this.errors[0] = 'Un problème est survenu pendant l\'opération';
+        console.log('onUploadError:', args);
+        this.resetUploads();
+        this.errors[0] = [
+            'Un problème est survenu pendant l\'opération',
+            '<small>' + args.error.main + '</small>',
+        ].join('<br>');
         this.uploading = false;
-
     }
 
     public onUploadSuccess([file, xhrResponse, progressEvent]: any): void {
         // console.log('onUploadSuccess:', [file, xhrResponse, progressEvent]);
+
         this.uploading = false;
         this.imagesUploadedWithSuccess = [...this.imagesUploadedWithSuccess, xhrResponse];
-        this.resetDropzoneUploads();
+        this.resetUploads();
         this.errors = [];
         this.toast.success('Votre image a été soumise et la qualité sera etudier avant d\'etre publier');
         setTimeout(() => this.modal.hide(), 2000);

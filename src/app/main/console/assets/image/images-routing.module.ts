@@ -17,10 +17,10 @@ const routes: Routes = [
                 path: 'add',
                 component: ImageAddComponent,
             },
-            {
-                path: 'upload',
-                component: ImageUploadComponent,
-            },
+            // {
+            //     path: 'upload',
+            //     component: ImageUploadComponent,
+            // },
             {
                 path: ':id/upload-picture',
                 component: ImageUploadPictureComponent,
