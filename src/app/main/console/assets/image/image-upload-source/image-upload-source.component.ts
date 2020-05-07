@@ -153,14 +153,12 @@ export class ImageUploadSourceComponent implements OnInit, AfterViewInit, OnDest
     }
 
     submit() {
-        console.log('begin', (new Date()).toISOString());
         this.uploading = true;
         // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
         this.myPond.processFile().then(file => {
+            setTimeout(() => this.modal.hide(), 2000);
         }).finally(() => {
             this.uploading = false;
-            console.log('end', (new Date()).toISOString());
-
         });
     }
 
