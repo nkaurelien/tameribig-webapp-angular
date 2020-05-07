@@ -46,7 +46,7 @@
 
 
                     <ng-container *ngIf="authUser.about">
-                        <h6 class='text-justify'><strong>About:</strong></h6>
+                        <h6 class='text-justify mt-3'><strong>About:</strong></h6>
                         <markdown class='text-justify' data="{{ authUser.about }}"></markdown>
                     </ng-container>
 
@@ -313,9 +313,9 @@
                                                 <button class="d-none btn grey lighten-3 " type="reset">
                                                     Annuler
                                                 </button>
-                                                <button class="btn orange darken-3 text-white mr-4" type="submit">
+                                                <button [disabled]="loading" class="btn orange darken-3 text-white mr-4"
+                                                        type="submit">
                                   <span *ngIf="loading"
-                                        [disabled]="loading"
                                         aria-hidden="true"
                                         class="spinner-grow spinner-grow-sm text-light"
                                         role="status"></span>

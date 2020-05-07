@@ -119,8 +119,11 @@
                                 rounded="true"
                                 size="sm"
                                 class="px-2"
+                                (click)="loadImages()"
+                                title="Recharger la liste"
                         >
-                            <mdb-icon fas icon="pencil-alt" class="mt-0"></mdb-icon>
+                            <mdb-icon class="mt-0" fas icon="redo"></mdb-icon>
+                            Recharger
                         </button>
                         <button
                                 type="button"
@@ -129,18 +132,7 @@
                                 color="white"
                                 rounded="true"
                                 size="sm"
-                                class="px-2"
-                        >
-                            <mdb-icon fas icon="times" class="mt-0"></mdb-icon>
-                        </button>
-                        <button
-                                type="button"
-                                mdbBtn
-                                outline="true"
-                                color="white"
-                                rounded="true"
-                                size="sm"
-                                class="px-2"
+                                class="d-none px-2"
                         >
                             <mdb-icon fas icon="info-circle" class="mt-0"></mdb-icon>
                         </button>
@@ -224,15 +216,15 @@
                                             <mdb-icon class="mt-0" fas icon="th-large"></mdb-icon>
                                         </a>
                                         <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
-                                            <a (click)="uploadPicture(row)" class="dropdown-item text-primary">
+                                            <a (click)="uploadPicture(row.data)" class="dropdown-item text-primary">
                                                 <mdb-icon class="mr-1" fas icon="cloud-upload-alt"></mdb-icon>
                                                 <span class="clearfix d-none d-sm-inline-block">Picture</span>
                                             </a>
-                                            <a (click)="uploadFiles(row)" class="dropdown-item text-primary">
+                                            <a (click)="uploadFiles(row.data)" class="dropdown-item text-primary">
                                                 <mdb-icon class="mr-1" fas icon="cloud-upload-alt"></mdb-icon>
                                                 <span class="clearfix d-none d-sm-inline-block">Source .Zip</span>
                                             </a>
-                                            <a (click)="edit(row)" class="dropdown-item text-primary">
+                                            <a (click)="edit(row.data)" class="dropdown-item text-primary">
                                                 <mdb-icon class="mr-1" fas icon="edit"></mdb-icon>
                                                 <span class="clearfix d-none d-sm-inline-block">Edit</span>
                                             </a>

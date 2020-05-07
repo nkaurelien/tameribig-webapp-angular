@@ -55,10 +55,18 @@ export class ImageComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.loadImages();
+    }
+
+    loadImages() {
 
         this.imagesApiSub = this.imagesApi.getAllByAuth().subscribe(resp => {
             // console.log({resp});
-            this.tableData = resp.map(row => new Selectable(row));
+            this.tableData = resp.map(row => {
+                // console.log('image', image);
+                const image = row as Image;
+                return new Selectable<Image>(image);
+            });
 
         });
     }
@@ -95,6 +103,7 @@ export class ImageComponent implements OnInit {
     }
 
     edit(image: Image) {
+        // console.log('editing image', image);
         this.router.navigateByUrl(`/console/assets/images/${image._id}/edit`);
     }
 

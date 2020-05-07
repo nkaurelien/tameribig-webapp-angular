@@ -30,7 +30,7 @@ export class ImageUploadSourceComponent implements OnInit, AfterViewInit, OnDest
         errorReset: null,
         cancelReset: null,
         autoProcessQueue: false,
-        // acceptedFiles: 'image/*'
+        // acceptedFiles: 'application/zip,application/x-7z-compressed,application/tar+gzip,application/x-photoshop,application/octet-stream,image/vnd.adobe.photoshop'
     };
 
 

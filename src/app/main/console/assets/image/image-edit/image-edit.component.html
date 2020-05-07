@@ -36,7 +36,7 @@
                                                 <div class="col">
                                                     <!-- Material input -->
                                                     <div class="md-form form-group mt-0">
-                                                        <input class="form-control" formControlName="titre" id="titre"
+                                                        <input class="form-control" formControlName="title" id="titre"
                                                                maxlength="100"
                                                                mdbInput
                                                                name="titre" placeholder="Titre "
@@ -121,11 +121,14 @@
                                                 <!-- Grid column -->
                                                 <div class="col">
                                                     <!-- Material input -->
-                                                    <div class="md-form m-0">
-                                                        <tag-input [maxItems]='5'
-                                                                   [modelAsStrings]="true"
-                                                                   formControlName="keywords"
-                                                                   inputClass="border  border-0"></tag-input>
+                                                    <div class="md-form p-2 rgba-cyan-slight- m-0">
+                                                        <tag-input
+                                                                [maxItems]='5'
+                                                                [modelAsStrings]="true"
+                                                                formControlName="keywords"
+                                                                inputClass="border  border-0"
+                                                                placeholder="Tapez ici"
+                                                                secondaryPlaceholder="Ajoutez vos mots clés pour la recherche"></tag-input>
                                                     </div>
                                                 </div>
                                                 <!-- Grid column -->
@@ -160,20 +163,28 @@
                                     </div>
                                 </mdb-card-body>
                             </mdb-card>
+                            <br>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-3">
 
 
-                        <div class="col-md-3 offset-md-7 text-center">
+                        <div class="col-md-9 text-center">
+                            <strong>Note:</strong> Vous allez ajouter l'image de couverture et l'archives
+                            <strong><a href="https://www.7-zip.org/" target="_blank"
+                                       title="Télécharger 7Zip gratuitement">zip</a></strong>
+                            des fichiers sources apres avoir enregister ce template.
+                        </div>
+                        <div class="col-md-3 text-center">
                             <button [disabled]="submitting"
-                                    class="btn  btn-primary btn-block"
+                                    class="btn m-0 btn-primary btn-block"
                                     type="submit">
-                                <mdb-spinner *ngIf="submitting" color="white"
-                                             size="sm"
-                                             spinnerColor="yellow"></mdb-spinner>
-                                <span *ngIf="!submitting">Envoyer</span>
+                                <span *ngIf="submitting"
+                                      aria-hidden="true"
+                                      class="spinner-grow spinner-grow-sm text-light"
+                                      role="status"></span>
+                                <span *ngIf="!submitting">Enregistrer</span>
                             </button>
                         </div>
                     </div>

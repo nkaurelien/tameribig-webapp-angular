@@ -40,25 +40,25 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     get prixInput() {
-        return this.validatingForm.get('price');
+        return this.validatingForm && this.validatingForm.get('price');
     }
 
     get titreInput() {
-        return this.validatingForm.get('titre');
+        return this.validatingForm && this.validatingForm.get('title');
     }
 
     get descInput() {
-        return this.validatingForm.get('description');
+        return this.validatingForm && this.validatingForm.get('description');
     }
 
     get keywordsInput() {
-        return this.validatingForm.get('keywords');
+        return this.validatingForm && this.validatingForm.get('keywords');
     }
 
     ngOnInit() {
         this.selectedTopics = [];
         this.validatingForm = new FormGroup({
-            titre: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+            title: new FormControl(null, [Validators.required, Validators.minLength(3)]),
             price: new FormControl(null, [Validators.required, Validators.min(50)]),
             description: new FormControl(null, [Validators.minLength(3), Validators.maxLength(100)]),
             keywords: new FormControl(null, null),
@@ -135,7 +135,7 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
                 };
 
                 this.selectedTopics = [];
-                this.toast.success('Enregistrer avec succès');
+                this.toast.success('Enregistrer avec succès, recharger votre liste ');
                 setTimeout(() => this.modal.hide(), 1200);
 
             }, err => {
