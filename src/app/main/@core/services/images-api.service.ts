@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {environment} from '@environments/environment';
 import {AuthenticationService} from '@app/auth2/_services';
 import {IApiResource} from '@core/_base/crud/models/IApiResource';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 export interface Author {
@@ -34,6 +34,7 @@ export interface Image {
     author: Author;
     userId: number;
     createdAt?: string;
+    publishedAt?: string;
     updatedAt?: string;
     deletedAt?: string;
     upvote?: number;
@@ -88,7 +89,7 @@ export class ImagesApiService {
         );
     }
 
-    
+
     voteDownById(ID: string): Observable<Image | any> {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-down').pipe(
             map(resp => (resp.data || resp) as Image)
@@ -104,9 +105,22 @@ export class ImagesApiService {
     }
 
 
-
     updateOneById(ID: string, body: Partial<Image>): Observable<Image | any> {
         return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID, body).pipe(
+            take(1),
+            map(resp => (resp.data || resp) as Image)
+        );
+    }
+
+    publishOneById(ID: string): Observable<Image | any> {
+        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/publish', null).pipe(
+            take(1),
+            map(resp => (resp.data || resp) as Image)
+        );
+    }
+
+    unpublishOneById(ID: string): Observable<Image | any> {
+        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/unpublish', null).pipe(
             take(1),
             map(resp => (resp.data || resp) as Image)
         );

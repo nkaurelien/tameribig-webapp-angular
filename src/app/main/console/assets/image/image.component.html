@@ -16,16 +16,22 @@
                     <div class="row">
 
                         <!--Grid column-->
-                        <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="col-xl-6 col-lg-6 col-md-6">
                             <a class="ml-3 btn btn-primary waves-light" mdbWavesEffect routerLink="./add">
                                 <mdb-icon class="mr-1" fas icon="plus"></mdb-icon>
                                 <span class="clearfix d-none d-sm-inline-block">Ajouter</span>
                             </a>
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-                        <div class="col-xl-3 col-lg-6 col-md-12">
+                            <ng-container *ngIf="hasSelection">
+                                <button (click)="publish()" [disabled]="publishing"
+                                        class="ml-3 btn btn-outline-primary animated fadeIn">
+                                    <mdb-icon *ngIf="!publishing" fas icon="paper-plane"></mdb-icon>&nbsp;
+                                    <span *ngIf="publishing"
+                                          aria-hidden="true"
+                                          class="spinner-grow spinner-grow-sm text-light"
+                                          role="status"></span>
+                                    <span class="clearfix d-none d-sm-inline-block">Publier</span>
+                                </button>
+                            </ng-container>
                         </div>
                         <!--Grid column-->
 
@@ -157,6 +163,12 @@
                                     </a>
                                 </th>
                                 <th class="th-lg">
+                                    <a (click)="sortBy('publishedAt')"
+                                    >Publier
+                                        <mdb-icon class="ml-1" fas icon="sort"></mdb-icon>
+                                    </a>
+                                </th>
+                                <th class="th-lg">
                                     <a
                                     >Mots clés
                                     </a>
@@ -188,6 +200,7 @@
                                 <td>{{ row.data.title }}</td>
                                 <td>{{ row.data.price }}</td>
                                 <td>{{ row.data.createdAt }}</td>
+                                <td>{{ row.data.publisheddAt }}</td>
                                 <td>{{ row.data.keywords }}</td>
                                 <td>{{ extractTopicsNames(row.data.topics) }}</td>
                                 <td>

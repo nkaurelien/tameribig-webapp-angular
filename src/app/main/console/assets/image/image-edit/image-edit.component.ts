@@ -3,10 +3,11 @@ import {MdbCheckboxChange, ModalDirective, ToastService} from 'ng-uikit-pro-stan
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@app/auth2/_services';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription, throwError} from 'rxjs';
 import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Categorie, CategoriesApiService} from '@app/main/@core/services/categories-api.service';
 import {remove, uniq} from 'lodash';
+import {catchError, finalize, takeUntil} from "rxjs/operators";
 
 @Component({
     selector: 'app-image-edit',
@@ -26,8 +27,10 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
     public validatingForm: FormGroup;
     public user: any;
     private paramMapSub: Subscription;
+    private unsubscribe = new Subject();
     public ID: string;
     public updateImagebyIdSub: Subscription;
+    private publishing = false;
 
     constructor(
         private router: Router,
@@ -37,6 +40,11 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
         private categoriesApiService: CategoriesApiService,
         private toast: ToastService,
     ) {
+    }
+
+
+    get published() {
+        return this.image ? this.image.publishedAt !== undefined && this.image.publishedAt !== null : false;
     }
 
     get prixInput() {
@@ -101,6 +109,9 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
+
         if (this.paramMapSub) {
             this.paramMapSub.unsubscribe();
         }
@@ -173,6 +184,35 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
             return null;
         }
         return item._id;
+    }
+
+    togglePublishing($event: MdbCheckboxChange | any) {
+
+        const oldPublishedAt = this.image.publishedAt;
+        let observable = null;
+        this.publishing = true;
+
+        // if ($event.checked || $event) {
+        if ($event) {
+            observable = this.imagesApiService.publishOneById(this.image._id);
+        } else {
+            observable = this.imagesApiService.unpublishOneById(this.image._id);
+        }
+
+        observable
+            .pipe(
+                finalize(() => {
+                    this.publishing = false;
+                }),
+                takeUntil(this.unsubscribe),
+                catchError((err, c) => {
+                    this.image.publishedAt = oldPublishedAt;
+                    return throwError(err);
+                })
+            )
+            .subscribe((response) => {
+            });
+
     }
 
 }

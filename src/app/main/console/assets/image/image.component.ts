@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
-import {Subscription} from 'rxjs';
+import {Subscription, forkJoin, interval, Subject} from 'rxjs';
+import {finalize, switchMap, takeUntil} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {CategoriesApiService} from '@app/main/@core/services/categories-api.service';
 import {MdbCheckboxChange} from 'ng-uikit-pro-standard';
@@ -11,17 +12,34 @@ import {remove} from 'lodash';
     templateUrl: './image.component.html',
     styleUrls: ['./image.component.scss']
 })
-export class ImageComponent implements OnInit {
+export class ImageComponent implements OnInit, OnDestroy {
 
     @Input() shadows = true;
 
     searchText1 = '';
 
     tableData: Selectable<Image>[] = [];
+    publishing = false;
+    unsubscribe = new Subject();
 
 
     get isSelectionIndeterminate(): boolean {
         return this.selection.length !== 0 && this.selection.length !== this.tableData.length;
+    }
+    bulkOptionsSelect: object[] = [
+        // { value: '1', label: 'Delete' },
+        // { value: '2', label: 'Export' },
+        // { value: '3', label: 'Change segment' }
+        {value: '1', label: 'Images acceptés'},
+        {value: '2', label: 'Image rejétés'},
+        {value: '3', label: 'Image en attente'},
+
+    ];
+
+    constructor(
+        private imagesApi: ImagesApiService,
+        private router: Router,
+    ) {
     }
 
     get isAllChecked(): boolean {
@@ -32,15 +50,9 @@ export class ImageComponent implements OnInit {
         return (this.tableData || []).filter(el => el.selected).map(el => el.data);
     }
 
-    bulkOptionsSelect: object[] = [
-        // { value: '1', label: 'Delete' },
-        // { value: '2', label: 'Export' },
-        // { value: '3', label: 'Change segment' }
-        {value: '1', label: 'Images acceptés'},
-        {value: '1', label: 'Image rejétés'},
-        {value: '1', label: 'Image en attente'},
-
-    ];
+    get hasSelection(): boolean {
+        return this.selection.length !== 0 && this.selection.length > 0;
+    }
 
     private sorted = false;
     private imagesApiSub: Subscription;
@@ -49,18 +61,26 @@ export class ImageComponent implements OnInit {
         return (this.tableData || []).map(el => el.data);
     }
 
-    constructor(
-        private imagesApi: ImagesApiService,
-        private router: Router,
-    ) { }
+    get hasUnpublishableSelection(): boolean {
+        return this.selection.length !== 0 && this.selection
+            .filter(image => image.publishedAt !== undefined && image.publishedAt !== null)
+            .length > 0;
+    }
 
     ngOnInit() {
         this.loadImages();
     }
 
-    loadImages() {
+    ngOnDestroy(): void {
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
+    }
 
-        this.imagesApiSub = this.imagesApi.getAllByAuth().subscribe(resp => {
+    loadImages() {
+        this.imagesApiSub = interval(10000).pipe(
+            switchMap(() => this.imagesApi.getAllByAuth()),
+            takeUntil(this.unsubscribe)
+        ).subscribe(resp => {
             // console.log({resp});
             this.tableData = resp.map(row => {
                 // console.log('image', image);
@@ -119,6 +139,32 @@ export class ImageComponent implements OnInit {
                 this.tableData[idx].selected = false;
             }
         }
+    }
+
+    publish() {
+        const observables = this.tableData.filter(row => row.selected)
+            .map(row => row.data)
+            .map(row => this.imagesApi.publishOneById(row._id));
+
+        // .reduce((previous, image, index, images ) => {
+        //     previous[image._id] = this.imagesApi.publishOneById(image._id);
+        //     return previous;
+        // }, {});
+
+        this.publishing = true;
+        forkJoin(observables)
+            .pipe(
+                finalize(() => {
+                    this.publishing = false;
+                }),
+                takeUntil(this.unsubscribe)
+            )
+            .subscribe((response) => {
+                console.log(response);
+                this.loadImages();
+            });
+
+        console.log(observables);
     }
 
     toggleRows($event: MdbCheckboxChange) {
