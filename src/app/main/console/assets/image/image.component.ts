@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Subscription, forkJoin, interval, Subject} from 'rxjs';
-import {finalize, switchMap, takeUntil} from 'rxjs/operators';
+import {finalize, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {CategoriesApiService} from '@app/main/@core/services/categories-api.service';
 import {MdbCheckboxChange} from 'ng-uikit-pro-standard';
@@ -20,6 +20,7 @@ export class ImageComponent implements OnInit, OnDestroy {
 
     tableData: Selectable<Image>[] = [];
     publishing = false;
+    loading = false;
     unsubscribe = new Subject();
 
 
@@ -77,11 +78,16 @@ export class ImageComponent implements OnInit, OnDestroy {
     }
 
     loadImages() {
-        this.imagesApiSub = interval(10000).pipe(
-            switchMap(() => this.imagesApi.getAllByAuth()),
+        this.imagesApiSub = interval(20 * 60 * 1000).pipe(
+            startWith(0),
+            switchMap(() => {
+                this.loading = true;
+                return this.imagesApi.getAllByAuth();
+            }),
             takeUntil(this.unsubscribe)
         ).subscribe(resp => {
             // console.log({resp});
+            this.loading = false;
             this.tableData = resp.map(row => {
                 // console.log('image', image);
                 const image = row as Image;

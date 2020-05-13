@@ -110,9 +110,11 @@
                                 size="sm"
                                 class="px-2"
                                 (click)="loadImages()"
+                                [disabled]="loading"
                                 title="Recharger la liste"
                         >
-                            <mdb-icon class="mt-0" fas icon="redo"></mdb-icon>
+                            <mdb-icon [ngClass]="{'animate__animated animate__rotateOut animate__infinite': loading}"
+                                      class="mt-0" fas icon="redo"></mdb-icon>
                             Recharger
                         </button>
                         <button
@@ -145,38 +147,27 @@
                                     Image
                                 </th>
                                 <th class="th-lg">
-                                    <a (click)="sortBy('title')"
-                                    >Titre
-                                        <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
+                                    <a>Titre
+                                        <mdb-icon (click)="sortBy('title')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par titre"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
-                                    <a (click)="sortBy('price')"
-                                    >Prix
-                                        <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
+                                    <a>Prix
+                                        <mdb-icon (click)="sortBy('price')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par prix de vente"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
-                                    <a (click)="sortBy('createdAt')"
-                                    >Date
-                                        <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
+                                    <a>Date
+                                        <mdb-icon (click)="sortBy('createdAt')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par date de creation"></mdb-icon>
+                                        <mdb-icon (click)="sortBy('publishedAt')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par date de mise en ligne"></mdb-icon>
                                     </a>
                                 </th>
                                 <th class="th-lg">
-                                    <a (click)="sortBy('publishedAt')"
-                                    >Publier
-                                        <mdb-icon class="ml-1" fas icon="sort"></mdb-icon>
-                                    </a>
-                                </th>
-                                <th class="th-lg">
-                                    <a
-                                    >Mots clés
-                                    </a>
-                                </th>
-                                <th class="th-lg">
-                                    <a
-                                    >Categories
-                                    </a>
+                                    <a>Classement</a>
                                 </th>
                                 <th></th>
                             </tr>
@@ -194,15 +185,26 @@
                                 </th>
                                 <td>
                                     <img *ngIf="row.data.miniature?.length" [src]="row.data.miniature"
-                                         class="img-fluid">
+                                         class="img-thumbnail " style="height: 80px">
+                                    <!--                                    <cl-image public-id={{row.data?.services?.cloudinary?.public_id}}-->
+                                    <!--                                            class="img-fluid"></cl-image>-->
+
                                     <span *ngIf="!row.data.miniature?.length" class="text-muted">Indéfinie</span>
                                 </td>
                                 <td>{{ row.data.title }}</td>
                                 <td>{{ row.data.price }}</td>
-                                <td>{{ row.data.createdAt }}</td>
-                                <td>{{ row.data.publisheddAt }}</td>
-                                <td>{{ row.data.keywords }}</td>
-                                <td>{{ extractTopicsNames(row.data.topics) }}</td>
+                                <td class="text-small">
+                                    <small class="d-inline-block">Ajouté le <br>{{ row.data.createdAt }}</small>
+                                    <br>
+                                    <small class="d-inline-block mt-1">Publié le
+                                        <br>{{ row.data.publishedAt || 'Pas encore publié' }}</small>
+                                </td>
+                                <td class="text-small">
+                                    <div class="text-small" mdbTooltip="mots clés">{{ row.data.keywords }}</div>
+                                    <div class="text-small mt-1"
+                                         mdbTooltip="catégories">{{ extractTopicsNames(row.data.topics) }}</div>
+                                </td>
+
                                 <td>
                                     <div class="nav-item dropdown btn-group" dropdown>
                                         <a class="px-2 dropdown-toggle waves-light" color="blue"

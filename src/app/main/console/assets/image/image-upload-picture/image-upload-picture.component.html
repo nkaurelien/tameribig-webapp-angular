@@ -82,17 +82,6 @@
                             </div>
                             <div class=" col-md-1"></div>
                         </div>
-                        <div *ngIf="imagesUploadedWithSuccess.length" class="row mx-auto">
-                            <div class="col">
-                                <figure *ngFor="let img of imagesUploadedWithSuccess; let i = index"
-                                        class="figure mx-2">
-                                    <img [alt]="img.title" [src]="getImageUrl(img.uid)"
-                                         class="figure-img img-fluid z-depth-1"
-                                         style="width: 400px">
-                                    <figcaption class="figure-caption">{{img.description}}</figcaption>
-                                </figure>
-                            </div>
-                        </div>
                     </div>
                 </div>
 

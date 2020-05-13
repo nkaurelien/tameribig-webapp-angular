@@ -7,7 +7,7 @@ import {Subject, Subscription, throwError} from 'rxjs';
 import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Categorie, CategoriesApiService} from '@app/main/@core/services/categories-api.service';
 import {remove, uniq} from 'lodash';
-import {catchError, finalize, takeUntil} from "rxjs/operators";
+import {catchError, finalize, takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-image-edit',

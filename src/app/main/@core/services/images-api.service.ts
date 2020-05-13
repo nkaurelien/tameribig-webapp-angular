@@ -43,6 +43,9 @@ export interface Image {
     // tags?: string[];
     topics?: any[];
     comments?: any[];
+    services: {
+        cloudinary: object;
+    };
     size?: {
         xs?: ImageSize,
         sm?: ImageSize,

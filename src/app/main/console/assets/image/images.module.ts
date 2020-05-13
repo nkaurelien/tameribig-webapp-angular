@@ -12,7 +12,7 @@ import {
 } from 'ng-uikit-pro-standard';
 import {ImageAddComponent} from './image-add/image-add.component';
 import {ImagesRoutingModule} from './images-routing.module';
-import {environment} from '@environments/environment';
+import {cloudinaryConfig, environment} from '@environments/environment';
 import {DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule} from 'ngx-dropzone-wrapper';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TagInputModule} from 'ngx-chips';
@@ -32,6 +32,8 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImageValidateSize from 'filepond-plugin-image-validate-size';
+import {CloudinaryConfiguration, CloudinaryModule} from "@cloudinary/angular-5.x";
+import {Cloudinary} from "cloudinary-core";
 
 registerPlugin(
     FilePondPluginFileValidateType,
@@ -71,6 +73,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         ReactiveFormsModule,
         TagInputModule,
         FilePondModule,
+
+        // CloudinaryModule.forRoot({Cloudinary}, cloudinaryConfig as CloudinaryConfiguration),
+
     ],
     schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     providers: [

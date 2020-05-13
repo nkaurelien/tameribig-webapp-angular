@@ -13,7 +13,7 @@ import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '@environments/environment';
+import {cloudinaryConfig, environment} from '@environments/environment';
 import { ErrorModule } from './errors/error.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -32,7 +32,8 @@ import { FaqModule } from './coorporate/faq/faq.module';
 import { SplashScreenService, DataTableService, KtDialogService, PageConfigService, MenuConfigService, LayoutRefService, LayoutConfigService } from 'src/@core/_base/layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { DeviceDetectorModule } from 'ngx-device-detector';
-
+import {CloudinaryModule, CloudinaryConfiguration} from '@cloudinary/angular-5.x';
+import {Cloudinary} from 'cloudinary-core';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     // AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
+      CloudinaryModule.forRoot({Cloudinary}, cloudinaryConfig as CloudinaryConfiguration),
   ],
   providers: [MDBSpinningPreloader,
 
