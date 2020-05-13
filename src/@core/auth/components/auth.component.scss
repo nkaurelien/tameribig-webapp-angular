@@ -4,8 +4,17 @@
 $white: #fff;
 $error-color: #af622c;
 
+.login-intro-bg {
+	background-size: 80%;
+	background-image: url(/assets/images/background/login-intro.jpeg);
+	background-repeat: no-repeat;
+	background-position: center 50%;
+	background-color: black;
+}
+
 app-login {
 	//height: 100%;
+
 
 	.mat-form-field {
 		width: 100%;
