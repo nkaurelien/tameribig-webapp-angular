@@ -2,7 +2,7 @@ import {Injectable, PLATFORM_ID, Inject} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { tap } from 'rxjs/operators';
-import {API_AUTH_USER, API_LOGIN_FIREBASE_URL, API_USERS_URL} from './auth.routes';
+import {API_AUTH_USER, API_LOGIN_FIREBASE_URL} from './auth.routes';
 
 
 @Injectable()
@@ -46,18 +46,18 @@ export class AuthBackendService {
     }
 
 
-    // jwtHttpHeaders() {
-    //     const token = this.localStorage.getItem('idToken');
+    jwtHttpHeaders() {
+        const token = this.localStorage.getItem('token');
 
-    //     return {
-    //         headers: new HttpHeaders({
-    //             'Content-Type': 'application/json',
-    //             Accept: 'application/json',
-    //             Authorization: 'Bearer ' + token,
-    //         })
-    //     };
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: 'Bearer ' + token,
+            })
+        };
 
-    // }
+    }
 
     public updateUserData(datas) {
 

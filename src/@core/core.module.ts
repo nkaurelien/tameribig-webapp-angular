@@ -73,11 +73,11 @@ import {ScrollTopDirective} from '@core/_base/layout/directives/scroll-top.direc
 export class CoreModule {
     static forProvider(): Provider[] {
         return [
-            {
-                provide: HTTP_INTERCEPTORS,
-                useClass: TokenInterceptorService,
-                multi: true,
-            },
+            // {
+            //     provide: HTTP_INTERCEPTORS,
+            //     useClass: TokenInterceptorService,
+            //     multi: true,
+            // },
             ScriptLoaderService,
             SeoService,
         ];

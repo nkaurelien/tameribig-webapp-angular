@@ -6,6 +6,7 @@ import {environment} from '@environments/environment';
 import {AuthenticationService} from '@app/auth2/_services';
 import {IApiResource} from '@core/_base/crud/models/IApiResource';
 import {Router} from '@angular/router';
+import {AuthService} from "@core/auth";
 
 
 export interface Author {
@@ -64,7 +65,7 @@ export class ImagesApiService {
 
     constructor(
         private http: HttpClient,
-        private auth: AuthenticationService,
+        private auth: AuthService,
         private router: Router,
     ) {
 
@@ -87,21 +88,21 @@ export class ImagesApiService {
     }
 
     voteUpById(ID: string): Observable<Image | any> {
-        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-up').pipe(
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-up', this.auth.apiAuth.jwtHttpHeaders()).pipe(
             map(resp => (resp.data || resp) as Image)
         );
     }
 
 
     voteDownById(ID: string): Observable<Image | any> {
-        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-down').pipe(
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-down', this.auth.apiAuth.jwtHttpHeaders()).pipe(
             map(resp => (resp.data || resp) as Image)
         );
     }
 
 
     create(body: Partial<Image>): Observable<Image | any> {
-        return this.http.post<IApiResource>(environment.ApiBaseUrl + '/images', body).pipe(
+        return this.http.post<IApiResource>(environment.ApiBaseUrl + '/images', body, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
             map(resp => (resp.data || resp) as Image)
         );
@@ -109,21 +110,21 @@ export class ImagesApiService {
 
 
     updateOneById(ID: string, body: Partial<Image>): Observable<Image | any> {
-        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID, body).pipe(
+        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID, body, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
             map(resp => (resp.data || resp) as Image)
         );
     }
 
     publishOneById(ID: string): Observable<Image | any> {
-        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/publish', null).pipe(
+        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/publish', null, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
             map(resp => (resp.data || resp) as Image)
         );
     }
 
     unpublishOneById(ID: string): Observable<Image | any> {
-        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/unpublish', null).pipe(
+        return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/unpublish', null, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
             map(resp => (resp.data || resp) as Image)
         );
@@ -131,7 +132,8 @@ export class ImagesApiService {
 
 
     getAllByAuth(): Observable<Image[] | any> {
-        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/me').pipe(
+
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/me', this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
             map(resp => (resp.data || resp) as Image));
     }

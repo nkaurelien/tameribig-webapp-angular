@@ -34,6 +34,9 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImageValidateSize from 'filepond-plugin-image-validate-size';
 import {CloudinaryConfiguration, CloudinaryModule} from "@cloudinary/angular-5.x";
 import {Cloudinary} from "cloudinary-core";
+import {CoreModule} from "@core/core.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TokenInterceptorService} from "@core/services/token-interceptor.service";
 
 registerPlugin(
     FilePondPluginFileValidateType,
@@ -73,6 +76,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         ReactiveFormsModule,
         TagInputModule,
         FilePondModule,
+        // CoreModule.forRoot(),
+
 
         // CloudinaryModule.forRoot({Cloudinary}, cloudinaryConfig as CloudinaryConfiguration),
 
@@ -81,6 +86,12 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     providers: [
         ImagesService,
         ImagesApiService,
+
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: TokenInterceptorService,
+        //     multi: true,
+        // },
         {
             provide: DROPZONE_CONFIG,
             useValue: DEFAULT_DROPZONE_CONFIG

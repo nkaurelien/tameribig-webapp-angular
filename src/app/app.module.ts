@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 
@@ -34,6 +34,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import {CloudinaryModule, CloudinaryConfiguration} from '@cloudinary/angular-5.x';
 import {Cloudinary} from 'cloudinary-core';
+import {ImageModule} from "@app/main/explorer/image/image.module";
+import {TokenInterceptorService} from "@core/services/token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import {Cloudinary} from 'cloudinary-core';
     BrowserAnimationsModule,
     ContactUsModule,
     FaqModule,
+      ImageModule.forRoot(),
     AuthModule.forRoot(),
     CoreModule.forRoot(),
 
@@ -74,7 +77,13 @@ import {Cloudinary} from 'cloudinary-core';
     AngularFireAuthModule,
       CloudinaryModule.forRoot({Cloudinary}, cloudinaryConfig as CloudinaryConfiguration),
   ],
-  providers: [MDBSpinningPreloader,
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptorService,
+            multi: true,
+        },
+        MDBSpinningPreloader,
 
     LayoutConfigService,
     LayoutRefService,

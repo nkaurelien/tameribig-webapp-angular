@@ -9,6 +9,7 @@ import {SidenavModule} from 'ng-uikit-pro-standard';
 import {ConsoleLayoutComponent} from './console-layout/console-layout.component';
 import {FooterComponent} from './console-layout/footer/footer.component';
 import {MarkdownModule} from '@core/components/markdown/markdown.module';
+import {CoreModule} from '@core/core.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {MarkdownModule} from '@core/components/markdown/markdown.module';
         NavigationModule,
         SidenavModule,
         MarkdownModule,
+        // CoreModule.forRoot(),
     ],
     exports: [
         ConsoleLayoutModule,

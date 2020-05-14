@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, ModuleWithProviders} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import {ImagePresenterComponent} from './imagepresenter.component';
@@ -9,6 +9,7 @@ import { WavesModule, AccordionModule, ButtonsModule, InputsModule, CheckboxModu
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {ShareButtonsModule} from '@ngx-share/buttons';
 import { ImagesService } from '../../@core/services/images.service';
+import {HttpClientModule} from "@angular/common/http";
 
 
 
@@ -22,7 +23,9 @@ const routes: Routes = [
 
     schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     imports: [
-        CommonModule, RouterModule.forChild(routes),
+        CommonModule,
+        RouterModule.forChild(routes),
+        // HttpClientModule,
         CheckboxModule,
         InputsModule,
         ButtonsModule,
@@ -40,8 +43,16 @@ const routes: Routes = [
         ImagePresenterComponent
     ],
     providers: [
-        ImagesService,
+        // ImagesService,
     ]
 })
-export class ImageModule  {
+export class ImageModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: ImageModule,
+            providers: [
+                ImagesService,
+            ]
+        };
+    }
 }

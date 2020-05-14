@@ -30,10 +30,6 @@ const routes: Routes = [
                     loadChildren: () => import('@modules/main/help/help.module').then(m => m.HelpModule)
                 },
                 {
-                    path: 'uploader',
-                    loadChildren: () => import('@modules/main/uploader/uploader.module').then(m => m.UploaderModule)
-                },
-                {
                     path: 'network',
                     loadChildren: () => import('@modules/main/network/network.module').then(m => m.NetworkModule),
                 },
@@ -62,7 +58,9 @@ const routes: Routes = [
 ;
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+    imports: [
+        RouterModule.forChild(routes),
+    ],
   exports: [RouterModule]
 })
 export class MainRoutingModule {

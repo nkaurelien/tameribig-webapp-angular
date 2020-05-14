@@ -15,8 +15,8 @@ import {
 } from 'ng-uikit-pro-standard';
 import {ProfileLayoutComponent} from './profile-layout/profile-layout.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
-import {MarkdownModule} from "@core/components/markdown/markdown.module";
-import {CoreDirectivesModule} from "@core/directives/core-directives.module";
+import {MarkdownModule} from '@core/components/markdown/markdown.module';
+import {CoreDirectivesModule} from '@core/directives/core-directives.module';
 
 const routes: Routes = [
     {

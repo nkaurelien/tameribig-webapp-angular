@@ -7,6 +7,7 @@ import { FooterComponent } from './main-layout/footer/footer.component';
 import { NavigationModule } from './main-layout/navigation/navigation.module';
 import { AgmCoreModule } from '@agm/core';
 import { GMAP_API_KEY } from '@environments/environment';
+import {CoreModule} from '@core/core.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { GMAP_API_KEY } from '@environments/environment';
   ],
   imports: [
     CommonModule,
+    // CoreModule.forRoot(),
     MainRoutingModule,
     NavigationModule,
     AgmCoreModule.forRoot({
