@@ -1,11 +1,13 @@
 import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import { dummyPicturesMocks } from '@data/dummy-pictures';
-import {ImagesApiService} from '../../@core/services/images-api.service';
 import {NgxMasonryOptions} from 'ngx-masonry';
-import {NgForm, FormBuilder, FormGroup} from '@angular/forms';
-import {tap, distinctUntilChanged, debounceTime, takeUntil} from 'rxjs/operators'
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {tap, distinctUntilChanged, debounceTime, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {generateDummyPicturesMocks} from 'src/@data/dummy-pictures';
+import {Image, ImagesService} from '@app/main/@core/services/images.service';
+import {ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-videos-explorer',
@@ -14,7 +16,7 @@ import {generateDummyPicturesMocks} from 'src/@data/dummy-pictures';
     './videosexplorer.component.css',
     // '~/ng-masonry-grid/ng-masonry-grid.css',
   ],
-  
+
   // encapsulation: ViewEncapsulation.None
 })
 export class VideosExplorerComponent implements OnInit, OnDestroy {
@@ -32,13 +34,15 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
     private unsubscribe = new Subject();
 
   constructor(
-      private imagesService: ImagesApiService,
+      private imagesApiService: ImagesApiService,
+      private imagesService: ImagesService,
       private formBuilder: FormBuilder,
+      private router: Router,
   ) {
       this.dummyPictures = generateDummyPicturesMocks(60);
   }
 
-  get searching () {
+    get searching() {
     try {
         return (this.filterForm.get('keyword').value || '').length > 0;
     } catch (error) {
@@ -68,6 +72,12 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
         this.masonryImages = this.dummyPictures.slice(0, this.limit);
     }
 
+    showDetail(image: Image) {
+
+        this.router.navigate(['/images/', image.uid]);
+
+    }
+
     ngOnDestroy() {
 
         this.unsubscribe.next(true);
@@ -75,9 +85,13 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
         this.unsubscribe.complete();
     }
 
+    getImageUrl(image: Image) {
+        return this.imagesService.getImageUrl(image);
+    }
+
   showMoreImages() {
     this.limit += 15;
-    
+
       if (this.searching) {
           this.masonryImages = this.filterImagesByKeyword(this.filterForm.get('keyword').value).slice(0, this.limit);
       } else {
@@ -98,7 +112,7 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
     }
         this.masonryImages = this.filterImagesByKeyword(searchForm.get('keyword').value);
         // console.log( `Searching`, this.searching);
-    
+
 
     // this.imageService.searchImages(this.form.keyword, this.page)
     //   .subscribe((res: any) => {
@@ -109,7 +123,7 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
     liked(id, event?: boolean) {
 
         if (event === true) {
-            this.imagesService.voteUpById(id || '5e2abcb28ddd5425987c02d3')
+            this.imagesApiService.voteUpById(id || '5e2abcb28ddd5425987c02d3')
                 .pipe(takeUntil(this.unsubscribe))
                 .subscribe();
         }
@@ -117,7 +131,7 @@ export class VideosExplorerComponent implements OnInit, OnDestroy {
     }
 
     navigateToImage(id) {
-        this.imagesService.navigateToImage(id || '5e2abcb28ddd5425987c02d3')
+        this.imagesApiService.navigateToImage(id || '5e2abcb28ddd5425987c02d3');
 
     }
 

@@ -1,33 +1,82 @@
+<div class="container ">
+  <div class="d-flex justify-content-between pt-3 box-search">
+    <!--<div class="btn-group">
+        <button (click)="displayMode = 'mansory-grid'" class="btn btn-sm btn-primary">Grille</button>
+        <button (click)="displayMode = 'list'"  class="btn btn-sm btn-primary">Liste</button>
+    </div>-->
+    <form #searchFormRef="ngForm" (ngSubmit)="search(filterForm)"
+          [formGroup]="filterForm"
+          class="w-100 form-inline md-form form-sm">
 
-<div
-        (scrolled)="getImages()"
-        [infiniteScrollDistance]="10"
-        [infiniteScrollThrottle]="50"
-        class="search-results"
-        infiniteScroll
->
-  <ng-masonry-grid
-    [masonryOptions]="{
-      transitionDuration: '0.8s',
-      gutter: 5,
-      columnWidth: 300,
-      fitWidth: true
-    }"
-    [useAnimation]="true"
-    [useImagesLoaded]="true"
-    [scrollAnimationOptions]="{
-      animationEffect: 'effect-4',
-      minDuration: 0.4,
-      maxDuration: 0.7
-    }"
-  >
-    <ng-masonry-grid-item
-            *ngFor="let picture of masonryImages; let i = index"
-            id="{{ 'masonry-item-' +  i}}"
-            class="masonry-item"
-    >
-      <img  (click)="showImage(picture)" [src]="getImageUrl(picture)">
+      <input
+              aria-label="Search"
+              class="form-control form-control-sm input-search w-75"
+              formControlName="keyword"
+              name="keyword"
+              placeholder="Keyword"
+              required-
+              type="text"
+      />
+      <mdb-icon aria-hidden="true" class="icon-search" fas icon="search"></mdb-icon>
+      <div *ngIf="keyword?.invalid && (keyword.dirty || keyword.touched)">
+        <div *ngIf="keyword.errors.required">
+          Keyword is required.
+        </div>
+        <div *ngIf="keyword.invalid">
+          Keyword is invalid.
+        </div>
+      </div>
+    </form>
+  </div>
 
-    </ng-masonry-grid-item>
-  </ng-masonry-grid>
+
+  <div (scrolled)="showMoreImages()" [infiniteScrollDistance]="10" [infiniteScrollThrottle]="50" class="search-results"
+       infiniteScroll>
+
+
+    <!-- Affichage en grille de brique -->
+    <ng-masonry-grid *ngIf="displayMode === 'mansory-grid'"
+                     [masonryOptions]="{
+                transitionDuration: '0.8s',
+                gutter: 10,
+                columnWidth: 360,
+                fitWidth: true
+            }"
+                     [scrollAnimationOptions]="{
+                animationEffect: 'effect-2',
+                minDuration: 0.4,
+                maxDuration: 0.7
+            }"
+                     [useAnimation]="true"
+                     [useImagesLoaded]="true">
+      <ng-masonry-grid-item *ngFor="let picture of masonryImages; let i = index" class="masonry-item"
+                            id="{{ 'masonry-item-' + i }}" style="width: 350px;">
+        <!--Zoom effect-->
+        <div class="view overlay zoom">
+          <img [src]="picture.picture" class="img-fluid">
+          <div (click)="navigateToImage(picture.id)"
+               class="mask flex-center waves-effect waves- rgba-orange-strong">
+            <div *ngIf="picture.author">
+              <img [src]="picture.author.avatar"
+                   class="avatar  mx-auto white rounded-circle z-depth-0 mb-3">
+              <h5 class="white-text ">{{ picture.author.fullname }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <app-animated-like (like)="liked(picture.id, $event)" [liked]='true'></app-animated-like>
+      </ng-masonry-grid-item>
+    </ng-masonry-grid>
+
+
+    <!-- Affichage en Liste -->
+    <div *ngIf="displayMode === 'list'" class="flex-column">
+      <div *ngFor="let picture of masonryImages; let i = index" class=" card m-3" id="{{ 'list-item-' + i }}">
+        <img [src]="picture.picture" class="img-fluid-full">
+      </div>
+    </div>
+
+
+  </div>
+
 </div>

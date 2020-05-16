@@ -20,12 +20,12 @@
             <mdb-icon aria-hidden="true" class="icon-search" fas icon="search"></mdb-icon>
             <div *ngIf="keyword?.invalid && (keyword.dirty || keyword.touched)">
                 <div *ngIf="keyword.errors.required">
-                        Keyword is required.
-                    </div>
-                    <div *ngIf="keyword.invalid">
-                        Keyword is invalid.
-                    </div>
+                    Keyword is required.
                 </div>
+                <div *ngIf="keyword.invalid">
+                    Keyword is invalid.
+                </div>
+            </div>
         </form>
     </div>
 
@@ -75,7 +75,6 @@
                 <img class="img-fluid-full" [src]="picture.picture">
             </div>
         </div>
-
 
 
     </div>
