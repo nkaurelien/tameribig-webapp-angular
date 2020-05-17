@@ -36,6 +36,10 @@ import {CloudinaryModule, CloudinaryConfiguration} from '@cloudinary/angular-5.x
 import {Cloudinary} from 'cloudinary-core';
 import {ImageModule} from "@app/main/explorer/image/image.module";
 import {TokenInterceptorService} from "@core/services/token-interceptor.service";
+import {NG_ENTITY_SERVICE_CONFIG} from '@datorama/akita-ng-entity-service';
+import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
+import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
+
 
 @NgModule({
   declarations: [
@@ -76,6 +80,8 @@ import {TokenInterceptorService} from "@core/services/token-interceptor.service"
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
       CloudinaryModule.forRoot({Cloudinary}, cloudinaryConfig as CloudinaryConfiguration),
+      environment.production ? [] : AkitaNgDevtools,
+      AkitaNgRouterStoreModule,
   ],
     providers: [
         {
@@ -96,6 +102,7 @@ import {TokenInterceptorService} from "@core/services/token-interceptor.service"
     // AuthService,
     HttpUtilsService,
     MDBModalService,
+        {provide: NG_ENTITY_SERVICE_CONFIG, useValue: {baseUrl: environment.ApiBaseUrl}},
   ],
   entryComponents: [
     ContactUsModalComponent,
