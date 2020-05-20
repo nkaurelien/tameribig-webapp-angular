@@ -52,10 +52,10 @@
       <ng-masonry-grid-item *ngFor="let picture of masonryImages; let i = index" class="masonry-item"
                             id="{{ 'masonry-item-' + i }}" style="width: 350px;">
         <!--Zoom effect-->
-        <div class="view overlay zoom">
+          <div (click)="navigateToImage(picture._id)" class="view overlay zoom">
           <img [src]="picture.picture" class="img-fluid">
-          <div (click)="navigateToImage(picture.id)"
-               class="mask flex-center waves-effect waves- rgba-orange-strong">
+              <div (click)="navigateToImage(picture._id)"
+                   class="mask flex-center waves-effect waves- rgba-orange-strong">
             <div *ngIf="picture.author">
               <img [src]="picture.author.avatar"
                    class="avatar  mx-auto white rounded-circle z-depth-0 mb-3">

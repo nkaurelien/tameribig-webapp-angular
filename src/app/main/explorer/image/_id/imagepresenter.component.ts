@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ImagePresenterUrl} from '../../explorer/routes';
-import { ShareService } from '@ngx-share/core';
-import { Image, ImagesService } from '../../@core/services/images.service';
+import {ImagePresenterUrl} from '../../routes';
+import {ShareService} from '@ngx-share/core';
+import {ImagesService} from '../../../@core/services/images.service';
+import {Image} from "@app/main/@core/state/image/image.model";
+import {ImagesQuery} from "@app/main/@core/state/image/images.query";
+import {ImagesApiService} from "@app/main/@core/services/images-api.service";
+import {take} from "rxjs/operators";
 // import { library } from '@fortawesome/fontawesome-svg-core';
 //
 // import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
@@ -21,44 +25,43 @@ export class ImagePresenterComponent implements OnInit {
     public selectedSize = 'md';
     public loading = true;
 
-    constructor(
-        private _router: Router,
-        private _route: ActivatedRoute,
-        private imagesService: ImagesService,
-        public share: ShareService,
-    ) {}
+    masonryOptions: NgxMasonryOptions = {
+        transitionDuration: '0.8s'
+    };
 
     defaultImage = 'assets/images$/default-image.png';
     offset = 100;
     masonryImages;
     limit = 15;
-    masonryOptions:  NgxMasonryOptions = {
-        transitionDuration: '0.8s'
-    };
+
+    constructor(
+        private _router: Router,
+        private _route: ActivatedRoute,
+        private imagesQuery: ImagesQuery,
+        private imagesService: ImagesService,
+        private imagesApiService: ImagesApiService,
+        public share: ShareService,
+    ) {
+    }
 
     get canDownload(): boolean {
         return this.freeSizeList.includes(this.selectedSize);
     }
+
     ngOnInit() {
 
-        this.imagesService.images$.subscribe(images => {
+        this._route.paramMap
+            .pipe(take(1))
+            .subscribe(({params}: any) => {
 
-            this.images = images;
+                this.imagesApiService.findOneById(params.uid).subscribe(image => {
+                    this.image = image;
 
-            // console.log("this.images", this.images);
-
-
-            this._route.paramMap.subscribe(({params}: any) => {
-
-                this.images.forEach((el: Image) => {
-
-                    if (el.uid === params.uid) {
-                        this.image = el;
-                        // break;
-                    }
+                }, null, () => {
+                    this.loading = false;
                 });
+
             });
-        }, null, () => { this.loading = false});
     }
 
     showMoreImages() {

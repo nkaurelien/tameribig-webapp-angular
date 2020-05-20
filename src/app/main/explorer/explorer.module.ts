@@ -57,7 +57,7 @@ const routes: Routes = [
             },
 
             {
-                path: ImagePresenterUrl,
+                path: ImagesExplorerPath,
                 loadChildren: () => import('@modules/main/explorer/image/image.module').then(m => m.ImageModule)
             },
         ]

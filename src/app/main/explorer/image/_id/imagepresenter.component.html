@@ -84,7 +84,8 @@
                                 <div *ngFor="let size of sizeList" class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="size-{{ size }}" name="efaultExampleRadios" [checked]="size === selectedSize" mdbInput>
                                     <label (click)="selectSize(size)" class="custom-control-label" for="size-{{ size }}">
-                                        {{ image.size[size].size }}
+                                        <!--                                        {{ image?.size[size].size }}-->
+                                        {{ size }}
                                         <small *ngIf="freeSizeList.includes(size)" class="badge badge-primary ml-3">FREE </small>
                                     </label>
                                 </div>

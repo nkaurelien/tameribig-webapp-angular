@@ -5,7 +5,7 @@ import {DropzoneComponent, DropzoneConfigInterface, DropzoneDirective} from 'ngx
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '@app/auth2/_services';
 import {environment} from '@environments/environment';
-import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 
 @Component({
     selector: 'app-image-add',

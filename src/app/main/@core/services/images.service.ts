@@ -12,6 +12,7 @@ import {BehaviorSubject} from 'rxjs';
 import {dummyPicturesMocks, generateDummyPicturesMocks} from '@data/dummy-pictures';
 import {uniqBy, flattenDeep} from 'lodash';
 import {environment} from '@environments/environment';
+import {Image} from "@app/main/@core/state/image/image.model";
 
 interface UserPreferences {
     cookiesAccepted?: boolean;
@@ -31,34 +32,6 @@ export interface ImageSize {
     downloadUrl: string;
 }
 
-export interface Image {
-    uid: string;
-    picture: string;
-    miniature: string;
-    title: string;
-    description: string;
-    content: any;
-    price: number;
-    author: Author;
-    userId: number;
-    created_at?: string;
-    updated_at?: string;
-    deleted_at?: string;
-    upvote?: string;
-    downvote?: string;
-
-    keywords?: string[];
-    tags?: string[];
-    comments?: Array<any>;
-    size?: {
-        xs?: ImageSize,
-        sm?: ImageSize,
-        md?: ImageSize,
-        lg?: ImageSize,
-        xl?: ImageSize,
-
-    };
-}
 
 @Injectable({
     providedIn: 'root',

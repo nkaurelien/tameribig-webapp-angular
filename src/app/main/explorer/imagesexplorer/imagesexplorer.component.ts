@@ -3,11 +3,13 @@ import {dummyPicturesMocks} from '@data/dummy-pictures';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {tap, distinctUntilChanged, debounceTime, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {generateDummyPicturesMocks} from 'src/@data/dummy-pictures';
-import {Image, ImagesService} from '@app/main/@core/services/images.service';
+import {ImagesService} from '@app/main/@core/services/images.service';
 import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Router} from '@angular/router';
+import {Image} from "@app/main/@core/state/image/image.model";
+import {ImagesQuery} from "@app/main/@core/state/image/images.query";
 
 @Component({
     selector: 'app-images-explorer',
@@ -21,20 +23,23 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
         transitionDuration: '0.8s'
     };
     displayMode = 'mansory-grid';
-    dummyPictures = dummyPicturesMocks;
+    images = [];
+    // images = dummyPicturesMocks;
     defaultImage = 'assets/images$/default-image.png';
     offset = 100;
     masonryImages;
+    images$: Observable<Image[]>;
     limit = 15;
     private unsubscribe = new Subject();
 
     constructor(
         private imagesApiService: ImagesApiService,
         private imagesService: ImagesService,
+        private imagesQuery: ImagesQuery,
         private formBuilder: FormBuilder,
         private router: Router,
     ) {
-        this.dummyPictures = generateDummyPicturesMocks(60);
+        this.images = generateDummyPicturesMocks(60);
     }
 
     get searching() {
@@ -47,6 +52,14 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.images$ = this.imagesQuery.selectAll();
+
+        this.images$
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe(resp => {
+                // console.log('this.images$', resp);
+                this.images = resp;
+            });
         this.filterForm = this.formBuilder.group({
             keyword: ''
         });
@@ -59,12 +72,14 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
             // console.log( `searching keyword is ${val}.`);
         });
 
+        this.imagesApiService.getAll().subscribe();
+
         this.showImages();
     }
 
 
     showImages() {
-        this.masonryImages = this.dummyPictures.slice(0, this.limit);
+        this.masonryImages = this.images.slice(0, this.limit);
     }
 
     showDetail(image: Image) {
@@ -89,13 +104,13 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
         if (this.searching) {
             this.masonryImages = this.filterImagesByKeyword(this.filterForm.get('keyword').value).slice(0, this.limit);
         } else {
-            this.masonryImages = this.dummyPictures.slice(0, this.limit);
+            this.masonryImages = this.images.slice(0, this.limit);
 
         }
     }
 
     filterImagesByKeyword(keyword: string) {
-        return this.dummyPictures.filter(picture => {
+        return this.images.filter(picture => {
             return (picture.description || '').toLowerCase().includes(keyword);
         });
     }

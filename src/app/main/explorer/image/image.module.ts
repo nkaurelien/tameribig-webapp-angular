@@ -1,7 +1,7 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, ModuleWithProviders} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {ImagePresenterComponent} from './imagepresenter.component';
+import {ImagePresenterComponent} from './_id/imagepresenter.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
 import {NgxMasonryModule} from 'ngx-masonry';
 import {SlideshowModule} from 'ng-simple-slideshow';
@@ -9,7 +9,6 @@ import { WavesModule, AccordionModule, ButtonsModule, InputsModule, CheckboxModu
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {ShareButtonsModule} from '@ngx-share/buttons';
 import { ImagesService } from '../../@core/services/images.service';
-import {HttpClientModule} from "@angular/common/http";
 
 
 

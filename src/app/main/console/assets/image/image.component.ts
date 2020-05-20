@@ -1,11 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Subscription, forkJoin, interval, Subject} from 'rxjs';
 import {finalize, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {CategoriesApiService} from '@app/main/@core/services/categories-api.service';
 import {MdbCheckboxChange} from 'ng-uikit-pro-standard';
 import {remove} from 'lodash';
+import {Image} from '@app/main/@core/state/image/image.model';
 
 @Component({
     selector: 'app-image',

@@ -4,10 +4,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@app/auth2/_services';
 import {Subject, Subscription, throwError} from 'rxjs';
-import {Image, ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Categorie, CategoriesApiService} from '@app/main/@core/services/categories-api.service';
 import {remove, uniq} from 'lodash';
 import {catchError, finalize, takeUntil} from 'rxjs/operators';
+import {Image} from '@app/main/@core/state/image/image.model';
 
 @Component({
     selector: 'app-image-edit',

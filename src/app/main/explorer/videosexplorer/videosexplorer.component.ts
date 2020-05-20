@@ -5,9 +5,10 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {tap, distinctUntilChanged, debounceTime, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {generateDummyPicturesMocks} from 'src/@data/dummy-pictures';
-import {Image, ImagesService} from '@app/main/@core/services/images.service';
+import {ImagesService} from '@app/main/@core/services/images.service';
 import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Router} from '@angular/router';
+import {Image} from '@app/main/@core/state/image/image.model';
 
 @Component({
   selector: 'app-videos-explorer',

@@ -1,61 +1,15 @@
 import {Injectable} from '@angular/core';
-import {map, take} from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '@environments/environment';
 import {AuthenticationService} from '@app/auth2/_services';
 import {IApiResource} from '@core/_base/crud/models/IApiResource';
 import {Router} from '@angular/router';
-import {AuthService} from "@core/auth";
+import {AuthService} from '@core/auth';
+import {Image} from '@app/main/@core/state/image/image.model';
+import {ImagesStore} from "@app/main/@core/state/image/images.store";
 
-
-export interface Author {
-    fullname: string;
-    displayName: string;
-    email?: string;
-    social?: string;
-    avatar?: string;
-    uid?: string;
-}
-
-export interface ImageSize {
-    size: string;
-    downloadUrl: string;
-}
-
-export interface Image {
-    _id: string;
-    uid: string;
-    picture: string;
-    miniature: string;
-    title: string;
-    description: string;
-    content: any;
-    price: number;
-    author: Author;
-    userId: number;
-    createdAt?: string;
-    publishedAt?: string;
-    updatedAt?: string;
-    deletedAt?: string;
-    upvote?: number;
-
-    keywords?: string[];
-    // tags?: string[];
-    topics?: any[];
-    comments?: any[];
-    services: {
-        cloudinary: object;
-    };
-    size?: {
-        xs?: ImageSize,
-        sm?: ImageSize,
-        md?: ImageSize,
-        lg?: ImageSize,
-        xl?: ImageSize,
-
-    };
-}
 
 @Injectable({
     providedIn: 'root',
@@ -66,16 +20,22 @@ export class ImagesApiService {
     constructor(
         private http: HttpClient,
         private auth: AuthService,
+        private imagesStore: ImagesStore,
         private router: Router,
     ) {
 
     }
 
+    static getImageUrl(image: Image) {
+        return `${environment.ApiBaseUrl}/images/open/${image.uid}`;
+    }
+
 
     getAll(): Observable<Image[] | any> {
-        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/').pipe(
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images').pipe(
             take(1),
-            map(resp => (resp.data || resp) as Image)
+            map(resp => (resp.data || resp)),
+            tap(resp => this.imagesStore.set(resp))
         );
     }
 
@@ -83,7 +43,9 @@ export class ImagesApiService {
     findOneById(ID: string): Observable<Image | any> {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID).pipe(
             take(1),
-            map(resp => (resp.data || resp) as Image)
+            map(resp => (resp.data || resp) as Image),
+            tap(resp => this.imagesStore.upsert(resp._id, resp)),
+            tap(resp => this.imagesStore.setActive(resp._id))
         );
     }
 
@@ -104,7 +66,8 @@ export class ImagesApiService {
     create(body: Partial<Image>): Observable<Image | any> {
         return this.http.post<IApiResource>(environment.ApiBaseUrl + '/images', body, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
-            map(resp => (resp.data || resp) as Image)
+            map(resp => (resp.data || resp) as Image),
+            tap(resp => this.imagesStore.upsert(resp._id, resp)),
         );
     }
 
@@ -112,21 +75,24 @@ export class ImagesApiService {
     updateOneById(ID: string, body: Partial<Image>): Observable<Image | any> {
         return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID, body, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
-            map(resp => (resp.data || resp) as Image)
+            map(resp => (resp.data || resp) as Image),
+            tap(resp => this.imagesStore.update(resp._id, resp))
         );
     }
 
     publishOneById(ID: string): Observable<Image | any> {
         return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/publish', null, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
-            map(resp => (resp.data || resp) as Image)
+            map(resp => (resp.data || resp) as Image),
+            tap(resp => this.imagesStore.update(resp._id, resp))
         );
     }
 
     unpublishOneById(ID: string): Observable<Image | any> {
         return this.http.put<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/unpublish', null, this.auth.apiAuth.jwtHttpHeaders()).pipe(
             take(1),
-            map(resp => (resp.data || resp) as Image)
+            map(resp => (resp.data || resp) as Image),
+            tap(resp => this.imagesStore.update(resp._id, resp))
         );
     }
 
@@ -138,9 +104,10 @@ export class ImagesApiService {
             map(resp => (resp.data || resp) as Image));
     }
 
-    navigateToImage(param: string) {
-
-        this.router.navigate(['/explorer/images/', param]);
+    navigateToImage(id: string) {
+        console.log(id);
+        this.imagesStore.setActive(id);
+        this.router.navigate(['/explorer/images/', id]);
 
     }
 }
