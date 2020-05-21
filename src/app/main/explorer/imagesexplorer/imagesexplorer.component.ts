@@ -39,7 +39,7 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private router: Router,
     ) {
-        this.images = generateDummyPicturesMocks(60);
+        // this.images = generateDummyPicturesMocks(60);
     }
 
     get searching() {
