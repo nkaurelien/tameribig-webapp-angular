@@ -3,12 +3,12 @@ import {map, take, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '@environments/environment';
-import {AuthenticationService} from '@app/auth2/_services';
 import {IApiResource} from '@core/_base/crud/models/IApiResource';
 import {Router} from '@angular/router';
 import {AuthService} from '@core/auth';
 import {Image} from '@app/main/@core/state/image/image.model';
 import {ImagesStore} from "@app/main/@core/state/image/images.store";
+import {ImagesQuery} from "@app/main/@core/state/image/images.query";
 
 
 @Injectable({
@@ -21,6 +21,7 @@ export class ImagesApiService {
         private http: HttpClient,
         private auth: AuthService,
         private imagesStore: ImagesStore,
+        private imagesQuery: ImagesQuery,
         private router: Router,
     ) {
 
@@ -30,6 +31,13 @@ export class ImagesApiService {
         return `${environment.ApiBaseUrl}/images/open/${image.uid}`;
     }
 
+    get query() {
+        return this.imagesQuery;
+    }
+
+    get store() {
+        return this.imagesStore;
+    }
 
     getAll(): Observable<Image[] | any> {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images').pipe(
@@ -44,7 +52,7 @@ export class ImagesApiService {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID).pipe(
             take(1),
             map(resp => (resp.data || resp) as Image),
-            tap(resp => this.imagesStore.upsert(resp._id, resp)),
+            // tap(resp => this.imagesStore.upsert(resp._id, resp)),
             tap(resp => this.imagesStore.setActive(resp._id))
         );
     }

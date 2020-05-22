@@ -1,3 +1,30 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+:host-context ::ng-deep {
+  mdb-modal-backdrop .modal-backdrop {
+    //position: fixed;
+    //top: 0;
+    //left: 0;
+    //z-index: 1040;
+    //width: 100vw;
+    //height: 100vh;
+    background-color: #fff !important;
+  }
+
+  .badge-free-download {
+    color: #fff;
+    font-size: 10px;
+    position: relative;
+    background-color: #007bff;
+    top: -2px;
+    font-weight: 200;
+  }
+
+}
+
 :host ::ng-deep mdb-accordion {
     .accordion .card .card-header {
         color: #0275d8;

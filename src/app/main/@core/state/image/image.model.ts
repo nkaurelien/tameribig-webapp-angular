@@ -1,8 +1,17 @@
+import {User} from "@core/auth";
+
 export interface Author {
     fullname: string;
     displayName: string;
     email?: string;
-    social?: string;
+    socialLinks?: {
+        twitter?: string,
+        facebook?: string,
+        dribbble?: string,
+        linkedin?: string,
+        instagram?: string
+        youtube?: string
+    };
     avatar?: string;
     uid?: string;
 }
@@ -21,7 +30,8 @@ export interface Image {
     description: string;
     content: any;
     price: number;
-    author: Author;
+    author: Partial<User>;
+    authorId: string;
     userId: number;
     createdAt?: string;
     publishedAt?: string;

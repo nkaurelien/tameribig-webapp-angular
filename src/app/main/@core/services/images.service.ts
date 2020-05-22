@@ -1,16 +1,14 @@
-import {Injectable, PLATFORM_ID, Inject} from '@angular/core';
-import {map, mergeMap, switchMap, tap, mergeAll, concatAll, combineAll, flatMap} from 'rxjs/operators';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {combineAll, switchMap, tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 import {LOCAL_STORAGE} from '@ng-toolkit/universal';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
-import {Observable, of, merge, concat, combineLatest} from 'rxjs';
-import {Router, RouterStateSnapshot} from '@angular/router';
-import {catchError, take} from 'rxjs/internal/operators';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, concat, Observable, of} from 'rxjs';
+import {Router} from '@angular/router';
+import {take} from 'rxjs/internal/operators';
 import {dummyPicturesMocks, generateDummyPicturesMocks} from '@data/dummy-pictures';
-import {uniqBy, flattenDeep} from 'lodash';
+import {flattenDeep, uniqBy} from 'lodash';
 import {environment} from '@environments/environment';
 import {Image} from "@app/main/@core/state/image/image.model";
 
@@ -47,11 +45,13 @@ export class ImagesService {
     private _imagesBackup$ = new BehaviorSubject<Image[] | any>([]);
 
     private _imagesRef:  AngularFirestoreCollection<any> = this.afs.collection<Image[]>(`images`);
-    private _imagesByTermRef = (term): AngularFirestoreCollection<any> => this.afs.collection<Image[]>(`images`,
-        ref => ref.where('description', '==', term))
 
-    private _imagesByTagsRef = (term): AngularFirestoreCollection<any> => this.afs.collection<Image[]>(`images`,
-        ref => ref.where('keywords', 'array-contains', term))
+    openUserProfile(authorId: string) {
+        this.router.navigate(['/network', authorId]);
+    }
+
+    private _imagesByTermRef = (term): AngularFirestoreCollection<any> => this.afs.collection<Image[]>(`images`,
+        ref => ref.where('description', '==', term));
 
     constructor(private http: HttpClient,
                 @Inject(PLATFORM_ID) private platformId: any,
@@ -206,4 +206,7 @@ export class ImagesService {
     getImageUrl(image: Image) {
         return `${environment.ApiBaseUrl}/images/open/${image.uid}`;
     }
+
+    private _imagesByTagsRef = (term): AngularFirestoreCollection<any> => this.afs.collection<Image[]>(`images`,
+        ref => ref.where('keywords', 'array-contains', term));
 }

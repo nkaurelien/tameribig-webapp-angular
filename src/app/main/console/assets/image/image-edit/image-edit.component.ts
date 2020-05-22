@@ -31,7 +31,8 @@ export class ImageEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private unsubscribe = new Subject();
     public ID: string;
     public updateImagebyIdSub: Subscription;
-    private publishing = false;
+    public publishing = false;
+    public isChecked: any;
 
     constructor(
         private router: Router,

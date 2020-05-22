@@ -1,13 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Location} from '@angular/common';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ImagePresenterUrl} from '../../routes';
 import {ShareService} from '@ngx-share/core';
 import {ImagesService} from '../../../@core/services/images.service';
-import {Image} from "@app/main/@core/state/image/image.model";
-import {ImagesQuery} from "@app/main/@core/state/image/images.query";
-import {ImagesApiService} from "@app/main/@core/services/images-api.service";
-import {take} from "rxjs/operators";
+import {Image} from '@app/main/@core/state/image/image.model';
+import {ImagesQuery} from '@app/main/@core/state/image/images.query';
+import {ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {finalize, take, takeUntil} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
+import {ModalDirective} from 'ng-uikit-pro-standard';
 // import { library } from '@fortawesome/fontawesome-svg-core';
 //
 // import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
@@ -17,11 +20,14 @@ import {take} from "rxjs/operators";
     templateUrl: './imagepresenter.component.html',
     styleUrls: ['./imagepresenter.component.scss']
 })
-export class ImagePresenterComponent implements OnInit {
+export class ImagePresenterComponent implements OnInit, AfterViewInit, OnDestroy {
+
+    @ViewChild('modal', {static: true}) modal: ModalDirective;
+
     public image: Image;
     public images: Image[] | any;
     public sizeList = ['sm', 'md', 'lg', 'xl'];
-    public freeSizeList = ['sm', 'md'];
+    public readonly freeSizeList = ['sm', 'md'];
     public selectedSize = 'md';
     public loading = true;
 
@@ -33,10 +39,13 @@ export class ImagePresenterComponent implements OnInit {
     offset = 100;
     masonryImages;
     limit = 15;
+    public image$: Observable<Image | Image[]>;
+    private unsubscribe = new Subject<any>();
 
     constructor(
-        private _router: Router,
-        private _route: ActivatedRoute,
+        private router: Router,
+        private route: ActivatedRoute,
+        private location: Location,
         private imagesQuery: ImagesQuery,
         private imagesService: ImagesService,
         private imagesApiService: ImagesApiService,
@@ -45,23 +54,43 @@ export class ImagePresenterComponent implements OnInit {
     }
 
     get canDownload(): boolean {
-        return this.freeSizeList.includes(this.selectedSize);
+        return !!this.freeSizeList && this.freeSizeList.includes(this.selectedSize);
     }
 
     ngOnInit() {
 
-        this._route.paramMap
+        this.image$ = this.imagesApiService.query.selectActive();
+
+        this.route.paramMap
             .pipe(take(1))
             .subscribe(({params}: any) => {
 
-                this.imagesApiService.findOneById(params.uid).subscribe(image => {
-                    this.image = image;
+                this.image = this.imagesApiService.query.getActive() as Image;
 
-                }, null, () => {
-                    this.loading = false;
-                });
+                if (!this.imagesApiService.query.hasActive() || this.imagesApiService.query.getActiveId() !== params.uid) {
+                    this.loading = true;
+                    this.imagesApiService.findOneById(params.uid)
+                        .pipe(
+                            takeUntil(this.unsubscribe),
+                            finalize(() => this.loading = false))
+                        .subscribe();
 
+                }
             });
+    }
+
+    ngAfterViewInit() {
+        this.modal.show();
+
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.next(true);
+        this.unsubscribe.complete();
+    }
+
+    onHideModal() {
+        this.location.back();
     }
 
     showMoreImages() {
@@ -71,11 +100,25 @@ export class ImagePresenterComponent implements OnInit {
 
     showImage(image: Image) {
 
-        this._router.navigate([ImagePresenterUrl, image.uid]);
+        this.router.navigate([ImagePresenterUrl, image.uid]);
+
+    }
+
+    liked(id, event?: boolean) {
+
+        if (event === true) {
+            this.imagesApiService.voteUpById(id)
+                .pipe(takeUntil(this.unsubscribe))
+                .subscribe();
+        }
 
     }
 
     selectSize(size: string) {
         this.selectedSize = size;
+    }
+
+    openUserProfile(image) {
+        this.imagesService.openUserProfile(image);
     }
 }

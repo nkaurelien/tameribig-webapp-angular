@@ -14,7 +14,7 @@ export class MarkdownComponent implements OnChanges {
     @Input()
     data: string;
 
-    private convertedData: any;
+    public convertedData: any;
 
     constructor(
         private readonly md: MarkdownService

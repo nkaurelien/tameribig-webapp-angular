@@ -1,10 +1,8 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
-import {dummyPicturesMocks} from '@data/dummy-pictures';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {tap, distinctUntilChanged, debounceTime, takeUntil} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, takeUntil, tap} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
-import {generateDummyPicturesMocks} from 'src/@data/dummy-pictures';
 import {ImagesService} from '@app/main/@core/services/images.service';
 import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 import {Router} from '@angular/router';
@@ -27,7 +25,7 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
     // images = dummyPicturesMocks;
     defaultImage = 'assets/images$/default-image.png';
     offset = 100;
-    masonryImages;
+    masonryImages: Image[];
     images$: Observable<Image[]>;
     limit = 15;
     private unsubscribe = new Subject();
@@ -59,6 +57,7 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
             .subscribe(resp => {
                 // console.log('this.images$', resp);
                 this.images = resp;
+                this.showImages();
             });
         this.filterForm = this.formBuilder.group({
             keyword: ''
@@ -72,9 +71,9 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
             // console.log( `searching keyword is ${val}.`);
         });
 
-        this.imagesApiService.getAll().subscribe();
+        this.imagesApiService.getAll()
+            .subscribe();
 
-        this.showImages();
     }
 
 
@@ -132,7 +131,7 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
     liked(id, event?: boolean) {
 
         if (event === true) {
-            this.imagesApiService.voteUpById(id || '5e2abcb28ddd5425987c02d3')
+            this.imagesApiService.voteUpById(id)
                 .pipe(takeUntil(this.unsubscribe))
                 .subscribe();
         }

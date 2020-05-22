@@ -1,9 +1,8 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {of, Subject, Subscription, throwError} from 'rxjs';
+import {Subject, Subscription, throwError} from 'rxjs';
 import {ToastService} from 'ng-uikit-pro-standard';
 import {User} from '@app/auth2/_models';
-import {AuthenticationService} from '@app/auth2/_services';
 import {AuthService} from '@core/auth';
 import {catchError, finalize, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {AllValidationErrors, getFormValidationErrors} from '@core/_helpers/get-form-validation-errors';
@@ -24,7 +23,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     defaultImageAvatar = '/assets/images/icons/masque-afrique.jpg';
     private isLoggedInSubscription: Subscription;
     unsubscribe = new Subject<boolean>();
-    private loading = false;
+    public loading = false;
 
     constructor(
         private auth: AuthService,

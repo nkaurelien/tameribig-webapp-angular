@@ -4,7 +4,8 @@ export class SocialNetworks {
 	facebook: string;
 	twitter: string;
     instagram: string;
-    youtube: string
+    youtube: string;
+    dribbble?: string;
 
     public constructor(init?: Partial<SocialNetworks>) {
 

@@ -1,3 +1,5 @@
+<router-outlet></router-outlet>
+
 <div class="container ">
   <div class="d-flex justify-content-between pt-3 box-search">
     <!--<div class="btn-group">
@@ -18,14 +20,6 @@
               type="text"
       />
       <mdb-icon aria-hidden="true" class="icon-search" fas icon="search"></mdb-icon>
-      <div *ngIf="keyword?.invalid && (keyword.dirty || keyword.touched)">
-        <div *ngIf="keyword.errors.required">
-          Keyword is required.
-        </div>
-        <div *ngIf="keyword.invalid">
-          Keyword is invalid.
-        </div>
-      </div>
     </form>
   </div>
 
@@ -49,22 +43,30 @@
             }"
                      [useAnimation]="true"
                      [useImagesLoaded]="true">
-      <ng-masonry-grid-item *ngFor="let picture of masonryImages; let i = index" class="masonry-item"
+      <ng-masonry-grid-item *ngFor="let picture of masonryImages; let i = index" class="border masonry-item"
                             id="{{ 'masonry-item-' + i }}" style="width: 350px;">
         <!--Zoom effect-->
-          <div (click)="navigateToImage(picture._id)" class="view overlay zoom">
+        <div (click)="navigateToImage(picture._id)" class="view overlay zoom">
           <img [src]="picture.picture" class="img-fluid">
-              <div (click)="navigateToImage(picture._id)"
-                   class="mask flex-center waves-effect waves- rgba-orange-strong">
+          <div (click)="navigateToImage(picture._id)"
+               class="mask flex-center waves-effect waves- rgba-orange-strong">
             <div *ngIf="picture.author">
-              <img [src]="picture.author.avatar"
-                   class="avatar  mx-auto white rounded-circle z-depth-0 mb-3">
-              <h5 class="white-text ">{{ picture.author.fullname }}</h5>
+              <h5 class="white-text mb-5">{{ picture.description}}
+                <small>{{ picture.createdAt}}</small>
+              </h5>
+
+              <div class="text-center">
+
+                <ngx-avatar [round]="true" [src]="picture.author.photoUrl" class="d-inline-block" facebookId="null"
+                            name="{{ picture.author.displayName || '' }}" size="60">
+                </ngx-avatar>
+                <h5 class="white-text ">{{ picture.author.fullname }}</h5>
+              </div>
             </div>
           </div>
         </div>
 
-        <app-animated-like (like)="liked(picture.id, $event)" [liked]='true'></app-animated-like>
+        <app-animated-like (like)="liked(picture._id, $event)" [liked]='true'></app-animated-like>
       </ng-masonry-grid-item>
     </ng-masonry-grid>
 
