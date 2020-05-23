@@ -1,12 +1,12 @@
-    // NGRX
-import { createFeatureSelector } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+// NGRX
+import {createFeatureSelector} from '@ngrx/store';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 // Actions
-import { UserActions, UserActionTypes } from '../_actions/user.actions';
+import {UserActions, UserActionTypes} from '../_actions/user.actions';
 // CRUD
-import { QueryParamsModel } from '../../_base/crud';
+import {QueryParamsModel} from '../../_base/crud';
 // Models
-import { User } from '../_models/user.model';
+import {User} from '../_models/user.model';
 
 // tslint:disable-next-line:no-empty-interface
 export interface UsersState extends EntityState<User> {
@@ -41,7 +41,7 @@ export function usersReducer(state = initialUsersState, action: UserActions): Us
             ...state
         };
         case UserActionTypes.UserCreated: return adapter.addOne(action.payload.user, {
-            ...state, lastCreatedUserId: action.payload.user.id
+            ...state, lastCreatedUserId: action.payload.user._id
         });
         case UserActionTypes.UserUpdated: return adapter.updateOne(action.payload.partialUser, state);
         case UserActionTypes.UserDeleted: return adapter.removeOne(action.payload.id, state);
