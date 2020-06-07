@@ -12,6 +12,10 @@
     opacity: 0.6;
 }
 
+ .box-search .icone {
+     min-width: 50px;
+ }
+
 .box-search a:nth-of-type(1) {
  color: orangered;
 }
@@ -115,8 +119,8 @@
 }
 
 .search-suggestion {
-    padding: 1em 1.25em;
-    min-width: 300px;
+    padding: 0.5em 1.25em;
+    //min-width: 300px;
 }
 .option {
     cursor: pointer;
@@ -124,3 +128,16 @@
     margin-top: 1.0rem
 }
 
+ ngb-typeahead-window {
+     padding: 0;
+
+     .dropdown-item {
+         padding: 0;
+     }
+
+     .dropdown-item.active, .dropdown-item:active {
+         color: #fff;
+         text-decoration: none;
+         background-color: #e78f22;
+     }
+ }

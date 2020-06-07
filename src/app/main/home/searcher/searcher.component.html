@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4 offset-md-4 col-sm-10 offset-sm-1 ">
+    <div class="col-xl-5 col-lg-6 col-md-6 col-sm-10 mx-auto ">
         <div class="row  mx-3">
             <div class="col-12 pt-3">
                 <div class="m-stack m-stack--ver m-stack--desktop">
@@ -7,13 +7,16 @@
                     <!--begin::Search-->
                     <div class="m-body-search m-stack__item m-stack__item--middle m-dropdown m-dropdown--arrow m-dropdown--large m-dropdown--mobile-full-width m-dropdown--align-right m-dropdown--skin-light ">
                         <!--begin::Search Form -->
-                        <form class="w-100 m-body-search__form">
+                        <form #searchForm class="w-100 m-body-search__form">
                             <div class="w-100 m-body-search__wrapper">
           <span class="m-body-search__icon-search" id="m_quicksearch_search">
             <i class="la la-search"></i>
           </span>
                                 <span class="m-body-search__input-wrapper">
-            <input autocomplete="off" type="text" name="q" class="m-body-search__input" value="" placeholder="Rechercher des medias.." [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter">
+            <input #searchInput [(ngModel)]="model" [inputFormatter]="formatter" [ngbTypeahead]="search"
+                   [resultTemplate]="rt" autocomplete="off"
+                   class="m-body-search__input" name="q" placeholder="Rechercher des medias.."
+                   type="text" value="">
           </span>
                                 <!-- <span class="m-body-search__icon-close" >
                                                                       <i class="la la-remove"></i>
@@ -67,7 +70,7 @@
 </div>
 
 <ng-template #rt let-r="result" let-t="term">
-    <div class="search-suggestion">
+    <div [style.width.px]="searchSuggestionMinWidth - 65" class="search-suggestion">
         <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1"
              style="width: 16px">
         <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
