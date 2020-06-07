@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ModalDirective, ToastService} from 'ng-uikit-pro-standard';
-import {DropzoneComponent, DropzoneConfigInterface, DropzoneDirective} from 'ngx-dropzone-wrapper';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '@app/auth2/_services';
 import {environment} from '@environments/environment';
@@ -34,19 +33,19 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
     ) { }
 
     get prixInput() {
-        return this.validatingForm.get('price');
+        return this.validatingForm && this.validatingForm.get('price');
     }
 
     get titreInput() {
-        return this.validatingForm.get('titre');
+        return this.validatingForm && this.validatingForm.get('titre');
     }
 
     get descInput() {
-        return this.validatingForm.get('description');
+        return this.validatingForm && this.validatingForm.get('description');
     }
 
     get tagsInput() {
-        return this.validatingForm.get('keywords');
+        return this.validatingForm && this.validatingForm.get('keywords');
     }
 
     ngOnInit() {

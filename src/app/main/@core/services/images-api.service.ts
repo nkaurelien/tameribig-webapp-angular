@@ -57,6 +57,14 @@ export class ImagesApiService {
         );
     }
 
+
+    createImageDownloadZipUrl(ID: string): Observable<Image | any> {
+        return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/download-picture-archive').pipe(
+            take(1),
+            map(resp => (resp.data || resp) as string),
+        );
+    }
+
     voteUpById(ID: string): Observable<Image | any> {
         return this.http.get<IApiResource>(environment.ApiBaseUrl + '/images/' + ID + '/vote-up', this.auth.apiAuth.jwtHttpHeaders()).pipe(
             map(resp => (resp.data || resp) as Image)

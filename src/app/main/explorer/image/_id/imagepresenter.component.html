@@ -35,8 +35,8 @@
                             <!--<h1 class="mb-5">Images presenter</h1>-->
 
                             <div class="row mx-auto">
-                                <div class=" col-md-1"></div>
-                                <div class=" col-md-4">
+                                <div class=" col-md-1-"></div>
+                                <div class=" col-md-5 mx-auto">
                                     <figure class="figure">
                                         <img [src]="image.picture" alt="..." class="figure-img img-fluid z-depth-1"
                                              style="width: 400px">
@@ -105,7 +105,7 @@
                                     </figure>
 
                                 </div>
-                                <div class=" col-md-1"></div>
+                                <div class=" col-md-1-"></div>
                                 <div class=" col-md-6">
                                     <mdb-accordion [multiple]="true">
                                         <mdb-accordion-item [collapsed]="false">
@@ -116,28 +116,35 @@
                                         </mdb-accordion-item>
 
                                         <mdb-accordion-item [collapsed]="false">
-                                            <mdb-accordion-item-head>Taille</mdb-accordion-item-head>
+                                            <mdb-accordion-item-head>Dimensions</mdb-accordion-item-head>
                                             <mdb-accordion-item-body>
                                                 <div class="list-group">
-                                                    <div class="list-group-item waves-light">
-                                                        <div *ngFor="let size of sizeList"
+                                                    <div class="size-select-container list-group-item waves-light">
+                                                        <div *ngFor="let size of image.breakpoints"
                                                              class="custom-control custom-radio">
-                                                            <input [checked]="size === selectedSize"
+                                                            <input [checked]="size.height === selectedBreakpoint.heigth"
                                                                    class="custom-control-input"
-                                                                   id="size-{{ size }}"
+                                                                   id="size-{{ size.height }}"
                                                                    mdbInput
                                                                    name="efaultExampleRadios"
                                                                    type="radio">
-                                                            <label (click)="selectSize(size)"
+                                                            <label (click)="selectBreakpoint(size)"
                                                                    class="custom-control-label"
-                                                                   for="size-{{ size }}">
-                                                                <!--                                        {{ image?.size[size].size }}-->
-                                                                {{ size }}
-                                                                <small *ngIf="freeSizeList.includes(size)"
-                                                                       class="badge badge-primary badge-free-download ml-3">
-                                                                    GRATUIT
-                                                                </small>
+                                                                   for="size-{{ size.height }}">
+
+                                                                <a class="ml-2" href="{{ size.secure_url }}"
+                                                                   target="_blank">
+                                                                    <!--                                        {{ image?.size[size].size }}-->
+                                                                    <span class="size-text">{{ size.height }}</span>
+                                                                    <small *ngIf="freeBreakpointCeil >= size.height"
+                                                                           class="badge badge-primary badge-free-download ml-3">
+                                                                        GRATUIT
+                                                                    </small>
+                                                                    <mdb-icon class="ml-2" fas
+                                                                              icon="external-link-alt"></mdb-icon>
+                                                                </a>
                                                             </label>
+
                                                         </div>
 
                                                         <!--<div class="custom-control custom-radio">-->
@@ -152,21 +159,46 @@
                                     </mdb-accordion>
                                     <br>
                                     <p class="text-center mt-2 ">
-                                        <mdb-checkbox [default]="true">
+                                        <mdb-checkbox [(ngModel)]="licenceChecked" [default]="true">
                                             Usages et licences comparées
                                         </mdb-checkbox>
                                     </p>
-                                    <p class="my-4 text-center">
-                                        <button *ngIf="canDownload; else payer"
-                                                class="btn btn-download btn-lg btn-primary">
-                                            Telecharger
-                                        </button>
-                                        <ng-template #payer>
-                                            <button class="btn btn-download btn-lg btn-warning">
-                                                Payer et Telecharger
+                                    <div class="my-4 text-center">
+                                        <iframe id="download_iframe" style="display:none;"></iframe>
+                                        <div class="btn-group">
+                                            <button (click)="download(image.download)" [disabled]="lockDownload"
+                                                    class="btn btn-download btn-lg btn-success">
+                                                Télécharger
                                             </button>
-                                        </ng-template>
-                                    </p>
+                                            <button (click)="downloadImageZipped(image)" [disabled]="lockDownload"
+                                                    class="btn btn-download btn-lg btn-outline-success">
+                                                <span>Zipp</span>
+                                                <ng-container *ngIf=" downloading; else zzz">
+                                                    <div class="mb-1 spinner-grow spinner-grow-sm"
+                                                         role="status"></div>
+                                                </ng-container>
+                                                <ng-template #zzz>
+                                                    <span>é</span>
+                                                </ng-template>
+
+                                                <mdb-icon class="ml-2" fas icon="file-archive"></mdb-icon>
+                                            </button>
+
+                                        </div>
+                                        <ng-container *ngIf=" false">
+                                            <ng-container *ngIf=" canFreeDownload; else payer">
+                                                <button (click)="download(image.download)"
+                                                        class="btn btn-download btn-lg btn-primary">
+                                                    Telecharger
+                                                </button>
+                                            </ng-container>
+                                            <ng-template #payer>
+                                                <button class="btn btn-download btn-lg btn-warning">
+                                                    Payer et Telecharger
+                                                </button>
+                                            </ng-template>
+                                        </ng-container>
+                                    </div>
                                 </div>
 
                             </div>

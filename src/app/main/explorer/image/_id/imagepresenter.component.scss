@@ -23,6 +23,14 @@
     font-weight: 200;
   }
 
+  .size-select-container {
+    min-width: 284px;
+  }
+
+  .size-text {
+    min-width: 50px;
+    display: inline-block;
+  }
 }
 
 :host ::ng-deep mdb-accordion {

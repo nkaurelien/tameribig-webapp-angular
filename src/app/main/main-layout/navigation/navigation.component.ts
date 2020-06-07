@@ -1,7 +1,7 @@
 import {AuthFirebaseService} from '@core/auth/_services/auth-firebase.service';
-import {tap, takeUntil} from 'rxjs/operators';
+import {takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 
 import * as $ from 'jquery';
 
@@ -43,7 +43,7 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
             tap((user: firebase.User) => {
                 if (!!user) {
                     this.authUser = user;
-                    console.log({user});
+                    // console.log({user});
                 }
             }),
             takeUntil(this.unsubscribe)

@@ -17,8 +17,17 @@ export interface Author {
 }
 
 export interface ImageSize {
-    size: string;
+    bytes: string;
     downloadUrl: string;
+    downloadSecureUrl?: string;
+}
+
+export interface ImageBreakpoint {
+    bytes?: number;
+    height?: number;
+    secure_url?: string;
+    url?: string;
+    width?: number;
 }
 
 export interface Image {
@@ -26,8 +35,10 @@ export interface Image {
     uid: string;
     picture: string;
     miniature: string;
+    download: string;
     title: string;
     description: string;
+    originalname: string;
     content: any;
     price: number;
     author: Partial<User>;
@@ -43,6 +54,7 @@ export interface Image {
     // tags?: string[];
     topics?: any[];
     comments?: any[];
+    breakpoints?: ImageBreakpoint[];
     services: {
         cloudinary: object;
     };

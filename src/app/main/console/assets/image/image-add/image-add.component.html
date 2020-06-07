@@ -46,11 +46,11 @@
                                                                        name="titre" placeholder="Titre " type="text">
                                                                 <label for="titre">Titre</label>
                                                                 <mdb-error
-                                                                        *ngIf="titreInput.invalid && (titreInput.dirty || titreInput.touched)">
+                                                                        *ngIf="titreInput && titreInput.invalid && (titreInput.dirty || titreInput.touched)">
                                                                     invalid
                                                                 </mdb-error>
                                                                 <mdb-success
-                                                                        *ngIf="titreInput.valid && (titreInput.dirty || titreInput.touched)">
+                                                                        *ngIf="titreInput && titreInput.valid && (titreInput.dirty || titreInput.touched)">
                                                                     valid
                                                                 </mdb-success>
                                                             </div>
@@ -65,7 +65,7 @@
                                                                        name="prix" placeholder="Prix" type="number">
                                                                 <label for="prix">Prix(FCFA)</label>
                                                                 <mdb-error
-                                                                        *ngIf="prixInput.invalid && (prixInput.dirty || prixInput.touched)">
+                                                                        *ngIf="prixInput && prixInput.invalid && (prixInput.dirty || prixInput.touched)">
                                                                     invalid
                                                                 </mdb-error>
                                                                 <mdb-success
