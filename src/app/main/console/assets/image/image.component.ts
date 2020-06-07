@@ -1,11 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ImagesApiService} from '@app/main/@core/services/images-api.service';
-import {Subscription, forkJoin, interval, Subject} from 'rxjs';
+import {forkJoin, interval, Subject, Subscription} from 'rxjs';
 import {finalize, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {CategoriesApiService} from '@app/main/@core/services/categories-api.service';
 import {MdbCheckboxChange} from 'ng-uikit-pro-standard';
-import {remove} from 'lodash';
 import {Image} from '@app/main/@core/state/image/image.model';
 
 @Component({
@@ -28,6 +27,7 @@ export class ImageComponent implements OnInit, OnDestroy {
     get isSelectionIndeterminate(): boolean {
         return this.selection.length !== 0 && this.selection.length !== this.tableData.length;
     }
+
     bulkOptionsSelect: object[] = [
         // { value: '1', label: 'Delete' },
         // { value: '2', label: 'Export' },
@@ -84,6 +84,9 @@ export class ImageComponent implements OnInit, OnDestroy {
             switchMap(() => {
                 this.loading = true;
                 return this.imagesApi.getAllByAuth();
+            }),
+            finalize(() => {
+                this.loading = true;
             }),
             takeUntil(this.unsubscribe)
         ).subscribe(resp => {
