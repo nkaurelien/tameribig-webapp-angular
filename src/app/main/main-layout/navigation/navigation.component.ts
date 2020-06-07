@@ -46,7 +46,7 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
     //     const currentTarget = event.currentTarget as Window;
     //     const innerWidth = currentTarget.innerWidth;
     //
-    //     const btn = this.navbarToggler.nativeElement as HTMLButtonElement;
+    //     const btn = this.searchInput.nativeElement as HTMLButtonElement;
     //     // btn.click();
     //
     //     // const deviceInfo = this.deviceService.getDeviceInfo();
