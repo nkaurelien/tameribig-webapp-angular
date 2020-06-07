@@ -13,12 +13,13 @@
                                  style="display: none;"/>
                         </a>
 
-                        <button (click)="navbarSupportedContent.toggle()" class="navbar-toggler" type="button">
+                        <button #navbarToggler (click)="navbarSupportedContent.toggle()" class="navbar-toggler"
+                                type="button">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
-                        <div #navbarSupportedContent="bs-collapse" [isCollapsed]="false" class="navbar-collapse"
-                             id="navbarSupportedContent" mdbCollapse>
+                        <div #navbarSupportedContent="bs-collapse" [isCollapsed]="true" class="navbar-collapse"
+                             mdbCollapse>
                             <ul class="navbar-nav ml-auto py-4 py-md-0">
 
                                 <ng-container *ngIf="!authenticated">
@@ -27,16 +28,16 @@
                                         <a class="nav-link waves-light" mdbWavesEffect
                                            routerLink="/coorporate/contact-us">
                                             <mdb-icon class="mr-1" far icon="envelope"></mdb-icon>
-                                            <span class="clearfix d-none d-sm-inline-block">Contact</span>
+                                            <span class="clearfix d-sm-inline-block">Contact</span>
                                         </a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link waves-light" mdbWavesEffect routerLink="/coorporate/faq">
                                             <mdb-icon class="mr-1" far icon="comments"></mdb-icon>
-                                            <span class="clearfix d-none d-sm-inline-block">Support</span>
+                                            <span class="clearfix d-sm-inline-block">Support</span>
                                         </a>
                                     </li>
-                                    <li class="nav-button pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <li class="nav-button mt-3 mt-md-0 pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a [routerLink]="['/auth/login']"
                                            class="btn btn-sm btn-rounded  btn-primary waves-effect  waves-light"
                                            id="loginBtn" routerLinkActive="login"
@@ -122,13 +123,13 @@
                                         </div>
 
                                     </li>
-                                    <li class="pull-right nav-item no-underlined pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <li class="pull-right mt-3 mt-md-0 nav-item no-underlined pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a aria-expanded="false" aria-haspopup="true"
                                            class="nav-link user-nav-link dropdown-toggle p-0"
                                            data-toggle="dropdown" role="button">
                                             <img [alt]="username.substring(0,1).toUpperCase()" [src]="authUser.photoURL"
                                                  class="avatar rounded-circle img-fluid">
-                                            <span class="pl-2 ml-1 d-none d-sm-inline-block text-truncate"
+                                            <span class="pl-2 ml-1 d-none- d-sm-inline-block text-truncate"
                                                   id="user-name"
                                                   style="max-width: 10em; transform: translateY(5px);">{{ username.substring(0, 16) }}</span>
                                         </a>

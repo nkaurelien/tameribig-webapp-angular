@@ -1,16 +1,18 @@
 import {
-    MDBBootstrapModulesPro,
-    SidenavModule,
-    NavbarModule,
     ButtonsModule,
-    WavesModule,
-    IconsModule, CollapseModule, DropdownModule
+    CollapseModule,
+    DropdownModule,
+    IconsModule,
+    MDBBootstrapModulesPro,
+    NavbarModule,
+    SidenavModule,
+    WavesModule
 } from 'ng-uikit-pro-standard';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NavigationComponent } from './navigation.component';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {NavigationComponent} from './navigation.component';
 
 @NgModule({
     imports: [
@@ -24,7 +26,7 @@ import { NavigationComponent } from './navigation.component';
         IconsModule,
         CollapseModule,
         DropdownModule.forRoot(),
-        MDBBootstrapModulesPro.forRoot()
+        MDBBootstrapModulesPro.forRoot(),
     ],
     declarations: [
         NavigationComponent,
