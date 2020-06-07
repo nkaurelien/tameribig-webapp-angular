@@ -2,8 +2,8 @@ import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild, ViewEnca
 import {fromEvent, Observable, Subject} from 'rxjs';
 import {debounceTime, map, take, takeUntil} from 'rxjs/operators';
 import {statesWithFlagsMocks} from '@data/states';
-import {DeviceDetectorService} from "ngx-device-detector";
-import {WINDOW} from "@ng-toolkit/universal";
+import {DeviceDetectorService} from 'ngx-device-detector';
+import {WINDOW} from '@ng-toolkit/universal';
 
 const statesWithFlags: { name: string, flag: string }[] = statesWithFlagsMocks;
 
