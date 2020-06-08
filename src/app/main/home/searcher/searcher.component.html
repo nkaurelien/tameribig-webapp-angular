@@ -8,23 +8,29 @@
                     <div class="m-body-search m-stack__item m-stack__item--middle m-dropdown m-dropdown--arrow m-dropdown--large m-dropdown--mobile-full-width m-dropdown--align-right m-dropdown--skin-light ">
                         <!--begin::Search Form -->
                         <form #searchForm class="w-100 m-body-search__form">
-                            <div class="w-100 m-body-search__wrapper">
-          <span class="m-body-search__icon-search" id="m_quicksearch_search">
-            <i class="la la-search"></i>
-          </span>
-                                <span class="m-body-search__input-wrapper">
-            <input #searchInput [(ngModel)]="model" [inputFormatter]="formatter" [ngbTypeahead]="search"
-                   [resultTemplate]="rt" autocomplete="off"
-                   class="m-body-search__input" name="q" placeholder="Rechercher des medias.."
-                   type="text" value="">
-          </span>
-                                <!-- <span class="m-body-search__icon-close" >
-                                                                      <i class="la la-remove"></i>
-                                                                  </span>
-                                                                  <span class="m-body-search__icon-cancel" >
-                                                                      <i class="la la-remove"></i>
-                                                                  </span> -->
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <!--                                        <mdb-icon fas icon="search"></mdb-icon>-->
+                                        <div class="svg">
+                                            <svg focusable="false" viewBox="0 0 24 24"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input #searchInput [(ngModel)]="model" [inputFormatter]="formatter"
+                                       [ngbTypeahead]="search" [resultTemplate]="rt" autocomplete="off"
+                                       class="form-control"
+                                       mdbInput name="q" placeholder="Rechercher des medias.." type="text">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <mdb-icon fas icon="microphone"></mdb-icon>
+                                    </div>
+                                </div>
                             </div>
+
                         </form>
                         <!--end::Search Form -->
                         <!--begin::Search Results -->
@@ -46,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="row box-search mb-5 justify-content-center">
+        <div class="row box-search mb-5 mx-auto justify-content-center">
 
             <a [routerLink]="[ '/explorer/images' ]" class="col-2 option" routerLinkActive="active">
                 <img class="icone img-fluid" src="assets/images/camera.png">
@@ -70,7 +76,7 @@
 </div>
 
 <ng-template #rt let-r="result" let-t="term">
-    <div [style.width.px]="searchSuggestionMinWidth - 65" class="search-suggestion">
+    <div [style.width.px]="searchSuggestionMinWidth " class="search-suggestion">
         <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1"
              style="width: 16px">
         <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>

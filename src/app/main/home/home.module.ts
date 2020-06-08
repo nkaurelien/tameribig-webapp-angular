@@ -8,8 +8,9 @@ import {HexagoneComponent} from './hexagone/hexagone.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
-import { CategoriesService } from '../@core/services/categories.service';
-import { ImagesService } from '../@core/services/images.service';
+import {CategoriesService} from '../@core/services/categories.service';
+import {ImagesService} from '../@core/services/images.service';
+import {IconsModule, InputsModule} from "ng-uikit-pro-standard";
 
 
 @NgModule({
@@ -20,6 +21,8 @@ import { ImagesService } from '../@core/services/images.service';
         ReactiveFormsModule,
         RouterModule,
         NgbTypeaheadModule,
+        IconsModule,
+        InputsModule,
     ],
     exports: [
         HomeRoutingModule,

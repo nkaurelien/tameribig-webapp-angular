@@ -61,7 +61,7 @@ export class SearcherComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
   resizeSearchSuggestions(): void {
-    const element = this.searchForm.nativeElement;
+    const element = this.searchInput.nativeElement;
     const searchSuggestionMinWidth = element.clientWidth;
     this.searchSuggestionMinWidth = searchSuggestionMinWidth;
       // console.log({searchSuggestionMinWidth});
