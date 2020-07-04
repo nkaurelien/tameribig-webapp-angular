@@ -270,6 +270,7 @@ input:-webkit-autofill {
 .spinner-grow {
   background-color: rgba(231, 143, 34, 0.7);
 }
+
 //.form-control:focus {
 //  color: #495057;
 //  background-color: #fff;
@@ -277,3 +278,33 @@ input:-webkit-autofill {
 //  outline: 0;
 //  box-shadow: none;
 //}
+
+
+//SEARCH NAV
+
+.nav-link {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.nav-link.active {
+  font-weight: bolder !important;
+}
+
+//.amber-lighter-hover {
+//  color: #ffa000;
+//  transition: .4s;
+//}
+.amber-lighter-hover:hover {
+  transition: .4s;
+  color: #ffbd4d;
+}
+
+//.deep-orange-lighter-hover {
+//  color: #ff7043;
+//  transition: .4s;
+//}
+
+.deep-orange-lighter-hover:hover {
+  transition: .4s;
+  color: #ffaa90;
+}

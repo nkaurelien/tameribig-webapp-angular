@@ -3,35 +3,28 @@ import {CommonModule} from '@angular/common';
 import {HomeComponent} from './home.component';
 import {HomeLayoutComponent} from './home-layout/home-layout.component';
 import {HomeRoutingModule} from './home-routing.module';
-import {SearcherComponent} from './searcher/searcher.component';
 import {HexagoneComponent} from './hexagone/hexagone.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
 import {CategoriesService} from '../@core/services/categories.service';
 import {ImagesService} from '../@core/services/images.service';
-import {IconsModule, InputsModule} from "ng-uikit-pro-standard";
+import {IconsModule} from 'ng-uikit-pro-standard';
+import {SearchSharedModule} from '@app/main/search';
 
 
 @NgModule({
-    imports: [
-        HomeRoutingModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-        NgbTypeaheadModule,
-        IconsModule,
-        InputsModule,
-    ],
+  imports: [
+    HomeRoutingModule,
+    CommonModule,
+    RouterModule,
+    IconsModule,
+    SearchSharedModule,
+  ],
     exports: [
         HomeRoutingModule,
-        SearcherComponent,
     ],
     declarations: [
         HomeComponent,
         HomeLayoutComponent,
-        SearcherComponent,
         HexagoneComponent,
     ],
     providers: [

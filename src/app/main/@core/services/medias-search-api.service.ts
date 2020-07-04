@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '@core/auth';
 import {ImagesStore} from '@app/main/@core/state/image/images.store';
 import {ImagesQuery} from '@app/main/@core/state/image/images.query';
-import {SearchResponseItem} from "@app/main/home/searcher/SearchResponseItem";
+import {SearchResponseItem} from "@app/main/search/search-shared/searcher/SearchResponseItem";
 
 
 @Injectable({
