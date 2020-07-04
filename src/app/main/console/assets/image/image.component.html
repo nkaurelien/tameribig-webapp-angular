@@ -184,12 +184,16 @@
                                     ></mdb-checkbox>
                                 </th>
                                 <td>
-                                    <img *ngIf="row.data.miniature?.length" [src]="row.data.miniature"
-                                         class="img-thumbnail " style="height: 80px">
-                                    <!--                                    <cl-image public-id={{row.data?.services?.cloudinary?.public_id}}-->
-                                    <!--                                            class="img-fluid"></cl-image>-->
+                                  <img *ngIf="row.data.miniature?.length" [src]="row.data.miniature"
+                                       class="img-thumbnail " style="height: 80px">
+                                  <!--                                    <cl-image public-id={{row.data?.services?.cloudinary?.public_id}}-->
+                                  <!--                                            class="img-fluid"></cl-image>-->
 
-                                    <span *ngIf="!row.data.miniature?.length" class="text-muted">Indéfinie</span>
+                                  <span *ngIf="!row.data.miniature?.length" class="text-muted">
+                                      <button (click)="uploadPicture(row.data)" class="btn m-0 p-0 btn-sm">
+                                        <img alt="" height="80px" src="/assets/images/buttons/file-uploads1.png">
+                                      </button>
+                                    </span>
                                 </td>
                                 <td>{{ row.data.title }}</td>
                                 <td>{{ row.data.price }}</td>
@@ -246,47 +250,35 @@
                     <!--Bottom Table UI-->
                     <div class="d-flex justify-content-between">
                         <!--Pagination -->
-                        <nav class="my-4">
-                            <ul class="pagination pagination-circle pg-blue mb-0 flex-wrap">
-                                <!--First-->
-                                <li class="page-item disabled">
-                                    <a class="page-link">First</a>
-                                </li>
+                      <nav class="my-4 " style="opacity: 0.5;">
+                        <ul class="pagination pagination-circle pg-blue mb-0 flex-wrap">
+                          <!--First-->
+                          <li class="page-item disabled">
+                            <a class="page-link">First</a>
+                          </li>
 
-                                <!--Arrow left-->
-                                <li class="page-item disabled">
-                                    <a class="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
+                          <!--Arrow left-->
+                          <li class="page-item disabled">
+                            <a class="page-link" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
 
-                                <!--Numbers-->
-                                <li class="page-item active">
-                                    <a class="page-link  waves-effect" mdbWavesEffect>1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link  waves-effect" mdbWavesEffect>2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link  waves-effect" mdbWavesEffect>3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link  waves-effect" mdbWavesEffect>4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link  waves-effect" mdbWavesEffect>5</a>
-                                </li>
+                          <!--Numbers-->
+                          <li class="page-item active-">
+                            <a class="page-link  waves-effect" disabled="" mdbWavesEffect>1</a>
+                          </li>
 
-                                <!--Arrow right-->
-                                <li class="page-item">
-                                    <a class="page-link waves-effect" mdbWavesEffect aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
+                          <!--Arrow right-->
+                          <li class="page-item">
+                            <a class="page-link waves-effect" mdbWavesEffect aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
 
-                                <!--First-->
+                          <!--First-->
                                 <li class="page-item">
                                     <a class="page-link waves-effect" mdbWavesEffect>Last</a>
                                 </li>

@@ -7,99 +7,98 @@ import {environment} from '@environments/environment';
 import {ImagesApiService} from '@app/main/@core/services/images-api.service';
 
 @Component({
-    selector: 'app-image-add',
-    templateUrl: './image-add.component.html',
-    styleUrls: ['./image-add.component.scss']
+  selector: 'app-image-add',
+  templateUrl: './image-add.component.html',
+  styleUrls: ['./image-add.component.scss']
 })
 export class ImageAddComponent implements OnInit, AfterViewInit {
 
-    @ViewChild('modal', {static: true}) modal: ModalDirective;
+  @ViewChild('modal', {static: true}) modal: ModalDirective;
 
-    public disabled = false;
+  public disabled = false;
 
-    public submitting = false;
+  public submitting = false;
 
-    public errors = [];
-    public imagesUploadedWithSuccess = [];
+  public errors = [];
+  public imagesUploadedWithSuccess = [];
 
-    public validatingForm: FormGroup;
-    public user: any;
+  public validatingForm: FormGroup;
+  public user: any;
 
-    constructor(
-        private router: Router,
-        private auth: AuthenticationService,
-        private imagesApiService: ImagesApiService,
-        private toast: ToastService,
-    ) { }
+  constructor(
+    private router: Router,
+    private auth: AuthenticationService,
+    private imagesApiService: ImagesApiService,
+    private toast: ToastService,
+  ) {
+  }
 
-    get prixInput() {
-        return this.validatingForm && this.validatingForm.get('price');
+  get prixInput() {
+    return this.validatingForm && this.validatingForm.get('price');
+  }
+
+  get titreInput() {
+    return this.validatingForm && this.validatingForm.get('titre');
+  }
+
+  get descInput() {
+    return this.validatingForm && this.validatingForm.get('description');
+  }
+
+  get tagsInput() {
+    return this.validatingForm && this.validatingForm.get('keywords');
+  }
+
+  ngOnInit() {
+    this.validatingForm = new FormGroup({
+      title: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      price: new FormControl(null, [Validators.required, Validators.min(50)]),
+      description: new FormControl(null, [Validators.minLength(3), Validators.maxLength(100)]),
+      keywords: new FormControl(null, null),
+    });
+
+    this.auth.loggedIn$.subscribe(({loggedIn, routerState, user}) => {
+      this.user = user;
+    });
+  }
+
+  ngAfterViewInit() {
+    this.modal.show();
+
+  }
+
+
+  onHideModal() {
+    this.router.navigateByUrl('/console/assets/images');
+  }
+
+
+  submit() {
+    // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
+    if (this.validatingForm.valid) {
+      this.submitting = true;
+      const body = {
+        user: this.user,
+        ...this.validatingForm.value,
+      };
+      this.imagesApiService.create(body).subscribe(resp => {
+        this.submitting = false;
+        this.validatingForm.reset();
+        this.errors = [];
+        this.toast.success('Enregistrer avec succès, recharger votre liste ');
+        setTimeout(() => this.modal.hide(), 1200);
+
+      }, err => {
+        this.submitting = false;
+      });
+    } else {
+      this.errors = ['Formulaire invalide'];
     }
-
-    get titreInput() {
-        return this.validatingForm && this.validatingForm.get('titre');
-    }
-
-    get descInput() {
-        return this.validatingForm && this.validatingForm.get('description');
-    }
-
-    get tagsInput() {
-        return this.validatingForm && this.validatingForm.get('keywords');
-    }
-
-    ngOnInit() {
-        this.validatingForm = new FormGroup({
-            title: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-            price: new FormControl(null, [Validators.required, Validators.min(50)]),
-            description: new FormControl(null, [Validators.minLength(3), Validators.maxLength(100)]),
-            tags: new FormControl(null, null),
-        });
-
-        this.auth.loggedIn$.subscribe(({loggedIn, routerState, user}) => {
-            this.user = user;
-        });
-    }
-
-    ngAfterViewInit() {
-        this.modal.show();
-
-    }
+  }
 
 
-
-    onHideModal() {
-        this.router.navigateByUrl('/console/assets/images');
-    }
-
-
-
-    submit() {
-        // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
-        if (this.validatingForm.valid) {
-            this.submitting = true;
-            const body = {
-                user: this.user,
-                ...this.validatingForm.value,
-            };
-            this.imagesApiService.create(body).subscribe(resp => {
-                this.submitting = false;
-                this.validatingForm.reset();
-                this.errors = [];
-                this.toast.success('Enregistrer avec succès, recharger votre liste ');
-                setTimeout(() => this.modal.hide(), 1200);
-
-            }, err => {
-                this.submitting = false;
-            });
-        } else {
-            this.errors = ['Formulaire invalide'];
-        }
-    }
-
-
-    getImageUrl(uid: string) {
-        return `${environment.ApiBaseUrl}/images/open/${uid}`;
-    }
+  getImageUrl(uid: string) {
+    return `${environment.ApiBaseUrl}/images/open/${uid}`;
+  }
 
 }
