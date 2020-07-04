@@ -7,18 +7,18 @@ import {IApiResource} from '@core/_base/crud/models/IApiResource';
 import {Router} from '@angular/router';
 import {AuthService} from '@core/auth';
 import {Image} from '@app/main/@core/state/image/image.model';
-import {ImagesStore} from "@app/main/@core/state/image/images.store";
-import {ImagesQuery} from "@app/main/@core/state/image/images.query";
+import {ImagesStore} from '@app/main/@core/state/image/images.store';
+import {ImagesQuery} from '@app/main/@core/state/image/images.query';
 
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class ImagesApiService {
 
 
-    constructor(
-        private http: HttpClient,
+  constructor(
+    private http: HttpClient,
         private auth: AuthService,
         private imagesStore: ImagesStore,
         private imagesQuery: ImagesQuery,

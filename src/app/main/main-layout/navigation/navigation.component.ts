@@ -5,7 +5,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChil
 
 import * as $ from 'jquery';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {CollapseComponent} from "ng-uikit-pro-standard";
+import {CollapseComponent} from 'ng-uikit-pro-standard';
 
 @Component({
     selector: 'app-navigation',
@@ -14,7 +14,6 @@ import {CollapseComponent} from "ng-uikit-pro-standard";
 })
 export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    clicked: boolean;
     authUser: firebase.User;
     unsubscribe = new Subject<boolean>();
     @ViewChildren(CollapseComponent) collapses: CollapseComponent[];
@@ -25,7 +24,6 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
         private afAuth: AuthFirebaseService,
         private deviceService: DeviceDetectorService
     ) {
-        this.clicked = this.clicked === undefined ? false : true;
     }
 
     get authenticated() {

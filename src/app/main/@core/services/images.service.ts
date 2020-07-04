@@ -182,7 +182,7 @@ export class ImagesService {
 
                 return [arr];
             })),
-            tap( x => console.log('results', x)),
+            // tap( x => console.log('results', x)),
 
             // catchError(x => x)
         );

@@ -1,0 +1,22 @@
+{
+  "_id": "5ee415308c48e22bcc29ac7a",
+  "title": "Lorem",
+  "description": "Lorem ipsum",
+  "score": 1.2305773496627808,
+  "highlight": [
+    {
+      "path": "description",
+      "texts": [
+        {
+          "value": "Lorem",
+          "type": "hit"
+        },
+        {
+          "value": " ipsum",
+          "type": "text"
+        }
+      ],
+      "score": 1.3987467288970947
+    }
+  ]
+}

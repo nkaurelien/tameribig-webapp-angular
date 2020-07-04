@@ -1,8 +1,5 @@
 /* Formlaire de recherche */
 
-.m-body-search {
-  vertical-align: middle;
-}
 
 .description {
   font-weight: bolder;
@@ -10,6 +7,10 @@
   text-align: center;
   opacity: 0.6;
 }
+
+//-------------------------------------
+// buttons de  recherche
+
 
 .box-search {
   max-width: 500px;
@@ -34,26 +35,6 @@
 .box-search a:nth-of-type(4) {
   color: green;
 }
-
-.m-body-search .m-body-search__form {
-  height: 3.2rem;
-}
-
-.m-body-search .m-body-search__form {
-  display: inline-block;
-  float: right;
-}
-
-.m-body-search .m-body-search__wrapper {
-  display: table;
-  table-layout: fixed;
-  text-align: right;
-  border-radius: 40px;
-  background-color: rgba(33, 37, 41, 0.0192);
-  border: 1px solid rgba(197, 175, 209, .25);
-
-}
-
 
 // Annule le border-raduis
 .border-gradient {
@@ -126,7 +107,7 @@
 }
 
 //--------------------------------------------------------------------------
-
+// Dematerialisation et design  du formulaire
 .search-suggestion {
   padding: 0.5em 1.25em;
   //min-width: 300px;
@@ -148,7 +129,7 @@ ngb-typeahead-window {
   .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #e78f22;
+    background-color: rgba(231, 143, 34, 0.7);
   }
 }
 
@@ -286,6 +267,9 @@ input:-webkit-autofill {
   }
 }
 
+.spinner-grow {
+  background-color: rgba(231, 143, 34, 0.7);
+}
 //.form-control:focus {
 //  color: #495057;
 //  background-color: #fff;
