@@ -2,7 +2,7 @@
   <div class="col-sm-11 mx-auto rgba-white-strong border ">
     <div class="row  justify-content-between">
 
-      <div class="col-7 pt-3">
+      <div class="col-sm-12 col-lg-6 pt-3">
         <div class="m-stack m-stack--ver m-stack--desktop">
 
           <!--begin::Search-->
@@ -27,7 +27,7 @@
                        [(ngModel)]="searchModel"
                        [class.is-invalid]="searchFailed"
                        [inputFormatter]="formatter" [ngbTypeahead]="search"
-                       [placeholder]="searchModel" [resultTemplate]="rt" autocomplete="off"
+                       [placeholder]="searchModel.description || searchModel" [resultTemplate]="rt" autocomplete="off"
                        class="form-control"
                        mdbInput name="q" placeholder="Rechercher des medias.." type="text">
                 <div class="input-group-append">
@@ -57,7 +57,7 @@
           <!--end::Search-->
 
           <!-- begin search nav-->
-          <nav class="nav lighten-4- py-2 ml-2">
+          <nav class="nav lighten-4- py-2 ml-2 justify-content-sm-center justify-content-lg-start">
             <a (click)="searchNavigate('images')" [ngClass]="{'active': paramActiveSearchTab === 'images'}"
                class="nav-link deep-orange-lighter-hover">Images</a>
             <a (click)="searchNavigate('videos')" [ngClass]="{'active': paramActiveSearchTab === 'videos'}"
@@ -71,31 +71,39 @@
         </div>
       </div>
       <div class="col">
-        <div class="row box-search mb-5 mx-auto justify-content-end">
+        <div class="row box-search mb-0 mx-auto justify-content-end flex-column">
+          <div class="row box-search mb-3 mx-auto justify-content-center">
 
-          <a [routerLink]="[ '/explorer/images' ]" class="col-2 option" customHeight="50"
-             mdbTooltip="Explorer les images populaires" placement="bottom" routerLinkActive="active">
-            <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-01.png">
-            <h5 class="font font-image description">Images</h5>
-          </a>
-          <a [routerLink]="[ '/explorer/videos' ]" class="col-2 option" customHeight="50"
-             mdbTooltip="Explorer les videos populaires" placement="bottom" routerLinkActive="active">
-            <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-02.png">
-            <h5 class="font font-video description">Videos</h5>
-          </a>
-          <a [routerLink]="[ '/explorer/audios' ]" class="col-2 option" customHeight="50"
-             mdbTooltip="Explorer les audios populaires" placement="bottom" routerLinkActive="active">
-            <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-03.png">
-            <h5 class="font font-audio description">Audios</h5>
-          </a>
-          <a [routerLink]="[ '/explorer/creas' ]" class="col-2 option" customHeight="50"
-             mdbTooltip="Explorer les creations populaires" placement="bottom" routerLinkActive="active">
-            <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-04.png">
-            <h5 class="font font-crea description">Creas</h5>
-          </a>
+            <a [routerLink]="[ '/explorer/images' ]" class="col-2 option" customHeight="50"
+               mdbTooltip="Explorer les images populaires" placement="bottom" routerLinkActive="active">
+              <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-01.png">
+              <h5 class="font font-image description">Images</h5>
+            </a>
+            <a [routerLink]="[ '/explorer/videos' ]" class="col-2 option" customHeight="50"
+               mdbTooltip="Explorer les videos populaires" placement="bottom" routerLinkActive="active">
+              <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-02.png">
+              <h5 class="font font-video description">Videos</h5>
+            </a>
+            <a [routerLink]="[ '/explorer/audios' ]" class="col-2 option" customHeight="50"
+               mdbTooltip="Explorer les audios populaires" placement="bottom" routerLinkActive="active">
+              <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-03.png">
+              <h5 class="font font-audio description">Audios</h5>
+            </a>
+            <a [routerLink]="[ '/explorer/creas' ]" class="col-2 option" customHeight="50"
+               mdbTooltip="Explorer les creations populaires" placement="bottom" routerLinkActive="active">
+              <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-04.png">
+              <h5 class="font font-crea description">Creas</h5>
+            </a>
 
+          </div>
+          <div class="row box-search mb-2 mx-auto justify-content-center">
+
+            <div class="or-spacer mx-auto">
+              <div class="mask"></div>
+              <span><i>les meilleures publications</i></span>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -109,12 +117,6 @@
 </ng-template>
 
 <ng-template #tplSearching>
-  <!--  <div class="spinner-grow text-primary" role="status">-->
-  <!--&lt;!&ndash;    <span class="sr-only">Loading...</span>&ndash;&gt;-->
-  <!--  </div>-->
-  <!--  <div class="spinner-border spinner-border-sm" role="status">-->
-  <!--&lt;!&ndash;    <span class="sr-only">Loading...</span>&ndash;&gt;-->
-  <!--  </div>-->
   <div class="spinner-grow spinner-grow-sm text-primary mr-1" role="status">
     <!--    <span class="sr-only">Loading...</span>-->
   </div>

@@ -80,7 +80,7 @@ export class Searcher2Component implements OnInit, AfterViewInit, OnDestroy {
         .subscribe(
           (params: any) => {
 
-            if (params.hasOwnProperty('active_search_tab') !== '') {
+            if (params.hasOwnProperty('active_search_tab')) {
               this.paramActiveSearchTab = params.active_search_tab;
             }
 
@@ -104,8 +104,8 @@ export class Searcher2Component implements OnInit, AfterViewInit, OnDestroy {
         // .pipe(take(1))
         .subscribe(
           (queryParams: any) => {
-            if (queryParams.hasOwnProperty('q') !== '') {
-              this.searchModel = queryParams.q;
+            if (queryParams.hasOwnProperty('q')) {
+              this.searchModel = queryParams.q || '';
             }
           });
 
