@@ -1,10 +1,34 @@
-import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {fromEvent, Observable, of, Subject} from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, map, switchMap, take, takeUntil, tap} from 'rxjs/operators';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
+import {Observable, of, Subject, timer} from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  tap
+} from 'rxjs/operators';
 import {statesWithFlagsMocks} from '@data/states';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {WINDOW} from '@ng-toolkit/universal';
-import {MediasSearchApiService} from "@app/main/@core/services/medias-search-api.service";
+import {MediasSearchApiService} from '@app/main/@core/services/medias-search-api.service';
+import {SearchSuggestion} from '@app/main/@core/state/search/SearchSuggestion';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from "@angular/router";
 
 const statesWithFlags: { name: string, flag: string }[] = statesWithFlagsMocks;
 
@@ -20,38 +44,87 @@ export class SearcherComponent implements OnInit, AfterViewInit, OnDestroy {
   searching = false;
   searchFailed = false;
   public searchSuggestionMinWidth = 0;
-  @ViewChild('searchInput', {static: false}) searchInput;
-  @ViewChild('searchForm', {static: false}) searchForm;
+  myControl = new FormControl();
+  @ViewChild('searchInputRef', {static: false}) searchInputRef;
+  @ViewChild('searchFormRef', {static: false}) searchFormRef;
   private unsubscribe = new Subject();
+
+  searchText$ = new Subject<string>();
+  searchText = '';
+  results: Observable<SearchSuggestion[]>;
+
+  public searchForm: FormGroup;
 
   constructor(
     private deviceService: DeviceDetectorService,
     private mediasSearchApiService: MediasSearchApiService,
+    private renderer: Renderer2,
+    private elRef: ElementRef,
+    private router: Router,
     @Inject(WINDOW) private window: Window
   ) {
-
+    //
   }
 
-  searchCountry = (text$: Observable<string>) =>
+  get searchInput() {
+    return this.searchForm && this.searchForm.get('search');
+  }
+
+  public searchCountry = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
       map(term => {
         return term === '' ? []
           : statesWithFlags.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10);
       }, take(5)),
-    );
+    )
 
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
+  // public search$ = (text$: Observable<string>) =>
+  //   text$.pipe(
+  //     debounceTime(200),
+  //     distinctUntilChanged(),
+  //     tap(() => this.searching = true),
+  //     switchMap(term => {
+  //       return this.mediasSearchApiService.searchSuggestions({search: term}).pipe(
+  //         tap(() => this.searchFailed = false),
+  //         take(5),
+  //         // map((response) => response.map(X => X.description)),
+  //         // tap(console.log),
+  //         catchError(() => {
+  //           this.searchFailed = true;
+  //           return of([]);
+  //         }));
+  //     }),
+  //     tap(() => this.searching = false)
+  //   )
+
+  // formatter = (x: { name: string }) => x.name;
+
+  // @HostListener('window:resize', ['$event'])
+  // onWindowResize(event: Event) {
+  //   this.resizeSearchSuggestions();
+  // }
+
+  ngOnInit(): void {
+    this.searchForm = new FormGroup({
+      search: new FormControl(null, Validators.nullValidator),
+    });
+
+    this.results = this.searchInput.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
       distinctUntilChanged(),
+      filter($e => $e.length > 0 && this.searchText !== $e),
+      tap($e => this.searchText$.next($e as string)),
+      tap(($e) => this.searchText = $e),
       tap(() => this.searching = true),
+      // tap($e => console.log({$e})),
+      // takeUntil(this.unsubscribe),
       switchMap(term => {
-        return this.mediasSearchApiService.searchImages([term]).pipe(
+        return this.mediasSearchApiService.searchSuggestions({search: term.toLowerCase()}).pipe(
+          // tap(console.log),
           tap(() => this.searchFailed = false),
           take(5),
-          // map((response) => response.map(X => X.description)),
-          // tap(console.log),
           catchError(() => {
             this.searchFailed = true;
             return of([]);
@@ -60,21 +133,12 @@ export class SearcherComponent implements OnInit, AfterViewInit, OnDestroy {
       tap(() => this.searching = false)
     );
 
-  formatter = (x: { name: string }) => x.name;
-
-  // @HostListener('window:resize', ['$event'])
-  onWindowResize(event: Event) {
-    this.resizeSearchSuggestions();
-  }
-
-  ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
-    fromEvent(this.window, 'resize')
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(this.onWindowResize.bind(this));
+    // fromEvent(this.window, 'resize')
+    //   .pipe(takeUntil(this.unsubscribe))
+    //   .subscribe(this.onWindowResize.bind(this));
     this.resizeSearchSuggestions();
   }
 
@@ -84,11 +148,41 @@ export class SearcherComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   resizeSearchSuggestions(): void {
-    const element = this.searchInput.nativeElement;
-    const searchSuggestionMinWidth = element.clientWidth;
-    this.searchSuggestionMinWidth = searchSuggestionMinWidth;
-    // console.log({searchSuggestionMinWidth});
+
+    timer(0, 500).pipe(takeUntil(this.unsubscribe), tap(_ => {
+      const element = this.searchFormRef.nativeElement;
+      const searchSuggestionMinWidth = element.clientWidth;
+      this.searchSuggestionMinWidth = searchSuggestionMinWidth;
+      // console.log({searchSuggestionMinWidth}, element.querySelector('.completer-dropdown'));
+      if (element.querySelector('.completer-dropdown')) {
+        this.renderer.setStyle(element.querySelector('.completer-dropdown'), 'width', `${searchSuggestionMinWidth}px`);
+        // element.querySelector('.completer-dropdown').style.setProperty('width', `${searchSuggestionMinWidth}px !important`);
+      }
+    })).subscribe();
   }
 
+  selected({text}) {
+    this.searchText = text;
+    // this.searchInputRef.nativeElement.value = $selected.search;
+  }
 
+  onDisplayValue($event) {
+    return $event;
+  }
+
+  submit() {
+    this.searchNavigate(null);
+  }
+
+  searchNavigate(nextTab: string) {
+    if (this.searchText.length === 0) {
+      return;
+    }
+
+    this.router.navigate(['/search', nextTab || 'images'], {
+      queryParams: {
+        q: this.searchText
+      }
+    });
+  }
 }

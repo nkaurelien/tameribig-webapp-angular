@@ -8,7 +8,8 @@
           <div
             class="m-body-search m-stack__item m-stack__item--middle m-dropdown m-dropdown--arrow m-dropdown--large m-dropdown--mobile-full-width m-dropdown--align-right m-dropdown--skin-light ">
             <!--begin::Search Form -->
-            <form #searchForm class="w-100 m-body-search__form">
+            <form #searchFormRef (submit)="submit()" [formGroup]="searchForm" class="w-100 m-body-search__form"
+                  novalidate>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
@@ -22,12 +23,38 @@
                     </div>
                   </div>
                 </div>
-                <input #searchInput
-                       [(ngModel)]="model"
-                       [class.is-invalid]="searchFailed" [inputFormatter]="formatter"
-                       [ngbTypeahead]="search" [resultTemplate]="rt" autocomplete="off"
-                       class="form-control"
-                       mdbInput name="q" placeholder="Rechercher des medias.." type="text">
+
+                <!--                <input hidden-->
+                <!--                       [class.is-invalid]="searchFailed" [inputFormatter]="formatter"-->
+                <!--                       [ngbTypeahead]="search$" [resultTemplate]="rt" autocomplete="off"-->
+                <!--                       (selectItem)="selected($event)"-->
+                <!--                       class="form-control"-->
+                <!--                       mdbInput name="q" placeholder="Rechercher des medias.." type="text">-->
+
+                <input #searchInputRef
+                       [mdbAutoCompleter]="auto"
+                       class="completer-input form-control mdb-autocomplete"
+                       formControlName="search"
+                       placeholder="Rechercher des medias.."
+                       type="text">
+
+                <mdb-auto-completer
+                  #auto="mdbAutoCompleter"
+                  (selected)="selected($event)"
+                  [appendToBody]="false"
+                  [disabled]="false"
+                  [displayValue]="onDisplayValue"
+                  [optionHeight]="40" [visibleOptions]="5" textNoResults="Aucune suggestions">
+                  <mdb-option *ngFor="let option of results | async" [value]="option.search">
+                    <div [style.width.px]="searchSuggestionMinWidth" class="search-suggestion">
+                      <!--        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">-->
+                      <ngb-highlight [result]="option.search" [term]="searchText" class="text-dark"
+                                     highlightClass="text-black-50"></ngb-highlight>
+                    </div>
+                  </mdb-option>
+                </mdb-auto-completer>
+
+
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <mdb-icon fas icon="microphone"></mdb-icon>
@@ -82,7 +109,7 @@
 <ng-template #rt let-r="result" let-t="term">
   <div [style.width.px]="searchSuggestionMinWidth " class="search-suggestion">
     <!--        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">-->
-    <ngb-highlight [result]="r.description" [term]="t"></ngb-highlight>
+    <ngb-highlight [result]="r.search" [term]="t"></ngb-highlight>
   </div>
 </ng-template>
 
@@ -98,3 +125,4 @@
   </div>
 
 </ng-template>
+

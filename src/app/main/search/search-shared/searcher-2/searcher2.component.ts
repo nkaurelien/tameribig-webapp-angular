@@ -33,7 +33,9 @@ export class Searcher2Component implements OnInit, AfterViewInit, OnDestroy {
     private mediasSearchApiService: MediasSearchApiService,
     @Inject(WINDOW) private window: Window
   ) {
-
+    // this.control.valueChanges.subscribe((completed: boolean) => {
+    //   this.complete.emit({ ...this.todo, completed });
+    // });
   }
 
   searchCountry = (text$: Observable<string>) =>
@@ -45,13 +47,15 @@ export class Searcher2Component implements OnInit, AfterViewInit, OnDestroy {
       }, take(5)),
     )
 
-  search = (text$: Observable<string>) =>
+  search$ = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
       tap(() => this.searching = true),
+      tap(resp => this.mediasSearchApiService.store.setLoading(true)),
       switchMap(term => {
-        return this.mediasSearchApiService.searchImages([term]).pipe(
+        return this.mediasSearchApiService.searchImages({search: [term]}).pipe(
+          tap(resp => this.mediasSearchApiService.store.setLoading(false)),
           tap(() => this.searchFailed = false),
           take(5),
           // map((response) => response.map(X => X.description)),
@@ -76,7 +80,10 @@ export class Searcher2Component implements OnInit, AfterViewInit, OnDestroy {
     if (this.route.firstChild) {
 
       this.route.firstChild.params
-        // .pipe(take(1))
+        .pipe(
+          takeUntil(this.unsubscribe),
+          // take(1)
+        )
         .subscribe(
           (params: any) => {
 

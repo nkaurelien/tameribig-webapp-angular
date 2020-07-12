@@ -133,6 +133,18 @@ ngb-typeahead-window {
   }
 }
 
+mdb-auto-completer .completer-dropdown {
+  margin-top: 1px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+  z-index: 110;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 //--------------------------------------------------------------------------------
 // A fix for the default background color of input in the browser

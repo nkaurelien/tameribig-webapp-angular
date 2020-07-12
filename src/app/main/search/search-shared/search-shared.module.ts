@@ -6,7 +6,7 @@ import {Searcher2Component} from './searcher-2/searcher2.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
-import {IconsModule, InputsModule, TooltipModule} from 'ng-uikit-pro-standard';
+import {AutoCompleterModule, IconsModule, InputsModule, TooltipModule} from 'ng-uikit-pro-standard';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import {IconsModule, InputsModule, TooltipModule} from 'ng-uikit-pro-standard';
     NgbTypeaheadModule,
     IconsModule,
     InputsModule,
+    AutoCompleterModule,
   ]
 })
 export class SearchSharedModule {

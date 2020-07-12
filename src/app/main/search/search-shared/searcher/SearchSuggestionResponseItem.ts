@@ -1,43 +1,37 @@
 // To parse this data:
 //
-//   import { Convert, SearchResponseItem } from "./file";
+//   import { Convert, SearchSuggestionResponseItem } from "./file";
 //
-//   const searchResponseItem = Convert.toSearchResponseItem(json);
+//   const searchSuggestionResponseItem = Convert.toSearchSuggestionResponseItem(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface SearchResponseItem {
+export interface SearchSuggestionResponseItem {
+  atlas: any[];
+  native: Native[];
+}
+
+export interface Native {
+  results: any[];
   _id: string;
-  title: string;
-  description: string;
-  score: number;
-  miniature: string;
-  picture: string;
-  download: string;
-  highlight: Highlight[];
-}
-
-export interface Highlight {
-  path: string;
-  texts: Text[];
-  score: number;
-}
-
-export interface Text {
-  value: string;
-  type: string;
+  search: string;
+  createdAt: Date;
+  lastUsedAt: Date;
+  useCount: number;
+  updatedAt: Date;
+  __v: number;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-  public static toSearchResponseItem(json: string): SearchResponseItem {
-    return cast(JSON.parse(json), r("SearchResponseItem"));
+  public static toSearchSuggestionResponseItem(json: string): SearchSuggestionResponseItem {
+    return cast(JSON.parse(json), r("SearchSuggestionResponseItem"));
   }
 
-  public static searchResponseItemToJson(value: SearchResponseItem): string {
-    return JSON.stringify(uncast(value, r("SearchResponseItem")), null, 2);
+  public static searchSuggestionResponseItemToJson(value: SearchSuggestionResponseItem): string {
+    return JSON.stringify(uncast(value, r("SearchSuggestionResponseItem")), null, 2);
   }
 }
 
@@ -172,23 +166,18 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-  "SearchResponseItem": o([
+  "SearchSuggestionResponseItem": o([
+    {json: "atlas", js: "atlas", typ: a("any")},
+    {json: "native", js: "native", typ: a(r("Native"))},
+  ], false),
+  "Native": o([
+    {json: "results", js: "results", typ: a("any")},
     {json: "_id", js: "_id", typ: ""},
-    {json: "title", js: "title", typ: ""},
-    {json: "description", js: "description", typ: ""},
-    {json: "score", js: "score", typ: 3.14},
-    {json: "miniature", js: "miniature", typ: ""},
-    {json: "picture", js: "picture", typ: ""},
-    {json: "download", js: "download", typ: ""},
-    {json: "highlight", js: "highlight", typ: a(r("Highlight"))},
-  ], false),
-  "Highlight": o([
-    {json: "path", js: "path", typ: ""},
-    {json: "texts", js: "texts", typ: a(r("Text"))},
-    {json: "score", js: "score", typ: 3.14},
-  ], false),
-  "Text": o([
-    {json: "value", js: "value", typ: ""},
-    {json: "type", js: "type", typ: ""},
+    {json: "search", js: "search", typ: ""},
+    {json: "createdAt", js: "createdAt", typ: Date},
+    {json: "lastUsedAt", js: "lastUsedAt", typ: Date},
+    {json: "useCount", js: "useCount", typ: 0},
+    {json: "updatedAt", js: "updatedAt", typ: Date},
+    {json: "__v", js: "__v", typ: 0},
   ], false),
 };
