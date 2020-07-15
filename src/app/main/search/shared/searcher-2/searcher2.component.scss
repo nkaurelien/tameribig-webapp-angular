@@ -108,29 +108,11 @@
 
 //--------------------------------------------------------------------------
 // Dematerialisation et design  du formulaire
-.search-suggestion {
-  padding: 0.5em 1.25em;
-  //min-width: 300px;
-}
-
+@import "../../styles/auto-completer";
 .option {
   cursor: pointer;
   border: #a1a0a0;
-  margin-top: 1.0rem
-}
-
-ngb-typeahead-window {
-  padding: 0 !important;
-
-  .dropdown-item {
-    padding: 0;
-  }
-
-  .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
-    text-decoration: none;
-    background-color: rgba(231, 143, 34, 0.7);
-  }
+  margin-top: 0.5rem
 }
 
 
@@ -213,6 +195,10 @@ input:-webkit-autofill {
     display: block;
     height: 100%;
     width: 100%;
+  }
+
+  &.search-icon-svg-wrapper:hover {
+    cursor: pointer;
   }
 }
 

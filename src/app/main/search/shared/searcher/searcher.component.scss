@@ -108,43 +108,7 @@
 
 //--------------------------------------------------------------------------
 // Dematerialisation et design  du formulaire
-.search-suggestion {
-  padding: 0.5em 1.25em;
-  //min-width: 300px;
-}
-
-.option {
-  cursor: pointer;
-  border: #a1a0a0;
-  margin-top: 1.0rem
-}
-
-ngb-typeahead-window {
-  padding: 0 !important;
-
-  .dropdown-item {
-    padding: 0;
-  }
-
-  .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
-    text-decoration: none;
-    background-color: rgba(231, 143, 34, 0.7);
-  }
-}
-
-mdb-auto-completer .completer-dropdown {
-  margin-top: 1px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
-  z-index: 110;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
+@import "../../styles/auto-completer";
 
 //--------------------------------------------------------------------------------
 // A fix for the default background color of input in the browser

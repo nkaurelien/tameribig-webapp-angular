@@ -9,27 +9,56 @@
           <div
             class="m-body-search m-stack__item m-stack__item--middle m-dropdown m-dropdown--arrow m-dropdown--large m-dropdown--mobile-full-width m-dropdown--align-right m-dropdown--skin-light ">
             <!--begin::Search Form -->
-            <form #searchForm class="w-100 m-body-search__form">
+            <form #searchFormRef (submit)="submit()" [formGroup]="searchForm" class="w-100 m-body-search__form"
+                  novalidate>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
-                    <!--                                        <mdb-icon fas icon="search"></mdb-icon>-->
-                    <div *ngIf="!searching; else tplSearching" class="svg">
-                      <svg focusable="false" viewBox="0 0 24 24"
-                           xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                      </svg>
-                    </div>
+                    <!--                                        <mdb-icon fas icon="states"></mdb-icon>-->
+                    <ng-container *ngIf="!searching; else tplSearching">
+                      <div (click)="submit()" class="svg search-icon-svg-wrapper">
+                        <svg focusable="false" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                        </svg>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
-                <input #searchInput
-                       [(ngModel)]="searchModel"
-                       [class.is-invalid]="searchFailed"
-                       [inputFormatter]="formatter" [ngbTypeahead]="search$"
-                       [placeholder]="searchModel.description || searchModel" [resultTemplate]="rt" autocomplete="off"
-                       class="form-control"
-                       mdbInput name="q" placeholder="Rechercher des medias.." type="text">
+
+                <!--                <input hidden-->
+                <!--                       [class.is-invalid]="searchFailed" [inputFormatter]="formatter"-->
+                <!--                       [ngbTypeahead]="states$" [resultTemplate]="rt" autocomplete="off"-->
+                <!--                       (selectItem)="selected($event)"-->
+                <!--                       class="form-control"-->
+                <!--                       mdbInput name="q" placeholder="Rechercher des medias.." type="text">-->
+
+                <input #searchInputRef
+                       (keydown.enter)="submit($event.target.value)"
+                       [mdbAutoCompleter]="auto"
+                       class="completer-input form-control mdb-autocomplete"
+                       formControlName="search"
+                       placeholder="Rechercher des medias.."
+                       type="text">
+
+                <mdb-auto-completer
+                  #auto="mdbAutoCompleter"
+                  (selected)="selected($event)"
+                  [appendToBody]="false"
+                  [disabled]="false"
+                  [displayValue]="onDisplayValue"
+                  [optionHeight]="40" [visibleOptions]="5" textNoResults="">
+                  <mdb-option *ngFor="let option of results$ | async" [value]="option.search">
+                    <div [style.width.px]="searchSuggestionMinWidth" class="search-suggestion">
+                      <!--        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">-->
+                      <ngb-highlight [result]="option.search" [term]="searchText" class="text-dark"
+                                     highlightClass="text-black-50"></ngb-highlight>
+                    </div>
+                  </mdb-option>
+                </mdb-auto-completer>
+
+
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <mdb-icon fas icon="microphone"></mdb-icon>
@@ -56,18 +85,18 @@
           </div>
           <!--end::Search-->
 
-          <!-- begin search nav-->
+          <!-- begin states nav-->
           <nav class="nav lighten-4- py-2 ml-2 justify-content-sm-center justify-content-lg-start">
             <a (click)="searchNavigate('images')" [ngClass]="{'active': paramActiveSearchTab === 'images'}"
                class="nav-link deep-orange-lighter-hover">Images</a>
             <a (click)="searchNavigate('videos')" [ngClass]="{'active': paramActiveSearchTab === 'videos'}"
-               class="nav-link deep-orange-lighter-hover">Videos</a>
+               class="nav-link disabled deep-orange-lighter-hover" disabled="">Videos</a>
             <a (click)="searchNavigate('audios')" [ngClass]="{'active': paramActiveSearchTab === 'audios'}"
-               class="nav-link deep-orange-lighter-hover  disabled-">Audios</a>
+               class="nav-link disabled deep-orange-lighter-hover  disabled-" disabled="">Audios</a>
             <a (click)="searchNavigate('creations')" [ngClass]="{'active': paramActiveSearchTab === 'creations'}"
                class="nav-link deep-orange-lighter-hover">Creations</a>
           </nav>
-          <!--  end search nav-->
+          <!--  end states nav-->
         </div>
       </div>
       <div class="col">
@@ -79,12 +108,12 @@
               <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-01.png">
               <h5 class="font font-image description">Images</h5>
             </a>
-            <a [routerLink]="[ '/explorer/videos' ]" class="col-2 option" customHeight="50"
+            <a [routerLink]="[ '/explorer/videos' ]" class="col-2 option disabled" customHeight="50" disabled=""
                mdbTooltip="Explorer les videos populaires" placement="bottom" routerLinkActive="active">
               <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-02.png">
               <h5 class="font font-video description">Videos</h5>
             </a>
-            <a [routerLink]="[ '/explorer/audios' ]" class="col-2 option" customHeight="50"
+            <a [routerLink]="[ '/explorer/audios' ]" class="col-2 option disabled" customHeight="50" disabled=""
                mdbTooltip="Explorer les audios populaires" placement="bottom" routerLinkActive="active">
               <img class="icone img-fluid" src="assets/images/icons/ICONES COULEUR-03.png">
               <h5 class="font font-audio description">Audios</h5>
@@ -112,13 +141,20 @@
 <ng-template #rt let-r="result" let-t="term">
   <div [style.width.px]="searchSuggestionMinWidth " class="search-suggestion">
     <!--        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">-->
-    <ngb-highlight [result]="r.description" [term]="t"></ngb-highlight>
+    <ngb-highlight [result]="r.search" [term]="t"></ngb-highlight>
   </div>
 </ng-template>
 
 <ng-template #tplSearching>
+  <!--  <div class="spinner-grow text-primary" role="status">-->
+  <!--&lt;!&ndash;    <span class="sr-only">Loading...</span>&ndash;&gt;-->
+  <!--  </div>-->
+  <!--  <div class="spinner-border spinner-border-sm" role="status">-->
+  <!--&lt;!&ndash;    <span class="sr-only">Loading...</span>&ndash;&gt;-->
+  <!--  </div>-->
   <div class="spinner-grow spinner-grow-sm text-primary mr-1" role="status">
     <!--    <span class="sr-only">Loading...</span>-->
   </div>
 
 </ng-template>
+

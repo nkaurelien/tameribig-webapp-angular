@@ -44,8 +44,8 @@
                   [appendToBody]="false"
                   [disabled]="false"
                   [displayValue]="onDisplayValue"
-                  [optionHeight]="40" [visibleOptions]="5" textNoResults="Aucune suggestions">
-                  <mdb-option *ngFor="let option of results | async" [value]="option.search">
+                  [optionHeight]="40" [visibleOptions]="5" textNoResults="">
+                  <mdb-option *ngFor="let option of results$ | async" [value]="option.search">
                     <div [style.width.px]="searchSuggestionMinWidth" class="search-suggestion">
                       <!--        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">-->
                       <ngb-highlight [result]="option.search" [term]="searchText" class="text-dark"

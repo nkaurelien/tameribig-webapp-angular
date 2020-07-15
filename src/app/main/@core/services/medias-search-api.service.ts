@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {catchError, map, take, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {forkJoin, Observable, throwError} from 'rxjs';
+import {EMPTY, forkJoin, Observable, throwError} from 'rxjs';
 import {environment} from '@environments/environment';
 import {IApiResource} from '@core/_base/crud/models/IApiResource';
 import {Router} from '@angular/router';
 import {AuthService} from '@core/auth';
 import {ImagesStore} from '@app/main/@core/state/image/images.store';
 import {ImagesQuery} from '@app/main/@core/state/image/images.query';
-import {SearchResponseItem} from '@app/main/search/search-shared/searcher/SearchResponseItem';
-import {SearchQuery} from '@app/main/@core/state/search/search.query';
-import {SearchStore} from '@app/main/@core/state/search/search.store';
-import {SearchSuggestionResponseItem} from "@app/main/search/search-shared/searcher/SearchSuggestionResponseItem";
-import {SearchSuggestion} from "@app/main/@core/state/search/SearchSuggestion";
+import {SearchResponseItem} from '@app/main/search/models/SearchResponseItem';
+import {SearchQuery} from '@app/main/search/states/search.query';
+import {SearchStore} from '@app/main/search/states/search.store';
+import {SearchSuggestionResponseItem} from '@app/main/search/models/SearchSuggestionResponseItem';
+import {SearchSuggestion} from '@app/main/search/models/SearchSuggestion';
 
 
 @Injectable({
@@ -41,6 +41,27 @@ export class MediasSearchApiService {
     return this.searchStore;
   }
 
+
+  searchSelectedTab(searchTerm: SearchSuggestionQuery, paramActiveSearchTab): Observable<any> {
+
+    let stream: Observable<any> = EMPTY;
+    switch (paramActiveSearchTab) {
+      case ActiveTab.CREATIONS:
+        stream = this.searchCreations(searchTerm);
+        break;
+      case ActiveTab.IMAGES:
+        stream = this.searchImages(searchTerm);
+        break;
+      default:
+        stream = this.searchImages(searchTerm);
+    }
+
+    return stream.pipe(
+      // finalize(() => {
+      //   this.store.setLoading(false);
+      // })
+    );
+  }
 
   searchMedia(terms: string[]): Observable<any> {
 
@@ -74,6 +95,19 @@ export class MediasSearchApiService {
       catchError((err, x) => {
         this.searchStore.setError(err);
         return throwError(err);
+      }),
+    );
+  }
+
+  searchCreations(terms: SearchSuggestionQuery): Observable<SearchResponseItem[]> {
+    return this.http.post<IApiResource>(environment.ApiBaseUrl + '/search/creations', terms).pipe(
+      take(1),
+      map(resp => (resp.data || resp)),
+      // tap(resp => this.searchStore.update(state => ({images: resp}))),
+      tap(resp => this.searchStore.update({images: resp})),
+      catchError((err, x) => {
+        this.searchStore.setError(err);
+        return throwError(err);
       })
     );
   }
@@ -97,4 +131,12 @@ export class MediasSearchApiService {
 interface SearchSuggestionQuery {
   _id?: string;
   search: string | string[];
+}
+
+
+export enum ActiveTab {
+  IMAGES = 'images',
+  AUDIOS = 'audios',
+  VIDEOS = 'videos',
+  CREATIONS = 'creations'
 }
