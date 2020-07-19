@@ -5,6 +5,7 @@ import {EMPTY, forkJoin, Observable, throwError} from 'rxjs';
 import {environment} from '@environments/environment';
 import {IApiResource} from '@core/_base/crud/models/IApiResource';
 import {Router} from '@angular/router';
+import {uniqBy} from 'lodash';
 import {AuthService} from '@core/auth';
 import {ImagesStore} from '@app/main/@core/state/image/images.store';
 import {ImagesQuery} from '@app/main/@core/state/image/images.query';
@@ -117,6 +118,8 @@ export class MediasSearchApiService {
       take(1),
       map(resp => (resp.data || resp) as SearchSuggestionResponseItem),
       map(resp => (resp.native || resp) as SearchSuggestion[]),
+      map(resp => uniqBy(resp, 'searchMd5')),
+      // tap(console.log),
       tap(resp => this.searchStore.update({suggestions: resp})),
       catchError((err, x) => {
         this.searchStore.setError(err);

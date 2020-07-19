@@ -138,6 +138,7 @@ export class Searcher2Component implements OnInit, AfterViewInit, OnDestroy {
         return this.mediasSearchApiService.searchSuggestions({search: term.toLowerCase()}).pipe(
           // tap(console.log),
           tap(() => this.searchFailed = false),
+          tap(() => this.searchFailed = false),
           take(5),
           catchError(() => {
             this.searchFailed = true;

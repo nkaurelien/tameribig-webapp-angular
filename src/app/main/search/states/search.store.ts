@@ -34,6 +34,8 @@ export function createSuggestion(suggestion: Partial<SearchSuggestion>): SearchS
     useCount: undefined,
     __v: undefined,
     search: undefined,
+    searchMd5: undefined,
+    type: undefined,
     ...suggestion,
   };
 }

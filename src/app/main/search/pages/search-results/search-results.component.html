@@ -8,15 +8,18 @@
       <ng-container *ngIf="(images$ | async).length === 0">
         <div class="header animate__animated animate__jackInTheBox- animate__fadeIn animate__faster">
           <h1>Votre recherche n'a rien donné dans {{ paramActiveSearchTab }}</h1>
-          <div class="mb-5">Explorer encore plus de contenu dans <a routerLink="/explorer/{{ paramActiveSearchTab }}">nos {{ paramActiveSearchTab }}</a>
+          <div>Explorer encore plus de contenu dans <a
+            routerLink="/explorer/{{ paramActiveSearchTab }}">nos {{ paramActiveSearchTab }}</a>
           </div>
 
         </div>
       </ng-container>
     </ng-container>
 
+
     <app-search-results-grid-1></app-search-results-grid-1>
 
+    <div class="mb-5 w-100">&nbsp;</div>
 
     <app-search-results-masonry></app-search-results-masonry>
   </div>

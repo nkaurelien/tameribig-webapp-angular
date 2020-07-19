@@ -86,19 +86,19 @@
     </div>
     <div class="row box-search mb-5 mx-auto justify-content-center">
 
-      <a [routerLink]="[ '/search/images' ]" class="col-2 option" routerLinkActive="active">
+      <a (click)="searchNavigate('images')" class="col-2 option" routerLinkActive="active">
         <img class="icone img-fluid" src="assets/images/camera.png">
         <h5 class="font font-image description">Images</h5>
       </a>
-      <a [routerLink]="[ '/search/videos' ]" class="col-2 option" routerLinkActive="active">
+      <a (click)="searchNavigate('videos')" class="col-2 option" routerLinkActive="active">
         <img class="icone img-fluid" src="assets/images/video.png">
         <h5 class="font font-video description">Videos</h5>
       </a>
-      <a [routerLink]="[ '/search/audios' ]" class="col-2 option" routerLinkActive="active">
+      <a (click)="searchNavigate('audios')" class="col-2 option" routerLinkActive="active">
         <img class="icone img-fluid" src="assets/images/audio.png">
         <h5 class="font font-audio description">Audios</h5>
       </a>
-      <a [routerLink]="[ '/search/creas' ]" class="col-2 option" routerLinkActive="active">
+      <a (click)="searchNavigate('creations')" class="col-2 option" routerLinkActive="active">
         <img class="icone img-fluid" src="assets/images/illustration.png">
         <h5 class="font font-crea description">Creas</h5>
       </a>

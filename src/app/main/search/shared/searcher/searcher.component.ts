@@ -186,11 +186,8 @@ export class SearcherComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   searchNavigate(nextTab: string) {
-    if (this.searchText.length === 0) {
-      return;
-    }
-
-    this.router.navigate(['/search', nextTab || 'images'], {
+    const page = this.searchInput.value && this.searchInput.value.length ? '/search' : '/explorer';
+    this.router.navigate([page, nextTab || 'images'], {
       queryParams: {
         q: this.searchText
       }

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Query} from '@datorama/akita';
+import {uniqBy} from 'lodash';
 import {createSuggestion, SearchState, SearchStore} from './search.store';
 import {SearchSuggestion} from '../models/SearchSuggestion';
 
@@ -15,7 +16,12 @@ export class SearchQuery extends Query<SearchState> {
   selectSuggestions$ = this.select('suggestions');
   selectCreations$ = this.select('creations');
 
-  pushSuggestion = (suggestion: SearchSuggestion) => state => this.store.update({suggestion, ...state});
+  pushSuggestion = (suggestion: SearchSuggestion) => state => {
+    let newState = {suggestion, ...state};
+    newState = uniqBy(newState, 'searchMd5');
+    return this.store.update(newState);
+  }
+
   pushNewSuggestion = (searchText: string) => state => {
     this.pushSuggestion(createSuggestion({search: searchText}));
   }
