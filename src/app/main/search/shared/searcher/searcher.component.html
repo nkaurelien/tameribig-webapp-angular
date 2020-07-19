@@ -33,6 +33,7 @@
 
                 <input #searchInputRef
                        [mdbAutoCompleter]="auto"
+                       (keydown.enter)="submit($event.target.value)"
                        class="completer-input form-control mdb-autocomplete"
                        formControlName="search"
                        placeholder="Rechercher des medias.."

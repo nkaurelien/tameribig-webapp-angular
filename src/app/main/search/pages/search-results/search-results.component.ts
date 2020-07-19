@@ -13,12 +13,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   images$: Observable<any>;
 
   private unsubscribe = new Subject();
+  public paramActiveSearchTab: string;
+  private searching$: Observable<boolean>;
 
   constructor(
     private mediasSearchApiService: MediasSearchApiService,
     private route: ActivatedRoute,
   ) {
     this.images$ = this.mediasSearchApiService.query.selectImages$;
+    this.searching$ = this.mediasSearchApiService.query.selectLoading();
 
   }
 
@@ -40,6 +43,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
           if (queryParams.hasOwnProperty('q') && params.hasOwnProperty('active_search_tab')) {
             const searchTerm = queryParams.q || '';
             const paramActiveSearchTab = params.active_search_tab;
+            this.paramActiveSearchTab = paramActiveSearchTab;
             this.mediasSearchApiService.store.setLoading(true);
             this.mediasSearchApiService.searchSelectedTab({search: searchTerm}, paramActiveSearchTab).pipe(
               takeUntil(this.unsubscribe),

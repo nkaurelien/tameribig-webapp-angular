@@ -196,7 +196,7 @@ export class Searcher2Component implements OnInit, AfterViewInit, OnDestroy {
 
   submit(searchText?: string) {
     if (searchText) {
-      console.log('submit', searchText);
+      // console.log('submit', searchText);
       this.searchText = searchText;
       this.mediasSearchApiService.query.pushNewSuggestion(searchText);
       this.searchInput.setValue(searchText);

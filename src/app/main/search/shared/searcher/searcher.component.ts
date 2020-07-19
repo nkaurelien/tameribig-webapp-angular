@@ -177,8 +177,10 @@ export class SearcherComponent implements OnInit, AfterViewInit, OnDestroy {
 
   submit(searchText?: string) {
     if (searchText) {
-      this.searchInput.setValue(searchText);
+      // console.log('submit', searchText);
       this.searchText = searchText;
+      this.mediasSearchApiService.query.pushNewSuggestion(searchText);
+      this.searchInput.setValue(searchText);
     }
     this.searchNavigate(null);
   }
@@ -188,7 +190,7 @@ export class SearcherComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.router.navigate(['/states', nextTab || 'images'], {
+    this.router.navigate(['/search', nextTab || 'images'], {
       queryParams: {
         q: this.searchText
       }
