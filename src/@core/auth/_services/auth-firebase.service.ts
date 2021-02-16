@@ -1,7 +1,7 @@
 import {Injectable, PLATFORM_ID, Inject} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '@environments/environment';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import {tap, first, switchMap, exhaustMap, mergeMap, map, concat} from 'rxjs/operators';
@@ -153,4 +153,15 @@ export class AuthFirebaseService {
             })
         );
     }
+
+    public updateUserData(user) {
+
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+        const data: any = {
+            ...user,
+        };
+        return fromPromise(userRef.set(data, {merge: true}));
+
+    }
+
 }

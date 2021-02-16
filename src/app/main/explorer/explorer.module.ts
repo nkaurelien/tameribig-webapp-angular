@@ -1,33 +1,23 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Routes, RouterModule} from '@angular/router';
-import { IconsModule } from 'ng-uikit-pro-standard'
-import { WavesModule, InputsModule, ButtonsModule } from 'ng-uikit-pro-standard'
+import {RouterModule, Routes} from '@angular/router';
+import {ButtonsModule, IconsModule, InputsModule, WavesModule} from 'ng-uikit-pro-standard';
 import {ExplorerComponent} from './explorer.component';
 import {VideosExplorerComponent} from './videosexplorer/videosexplorer.component';
 
 import {SlideshowModule} from 'ng-simple-slideshow';
-import {NgxMasonryModule} from 'ngx-masonry';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
-import { SearchresultComponent } from './searchresult/searchresult.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreasExplorerComponent } from './creasexplorer/creasexplorer.component';
-import { AudiosExplorerComponent } from './audiosexplorer/audiosexplorer.component';
-import { ImagesExplorerComponent } from './imagesexplorer/imagesexplorer.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CreasExplorerComponent} from './creasexplorer/creasexplorer.component';
+import {AudiosExplorerComponent} from './audiosexplorer/audiosexplorer.component';
+import {ImagesExplorerComponent} from './imagesexplorer/imagesexplorer.component';
 
-import {
-    AudiosExplorerPath,
-    CreasExplorerPath,
-    ExplorerPath,
-    ImagesExplorerPath,
-    SearchresultPath,
-    VideosExplorerPath,
-    ImagePresenterUrl
-} from './routes';
-import { ImagesService } from '../@core/services/images.service';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgMasonryGridModule } from 'ng-masonry-grid';
-import { AnimatedLikeModule } from 'src/@core/components/animated-like/animated-like.module';
+import {AudiosExplorerPath, CreasExplorerPath, ExplorerPath, ImagesExplorerPath, VideosExplorerPath} from './routes';
+import {ImagesService} from '../@core/services/images.service';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {NgMasonryGridModule} from 'ng-masonry-grid';
+import {AnimatedLikeModule} from 'src/@core/components/animated-like/animated-like.module';
+import {AvatarModule} from 'ngx-avatar';
 
 const routes: Routes = [
     {
@@ -37,11 +27,18 @@ const routes: Routes = [
             // { path: '', redirectTo: 'images$', pathMatch: 'full' },
             {
                 path: VideosExplorerPath,
-                component: VideosExplorerComponent
+                component: VideosExplorerComponent,
             },
             {
                 path: ImagesExplorerPath,
                 component: ImagesExplorerComponent,
+                loadChildren: () => import('@modules/main/explorer/image/image.module').then(m => m.ImageModule)
+                // children: [
+                //     {
+                //         path: '',
+                //         loadChildren: () => import('@modules/main/explorer/image/image.module').then(m => m.ImageModule)
+                //     },
+                // ],
             },
             {
                 path: AudiosExplorerPath,
@@ -51,15 +48,11 @@ const routes: Routes = [
                 path: CreasExplorerPath,
                 component: CreasExplorerComponent
             },
-            {
-                path: SearchresultPath,
-                component: SearchresultComponent
-            },
 
-            {
-                path: ImagePresenterUrl,
-                loadChildren: () => import('@modules/main/explorer/image/image.module').then(m => m.ImageModule)
-            },
+            // {
+            //     path: ImagesExplorerPath,
+            //     loadChildren: () => import('@modules/main/explorer/image/image.module').then(m => m.ImageModule)
+            // },
         ]
     }
 ];
@@ -72,7 +65,6 @@ const routes: Routes = [
         CreasExplorerComponent,
         AudiosExplorerComponent,
         ImagesExplorerComponent,
-        SearchresultComponent,
 
     ],
     imports: [
@@ -85,11 +77,12 @@ const routes: Routes = [
         // NgxMasonryModule,
         NgMasonryGridModule,
         InfiniteScrollModule,
-            IconsModule,
-        WavesModule, 
-        InputsModule, 
+        IconsModule,
+        WavesModule,
+        InputsModule,
         ButtonsModule,
         AnimatedLikeModule,
+        AvatarModule,
         // NgbModule,
 
     ],
@@ -97,7 +90,7 @@ const routes: Routes = [
     providers: [
         ImagesService,
     ]
-    
+
 })
 export class ExplorerModule {
 }

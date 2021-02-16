@@ -61,9 +61,9 @@
                             <mdb-error *ngIf="isControlHasError('email','required')">
                                 <strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
                             </mdb-error>
-                            <ndb-error *ngIf="isControlHasError('email','email')">
+                            <mdb-error *ngIf="isControlHasError('email','email')">
                                 <strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
-                            </ndb-error>
+                            </mdb-error>
                             <mdb-error *ngIf="isControlHasError('email','minLength')">
                                 <strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
                             </mdb-error>
@@ -156,6 +156,10 @@
                         </div>
                         <!--end::Action-->
                     </form>
+                    <!--begin::Options-->
+                    <div class="kt-login__options" style="height: 250px; border: none"></div>
+                    <!--end::Options-->
+
                     <!--begin::Options-->
                     <div class="d-none kt-login__options">
                         <h6> Inscrivez vous avec votre reseau </h6>

@@ -1,0 +1,25 @@
+{
+  "_id": "5ee415308c48e22bcc29ac7a",
+  "title": "Lorem",
+  "description": "Lorem ipsum",
+  "score": 1.2305773496627808,
+  "miniature": "https://res.cloudinary.com/tameribig-dev/image/private/c_scale,w_320/v1593992477/app/storage/upload/medias/images/5effc4231b26af3434bf9508.png",
+  "picture": "https://res.cloudinary.com/tameribig-dev/image/private/c_fit,e_screen,fl_tiled,l_watermarks:LOGOz_DEF-08_dqeugs,w_320/v1593992477/app/storage/upload/medias/images/5effc4231b26af3434bf9508.png",
+  "download": "https://res.cloudinary.com/tameribig-dev/image/private/c_fit,e_screen,fl_tiled,l_watermarks:LOGOz_DEF-08_dqeugs,w_320/v1593992477/app/storage/upload/medias/images/5effc4231b26af3434bf9508.png",
+  "highlight": [
+    {
+      "path": "description",
+      "texts": [
+        {
+          "value": "Lorem",
+          "type": "hit"
+        },
+        {
+          "value": " ipsum",
+          "type": "text"
+        }
+      ],
+      "score": 1.3987467288970947
+    }
+  ]
+}

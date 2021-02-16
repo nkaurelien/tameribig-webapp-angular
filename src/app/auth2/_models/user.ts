@@ -1,8 +1,9 @@
 export class User {
-  uid: number;
+    uid: string;
   email: string;
   password: string;
   fullName: string;
+  displayName: string;
   lastName: string;
   firstName: string;
   userName: string;
@@ -25,6 +26,7 @@ export class User {
   socialLinks?: {
     twitter?: string,
     facebook?: string,
+    dribbble?: string,
     linkedin?: string,
     instagram?: string
     youtube?: string
@@ -33,8 +35,8 @@ export class User {
 
   public constructor(init?: Partial<User>) {
 
-    this.address = {},
-    this.socialLinks = {},
+    this.address = {};
+    this.socialLinks = {};
     this.init(init);
 
   }

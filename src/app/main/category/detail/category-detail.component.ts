@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import { Image, ImagesService } from '../../@core/services/images.service';
+import {ImagesService} from '../../@core/services/images.service';
+import {Image} from '@app/main/@core/state/image/image.model';
 
 @Component({
   selector: 'app-category',

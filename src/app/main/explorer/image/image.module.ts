@@ -1,30 +1,43 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import {ImagePresenterComponent} from './imagepresenter.component';
+import {CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {ImagePresenterComponent} from './_id/imagepresenter.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
 import {NgxMasonryModule} from 'ngx-masonry';
 import {SlideshowModule} from 'ng-simple-slideshow';
-import { WavesModule, AccordionModule, ButtonsModule, InputsModule, CheckboxModule } from 'ng-uikit-pro-standard';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+    AccordionModule,
+    ButtonsModule,
+    CheckboxModule,
+    IconsModule,
+    InputsModule,
+    ModalModule,
+    PreloadersModule,
+    WavesModule
+} from 'ng-uikit-pro-standard';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ShareButtonsModule} from '@ngx-share/buttons';
-import { ImagesService } from '../../@core/services/images.service';
-
+import {ImagesService} from '../../@core/services/images.service';
+import {AnimatedLikeModule} from '@core/components/animated-like/animated-like.module';
+import {AvatarModule} from 'ngx-avatar';
 
 
 const routes: Routes = [
     {
-        'path': ':uid',
-        'component': ImagePresenterComponent
+        path: ':uid',
+        component: ImagePresenterComponent
     }
 ];
 @NgModule({
 
     schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     imports: [
-        CommonModule, RouterModule.forChild(routes),
+        CommonModule,
+        RouterModule.forChild(routes),
+        // HttpClientModule,
         CheckboxModule,
         InputsModule,
+        IconsModule,
         ButtonsModule,
         FormsModule,
         ReactiveFormsModule,
@@ -32,16 +45,27 @@ const routes: Routes = [
         SlideshowModule,
         LazyLoadImageModule,
         NgxMasonryModule,
+        AvatarModule,
         AccordionModule, WavesModule,
-        ShareButtonsModule
+        ModalModule, PreloadersModule,
+        ShareButtonsModule,
+        AnimatedLikeModule,
     ], exports: [
         RouterModule
     ], declarations: [
         ImagePresenterComponent
     ],
     providers: [
-        ImagesService,
+        // ImagesService,
     ]
 })
-export class ImageModule  {
+export class ImageModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: ImageModule,
+            providers: [
+                ImagesService,
+            ]
+        };
+    }
 }

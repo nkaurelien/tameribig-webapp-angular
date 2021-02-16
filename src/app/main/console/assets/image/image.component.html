@@ -1,0 +1,297 @@
+<router-outlet></router-outlet>
+<!-- BEGIN: Subheader -->
+<!-- END: Subheader -->
+<div class="container p-sm-2">
+    <div class="row p-md-5">
+
+        <!-- center -->
+        <div class="col-md-12 mt-md-0  pt-md-0 pt-4">
+
+
+
+            <!--Top Table UI-->
+            <!--Grid row-->
+            <div class="row">
+                <div class="col p-4">
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
+                            <a class="ml-3 btn btn-primary waves-light" mdbWavesEffect routerLink="./add">
+                                <mdb-icon class="mr-1" fas icon="plus"></mdb-icon>
+                                <span class="clearfix d-none d-sm-inline-block">Ajouter</span>
+                            </a>
+                            <ng-container *ngIf="hasSelection">
+                                <button (click)="publish()" [disabled]="publishing"
+                                        class="ml-3 btn btn-outline-primary animated fadeIn">
+                                    <mdb-icon *ngIf="!publishing" fas icon="paper-plane"></mdb-icon>&nbsp;
+                                    <span *ngIf="publishing"
+                                          aria-hidden="true"
+                                          class="spinner-grow spinner-grow-sm text-light"
+                                          role="status"></span>
+                                    <span class="clearfix d-none d-sm-inline-block">Publier</span>
+                                </button>
+                            </ng-container>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="pr-3 col-xl-3 col-lg-3 col-md-4 offset-md-2 offset-lg-0">
+                            <mdb-select
+                                    [options]="bulkOptionsSelect"
+                                    placeholder="Statuts"
+                            ></mdb-select>
+                        </div>
+                        <!--Grid column-->
+
+
+                        <!--Grid column-->
+                        <div class="col-xl-3 col-lg-3 col-md-6">
+                            <form class="form-inline inputs ml-2">
+                                <!--Right-->
+                                <div class="md-form  input-group">
+                                    <input
+                                            class="form-control my-0 py-0"
+                                            type="text"
+                                            placeholder="Rechercher"
+                                            [(ngModel)]="searchText1"
+                                            [ngModelOptions]="{standalone: true}"
+                                    />
+                                    <div class="input-group-btn">
+                                        <button
+                                                mdbBtn
+                                                color="primary"
+                                                size="sm"
+                                                class="ml-2 px-2 waves-effect waves-light"
+                                                mdbWavesEffect
+                                        >
+                                            <mdb-icon fas icon="search"></mdb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                </div>
+            </div>
+            <!--Grid row-->
+            <!--Top Table UI-->
+
+            <mdb-card cascade="true" narrower="true" [ngClass]="{ 'z-depth-0': !shadows }">
+                <!--Card image-->
+                <div
+                        class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center"
+                >
+                    <div>
+
+                        <button
+                                type="button"
+                                mdbBtn
+                                outline="true"
+                                color="white"
+                                rounded="true"
+                                size="sm"
+                                class="px-2"
+                        >
+                            <mdb-icon fas icon="columns" class="mt-0"></mdb-icon>
+                        </button>
+                    </div>
+
+                    <a class="white-text mx-3" href="">Vos Images</a>
+
+                    <div>
+                        <button
+                                type="button"
+                                mdbBtn
+                                outline="true"
+                                color="white"
+                                rounded="true"
+                                size="sm"
+                                class="px-2"
+                                (click)="loadImages()"
+                                [disabled]="loading"
+                                title="Recharger la liste"
+                        >
+                            <mdb-icon [ngClass]="{'animate__animated animate__rotateOut animate__infinite': loading}"
+                                      class="mt-0" fas icon="redo"></mdb-icon>
+                            Recharger
+                        </button>
+                        <button
+                                type="button"
+                                mdbBtn
+                                outline="true"
+                                color="white"
+                                rounded="true"
+                                size="sm"
+                                class="d-none px-2"
+                        >
+                            <mdb-icon fas icon="info-circle" class="mt-0"></mdb-icon>
+                        </button>
+                    </div>
+                </div>
+                <!--/Card image-->
+
+                <div class="px-4">
+                    <div class="table-wrapper">
+                        <!--Table-->
+                        <table class="table table-hover mb-0">
+                            <!--Table head-->
+                            <thead>
+                            <tr>
+                                <th>
+                                    <mdb-checkbox (change)="toggleRows($event)" [checked]="isAllChecked"
+                                                  [indeterminate]="isSelectionIndeterminate"></mdb-checkbox>
+                                </th>
+                                <th class="th-lg">
+                                    Image
+                                </th>
+                                <th class="th-lg">
+                                    <a>Titre
+                                        <mdb-icon (click)="sortBy('title')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par titre"></mdb-icon>
+                                    </a>
+                                </th>
+                                <th class="th-lg">
+                                    <a>Prix
+                                        <mdb-icon (click)="sortBy('price')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par prix de vente"></mdb-icon>
+                                    </a>
+                                </th>
+                                <th class="th-lg">
+                                    <a>Date
+                                        <mdb-icon (click)="sortBy('createdAt')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par date de creation"></mdb-icon>
+                                        <mdb-icon (click)="sortBy('publishedAt')" class="ml-1" fas icon="sort"
+                                                  mdbTooltip="ordonner par date de mise en ligne"></mdb-icon>
+                                    </a>
+                                </th>
+                                <th class="th-lg">
+                                    <a>Classement</a>
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <!--Table head-->
+
+                            <!--Table body-->
+                            <tbody>
+                            <tr *ngFor="let row of tableData | searchSelectable: 'title,price':searchText1; trackBy: trackByID">
+                                <th scope="row">
+                                    <mdb-checkbox (change)="selectRow($event, row)"
+                                                  [checkboxPosition]="'left'"
+                                                  [checked]="row.selected"
+                                    ></mdb-checkbox>
+                                </th>
+                                <td>
+                                  <img *ngIf="row.data.miniature?.length" [src]="row.data.miniature"
+                                       class="img-thumbnail " style="height: 80px">
+                                  <!--                                    <cl-image public-id={{row.data?.services?.cloudinary?.public_id}}-->
+                                  <!--                                            class="img-fluid"></cl-image>-->
+
+                                  <span *ngIf="!row.data.miniature?.length" class="text-muted">
+                                      <button (click)="uploadPicture(row.data)" class="btn m-0 p-0 btn-sm">
+                                        <img alt="" height="80px" src="/assets/images/buttons/file-uploads1.png">
+                                      </button>
+                                    </span>
+                                </td>
+                                <td>{{ row.data.title }}</td>
+                                <td>{{ row.data.price }}</td>
+                                <td class="text-small">
+                                    <small class="d-inline-block">Ajouté le <br>{{ row.data.createdAt }}</small>
+                                    <br>
+                                    <small class="d-inline-block mt-1">Publié le
+                                        <br>{{ row.data.publishedAt || 'Pas encore publié' }}</small>
+                                </td>
+                                <td class="text-small">
+                                    <div class="text-small" mdbTooltip="mots clés">{{ row.data.keywords }}</div>
+                                    <div class="text-small mt-1"
+                                         mdbTooltip="catégories">{{ extractTopicsNames(row.data.topics) }}</div>
+                                </td>
+
+                                <td>
+                                    <div class="nav-item dropdown btn-group" dropdown>
+                                        <a class="px-2 dropdown-toggle waves-light" color="blue"
+                                           dropdownToggle
+                                           mdbBtn
+                                           mdbWavesEffect
+                                           outline="true"
+                                           rounded="true" size="sm" type="button">
+                                            <mdb-icon class="mt-0" fas icon="th-large"></mdb-icon>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                                            <a (click)="uploadPicture(row.data)" class="dropdown-item text-primary">
+                                                <mdb-icon class="mr-1" fas icon="cloud-upload-alt"></mdb-icon>
+                                                <span class="clearfix d-none d-sm-inline-block">Picture</span>
+                                            </a>
+                                            <a (click)="uploadFiles(row.data)" class="dropdown-item text-primary">
+                                                <mdb-icon class="mr-1" fas icon="cloud-upload-alt"></mdb-icon>
+                                                <span class="clearfix d-none d-sm-inline-block">Source .Zip</span>
+                                            </a>
+                                            <a (click)="edit(row.data)" class="dropdown-item text-primary">
+                                                <mdb-icon class="mr-1" fas icon="edit"></mdb-icon>
+                                                <span class="clearfix d-none d-sm-inline-block">Edit</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                            <!--Table body-->
+                        </table>
+                        <!--Table-->
+
+
+                    </div>
+
+                    <hr class="my-0" />
+
+                    <!--Bottom Table UI-->
+                    <div class="d-flex justify-content-between">
+                        <!--Pagination -->
+                      <nav class="my-4 " style="opacity: 0.5;">
+                        <ul class="pagination pagination-circle pg-blue mb-0 flex-wrap">
+                          <!--First-->
+                          <li class="page-item disabled">
+                            <a class="page-link">First</a>
+                          </li>
+
+                          <!--Arrow left-->
+                          <li class="page-item disabled">
+                            <a class="page-link" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+
+                          <!--Numbers-->
+                          <li class="page-item active-">
+                            <a class="page-link  waves-effect" disabled="" mdbWavesEffect>1</a>
+                          </li>
+
+                          <!--Arrow right-->
+                          <li class="page-item">
+                            <a class="page-link waves-effect" mdbWavesEffect aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+
+                          <!--First-->
+                                <li class="page-item">
+                                    <a class="page-link waves-effect" mdbWavesEffect>Last</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!--/Pagination -->
+                    </div>
+                    <!--Bottom Table UI-->
+                </div>
+            </mdb-card>
+
+
+        </div>
+
+    </div>
+</div>

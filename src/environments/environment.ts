@@ -33,6 +33,11 @@ export const environment = {
     },
 };
 
+export const cloudinaryConfig = {
+    cloud_name: 'tameribig-dev',
+    api_key: '558746438725712',
+    api_secret: 'oo1nS-FYRW8dEG7w-pjw-IvCZVI'
+};
 
 export const GMAP_API_KEY = 'AIzaSyBn_LS3TTqaSsByi5U7poZjoFLB8Egi2Kk';
 export const MESSAGING_SERVER_KEY = 'AAAA5ub8w6Y:APA91bH_4ONKLKcZrHJiac9M_mJhnL63YSPKYQc1QLZSV2HJuSbSGPnhdFwHdKN_6o6qrs2oOeu5VqJ4EfWztbuHgDieGxOg40dmGpLH0BQzmvdNg8GGdfNu4Ubs23avkL2BplIgzGnsd68fZyzQLPrb1cPoY6K_bw';

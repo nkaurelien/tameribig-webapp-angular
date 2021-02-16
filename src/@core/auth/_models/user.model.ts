@@ -1,9 +1,9 @@
-import { BaseModel } from '../../_base/crud';
-import { Address } from './address.model';
-import { SocialNetworks } from './social-networks.model';
+import {BaseModel} from '../../_base/crud';
+import {Address} from './address.model';
+import {SocialNetworks} from './social-networks.model';
 
 export class User extends BaseModel {
-    id: string;
+    _id: string;
     uid: string;
     avatar: string;
     username: string;
@@ -11,18 +11,25 @@ export class User extends BaseModel {
     email: string;
     accessToken: string;
     refreshToken: string;
-    roles: string[];
     pic: string;
     fullname: string;
+    displayName: string;
+    lastName: string;
+    firstName: string;
+    userName: string;
     occupation: string;
     about: string;
     companyName: string;
-    phone: string;
+    phoneNumber: string;
+    photoUrl?: string;
+    providerName?: string;
+    providerId?: string;
     address: Address;
 
 
     socialLinks: SocialNetworks;
 
+    roles?: string[];
 
     public constructor(init?: Partial<User>) {
         super();
@@ -54,7 +61,7 @@ export class User extends BaseModel {
     }
 
     clear(): void {
-        this.id = undefined;
+        this._id = undefined;
         this.username = '';
         this.password = '';
         this.email = '';
@@ -65,7 +72,7 @@ export class User extends BaseModel {
         this.pic = './assets/media/users/default.jpg';
         this.occupation = '';
         this.companyName = '';
-        this.phone = '';
+        this.phoneNumber = '';
         this.address = new Address();
         // this.address.clear();
         this.socialLinks = new SocialNetworks();

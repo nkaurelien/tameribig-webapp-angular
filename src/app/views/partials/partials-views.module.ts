@@ -1,6 +1,6 @@
 // Angular
 import {RouterModule} from '@angular/router';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -58,8 +58,8 @@ import {
     Subheader4Component,
     Subheader5Component,
     UserProfile2Component,
-    UserProfileComponent,
-    UserProfile3Component
+    UserProfile3Component,
+    UserProfileComponent
 } from './layout';
 // General
 import {NoticeComponent} from './content/general/notice/notice.component';
@@ -173,6 +173,9 @@ import {CartComponent} from './layout/topbar/cart/cart.component';
         MatTabsModule,
         MatTooltipModule,
         MatDialogModule,
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
     ]
 })
 export class PartialsViewsModule {

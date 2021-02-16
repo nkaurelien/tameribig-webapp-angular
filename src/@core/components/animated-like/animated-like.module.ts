@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IconsModule } from 'ng-uikit-pro-standard';
-import { AnimatedLikeComponent } from './animated-like.component';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {IconsModule, TooltipModule} from 'ng-uikit-pro-standard';
+import {AnimatedLikeComponent} from './animated-like.component';
 
 
 @NgModule({
@@ -12,6 +11,7 @@ import { AnimatedLikeComponent } from './animated-like.component';
   imports: [
     CommonModule,
     IconsModule,
+      TooltipModule,
   ],
   exports: [
     AnimatedLikeComponent,

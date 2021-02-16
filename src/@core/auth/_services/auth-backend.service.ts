@@ -46,17 +46,27 @@ export class AuthBackendService {
     }
 
 
-    // jwtHttpHeaders() {
-    //     const token = this.localStorage.getItem('idToken');
+    jwtHttpHeaders() {
+        const token = this.localStorage.getItem('token');
 
-    //     return {
-    //         headers: new HttpHeaders({
-    //             'Content-Type': 'application/json',
-    //             Accept: 'application/json',
-    //             Authorization: 'Bearer ' + token,
-    //         })
-    //     };
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: 'Bearer ' + token,
+            })
+        };
 
-    // }
+    }
 
+    public updateUserData(datas) {
+
+        return this.http.put<any>(`${API_AUTH_USER}`, datas).pipe(
+            tap(res => {
+                // console.log('auth backen', res);
+
+            })
+        );
+
+    }
 }

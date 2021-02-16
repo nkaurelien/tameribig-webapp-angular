@@ -28,6 +28,7 @@ build-stage:
       - node_modules/
   script:
     #    - npm install --quiet
+    - cp ./src/environments/environment.staging.ts ./src/environments/environment.ts --remove-destination
     - npm run build
   only:
     - develop

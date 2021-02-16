@@ -52,9 +52,9 @@ export class Helpers {
     static setLoading(enable) {
         let body = $('body');
         if (enable) {
-            $(body).addClass('m-page--loading-non-block')
+            $(body).addClass('m-page--loading-non-block');
         } else {
-            $(body).removeClass('m-page--loading-non-block')
+            $(body).removeClass('m-page--loading-non-block');
         }
     }
 

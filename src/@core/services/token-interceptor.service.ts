@@ -30,7 +30,7 @@ export class TokenInterceptorService implements HttpInterceptor {
         Accept: 'application/json',
         // 'X-CSRF-TOKEN': ''
         Authorization: `Bearer ${token}`,
-      }
+      },
     });
     // console.log(request);
     return next.handle(request).pipe(tap((event: HttpEvent<any>) => {

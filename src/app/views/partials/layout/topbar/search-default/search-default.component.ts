@@ -9,7 +9,7 @@ export class SearchDefaultComponent implements OnInit {
     // Public properties
 
     // Set icon class name
-    @Input() icon: string = 'flaticon2-search-1';
+    @Input() icon: string = 'flaticon2-states-1';
 
     // Set true to icon as SVG or false as icon class
     @Input() useSVG: boolean;
@@ -98,7 +98,7 @@ export class SearchDefaultComponent implements OnInit {
         this.data = null;
         if (e.target.value.length > 2) {
             this.loading = true;
-            // simulate getting search result
+          // simulate getting states result
             setTimeout(() => {
                 this.data = this.result;
                 this.loading = false;
@@ -107,11 +107,11 @@ export class SearchDefaultComponent implements OnInit {
         }
     }
 
-    /**
-     * Clear search
-     *
-     * @param e: Event
-     */
+  /**
+   * Clear states
+   *
+   * @param e: Event
+   */
     clear(e) {
         this.data = null;
         this.searchInput.nativeElement.value = '';
