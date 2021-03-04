@@ -14,7 +14,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject();
   public paramActiveSearchTab: string;
-  private searching$: Observable<boolean>;
+  public searching$: Observable<boolean>;
 
   constructor(
     private mediasSearchApiService: MediasSearchApiService,

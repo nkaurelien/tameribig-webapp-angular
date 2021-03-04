@@ -71,6 +71,7 @@ import {WidgetModule} from './content/widgets/widget.module';
 // SVG inline
 import {InlineSVGModule} from 'ng-inline-svg';
 import {CartComponent} from './layout/topbar/cart/cart.component';
+import {NgbTabset, NgbTabsetModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
     declarations: [
@@ -173,6 +174,7 @@ import {CartComponent} from './layout/topbar/cart/cart.component';
         MatTabsModule,
         MatTooltipModule,
         MatDialogModule,
+        NgbTabsetModule,
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
