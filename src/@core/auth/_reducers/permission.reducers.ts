@@ -1,13 +1,13 @@
 // NGRX
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector } from '@ngrx/store';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
+import {createFeatureSelector} from '@ngrx/store';
 // Actions
-import { PermissionActionTypes, PermissionActions } from '../_actions/permission.actions';
+import {PermissionActions, PermissionActionTypes} from '../_actions/permission.actions';
 // Models
-import { Permission } from '../_models/permission.model';
+import {Permission} from '../_models/permission.model';
 
 export interface PermissionsState extends EntityState<Permission> {
-    _isAllPermissionsLoaded: boolean;
+  _isAllPermissionsLoaded: boolean;
 }
 
 export const adapter: EntityAdapter<Permission> = createEntityAdapter<Permission>();
@@ -23,10 +23,10 @@ export function permissionsReducer(state = initialPermissionsState, action: Perm
                 _isAllPermissionsLoaded: false
         };
         case PermissionActionTypes.AllPermissionsLoaded:
-            return adapter.addAll(action.payload.permissions, {
-                ...state,
-                _isAllPermissionsLoaded: true
-            });
+          return adapter.addMany(action.payload.permissions, {
+            ...state,
+            _isAllPermissionsLoaded: true
+          });
         default:
             return state;
     }

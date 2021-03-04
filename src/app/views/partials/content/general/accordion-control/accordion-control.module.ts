@@ -1,14 +1,14 @@
 // Angular
-import {NgModule, ModuleWithProviders} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 // Config
 import {AccordionControlConfig} from './accordion-control.config';
 
 import {
-    AccordionControlComponent,
-    AccordionControlPanelDirective,
-    AccordionControlPanelTitleDirective,
-    AccordionControlPanelContentDirective
+  AccordionControlComponent,
+  AccordionControlPanelContentDirective,
+  AccordionControlPanelDirective,
+  AccordionControlPanelTitleDirective
 } from './accordion-control.component';
 
 export {AccordionControlConfig} from './accordion-control.config';
@@ -32,7 +32,7 @@ const ACCORDION_CONTROL_DIRECTIVES = [
     declarations: ACCORDION_CONTROL_DIRECTIVES
 })
 export class AccordionControlModule {
-    static forRoot(): ModuleWithProviders {
-        return {ngModule: AccordionControlModule, providers: [AccordionControlConfig]};
-    }
+  static forRoot(): ModuleWithProviders<AccordionControlModule> {
+    return {ngModule: AccordionControlModule, providers: [AccordionControlConfig]};
+  }
 }

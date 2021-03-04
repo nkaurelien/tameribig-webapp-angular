@@ -1,13 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {
-    MatButtonModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatTableModule,
-} from '@angular/material';
+
 import {CoreModule} from '@core/core.module';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 // Datatable
@@ -20,16 +13,22 @@ import {DataTableComponent} from './general/data-table/data-table.component';
 // import { Widget14Component } from './widget14/widget14.component';
 // import { Widget26Component } from './widget26/widget26.component';
 import {Timeline2Component} from './timeline2/timeline2.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
-    declarations: [
-        DataTableComponent,
-        // Widgets
-        // Widget1Component,
-        // Widget4Component,
-        // Widget5Component,
-        // Widget12Component,
-        // Widget14Component,
+  declarations: [
+    DataTableComponent,
+    // Widgets
+    // Widget1Component,
+    // Widget4Component,
+    // Widget5Component,
+    // Widget12Component,
+    // Widget14Component,
         // Widget26Component,
         Timeline2Component,
     ],

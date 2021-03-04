@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgxMasonryOptions} from 'ngx-masonry';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { dummyPicturesMocks } from '@data/dummy-pictures';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {dummyPicturesMocks} from '@data/dummy-pictures';
 
 @Component({
   selector: "app-home",
@@ -10,38 +10,39 @@ import { dummyPicturesMocks } from '@data/dummy-pictures';
 })
 export class ExplorerComponent implements OnInit {
 
-    
-  constructor(
-      private modalService: NgbModal
-      
-  ) {}
+
+  public masonryOptions: NgxMasonryOptions = {
+    // transitionDuration: '0.2s',
+    gutter: 20,
+    resize: true,
+    initLayout: true,
+    fitWidth: true
+  };
 
 
-    defaultImage = 'assets/images/default-image.png';
-    offset = 100;
+  defaultImage = 'assets/images/default-image.png';
+  offset = 100;
 
   imageSources = [
-      'assets/images/background/tete-image-01.jpg',
-      'assets/images/background/tete-image-02.jpg'
+    'assets/images/background/tete-image-01.jpg',
+    'assets/images/background/tete-image-02.jpg'
   ];
 
-    public masonryOptions: NgxMasonryOptions = {
-        transitionDuration: '0.2s',
-        gutter: 20,
-        resize: true,
-        initLayout: true,
-        fitWidth: true
-    };
-    
-    dummyPictures = dummyPicturesMocks;
+  constructor(
+    private modalService: NgbModal
+  ) {
+  }
 
-    masonryImages;
-    limit = 15;
-    ngOnInit() {
-      this.masonryImages = this.dummyPictures.slice(0, this.limit);
-    }
+  dummyPictures = dummyPicturesMocks;
 
-    showMoreImages() {
+  masonryImages;
+  limit = 15;
+
+  ngOnInit() {
+    this.masonryImages = this.dummyPictures.slice(0, this.limit);
+  }
+
+  showMoreImages() {
         this.limit += 15;
         this.masonryImages = this.dummyPictures.slice(0, this.limit);
     }
@@ -53,8 +54,8 @@ export class ExplorerComponent implements OnInit {
         //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
       }
-    
-      private getDismissReason(reason: any): string {
+
+  private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
           return 'by pressing ESC';
         } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {

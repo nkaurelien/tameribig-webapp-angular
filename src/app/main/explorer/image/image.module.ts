@@ -6,14 +6,14 @@ import {LazyLoadImageModule} from 'ng-lazyload-image';
 import {NgxMasonryModule} from 'ngx-masonry';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {
-    AccordionModule,
-    ButtonsModule,
-    CheckboxModule,
-    IconsModule,
-    InputsModule,
-    ModalModule,
-    PreloadersModule,
-    WavesModule
+  AccordionModule,
+  ButtonsModule,
+  CheckboxModule,
+  IconsModule,
+  InputsModule,
+  ModalModule,
+  PreloadersModule,
+  WavesModule
 } from 'ng-uikit-pro-standard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ShareButtonsModule} from '@ngx-share/buttons';
@@ -60,12 +60,12 @@ const routes: Routes = [
     ]
 })
 export class ImageModule {
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: ImageModule,
-            providers: [
-                ImagesService,
-            ]
-        };
-    }
+  static forRoot(): ModuleWithProviders<ImageModule> {
+    return {
+      ngModule: ImageModule,
+      providers: [
+        ImagesService,
+      ]
+    };
+  }
 }

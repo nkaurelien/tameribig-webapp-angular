@@ -6,16 +6,18 @@ import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChil
 import * as $ from 'jquery';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {CollapseComponent} from 'ng-uikit-pro-standard';
+import firebase from 'firebase';
+import User = firebase.User;
 
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    // styleUrls: ['./navigation.component.scss']
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  // styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    authUser: firebase.User;
-    unsubscribe = new Subject<boolean>();
+  authUser: User;
+  unsubscribe = new Subject<boolean>();
     @ViewChildren(CollapseComponent) collapses: CollapseComponent[];
     @ViewChild('navbarToggler', {static: false}) navbarToggler;
 

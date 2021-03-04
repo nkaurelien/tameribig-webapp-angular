@@ -1,36 +1,23 @@
 // Anglar
-import {NgModule, Provider, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA, Provider} from '@angular/core';
 import {CommonModule} from '@angular/common';
 // Layout Directives
 // import { ContentAnimateDirective, HeaderDirective, MenuDirective, StickyDirective } from './_base/layout';
 // Pipes
 // Services
-import {
-    FirstLetterPipe,
-    GetObjectPipe,
-    JoinPipe,
-    // OffcanvasDirective,
-    SafePipe, StickyDirective,
-    // ScrollTopDirective,
-    // SparklineChartDirective,
-    // TabClickEventDirective,
-    TimeElapsedPipe,
-    // ToggleDirective
-} from './_base/layout';
-import { TokenInterceptorService } from './services/token-interceptor.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ScriptLoaderService } from './services/script-loader.service';
-import { SeoService } from './services/seo.service';
+import {FirstLetterPipe, GetObjectPipe, JoinPipe, SafePipe, StickyDirective, TimeElapsedPipe,} from './_base/layout';
+import {ScriptLoaderService} from './services/script-loader.service';
+import {SeoService} from './services/seo.service';
 import {ToggleDirective} from '@core/_base/layout/directives/toggle.directive';
 import {OffcanvasDirective} from '@core/_base/layout/directives/offcanvas.directive';
 import {ScrollTopDirective} from '@core/_base/layout/directives/scroll-top.directive';
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [
-        // directives
-        // HeaderDirective,
-        ScrollTopDirective,
+  imports: [CommonModule],
+  declarations: [
+    // directives
+    // HeaderDirective,
+    ScrollTopDirective,
         StickyDirective,
         OffcanvasDirective,
         ToggleDirective,
@@ -83,10 +70,10 @@ export class CoreModule {
         ];
     }
 
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: CoreModule,
-            providers: [...CoreModule.forProvider()]
-        };
-    }
+  static forRoot(): ModuleWithProviders<CoreModule> {
+    return {
+      ngModule: CoreModule,
+      providers: [...CoreModule.forProvider()]
+    };
+  }
 }

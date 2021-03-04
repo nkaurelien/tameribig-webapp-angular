@@ -8,6 +8,7 @@ import {catchError, finalize, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {AllValidationErrors, getFormValidationErrors} from '@core/_helpers/get-form-validation-errors';
 
 import {get} from 'lodash';
+import firebase from 'firebase';
 
 @Component({
     selector: 'app-profile',

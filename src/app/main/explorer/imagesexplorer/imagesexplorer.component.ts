@@ -18,7 +18,7 @@ export class ImagesExplorerComponent implements OnInit, OnDestroy {
 
     filterForm: FormGroup;
     masonryOptions: NgxMasonryOptions = {
-        transitionDuration: '0.8s'
+        // transitionDuration: '0.8s'
     };
     displayMode = 'mansory-grid';
     images = [];

@@ -3,28 +3,6 @@ import {RouterModule} from '@angular/router';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatIconModule,
-    MatInputModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatTooltipModule
-} from '@angular/material';
 // NgBootstrap
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // Perfect Scrollbar
@@ -33,33 +11,33 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {CoreModule} from '@core/core.module';
 // CRUD Partials
 import {
-    ActionNotificationComponent,
-    AlertComponent,
-    DeleteEntityDialogComponent,
-    FetchEntityDialogComponent,
-    UpdateStatusDialogComponent
+  ActionNotificationComponent,
+  AlertComponent,
+  DeleteEntityDialogComponent,
+  FetchEntityDialogComponent,
+  UpdateStatusDialogComponent
 } from './content/crud';
 // Layout partials
 import {
-    ContextMenu2Component,
-    ContextMenuComponent,
-    LanguageSelectorComponent,
-    NotificationComponent,
-    QuickActionComponent,
-    QuickPanelComponent,
-    ScrollTopComponent,
-    SearchDefaultComponent,
-    SearchDropdownComponent,
-    SearchResultComponent,
-    SplashScreenComponent,
-    Subheader1Component,
-    Subheader2Component,
-    Subheader3Component,
-    Subheader4Component,
-    Subheader5Component,
-    UserProfile2Component,
-    UserProfile3Component,
-    UserProfileComponent
+  ContextMenu2Component,
+  ContextMenuComponent,
+  LanguageSelectorComponent,
+  NotificationComponent,
+  QuickActionComponent,
+  QuickPanelComponent,
+  ScrollTopComponent,
+  SearchDefaultComponent,
+  SearchDropdownComponent,
+  SearchResultComponent,
+  SplashScreenComponent,
+  Subheader1Component,
+  Subheader2Component,
+  Subheader3Component,
+  Subheader4Component,
+  Subheader5Component,
+  UserProfile2Component,
+  UserProfile3Component,
+  UserProfileComponent
 } from './layout';
 // General
 import {NoticeComponent} from './content/general/notice/notice.component';
@@ -71,16 +49,36 @@ import {WidgetModule} from './content/widgets/widget.module';
 // SVG inline
 import {InlineSVGModule} from 'ng-inline-svg';
 import {CartComponent} from './layout/topbar/cart/cart.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSortModule} from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
-    declarations: [
-        ScrollTopComponent,
-        NoticeComponent,
-        ActionNotificationComponent,
-        DeleteEntityDialogComponent,
-        FetchEntityDialogComponent,
-        UpdateStatusDialogComponent,
-        AlertComponent,
+  declarations: [
+    ScrollTopComponent,
+    NoticeComponent,
+    ActionNotificationComponent,
+    DeleteEntityDialogComponent,
+    FetchEntityDialogComponent,
+    UpdateStatusDialogComponent,
+    AlertComponent,
 
         // topbar components
         ContextMenu2Component,

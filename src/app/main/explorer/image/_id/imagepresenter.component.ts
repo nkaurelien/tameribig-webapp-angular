@@ -33,7 +33,7 @@ export class ImagePresenterComponent implements OnInit, AfterViewInit, OnDestroy
     public licenceChecked: false;
 
     masonryOptions: NgxMasonryOptions = {
-        transitionDuration: '0.8s'
+        // transitionDuration: '0.8s'
     };
 
     defaultImage = 'assets/images$/default-image.png';

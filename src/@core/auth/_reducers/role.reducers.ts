@@ -1,20 +1,20 @@
 // NGRX
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 // Actions
-import { RoleActions, RoleActionTypes } from '../_actions/role.actions';
+import {RoleActions, RoleActionTypes} from '../_actions/role.actions';
 // Models
-import { Role } from '../_models/role.model';
-import { QueryParamsModel } from '../../_base/crud';
+import {Role} from '../_models/role.model';
+import {QueryParamsModel} from '../../_base/crud';
 
 export interface RolesState extends EntityState<Role> {
-    isAllRolesLoaded: boolean;
-    queryRowsCount: number;
-    queryResult: Role[];
-    lastCreatedRoleId: number;
-    listLoading: boolean;
-    actionsloading: boolean;
-    lastQuery: QueryParamsModel;
-    showInitWaitingMessage: boolean;
+  isAllRolesLoaded: boolean;
+  queryRowsCount: number;
+  queryResult: Role[];
+  lastCreatedRoleId: number;
+  listLoading: boolean;
+  actionsloading: boolean;
+  lastQuery: QueryParamsModel;
+  showInitWaitingMessage: boolean;
 }
 
 export const adapter: EntityAdapter<Role> = createEntityAdapter<Role>();
@@ -45,12 +45,15 @@ export function rolesReducer(state = initialRolesState, action: RoleActions): Ro
             ...state, lastCreatedRoleId: action.payload.role.id
         });
         case RoleActionTypes.RoleUpdated: return adapter.updateOne(action.payload.partialrole, state);
-        case RoleActionTypes.RoleDeleted: return adapter.removeOne(action.payload.id, state);
-        case RoleActionTypes.AllRolesLoaded: return adapter.addAll(action.payload.roles, {
-            ...state, isAllRolesLoaded: true
+      case RoleActionTypes.RoleDeleted:
+        return adapter.removeOne(action.payload.id, state);
+      case RoleActionTypes.AllRolesLoaded:
+        return adapter.addMany(action.payload.roles, {
+          ...state, isAllRolesLoaded: true
         });
-        case RoleActionTypes.RolesPageCancelled: return {
-            ...state, listLoading: false, queryRowsCount: 0, queryResult: [], lastQuery: new QueryParamsModel({})
+      case RoleActionTypes.RolesPageCancelled:
+        return {
+          ...state, listLoading: false, queryRowsCount: 0, queryResult: [], lastQuery: new QueryParamsModel({})
         };
         case RoleActionTypes.RolesPageLoaded: return adapter.addMany(action.payload.roles, {
             ...initialRolesState,

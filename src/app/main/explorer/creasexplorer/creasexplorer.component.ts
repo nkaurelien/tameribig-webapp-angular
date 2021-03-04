@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { dummyPicturesMocks } from '@data/dummy-pictures';
+import {Component, OnInit} from '@angular/core';
+import {dummyPicturesMocks} from '@data/dummy-pictures';
 import {NgxMasonryOptions} from 'ngx-masonry';
 
 @Component({
@@ -9,7 +9,8 @@ import {NgxMasonryOptions} from 'ngx-masonry';
   // encapsulation: ViewEncapsulation.None
 })
 export class CreasExplorerComponent implements OnInit {
-  constructor() {}
+  constructor() {
+  }
   dummyPictures = dummyPicturesMocks;
 
 
@@ -19,7 +20,7 @@ export class CreasExplorerComponent implements OnInit {
   masonryImages;
   limit = 15;
   masonryOptions:  NgxMasonryOptions = {
-    transitionDuration: '0.8s'
+    // transitionDuration: '0.8s'
   };
   ngOnInit() {
     this.masonryImages = this.dummyPictures.slice(0, this.limit);

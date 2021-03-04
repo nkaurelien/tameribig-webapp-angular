@@ -1,31 +1,29 @@
-import {NgModule, ModuleWithProviders, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BaseRequestOptions, HttpModule} from '@angular/http';
-
 import {AuthRoutingModule} from './auth-routing.routing';
 import {AlertComponent} from './_directives/alert.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {AlertService} from './_services/alert.service';
 import {AuthenticationService} from './_services/authentication.service';
 import {UserService} from './_services/user.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import { TranslateModule } from '@ngx-translate/core';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {TranslateModule} from '@ngx-translate/core';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
 // Module components
-import { AuthComponent } from './auth.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { AuthNoticeComponent } from './auth-notice/auth-notice.component';
-import { LogoutComponent } from './logout/logout.component';
-
+import {AuthComponent} from './auth.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {AuthNoticeComponent} from './auth-notice/auth-notice.component';
+import {LogoutComponent} from './logout/logout.component';
 // Auth
-import {AuthEffects, authReducer, AuthService} from '@core/auth/index';
+import {AuthEffects, authReducer} from '@core/auth/index';
 import {InterceptService} from '@core/_base/crud/index';
-import { ButtonsModule, CardsModule, WavesModule, IconsModule } from 'ng-uikit-pro-standard';
+import {ButtonsModule, CardsModule, IconsModule, WavesModule} from 'ng-uikit-pro-standard';
+
+// import {BaseRequestOptions, HttpModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -41,7 +39,7 @@ import { ButtonsModule, CardsModule, WavesModule, IconsModule } from 'ng-uikit-p
   imports: [
     CommonModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     AuthRoutingModule,
     ReactiveFormsModule,
     ButtonsModule,
@@ -66,7 +64,7 @@ import { ButtonsModule, CardsModule, WavesModule, IconsModule } from 'ng-uikit-p
     AlertService,
     AuthenticationService,
     UserService,
-    BaseRequestOptions,
+    // BaseRequestOptions,
   ],
   exports: [AuthComponent],
   entryComponents: [AlertComponent],
@@ -74,12 +72,12 @@ import { ButtonsModule, CardsModule, WavesModule, IconsModule } from 'ng-uikit-p
 })
 
 export class AuthModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<AuthModule> {
     return {
       ngModule: AuthModule,
       providers: [
-          AuthenticationService,
-          AuthGuard
+        AuthenticationService,
+        AuthGuard
       ]
     };
   }
