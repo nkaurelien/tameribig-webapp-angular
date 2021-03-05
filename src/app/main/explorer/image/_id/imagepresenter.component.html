@@ -2,239 +2,244 @@
      aria-hidden="true"
      aria-labelledby="myBasicModalLabel" class="modal fade top"
      mdbModal role="dialog" style="overflow-y: auto" tabindex="-1">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="d-none modal-header">
-                <p class="heading lead">Téléchargement</p>
-            </div>
-            <div class="modal-body">
-                <div class="close">
-                    <ng-container *ngIf="( image$ | async ) as image ">
-                        <app-animated-like (like)="liked(image._id, $event)" [liked]='true'
-                                           class="mr-4"></app-animated-like>
-                    </ng-container>
-                    <button (click)="modal.hide()" aria-label="Close" class="btn btn-outline border" type="button">
-                        <mdb-icon fas icon="times"></mdb-icon>
-                        fermé
-                    </button>
-                </div>
-                <div class="container mt-5">
-                    <!--                    <hr class="hr w-100" size="2">-->
-                    <p class="mb-5 d-none">
-                        <a routerLink="/explorer/images">Images</a>
-                        &gt;
-                        <a>Cameroun</a>
-                        &gt;
-                        <a>Delivery</a>
-                        &gt;
-                        <a>SVG</a>
-
-                    </p>
-                    <ng-container *ngIf="( image$ | async ) as image else notExists">
-                        <div class="col-12">
-                            <!--<h1 class="mb-5">Images presenter</h1>-->
-
-                            <div class="row mx-auto">
-                                <div class=" col-md-1-"></div>
-                                <div class=" col-md-5 mx-auto">
-                                    <figure class="figure">
-                                        <img [src]="image.picture" alt="..." class="figure-img img-fluid z-depth-1"
-                                             style="width: 400px">
-                                        <figcaption class="mt-2 figure-caption text-right">
-                                            <div class="row">
-
-                                                <div class="container-fluid ">
-                                                    <div class="float-none">
-                                                        <share-buttons (closed)="null"
-                                                                       (opened)="null"
-                                                                       [autoSetMeta]="null"
-                                                                       [description]="null"
-                                                                       [exclude]="['reddit','tumblr','mix','vk','xing','line','sms','email','print','copy']"
-                                                                       [image]="null"
-                                                                       [include]="['facebook','twitter','linkedin','google','pinterest','reddit','tumblr','mix','vk','telegram','messenger','whatsapp','xing','line','sms','email','print','copy']"
-                                                                       [showText]="false"
-                                                                       [show]="5"
-                                                                       [size]="-4"
-                                                                       [tags]="null"
-                                                                       [theme]="'modern-dark'"
-                                                                       [title]="null"
-                                                                       [url]="null"
-                                                        ></share-buttons>
-                                                        <hr class="hr-dark">
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid  ">
-                                                    <div *ngIf="image.author" class="float-md-left">
-                                                        <b>De: </b>&nbsp;
-                                                        <ngx-avatar [round]="true" [src]="image.author.photoUrl"
-                                                                    class="d-inline-block" facebookId="null"
-                                                                    name="{{ image.author.displayName || '' }}"
-                                                                    size="30">
-                                                        </ngx-avatar>
-                                                        <a (click)="openUserProfile(image?.authorId)" target="_blank">
-                                                            {{ image.author.displayName || '' }}
-                                                        </a>
-                                                        <ng-container *ngIf="image?.author?.socialLinks?.twitter">
-                                                            <a [href]="image?.author?.socialLinks?.twitter">
-                                                                <mdb-icon fab icon="twitter"></mdb-icon>
-                                                            </a>
-                                                        </ng-container>
-                                                        <ng-container *ngIf="image?.author?.socialLinks?.facebook">
-                                                            <a [href]="image?.author?.socialLinks?.facebook">
-                                                                <mdb-icon fab icon="facebook"></mdb-icon>
-                                                            </a>
-                                                        </ng-container>
-                                                        <ng-container *ngIf="image?.author?.socialLinks?.linkedin">
-                                                            <a [href]="image?.author?.socialLinks?.linkedin">
-                                                                <mdb-icon fab icon="linkedin"></mdb-icon>
-                                                            </a>
-                                                        </ng-container>
-                                                    </div>
-
-                                                    <div class="float-md-right">
-                                                        <b class="price green-text">
-                                                            {{ image.priceHuman }}
-                                                        </b>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </figcaption>
-                                    </figure>
-
-                                </div>
-                                <div class=" col-md-1-"></div>
-                                <div class=" col-md-6">
-                                    <mdb-accordion [multiple]="true">
-                                        <mdb-accordion-item [collapsed]="false">
-                                            <mdb-accordion-item-head>Description</mdb-accordion-item-head>
-                                            <mdb-accordion-item-body>
-                                                {{ image.description }}
-                                            </mdb-accordion-item-body>
-                                        </mdb-accordion-item>
-
-                                        <mdb-accordion-item [collapsed]="false">
-                                            <mdb-accordion-item-head>Dimensions</mdb-accordion-item-head>
-                                            <mdb-accordion-item-body>
-                                                <div class="list-group">
-                                                    <div class="size-select-container list-group-item waves-light">
-                                                        <div *ngFor="let size of image.breakpoints"
-                                                             class="custom-control custom-radio">
-                                                            <input [checked]="size.height === selectedBreakpoint.heigth"
-                                                                   class="custom-control-input"
-                                                                   id="size-{{ size.height }}"
-                                                                   mdbInput
-                                                                   name="efaultExampleRadios"
-                                                                   type="radio">
-                                                            <label (click)="selectBreakpoint(size)"
-                                                                   class="custom-control-label"
-                                                                   for="size-{{ size.height }}">
-
-                                                                <a class="ml-2" href="{{ size.secure_url }}"
-                                                                   target="_blank">
-                                                                    <!--                                        {{ image?.size[size].size }}-->
-                                                                    <span class="size-text">{{ size.height }}</span>
-                                                                    <small *ngIf="freeBreakpointCeil >= size.height"
-                                                                           class="badge badge-primary badge-free-download ml-3">
-                                                                        GRATUIT
-                                                                    </small>
-                                                                    <mdb-icon class="ml-2" fas
-                                                                              icon="external-link-alt"></mdb-icon>
-                                                                </a>
-                                                            </label>
-
-                                                        </div>
-
-                                                        <!--<div class="custom-control custom-radio">-->
-                                                        <!--<input type="radio" class="custom-control-input" id="defaultUnchecked1" name="defaultExampleRadios" mdbInput>-->
-                                                        <!--<label class="custom-control-label" for="defaultUnchecked1">Default unchecked</label>-->
-                                                        <!--</div>-->
-                                                    </div>
-                                                </div>
-
-                                            </mdb-accordion-item-body>
-                                        </mdb-accordion-item>
-                                    </mdb-accordion>
-                                    <br>
-                                    <p class="text-center mt-2 ">
-                                        <mdb-checkbox [(ngModel)]="licenceChecked" [default]="true">
-                                            Usages et licences comparées
-                                        </mdb-checkbox>
-                                    </p>
-                                    <div class="my-4 text-center">
-                                        <iframe id="download_iframe" style="display:none;"></iframe>
-                                        <div class="btn-group">
-                                            <button (click)="download(image.download)" [disabled]="lockDownload"
-                                                    class="btn btn-download btn-lg btn-success">
-                                                Télécharger
-                                            </button>
-                                            <button (click)="downloadImageZipped(image)" [disabled]="lockDownload"
-                                                    class="btn btn-download btn-lg btn-outline-success">
-                                                <span>Zipp</span>
-                                                <ng-container *ngIf=" downloading; else zzz">
-                                                    <div class="mb-1 spinner-grow spinner-grow-sm"
-                                                         role="status"></div>
-                                                </ng-container>
-                                                <ng-template #zzz>
-                                                    <span>é</span>
-                                                </ng-template>
-
-                                                <mdb-icon class="ml-2" fas icon="file-archive"></mdb-icon>
-                                            </button>
-
-                                        </div>
-                                        <ng-container *ngIf=" false">
-                                            <ng-container *ngIf=" canFreeDownload; else payer">
-                                                <button (click)="download(image.download)"
-                                                        class="btn btn-download btn-lg btn-primary">
-                                                    Telecharger
-                                                </button>
-                                            </ng-container>
-                                            <ng-template #payer>
-                                                <button class="btn btn-download btn-lg btn-warning">
-                                                    Payer et Telecharger
-                                                </button>
-                                            </ng-template>
-                                        </ng-container>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="masonry">
-
-                                <!--<ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">-->
-                                <!--<ngxMasonryItem  *ngFor="let picture of masonryImages" class="masonry-item">-->
-                                <!--&lt;!&ndash;<img [defaultImage]="defaultImage" [lazyLoad]="picture.picture" [offset]="offset">&ndash;&gt;-->
-                                <!--<img (click)="showImage(picture)"  src="{{picture.picture}}">-->
-                                <!--</ngxMasonryItem >-->
-                                <!--</ngx-masonry>-->
-
-                            </div>
-
-                        </div>
-                    </ng-container>
-
-
-                    <ng-template #notExists>
-                        <div *ngIf="!loading" class="jumbotron text-center z-depth-0">
-                            <h1 class="display-4 text-info">
-                                <i class="icon"></i>
-                                Image not found
-                            </h1>
-                            <hr class="my-4">
-                            <p></p>
-                        </div>
-
-                        <div *ngIf="loading" class="d-flex align-items-center">
-                            <strong>Loading...</strong>
-                            <div aria-hidden="true" class="spinner-border ml-auto" role="status"></div>
-                        </div>
-
-                    </ng-template>
-
-                </div>
-
-            </div>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="d-none modal-header">
+        <p class="heading lead">Téléchargement</p>
+      </div>
+      <div class="modal-body">
+        <div class="close" style="z-index: 1">
+          <ng-container *ngIf="authenticated && ( image$ | async ) as image ">
+            <app-animated-like (like)="liked(image._id, $event)" [liked]='true'
+                               class="mr-4"></app-animated-like>
+          </ng-container>
+          <button (click)="modal.hide()" aria-label="Close" class="btn btn-outline border" type="button">
+            <mdb-icon fas icon="times"></mdb-icon>
+            fermé
+          </button>
         </div>
+        <div class="container mt-5">
+          <!--                    <hr class="hr w-100" size="2">-->
+          <p class="mb-5 d-none">
+            <a routerLink="/explorer/images">Images</a>
+            &gt;
+            <a>Cameroun</a>
+            &gt;
+            <a>Delivery</a>
+            &gt;
+            <a>SVG</a>
+
+          </p>
+          <ng-container *ngIf="( image$ | async ) as image else notExists">
+            <div class="col-12">
+              <!--<h1 class="mb-5">Images presenter</h1>-->
+
+              <div class="row mx-auto">
+                <div class=" col-md-1-"></div>
+                <div class=" col-md-5 mx-auto">
+                  <figure class="figure">
+                    <img [src]="image.picture" alt="..." class="figure-img img-fluid z-depth-1"
+                         style="width: 400px">
+                    <figcaption class="mt-2 figure-caption text-center">
+                      <div class="row">
+
+                        <div class="container-fluid ">
+                          <div class="float-none">
+                            <share-buttons (closed)="null"
+                                           (opened)="null"
+                                           [autoSetMeta]="null"
+                                           [description]="null"
+                                           [exclude]="['reddit','tumblr','mix','vk','xing','line','sms','email','print','copy']"
+                                           [image]="null"
+                                           [include]="['facebook','twitter','linkedin','pinterest','reddit','tumblr','mix','vk','telegram','messenger','whatsapp','xing','line','sms','email','print','copy']"
+                                           [showText]="false"
+                                           [show]="9"
+                                           [size]="-4"
+                                           [tags]="null"
+                                           [theme]="'material-dark'"
+                                           [title]="null"
+                                           [url]="null"
+                            ></share-buttons>
+                            <hr class="hr-dark">
+                          </div>
+                        </div>
+                        <div class="container-fluid  ">
+                          <div *ngIf="image.author" class="float-md-left">
+                            <span>Ajouter par</span>&nbsp;
+                            <!--                                                        <ngx-avatar [round]="true" [src]="image.author.photoUrl"-->
+                            <!--                                                                    class="d-inline-block" facebookId="null"-->
+                            <!--                                                                    name="{{ image.author.displayName || '' }}"-->
+                            <!--                                                                    size="30">-->
+                            <!--                                                        </ngx-avatar>-->
+                            <a (click)="openUserProfile(image?.authorId)" target="_blank">
+                              <b>{{ image.author.displayName || '' }}</b>
+                            </a>
+                            <ng-container *ngIf="image?.author?.socialLinks?.twitter">
+                              <a [href]="image?.author?.socialLinks?.twitter">
+                                <mdb-icon fab icon="twitter"></mdb-icon>
+                              </a>
+                            </ng-container>
+                            <ng-container *ngIf="image?.author?.socialLinks?.facebook">
+                              <a [href]="image?.author?.socialLinks?.facebook">
+                                <mdb-icon fab icon="facebook"></mdb-icon>
+                              </a>
+                            </ng-container>
+                            <ng-container *ngIf="image?.author?.socialLinks?.linkedin">
+                              <a [href]="image?.author?.socialLinks?.linkedin">
+                                <mdb-icon fab icon="linkedin"></mdb-icon>
+                              </a>
+                            </ng-container>
+                          </div>
+
+                          <div class="float-md-right">
+                            <b class="price green-text">
+                              {{ image.priceHuman }}
+                            </b>
+                          </div>
+                        </div>
+                      </div>
+
+                    </figcaption>
+                  </figure>
+
+                </div>
+                <div class=" col-md-1-"></div>
+                <div class=" col-md-6">
+                  <mdb-accordion [multiple]="true">
+                    <mdb-accordion-item [collapsed]="false">
+                      <mdb-accordion-item-head>Description</mdb-accordion-item-head>
+                      <mdb-accordion-item-body>
+                        {{ image.description }}
+                      </mdb-accordion-item-body>
+                    </mdb-accordion-item>
+
+                    <mdb-accordion-item [collapsed]="false">
+                      <mdb-accordion-item-head>Dimensions</mdb-accordion-item-head>
+                      <mdb-accordion-item-body>
+                        <div class="list-group">
+                          <div class="size-select-container list-group-item waves-light">
+                            <div *ngFor="let size of image.breakpoints"
+                                 class="custom-control custom-radio">
+                              <input [checked]="size.height === selectedBreakpoint.height"
+                                     class="custom-control-input"
+                                     id="size-{{ size.height }}"
+                                     mdbInput
+                                     name="efaultExampleRadios"
+                                     type="radio">
+                              <label (click)="selectBreakpoint(size)"
+                                     class="custom-control-label"
+                                     for="size-{{ size.height }}">
+
+                                <a class="ml-2" href="{{ size.secure_url }}"
+                                   target="_blank">
+                                  <!--                                        {{ image?.size[size].size }}-->
+                                  <span class="size-text">{{ size.height }}</span>
+
+                                  <mdb-icon class="ml-2" fas
+                                            icon="external-link-alt"></mdb-icon>
+                                  <small *ngIf="freeBreakpointCeil >= size.height"
+                                         class="badge badge-primary badge-free-download ml-3">
+                                    GRATUIT
+                                  </small>
+                                </a>
+                              </label>
+
+                            </div>
+
+                            <!--<div class="custom-control custom-radio">-->
+                            <!--<input type="radio" class="custom-control-input" id="defaultUnchecked1" name="defaultExampleRadios" mdbInput>-->
+                            <!--<label class="custom-control-label" for="defaultUnchecked1">Default unchecked</label>-->
+                            <!--</div>-->
+                          </div>
+                        </div>
+
+                      </mdb-accordion-item-body>
+                    </mdb-accordion-item>
+                  </mdb-accordion>
+                  <br>
+                  <p class="text-center mt-0" >
+                    <mdb-checkbox [(ngModel)]="licenceChecked" [default]="true">
+                      Usages et licences comparées
+                    </mdb-checkbox>
+                  </p>
+                  <div class="my-4 text-center">
+                    <iframe id="download_iframe" style="display:none;"></iframe>
+                    <div class="d-block mt-2">
+                      <button (click)="download(image.download)" [disabled]="lockDownload"
+                              class="btn btn-block btn-download btn-lg btn-success">
+                        Télécharger
+                        <mdb-icon class="ml-2" fas icon="cloud-download-alt"></mdb-icon>
+                      </button>
+
+                    </div>
+                    <div class="d-block mt-2">
+                      <button (click)="downloadImageZipped(image)" [disabled]="lockDownload"
+                              class="btn btn-block btn-download btn-lg btn-outline-success">
+                        <span>Télécharger Zip</span>
+                        <ng-container *ngIf=" downloading; else zzz">
+                          <div class="mb-1 spinner-grow spinner-grow-sm"
+                               role="status"></div>
+                        </ng-container>
+                        <ng-template #zzz>
+                          <span>pé</span>
+                        </ng-template>
+
+                        <mdb-icon class="ml-2" fas icon="file-archive"></mdb-icon>
+                      </button>
+
+                    </div>
+                    <ng-container *ngIf=" false">
+                      <ng-container *ngIf=" canFreeDownload; else payer">
+                        <button (click)="download(image.download)"
+                                class="btn btn-download btn-lg btn-primary">
+                          Telecharger
+                        </button>
+                      </ng-container>
+                      <ng-template #payer>
+                        <button class="btn btn-download btn-lg btn-warning">
+                          Payer et Telecharger
+                        </button>
+                      </ng-template>
+                    </ng-container>
+                  </div>
+                </div>
+
+              </div>
+              <div class="masonry">
+
+                <!--<ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">-->
+                <!--<ngxMasonryItem  *ngFor="let picture of masonryImages" class="masonry-item">-->
+                <!--&lt;!&ndash;<img [defaultImage]="defaultImage" [lazyLoad]="picture.picture" [offset]="offset">&ndash;&gt;-->
+                <!--<img (click)="showImage(picture)"  src="{{picture.picture}}">-->
+                <!--</ngxMasonryItem >-->
+                <!--</ngx-masonry>-->
+
+              </div>
+
+            </div>
+          </ng-container>
+
+
+          <ng-template #notExists>
+            <div *ngIf="!loading" class="jumbotron text-center z-depth-0">
+              <h1 class="display-4 text-info">
+                <i class="icon"></i>
+                Image not found
+              </h1>
+              <hr class="my-4">
+              <p></p>
+            </div>
+
+            <div *ngIf="loading" class="d-flex align-items-center">
+              <strong>Loading...</strong>
+              <div aria-hidden="true" class="spinner-border ml-auto" role="status"></div>
+            </div>
+
+          </ng-template>
+
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>

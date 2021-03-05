@@ -19,7 +19,7 @@ import {ImagesService} from '../../@core/services/images.service';
 import {AnimatedLikeModule} from '@core/components/animated-like/animated-like.module';
 import {AvatarModule} from 'ngx-avatar';
 import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
-import {ShareIconsModule} from "ngx-sharebuttons/icons";
+// import {ShareIconsModule} from "ngx-sharebuttons/icons";
 
 
 const routes: Routes = [
