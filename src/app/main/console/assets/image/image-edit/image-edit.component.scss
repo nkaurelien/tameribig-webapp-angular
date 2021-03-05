@@ -4,6 +4,11 @@
     .border.border-0 {
       border: none !important;
     }
+
+    form {
+      width: 320px;
+    }
+
   }
 
   .ng2-tag-input__text-input {
@@ -27,7 +32,7 @@
 
 
   .modal-body {
-    background-color: rgba(255, 193, 7, 0.62);
-    color: #424242;
+    //background-color: rgba(255, 193, 7, 0.62);
+    //color: #424242;
   }
 }

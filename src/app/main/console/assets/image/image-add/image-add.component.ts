@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '@app/auth2/_services';
 import {environment} from '@environments/environment';
 import {ImagesApiService} from '@app/main/@core/services/images-api.service';
+import {Image} from "@app/main/@core/state/image/image.model";
 
 @Component({
   selector: 'app-image-add',
@@ -38,7 +39,7 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
   }
 
   get titreInput() {
-    return this.validatingForm && this.validatingForm.get('titre');
+    return this.validatingForm && this.validatingForm.get('title');
   }
 
   get descInput() {
@@ -86,7 +87,11 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
         this.validatingForm.reset();
         this.errors = [];
         this.toast.success('Enregistrer avec succès, recharger votre liste ');
-        setTimeout(() => this.modal.hide(), 1200);
+        setTimeout(() => {
+            // this.modal.hide()
+            this.uploadPicture(resp)
+          }, 1200
+        );
 
       }, err => {
         this.submitting = false;
@@ -99,6 +104,11 @@ export class ImageAddComponent implements OnInit, AfterViewInit {
 
   getImageUrl(uid: string) {
     return `${environment.ApiBaseUrl}/images/open/${uid}`;
+  }
+
+
+  uploadPicture(image: Image) {
+    this.router.navigate([`/console/assets/images/${image._id}/upload-picture`]);
   }
 
 }

@@ -1,213 +1,209 @@
-<div #modal="mdbModal" (onHide)="onHideModal()" [config]="{backdrop: true, ignoreBackdropClick: true}"
+<div #modal="mdbModal" (onHide)="onHideModal()" [config]="{backdrop: true, ignoreBackdropClick: false}"
      aria-hidden="true"
      aria-labelledby="myBasicModalLabel" class="modal fade top"
      mdbModal role="dialog" style="overflow-y: auto" tabindex="-1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+  <div class="modal-dialog modal-full-height modal-rigth modal-notify" role="document">
+    <div class="modal-content">
 
-            <div class="modal-header">
-                <div class="custom-control custom-switch">
-                    <input (change)="togglePublishing(isChecked)" [(ngModel)]="isChecked" [checked]="published"
-                           class="custom-control-input" id="customSwitches" type="checkbox">
-                    <label class="custom-control-label" for="customSwitches">
-                        {{ published ? 'retirer en ligne' : 'publier en ligne' }}
-                        <span *ngIf="publishing"
-                              aria-hidden="true"
-                              class="spinner-grow spinner-grow-sm text-light"
-                              role="status"></span>
+      <div class="modal-header">
+        <div class="custom-control custom-switch">
+          <input (change)="togglePublishing(isChecked)" [(ngModel)]="isChecked" [checked]="published"
+                 class="custom-control-input" id="customSwitches" type="checkbox">
+          <label class="custom-control-label" for="customSwitches">
+            {{ published ? 'Publié' : 'Non Publié' }}
+            <span *ngIf="publishing"
+                  aria-hidden="true"
+                  class="spinner-grow spinner-grow-sm text-light"
+                  role="status"></span>
 
-                    </label>
-                </div>
+          </label>
+        </div>
 
-                <!--                <mdb-checkbox (change)="togglePublishing($event)" [checked]="published">-->
-                <!--                    {{ published ? 'retirer en ligne' : 'publier en ligne' }}-->
-                <!--                </mdb-checkbox>-->
-            </div>
-            <div class="modal-body">
-                <button (click)="modal.hide()" aria-label="Close" class="close pull-right" type="button">
-                    <span aria-hidden="true">×</span>
-                </button>
+        <button (click)="modal.hide()" aria-label="Close" class="close pull-right" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        <!--                <mdb-checkbox (change)="togglePublishing($event)" [checked]="published">-->
+        <!--                    {{ published ? 'retirer en ligne' : 'publier en ligne' }}-->
+        <!--                </mdb-checkbox>-->
+      </div>
+      <div class="modal-body">
+        <!--                <button (click)="modal.hide()" aria-label="Close" class="close pull-right" type="button">-->
+        <!--                    <span aria-hidden="true">×</span>-->
+        <!--                </button>-->
 
-                <!-- Material form row -->
-                <form (submit)="submit()" [formGroup]="validatingForm" novalidate>
+        <!-- Material form row -->
+        <form (submit)="submit()" [formGroup]="validatingForm" novalidate>
 
-                    <div class="row mt-4">
-                        <div class="col-md-5">
-                            <h4>Méta</h4>
-                            <mdb-card class="mt-0">
-                                <mdb-card-body class="text-left">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- Grid row -->
-                                            <div class="form-row mb-5">
-                                                <div class="col-md-12 ">
-                                                    <div *ngIf="errors.length"
-                                                         class="animated fadeIn alert alert-warning"
-                                                         role="alert">
-                                                        <b>{{ errors[0]}}</b>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Grid row -->
-                                            <div class="form-row">
-                                                <!-- Grid column -->
-                                                <div class="col">
-                                                    <!-- Material input -->
-                                                    <div class="md-form form-group mt-0">
-                                                        <input class="form-control" formControlName="title" id="titre"
-                                                               maxlength="100"
-                                                               mdbInput
-                                                               name="titre" placeholder="Titre "
-                                                               type="text">
-                                                        <label for="titre">Titre</label>
-                                                        <mdb-error
-                                                                *ngIf="titreInput.invalid && (titreInput.dirty || titreInput.touched)">
-                                                            invalid
-                                                        </mdb-error>
-                                                        <mdb-success
-                                                                *ngIf="titreInput.valid && (titreInput.dirty || titreInput.touched)">
-                                                            valid
-                                                        </mdb-success>
-                                                    </div>
-                                                </div>
-                                                <!-- Grid column -->
-                                            </div>
-                                            <!-- Grid row -->
-                                            <!-- Grid row -->
-                                            <div class="form-row">
-                                                <!-- Grid column -->
-                                                <div class="col">
-                                                    <!-- Material input -->
-                                                    <div class="md-form form-group  mt-0">
-                                                        <input class="form-control" formControlName="price" id="prix"
-                                                               mdbInput
-                                                               min="50"
-                                                               name="prix" placeholder="Prix" type="number">
-                                                        <label for="prix">Prix(FCFA)</label>
-                                                        <mdb-error
-                                                                *ngIf="prixInput.invalid && (prixInput.dirty || prixInput.touched)">
-                                                            invalid
-                                                        </mdb-error>
-                                                        <mdb-success
-                                                                *ngIf="prixInput.valid && (prixInput.dirty || prixInput.touched)">
-                                                            valid
-                                                        </mdb-success>
-                                                    </div>
-                                                </div>
-                                                <!-- Grid column -->
-                                            </div>
-                                            <!-- Grid row -->
-                                            <!-- Grid row -->
-                                            <div class="form-row">
-                                                <!-- Grid column -->
-                                                <div class="col">
-                                                    <!-- Material input -->
-                                                    <div class="md-form mt-0">
-                          <textarea class="form-control" formControlName="description" id="description" length="100"
-                                    maxlength="100" mdbCharCounter mdbInput name="description"
-                                    placeholder="Description "
-                                    rows="5" type="text"></textarea>
-
-                                                        <mdb-error
-                                                                *ngIf="descInput.invalid && (descInput.dirty || descInput.touched)">
-                                                            invalid
-                                                        </mdb-error>
-                                                        <mdb-success
-                                                                *ngIf="descInput.valid && (descInput.dirty || descInput.touched)">
-                                                            valid
-                                                        </mdb-success>
-                                                    </div>
-                                                </div>
-                                                <!-- Grid column -->
-                                            </div>
-                                            <!-- Grid row -->
-                                            <!-- Material form row -->
-                                        </div>
-                                    </div>
-
-                                </mdb-card-body>
-                            </mdb-card>
-                        </div>
-                        <div class="col-md-7">
-                            <h4>Mots clés</h4>
-                            <mdb-card class="mt-0">
-                                <mdb-card-body class="text-left">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <!-- Grid row -->
-                                            <div class="form-row">
-                                                <!-- Grid column -->
-                                                <div class="col">
-                                                    <!-- Material input -->
-                                                    <div class="md-form p-2 rgba-cyan-slight- m-0">
-                                                        <tag-input
-                                                                [maxItems]='5'
-                                                                [modelAsStrings]="true"
-                                                                formControlName="keywords"
-                                                                inputClass="border  border-0"
-                                                                placeholder="Tapez ici"
-                                                                secondaryPlaceholder="Ajoutez vos mots clés pour la recherche"></tag-input>
-                                                    </div>
-                                                </div>
-                                                <!-- Grid column -->
-                                            </div>
-                                            <!-- Grid row -->
-                                        </div>
-                                    </div>
-                                </mdb-card-body>
-                            </mdb-card>
-                            <br>
-                            <h4>Categories</h4>
-                            <mdb-card class="mt-0">
-                                <mdb-card-body class="text-left">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <!--<h1 class="mb-5">Images presenter</h1>-->
-
-                                            <div class="row mx-auto">
-                                                <div *ngFor="let item of topics; trackBy: trackByID"
-                                                     class="border-grey m-1 col-md-6">
-                                                    <!--                                                        <mdb-icon class="mr-2" fas icon="angle-right"></mdb-icon>-->
-                                                    <mdb-checkbox (change)="selectTopic($event, item)"
-                                                                  [checkboxPosition]="'left'"
-                                                                  [checked]="isCheckedCategorie(item)"
-                                                                  [inline]="true" [mdbTooltip]="item.name"
-                                                                  [value]="item._id" class="w-75"
-                                                                  filledIn="true" name="complements"
-                                                                  placement="bottom">{{item.name}}</mdb-checkbox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </mdb-card-body>
-                            </mdb-card>
-                            <br>
-                        </div>
+          <div class="row mt-0">
+            <div class="col-md-12">
+              <!--                            <h4>Méta</h4>-->
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Grid row -->
+                  <div class="form-row mb-2">
+                    <div class="col-md-12 ">
+                      <div *ngIf="errors.length"
+                           class="animated fadeIn alert alert-warning"
+                           role="alert">
+                        <b>{{ errors[0]}}</b>
+                      </div>
                     </div>
+                  </div>
+                  <!-- Grid row -->
+                  <div class="form-row">
+                    <!-- Grid column -->
+                    <div class="col">
+                      <!-- Material input -->
+                      <div class="md-form form-group mt-0">
+                        <input class="form-control" formControlName="title" id="titre"
+                               maxlength="100"
+                               mdbInput
+                               name="titre" placeholder="Titre "
+                               type="text">
+                        <label for="titre">Titre</label>
+                        <mdb-error
+                          *ngIf="titreInput.invalid && (titreInput.dirty || titreInput.touched)">
+                          invalid
+                        </mdb-error>
+                        <mdb-success
+                          *ngIf="titreInput.valid && (titreInput.dirty || titreInput.touched)">
+                          <mdb-icon fas icon="check-circle"></mdb-icon>
+                        </mdb-success>
+                      </div>
+                    </div>
+                    <!-- Grid column -->
+                  </div>
+                  <!-- Grid row -->
+                  <!-- Grid row -->
+                  <div class="form-row">
+                    <!-- Grid column -->
+                    <div class="col">
+                      <!-- Material input -->
+                      <div class="md-form form-group  mt-0">
+                        <input class="form-control" formControlName="price" id="prix"
+                               mdbInput
+                               min="50"
+                               name="prix" placeholder="Prix" type="number">
+                        <label for="prix">Prix(FCFA)</label>
+                        <mdb-error
+                          *ngIf="prixInput.invalid && (prixInput.dirty || prixInput.touched)">
+                          invalid
+                        </mdb-error>
+                        <mdb-success
+                          *ngIf="prixInput.valid && (prixInput.dirty || prixInput.touched)">
+                          <mdb-icon fas icon="check-circle"></mdb-icon>
+                        </mdb-success>
+                      </div>
+                    </div>
+                    <!-- Grid column -->
+                  </div>
+                  <!-- Grid row -->
+                  <!-- Grid row -->
+                  <div class="form-row">
+                    <!-- Grid column -->
+                    <div class="col">
+                      <!-- Material input -->
+                      <div class="md-form form-group  mt-0">
+                        <label class="w-100" for="description">Description</label><br>
+                        <textarea class="form-control" formControlName="description" id="description" length="100"
+                                  maxlength="100" mdbCharCounter mdbInput name="description"
+                                  placeholder="Description "
+                                  rows="5" type="text"></textarea>
 
-                    <div class="row mt-3">
+                        <mdb-error
+                          *ngIf="descInput.invalid && (descInput.dirty || descInput.touched)">
+                          invalid
+                        </mdb-error>
+                        <mdb-success
+                          *ngIf="descInput.valid && (descInput.dirty || descInput.touched)">
+                          <mdb-icon fas icon="check-circle"></mdb-icon>
+                        </mdb-success>
+                      </div>
+                    </div>
+                    <!-- Grid column -->
+                  </div>
+                  <!-- Grid row -->
+                  <!-- Material form row -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <!--              <h5>Mots clés</h5>-->
+              <div class="row">
+                <div class="col-12">
+                  <!-- Grid row -->
+                  <div class="form-row">
+                    <!-- Grid column -->
+                    <div class="col">
+                      <!-- Material input -->
+                      <div class="md-form p-2 rgba-cyan-slight- m-0">
+                        <tag-input
+                          [maxItems]='5'
+                          [modelAsStrings]="true"
+                          formControlName="keywords"
+                          inputClass="border w-100 border-0"
+                          placeholder="Ajoutez vos mots clés pour la recherche"
+                          secondaryPlaceholder="Ajoutez vos mots clés pour la recherche"></tag-input>
+                      </div>
+                    </div>
+                    <!-- Grid column -->
+                  </div>
+                  <!-- Grid row -->
+                </div>
+              </div>
+              <br>
+              <h5 *ngIf="topics.length">Categories</h5>
+              <div class="row">
+                <div class="col-12">
+                  <!--<h1 class="mb-5">Images presenter</h1>-->
+
+                  <div class="row mx-auto">
+                    <div *ngFor="let item of topics; trackBy: trackByID"
+                         class="border-grey m-1 col-md-6">
+                      <!--                                                        <mdb-icon class="mr-2" fas icon="angle-right"></mdb-icon>-->
+                      <mdb-checkbox (change)="selectTopic($event, item)"
+                                    [checkboxPosition]="'left'"
+                                    [checked]="isCheckedCategorie(item)"
+                                    [inline]="true" [mdbTooltip]="item.name"
+                                    [value]="item._id" class="w-75"
+                                    filledIn="true" name="complements"
+                                    placement="bottom">{{item.name}}</mdb-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+
+          <div class="row mt-3">
 
 
-                        <div class="col-md-9 text-center">
+            <div class="col-md-12 text-center">
 
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <button [disabled]="submitting"
-                                    class="btn m-0 btn-primary btn-block"
-                                    type="submit">
+            </div>
+            <div class="col-md-12 text-center">
+              <button [disabled]="submitting"
+                      class="btn m-0 btn-primary btn-block"
+                      type="submit">
                                 <span *ngIf="submitting"
                                       aria-hidden="true"
                                       class="spinner-grow spinner-grow-sm text-light"
                                       role="status"></span>
-                                <span>Enregistrer</span>
-                            </button>
-                        </div>
-                    </div>
-
-
-                </form>
+                <span>Enregistrer</span>
+              </button>
             </div>
+          </div>
 
-        </div>
+
+        </form>
+      </div>
+<!--      <div class="modal-header text-muted text-center">-->
+<!--        Presentation-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+
+<!--      </div>-->
     </div>
+  </div>
 </div>

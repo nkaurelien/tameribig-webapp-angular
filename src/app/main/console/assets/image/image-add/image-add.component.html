@@ -4,13 +4,13 @@
      mdbModal role="dialog" style="overflow-y: auto" tabindex="-1">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-            <div class="d-none modal-header">
-                <p class="heading lead">Ajouter un image</p>
+            <div class="d-none- modal-header">
+                <h1 class="heading lead text-muted">Creer un projet de creation d'image</h1>
+              <button (click)="modal.hide()" aria-label="Close" class="close pull-right" type="button">
+                <span aria-hidden="true">×</span>
+              </button>
             </div>
             <div class="modal-body">
-                <button (click)="modal.hide()" aria-label="Close" class="close pull-right" type="button">
-                    <span aria-hidden="true">×</span>
-                </button>
                 <div class="mt-3">
                     <div class="text-left">
                         <div class="row">
@@ -51,7 +51,7 @@
                                                                 </mdb-error>
                                                                 <mdb-success
                                                                         *ngIf="titreInput && titreInput.valid && (titreInput.dirty || titreInput.touched)">
-                                                                    valid
+                                                                  <mdb-icon fas icon="check-circle"></mdb-icon>
                                                                 </mdb-success>
                                                             </div>
                                                         </div>
@@ -70,7 +70,7 @@
                                                                 </mdb-error>
                                                                 <mdb-success
                                                                         *ngIf="prixInput.valid && (prixInput.dirty || prixInput.touched)">
-                                                                    valid
+                                                                  <mdb-icon fas icon="check-circle"></mdb-icon>
                                                                 </mdb-success>
                                                             </div>
                                                         </div>
@@ -96,7 +96,7 @@
                                                                 </mdb-error>
                                                                 <mdb-success
                                                                         *ngIf="descInput.valid && (descInput.dirty || descInput.touched)">
-                                                                    valid
+                                                                  <mdb-icon fas icon="check-circle"></mdb-icon>
                                                                 </mdb-success>
                                                             </div>
                                                         </div>
@@ -113,8 +113,8 @@
                                                                         [maxItems]='5'
                                                                         [modelAsStrings]="true"
                                                                         formControlName="keywords"
-                                                                        inputClass="border  border-0"
-                                                                        placeholder="Tapez ici"
+                                                                        inputClass="border w-100 border-0"
+                                                                        placeholder="Ajoutez vos mots clés pour la recherche"
                                                                         secondaryPlaceholder="Ajoutez vos mots clés pour la recherche"></tag-input>
                                                             </div>
                                                         </div>

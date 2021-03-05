@@ -5,147 +5,156 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@app/auth2/_services';
 import {environment} from '@environments/environment';
 import {Subscription} from 'rxjs';
+import {Image} from "@app/main/@core/state/image/image.model";
 
 @Component({
-    selector: 'app-image-upload-picture-component',
-    templateUrl: './image-upload-picture.component.html',
-    styleUrls: ['./image-upload-picture.component.scss']
+  selector: 'app-image-upload-picture-component',
+  templateUrl: './image-upload-picture.component.html',
+  styleUrls: ['./image-upload-picture.component.scss']
 })
 export class ImageUploadPictureComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
-    @ViewChild('modal', {static: true}) modal: ModalDirective;
+  @ViewChild('modal', {static: true}) modal: ModalDirective;
 
-    @ViewChild(DropzoneComponent, {static: false}) componentRef?: DropzoneComponent;
+  @ViewChild(DropzoneComponent, {static: false}) componentRef?: DropzoneComponent;
 
-    @ViewChild(DropzoneDirective, {static: false}) directiveRef?: DropzoneDirective;
+  @ViewChild(DropzoneDirective, {static: false}) directiveRef?: DropzoneDirective;
 
-    public type = 'directive';
-    public disabled = false;
-    public uploading = false;
-    public config: DropzoneConfigInterface = {
-        clickable: true,
-        maxFiles: 1,
-        autoReset: null,
-        errorReset: null,
-        cancelReset: null,
-        autoProcessQueue: false,
-        // acceptedFiles: 'image/*'
-    };
+  public type = 'directive';
+  public disabled = false;
+  public uploading = false;
+  public config: DropzoneConfigInterface = {
+    clickable: true,
+    maxFiles: 1,
+    autoReset: null,
+    errorReset: null,
+    cancelReset: null,
+    autoProcessQueue: false,
+    // acceptedFiles: 'image/*'
+  };
 
 
-    public dropzone: any;
+  public dropzone: any;
 
-    public errors = [];
-    public imagesUploadedWithSuccess = [];
+  public errors = [];
+  public imagesUploadedWithSuccess = [];
 
-    private user: any;
-    private paramMapSub: Subscription;
-    private ID: string;
+  private user: any;
+  private paramMapSub: Subscription;
+  private ID: string;
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private auth: AuthenticationService,
-        private toast: ToastService,
-    ) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private auth: AuthenticationService,
+    private toast: ToastService,
+  ) {
+  }
+
+  ngOnInit() {
+    this.auth.loggedIn$.subscribe(({loggedIn, routerState, user}) => {
+      this.user = user;
+    });
+
+    this.paramMapSub = this.route.paramMap.subscribe(params => {
+      this.ID = params.get('id');
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.paramMapSub) {
+      this.paramMapSub.unsubscribe();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.modal.show();
+
+    // Dropzone Init
+
+
+    if (this.type === 'directive' && this.directiveRef) {
+      this.dropzone = this.directiveRef.dropzone();
+    } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
+      this.dropzone = this.componentRef.directiveRef.dropzone();
     }
 
-    ngOnInit() {
-        this.auth.loggedIn$.subscribe(({loggedIn, routerState, user}) => {
-            this.user = user;
-        });
+    this.dropzone.on('sending', (file, xhr, formData) => {
+      this.uploading = true;
+      // Will send the filesize along with the file as POST data.
+      // console.log('sending:', file, xhr, formData);
+      // for (const key in this.validatingForm.value) {
+      //     formData.append(key, JSON.stringify(this.validatingForm.value[key]));
+      // }
+      // const generatedKeyswords = (this.validatingForm.value['description'] || '').split(' ');
+      // const keywordsModelList = this.validatingForm.value['keywords'];
+      // const keywords = keywordsModelList.map(x => x).concat(generatedKeyswords).filter(x => x.length > 2);
+      // formData.append('keywords', JSON.stringify(keywords));
 
-        this.paramMapSub = this.route.paramMap.subscribe(params => {
-            this.ID = params.get('id');
-        });
 
+      formData.append('id', this.ID);
+      formData.append('user', JSON.stringify(this.user));
+
+
+    });
+  }
+
+  redirectToImagesIndex() {
+    this.router.navigateByUrl('/console/assets/images');
+  }
+
+  onHideModal() {
+    this.redirectToImagesIndex();
+  }
+
+  submit() {
+    // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
+    this.dropzone.processQueue();
+  }
+
+  public resetDropzoneUploads(): void {
+    if (this.type === 'directive' && this.directiveRef) {
+      this.directiveRef.reset();
+    } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
+      this.componentRef.directiveRef.reset();
     }
+  }
 
-    ngOnDestroy(): void {
-        if (this.paramMapSub) {
-            this.paramMapSub.unsubscribe();
-        }
-    }
+  public onUploadInit(dropzone: any): void {
+    // console.log('onUploadInit:', dropzone);
+  }
 
-    ngAfterViewInit() {
-        this.modal.show();
+  public onUploadError(args: any): void {
+    // console.log('onUploadError:', args);
+    this.resetDropzoneUploads();
+    this.errors[0] = 'Un problème est survenu pendant l\'opération';
+    this.uploading = false;
 
-        // Dropzone Init
+  }
 
-
-        if (this.type === 'directive' && this.directiveRef) {
-            this.dropzone = this.directiveRef.dropzone();
-        } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
-            this.dropzone = this.componentRef.directiveRef.dropzone();
-        }
-
-        this.dropzone.on('sending', (file, xhr, formData) => {
-            this.uploading = true;
-            // Will send the filesize along with the file as POST data.
-            // console.log('sending:', file, xhr, formData);
-            // for (const key in this.validatingForm.value) {
-            //     formData.append(key, JSON.stringify(this.validatingForm.value[key]));
-            // }
-            // const generatedKeyswords = (this.validatingForm.value['description'] || '').split(' ');
-            // const keywordsModelList = this.validatingForm.value['keywords'];
-            // const keywords = keywordsModelList.map(x => x).concat(generatedKeyswords).filter(x => x.length > 2);
-            // formData.append('keywords', JSON.stringify(keywords));
+  public onUploadSuccess([file, xhrResponse, progressEvent]: any): void {
+    // console.log('onUploadSuccess:', [file, xhrResponse, progressEvent]);
+    this.uploading = false;
+    this.imagesUploadedWithSuccess = [...this.imagesUploadedWithSuccess, xhrResponse];
+    this.resetDropzoneUploads();
+    this.errors = [];
+    this.toast.success('Votre image a été soumise et la qualité sera etudier avant d\'etre publier');
+    setTimeout(() => {
+      this.uploadFiles(this.ID)
+      // this.modal.hide();
+    }, 2000);
+  }
 
 
-            formData.append('id', this.ID);
-            formData.append('user', JSON.stringify(this.user));
+  getImageUrl(uid: string) {
+    return `${environment.ApiBaseUrl}/images/open/${uid}`;
+  }
 
 
-        });
-    }
-
-    redirectToImagesIndex() {
-        this.router.navigateByUrl('/console/assets/images');
-    }
-
-    onHideModal() {
-        this.redirectToImagesIndex();
-    }
-
-    submit() {
-        // console.log('this.validatingForm.valid', this.validatingForm.valid, this.validatingForm.value);
-        this.dropzone.processQueue();
-    }
-
-    public resetDropzoneUploads(): void {
-        if (this.type === 'directive' && this.directiveRef) {
-            this.directiveRef.reset();
-        } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
-            this.componentRef.directiveRef.reset();
-        }
-    }
-
-    public onUploadInit(dropzone: any): void {
-        // console.log('onUploadInit:', dropzone);
-    }
-
-    public onUploadError(args: any): void {
-        // console.log('onUploadError:', args);
-        this.resetDropzoneUploads();
-        this.errors[0] = 'Un problème est survenu pendant l\'opération';
-        this.uploading = false;
-
-    }
-
-    public onUploadSuccess([file, xhrResponse, progressEvent]: any): void {
-        // console.log('onUploadSuccess:', [file, xhrResponse, progressEvent]);
-        this.uploading = false;
-        this.imagesUploadedWithSuccess = [...this.imagesUploadedWithSuccess, xhrResponse];
-        this.resetDropzoneUploads();
-        this.errors = [];
-        this.toast.success('Votre image a été soumise et la qualité sera etudier avant d\'etre publier');
-        setTimeout(() => this.modal.hide(), 2000);
-    }
-
-
-    getImageUrl(uid: string) {
-        return `${environment.ApiBaseUrl}/images/open/${uid}`;
-    }
+  uploadFiles(id) {
+    this.router.navigateByUrl(`/console/assets/images/${id}/upload-source`);
+  }
 
 }

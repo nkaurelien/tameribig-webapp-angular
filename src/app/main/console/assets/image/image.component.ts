@@ -83,7 +83,7 @@ export class ImageComponent implements OnInit, OnDestroy {
       )
       .subscribe(e => {
         if (e instanceof NavigationEnd) {
-          console.log(e);
+          // console.log(e);
           const canReload = (e.urlAfterRedirects || e.url).endsWith('console/assets/images');
           if (canReload) {
             this.reloadImages();
