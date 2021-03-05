@@ -1468,6 +1468,13 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.34"
 
+"@fortawesome/free-regular-svg-icons@^5.13.0":
+  version "5.15.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-5.15.2.tgz#61eeb8c206e792c530eaa58279cc32c55332fe8f"
+  integrity sha512-Uv5NQCYjyisNVTu/1Xjs+z8vwQjbfT6hiqYvQNfF0n8qdgfWLM581bAfVMQ3BCs1SPy+eEUKNcGkK4n0FihFHg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.34"
+
 "@fortawesome/free-solid-svg-icons@^5.8.2":
   version "5.15.2"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.15.2.tgz#25bb035de57cf85aee8072965732368ccc8e8943"
@@ -1600,27 +1607,6 @@
   integrity sha512-sfVmsDoLr9zI7ylzPct4wefi6zWBPyekQIhJVhME3h9sPh8S+BHy5loKgUqiZR3YduRNr8boLh4GkHpL3eXEPg==
   dependencies:
     tslib "^1.7.1"
-
-"@ngx-share/button@^7.1.2":
-  version "7.1.4"
-  resolved "https://registry.yarnpkg.com/@ngx-share/button/-/button-7.1.4.tgz#82ab8dbf43347e5235eae2b69093997ad431a4b4"
-  integrity sha512-XgmrQhpnB8CuRSdLYPWZgSz/zcJC7dNdK40MUjZA/0Z5tzMVkhcvrig6MRD0JBoBDbLd2HPG3XlfoWQqMZicZQ==
-  dependencies:
-    tslib "^1.9.0"
-
-"@ngx-share/buttons@^7.1.2":
-  version "7.1.4"
-  resolved "https://registry.yarnpkg.com/@ngx-share/buttons/-/buttons-7.1.4.tgz#468f8bc3b63e40f27d465c06ffa2c820551f035e"
-  integrity sha512-dcJm2qY5IvJH7FuzpyRTeBXpg86WkSqXfEaHMGHCKWwptM8twZxyyZwVorDLrtsMEHabUzw1mhqlX6DsiqSobA==
-  dependencies:
-    tslib "^1.9.0"
-
-"@ngx-share/core@^7.1.2":
-  version "7.1.4"
-  resolved "https://registry.yarnpkg.com/@ngx-share/core/-/core-7.1.4.tgz#00843416fadc8e61aa0e5a53c4820198db28a3bd"
-  integrity sha512-N6j1/7/I27Wfz1Uoy15uQ8fpRkPZXF1g9+dKrkEh6yi9jKmqNjr1hHB59DHfxrTGivxAgEEFgZMgnPzTd+2kcQ==
-  dependencies:
-    tslib "^1.9.0"
 
 "@ngx-translate/core@^11.0.1":
   version "11.0.1"
@@ -2015,7 +2001,7 @@
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.5.tgz#b14efa8852b7768d898906613c23f688713e02cd"
   integrity sha512-Q1y515GcOdTHgagaVFhHnIFQ38ygs/kmxdNpvpou+raI9UO3YZcHDngBSYKQklcKlvA7iuQlmIKbzvmxcOE9CQ==
 
-"@types/dropzone@^5.0.6":
+"@types/dropzone@^5.7.3":
   version "5.7.3"
   resolved "https://registry.yarnpkg.com/@types/dropzone/-/dropzone-5.7.3.tgz#fdb4a057114a4f02d26461d2ab212032b4e15554"
   integrity sha512-UQ6HPqpyQ6WTK75WwMhUZaZaQUw7v/hkcRJa0T/3WAXIKaYpQq+FcuTV2kQweebl/c6vWzK9hIe06eK55crwfg==
@@ -4634,7 +4620,7 @@ dotnet-deps-parser@5.0.0:
     tslib "^1.10.0"
     xml2js "0.4.23"
 
-dropzone@^5.5.0:
+dropzone@^5.7.0:
   version "5.7.6"
   resolved "https://registry.yarnpkg.com/dropzone/-/dropzone-5.7.6.tgz#a5ebb603ea2aaf630118c37a7be59bb3444ad6e1"
   integrity sha512-z38j+PZsH38rFGOK2rQ877t6c0cPos053fPp3RKaDvCDjAw4KflQQGn7BhCWeFq9Zl1hinB8khPrQdJ6cIBryQ==
@@ -7622,7 +7608,7 @@ lodash.values@^4.3.0:
   resolved "https://registry.yarnpkg.com/lodash.values/-/lodash.values-4.3.0.tgz#a3a6c2b0ebecc5c2cba1c17e6e620fe81b53d347"
   integrity sha1-o6bCsOvsxcLLocF+bmIP6BtT00c=
 
-lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19:
+lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -8202,11 +8188,6 @@ ng-recaptcha@^7.0.1:
     "@types/grecaptcha" "^3.0.1"
     tslib "^2.0.0"
 
-ng-simple-slideshow@^1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/ng-simple-slideshow/-/ng-simple-slideshow-1.2.9.tgz#384706ea76ed859c77927fd3b0585aba20d9a034"
-  integrity sha512-05bLd9pWFAIhlOuScO1FOhCubNm9oZ3HK7fJ0oZgn9m9kl257yxXQv/1fBsVrCu0v/25zQRGRS9EgkX5UXhJdQ==
-
 "ng-uikit-pro-standard@file:ng-uikit-pro-standard-10.1.1.tgz":
   version "10.1.1"
   resolved "file:ng-uikit-pro-standard-10.1.1.tgz#0730d8a924e7e7e7cef31467958f68a42b062cf9"
@@ -8258,12 +8239,13 @@ ngx-device-detector@^1.3.20:
   dependencies:
     tslib "^2.0.0"
 
-ngx-dropzone-wrapper@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/ngx-dropzone-wrapper/-/ngx-dropzone-wrapper-8.0.0.tgz#0828b92985d5533c25ea2ba6c179664faf77fd23"
-  integrity sha512-56nXp70DR5NRzvISi5l0bXONdda+2DGNJGBxwIn9oM9CD27aac7CT4aU5Vo4R0KDFcMNiTO3zFQvuDhHvSq54Q==
+ngx-dropzone-wrapper@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-dropzone-wrapper/-/ngx-dropzone-wrapper-10.0.1.tgz#531bf73f701323bf317fe4f0a5d6485d5d10db13"
+  integrity sha512-O9jaj8GWIIRWhYS8ibzR1yN1voQ4UUGKhl0zH0X/DY9MTsWCGmFvuSfnuv8MuXKcEmukjyeMUQ1p9BerUshIug==
   dependencies:
-    dropzone "^5.5.0"
+    dropzone "^5.7.0"
+    tslib "^2.0.0"
 
 ngx-filepond@^6.0.0:
   version "6.0.0"

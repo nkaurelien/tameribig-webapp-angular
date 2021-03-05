@@ -44,6 +44,7 @@ import {TokenInterceptorService} from "@core/services/token-interceptor.service"
 import {NG_ENTITY_SERVICE_CONFIG} from '@datorama/akita-ng-entity-service';
 import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
 import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -70,7 +71,6 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
 
     FormsModule,
     IconsModule,
-    HttpClientModule,
     ModalModule.forRoot(),
     ToastModule.forRoot({
       positionClass: 'md-toast-bottom-center',
@@ -87,6 +87,7 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
     CloudinaryModule.forRoot({Cloudinary}, cloudinaryConfig as CloudinaryConfiguration),
     environment.production ? [] : AkitaNgDevtools,
     AkitaNgRouterStoreModule,
+    FontAwesomeModule,
   ],
   providers: [
     {

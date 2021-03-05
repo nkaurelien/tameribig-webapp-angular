@@ -4,7 +4,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {ImagePresenterComponent} from './_id/imagepresenter.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
 import {NgxMasonryModule} from 'ngx-masonry';
-import {SlideshowModule} from 'ng-simple-slideshow';
 import {
   AccordionModule,
   ButtonsModule,
@@ -16,10 +15,11 @@ import {
   WavesModule
 } from 'ng-uikit-pro-standard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ShareButtonsModule} from '@ngx-share/buttons';
 import {ImagesService} from '../../@core/services/images.service';
 import {AnimatedLikeModule} from '@core/components/animated-like/animated-like.module';
 import {AvatarModule} from 'ngx-avatar';
+import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
+import {ShareIconsModule} from "ngx-sharebuttons/icons";
 
 
 const routes: Routes = [
@@ -42,7 +42,6 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        SlideshowModule,
         LazyLoadImageModule,
         NgxMasonryModule,
         AvatarModule,
@@ -50,6 +49,7 @@ const routes: Routes = [
         ModalModule, PreloadersModule,
         ShareButtonsModule,
         AnimatedLikeModule,
+        // ShareIconsModule,
     ], exports: [
         RouterModule
     ], declarations: [

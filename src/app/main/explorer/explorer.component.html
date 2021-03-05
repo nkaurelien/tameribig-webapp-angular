@@ -2,66 +2,77 @@
 <!-- Page -->
 <div class="row mx-0" style="min-height: 85vh">
 
-    <div class="col-12 p-0 z-depth-2" id="banner">
-        <div id="banner-menu" class="w-100 ">
-        banner menu
-        </div>
-        <slideshow [height]="'200px'"
-                   [minHeight]="'315px'"
-                   [autoPlay]="true"
-                   [showArrows]="false"
-                   [imageUrls]="imageSources"
-                   [lazyLoad]="imageSources?.length > 1"
-                   [autoPlayWaitForLazyLoad]="true">
-        </slideshow>
-        <div style="position:absolute; top: 50%; left: 50%; transform: scale(1.5)">
-            <h1 class="text-uppercase">il est temps d'agir</h1>
-            <p>Des images parfaites adaptées à vos besoins</p>
-        </div>
+  <div class="col-12 p-0 z-depth-2" id="banner">
+    <div id="banner-menu" class="w-100 ">
+      banner menu
     </div>
-
-    <div class="col-12">
-        <!-- <app-searcher></app-searcher> -->
+    <mdb-carousel [isControls]="false" [animation]="'slide'" [noWrap]="false" [interval]="'3500'">
+      <mdb-carousel-item *ngFor="let imageUrl of imageSources">
+<!--        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide">-->
+<!--        <img class="d-block w-100" [src]="imageUrl" alt="">-->
+        <div class="tile w-100" [style.background]="'url(' + imageUrl + ')'"  style="height: 200px; min-height: 315px">-->
+          <!--              <h1>{{j}}</h1>-->
+                      </div>
+      </mdb-carousel-item>
+    </mdb-carousel>
+    <div style="position:absolute; top: 50%; left: 50%; transform: scale(1.5)">
+      <h1 class="text-uppercase">il est temps d'agir</h1>
+      <p>Des images parfaites adaptées à vos besoins</p>
     </div>
+  </div>
+
+  <div class="col-12">
+    <!-- <app-searcher></app-searcher> -->
+  </div>
 
 
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 
 
 
-    <div class="col-12 mt-5">
-        <div class="row pt-5  mx-5">
-            <div class="col-3"></div>
-            <div class="col-6 px-0">
-                <h5 class="py-3" style="font-size: 22pt"><b>NOS CONTRIBUTEURS</b> A LA UNE</h5>
-                <div class="row z-depth-1 special-color-dark"
-                     style="color: white; height: 272px; overflow-y: hidden">
-                    <div class="col-5 d-flex flex-column p-3 align-items-center justify-content-start">
-                        <br>
-                        <h3 class="my-3"><b>Je suis doué</b></h3>
-                        <em class="text-center text-justify mb-4">je touche de l'argent et j'augmente ma cote de popularité
-                            en faisant la métier que j'aime</em>
-                        <button class="btn btn-danger" routerLink="/partner">Devenez contributeur</button>
-                    </div>
-                    <div class="col-7 px-0">
-                        <div id="carouselExampleSlidesOnly" class="carousel slide"
-                             data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100" [defaultImage]="defaultImage"  [lazyLoad]="'assets/images/002/photo01.jpg'" [offset]="offset" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" [defaultImage]="defaultImage"  [lazyLoad]="'assets/images/002/photo02.jpg'" [offset]="offset" alt="Second slide">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <small style="font-size: 9px; color: gray"><b>tameri international</b></small>
-                </div>
-            </div>
-            <div class="col-3"></div>
+  <div class="col-12 mt-5">
+    <div class="row pt-5  mx-5">
+      <div class="col-3"></div>
+      <div class="col-6 px-0">
+        <h5 class="py-3" style="font-size: 22pt"><b>NOS CONTRIBUTEURS</b> A LA UNE</h5>
+        <div class="row z-depth-1 special-color-dark"
+             style="color: white; height: 272px; overflow-y: hidden">
+          <div class="col-5 d-flex flex-column p-3 align-items-center justify-content-start">
+            <br>
+            <h3 class="my-3"><b>Je suis doué</b></h3>
+            <em class="text-center text-justify mb-4">je touche de l'argent et j'augmente ma cote de popularité
+              en faisant la métier que j'aime</em>
+            <button class="btn btn-danger" routerLink="/partner">Devenez contributeur</button>
+          </div>
+          <div class="col-7 px-0">
+            <mdb-carousel [isControls]="false" [animation]="'slide'" [noWrap]="false" [interval]="'3500'">
+              <mdb-carousel-item >
+<!--                <div class="tile w-100" [style.background]="'url(\'assets/images/002/photo01.jpg\') no-repeat right top'"  style="height: 280px; background-size: cover"></div>-->
+                  <img class="d-block w-100"  [defaultImage]="defaultImage"  [lazyLoad]="'assets/images/002/photo01.jpg'" [offset]="offset" style="height: 280px" >
+              </mdb-carousel-item>
+              <mdb-carousel-item >
+<!--                <div class="tile w-100" [style.background]="'url(\'assets/images/002/photo02.jpg\') no-repeat right top'"  style="height: 280px; background-size: cover"></div>-->
+                        <img class="d-block w-100"  [defaultImage]="defaultImage"  [lazyLoad]="'assets/images/002/photo02.jpg'" [offset]="offset" style="height: 280px" >
+              </mdb-carousel-item>
+            </mdb-carousel>
+<!--            <div id="carouselExampleSlidesOnly" class="carousel slide"-->
+<!--                 data-ride="carousel">-->
+<!--              <div class="carousel-inner">-->
+<!--                <div class="carousel-item active">-->
+<!--                  <img class="d-block w-100" [defaultImage]="defaultImage"  [lazyLoad]="'assets/images/002/photo01.jpg'" [offset]="offset" alt="First slide">-->
+<!--                </div>-->
+<!--                <div class="carousel-item">-->
+<!--                  <img class="d-block w-100" [defaultImage]="defaultImage"  [lazyLoad]="'assets/images/002/photo02.jpg'" [offset]="offset" alt="Second slide">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
         </div>
+        <div>
+          <small style="font-size: 9px; color: gray"><b>tameri international</b></small>
+        </div>
+      </div>
+      <div class="col-3"></div>
     </div>
+  </div>
 </div>

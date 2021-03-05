@@ -3,7 +3,6 @@ import {Location} from '@angular/common';
 import {NgxMasonryOptions} from 'ngx-masonry';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ImagePresenterUrl} from '../../routes';
-import {ShareService} from '@ngx-share/core';
 import {ImagesService} from '../../../@core/services/images.service';
 import {Image, ImageBreakpoint} from '@app/main/@core/state/image/image.model';
 import {ImagesQuery} from '@app/main/@core/state/image/images.query';
@@ -12,6 +11,7 @@ import {finalize, take, takeUntil, tap} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
 import {ModalDirective} from 'ng-uikit-pro-standard';
 import {WINDOW} from '@ng-toolkit/universal';
+import {ShareService} from "ngx-sharebuttons";
 // import { library } from '@fortawesome/fontawesome-svg-core';
 //
 // import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
