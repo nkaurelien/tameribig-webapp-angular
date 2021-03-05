@@ -197,12 +197,12 @@
                 <td>{{ row.data.title }}</td>
                 <td>{{ row.data.price }}</td>
                 <td class="text-small">
-                  <small class="d-inline-block">Ajouté le <br>{{ row.data.createdAt }}</small>
+                  <small class="d-inline-block">Ajouté le <br>{{ row.data?.createdAt | date }}</small>
                   <br>
                   <!--                                    <small *ngIf="!row.data.publishedAt" class="d-inline-block mt-1" [class.text-danger]="!row.data.publishedAt">Publié le-->
                   <!--                                        <br>{{ row.data.publishedAt || 'Pas encore publié' }}</small>-->
                   <small *ngIf="row.data.publishedAt" class="d-inline-block mt-1 text-danger">Publié le
-                    <br>{{ row.data.publishedAt || 'n/a' }}
+                    <br>{{ row.data?.publishedAt | date  }}
                   </small>
                   <small *ngIf="!row.data.publishedAt" class="d-inline-block mt-1 text-danger">Pas encore publié</small>
                 </td>

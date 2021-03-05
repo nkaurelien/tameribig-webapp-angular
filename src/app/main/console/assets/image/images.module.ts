@@ -24,6 +24,7 @@ import {ImageEditComponent} from './image-edit/image-edit.component';
 import {SearchSelectablePipe} from './search-selectable.pipe';
 import {ImageUploadComponent} from './image-upload/image-upload.component';
 
+
 // import filepond module
 import {FilePondModule, registerPlugin} from 'ngx-filepond';
 
@@ -37,6 +38,7 @@ import {Cloudinary} from "cloudinary-core";
 import {CoreModule} from "@core/core.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptorService} from "@core/services/token-interceptor.service";
+import {DatePipesModule} from "@core/pipes/date-pipes/date-pipes.module";
 
 registerPlugin(
     FilePondPluginFileValidateType,
@@ -76,7 +78,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         ReactiveFormsModule,
         TagInputModule,
         FilePondModule,
-        // CoreModule.forRoot(),
+        DatePipesModule.forRoot()
+      // CoreModule.forRoot(),
 
 
         // CloudinaryModule.forRoot({Cloudinary}, cloudinaryConfig as CloudinaryConfiguration),

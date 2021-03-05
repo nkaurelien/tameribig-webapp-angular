@@ -63,6 +63,7 @@
     "catch-decorator": "^2.0.0",
     "chart.js": "^2.5.0",
     "cloudinary-core": "^2.8.2",
+    "date-fns": "^2.19.0",
     "easy-pie-chart": "2.1.x",
     "faker": "^5.4.0",
     "filepond": "^4.25.1",
